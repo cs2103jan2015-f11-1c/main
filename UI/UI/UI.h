@@ -11,7 +11,7 @@ private:
 
 	string _welcomeMessage = "Welcome to TaskSotong!"; 
 	string _exitMessage = "Goodbye!";
-	string _promptInputMesssage = "What would you like to do?";
+	string _promptInputMessage = "What would you like to do?";
 
 public:
 
