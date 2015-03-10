@@ -5,8 +5,8 @@
 using namespace std;
 
 
-Parser::Parser()
-{}
+/* Parser::Parser()
+{}*/
 
 
 void Parser::sortCommand()
