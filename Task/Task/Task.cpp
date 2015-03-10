@@ -38,3 +38,52 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 
 	_taskStatus = MESSAGE_INCOMPLETE_TASK;
 }
+
+void Task::changeTaskName(string newTaskName){
+	_taskName = newTaskName;
+	return;
+}
+
+void Task::changeTaskStartDate(string newStartDate){
+	_taskStart.date = newStartDate;
+	return;
+}
+
+void Task::changeTaskStartTime(string newStartTime){
+	_taskStart.time = newStartTime;
+	return;
+}
+
+void Task::changeTaskEndDate(string newEndDate){
+	_taskEnd.date = newEndDate;
+	return;
+}
+
+void Task::changeTaskEndTime(string newEndTime){
+	_taskEnd.date = newEndTime;
+	return;
+}
+
+void Task::changeTaskDeadlineDate(string newDeadlineDate){
+	_taskDeadline.date = newDeadlineDate;
+	return;
+}
+
+void Task::changeTaskDeadlineTime(string newDeadlineTime){
+	_taskDeadline.time = newDeadlineTime;
+	return;
+}
+
+void Task::changeTaskPriority(string newTaskPriority){
+	_taskPriority = newTaskPriority;
+	return;
+}
+/*
+void Task::changeTaskStatus(){
+	if (mark == true){
+		_taskStatus = MESSAGE_COMPLETE_TASK;
+	} else {
+		_taskStatus = MESSAGE_INCOMPLETE_TASK;
+	}
+}
+*/
