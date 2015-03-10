@@ -1,10 +1,21 @@
 #include "Parser.h"
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+Parser::Parser()
+{}
 
 
-
-int main(void)
+void Parser::sortCommand()
 {
 
-
-	return 0;
 }
+
+void Parser::sortDetails()
+{
+
+}
+
+
