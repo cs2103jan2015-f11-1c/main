@@ -3,7 +3,7 @@
 #include "..\..\Storage\Storage\Storage.cpp"
 
 
-
+/*
 int main(){
 
 	Storage Jieyang;
@@ -13,3 +13,4 @@ int main(){
 	return 0;
 
 }
+*/
