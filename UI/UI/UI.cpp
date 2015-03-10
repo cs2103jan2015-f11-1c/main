@@ -1,11 +1,26 @@
 #include "UI.h"
 
+void UI::displayWelcomeMessage() {
 
-UI::UI(void)
-{
+	cout << _welcomeMessage;
+	return;
 }
 
+void UI::displayExitMessage() {
 
-UI::~UI(void)
-{
+	cout << _exitMessage;
+	return;
+}
+
+void UI::displayPromptInputMessage() {
+
+	cout << _promptInputMessage;
+	return;
+}
+
+string UI::acceptUserInput() {
+
+	string userInput;
+	cin >> userInput;
+	return userInput;
 }
