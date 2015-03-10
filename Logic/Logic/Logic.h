@@ -5,8 +5,8 @@
 #include "..\..\Storage\Storage\Storage.cpp"
 #include "..\..\UI\UI\UI.h"
 #include "..\..\UI\UI\UI.cpp"
-#include "..\..\Parser\Parser\Parser.h"
-#include "..\..\Parser\Parser\Parser.cpp"
+/*#include "..\..\Parser\Parser\Parser.h"
+#include "..\..\Parser\Parser\Parser.cpp" */
 #include "..\..\Task\Task\Task.h"
 #include "..\..\Task\Task\Task.cpp"
 
@@ -28,9 +28,9 @@ private:
 	string userInput;
 
 public:
-	parseCommand(Parser, string);
-	executeCommand(Storage, paraList);
-	displayFeedback(UI, string);
+	paraList callParser(Parser, string);
+	void executeCommand(Storage, paraList);
+	void displayFeedback(UI, string);
 
 
 };
