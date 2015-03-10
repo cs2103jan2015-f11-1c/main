@@ -5,10 +5,11 @@
 #include "..\..\Storage\Storage\Storage.cpp"
 #include "..\..\UI\UI\UI.h"
 #include "..\..\UI\UI\UI.cpp"
-/*#include "..\..\Parser\Parser\Parser.h"
-#include "..\..\Parser\Parser\Parser.cpp" */
-#include "..\..\Task\Task\Task.h"
+#include "..\..\Parser\Parser\Parser.h"
+#include "..\..\Parser\Parser\Parser.cpp" 
+/*#include "..\..\Task\Task\Task.h"
 #include "..\..\Task\Task\Task.cpp"
+*/
 
 #include <iostream> 
 #include <string> 
@@ -18,7 +19,7 @@
 
 using namespace std;
 
-/*class Logic(){
+class Logic{
 
 private:
 	UI UserInterface;
@@ -28,11 +29,13 @@ private:
 	string userInput;
 
 public:
-	paraList callParser(Parser, string);
+
+	string getUserInput();
+	paraList ParseUserInput(string);
 	void executeCommand(Storage, paraList);
 	void displayFeedback(UI, string);
+	void Welcome();
 
 
 };
-*/
 #endif
