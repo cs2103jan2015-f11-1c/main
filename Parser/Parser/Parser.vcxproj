@@ -63,7 +63,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="paraList.cpp" />
   </ItemGroup>
   <ItemGroup>
