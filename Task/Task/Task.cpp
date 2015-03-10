@@ -40,7 +40,8 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 }
 
 void Task::changeTaskName(string newTaskName){
-	_taskName = newTaskName;
+//	_taskName = newTaskName;
+	cout<<"Hello"<<endl;
 	return;
 }
 
@@ -78,6 +79,7 @@ void Task::changeTaskPriority(string newTaskPriority){
 	_taskPriority = newTaskPriority;
 	return;
 }
+
 /*
 void Task::changeTaskStatus(){
 	if (mark == true){

@@ -14,10 +14,28 @@ using namespace std;
 class Storage{
 
 private:
-	//vector<Task*> taskList;
+	vector<Task*> taskList;
+
 public:
-	//addTask
-	void print();
+	void addTask(Task*);
+
+	//vector<Task*> getTaskList();
+
+	void setTaskName(string);
+
+	void setTaskStartDate(string);
+	void setTaskStartTime(string);
+
+	void setTaskEndDate(string);
+	void setTaskEndTime(string);
+
+	void setTaskDeadlineDate(string);
+	void setTaskDeadlineTime(string);
+
+	void setTaskPriority(string);
+
+	void changeTaskStatus();
+
 };
 
 #endif
