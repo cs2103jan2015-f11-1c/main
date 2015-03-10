@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B72149E1-E00A-4D11-94D5-C2689BA0E5C1}</ProjectGuid>
+    <ProjectGuid>{90AC0443-4ADF-4E8D-91E6-BAD72FDA29BB}</ProjectGuid>
     <RootNamespace>Logic</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -64,6 +64,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Logic.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Logic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
