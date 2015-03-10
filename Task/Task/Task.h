@@ -32,9 +32,20 @@ private:
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
-	void changeDate();
-	void changeTime();
-	void changeTaskName();
+
+	void changeTaskName(string);
+
+	void changeTaskStartDate(string);
+	void changeTaskStartTime(string);
+
+	void changeTaskEndDate(string);
+	void changeTaskEndTime(string);
+
+	void changeTaskDeadlineDate(string);
+	void changeTaskDeadlineTime(string);
+
+	void changeTaskPriority(string);
+
 	void changeTaskStatus();
 };
 
