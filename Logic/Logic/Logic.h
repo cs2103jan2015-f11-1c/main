@@ -6,9 +6,9 @@
 */
 #include "..\..\UI\UI\UI.h"
 #include "..\..\UI\UI\UI.cpp"
-
 #include "..\..\Parser\Parser\Parser.h"
 #include "..\..\Parser\Parser\Parser.cpp" 
+
 /*
 #include "..\..\Task\Task\Task.h"
 #include "..\..\Task\Task\Task.cpp"
