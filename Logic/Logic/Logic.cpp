@@ -13,11 +13,16 @@ void Logic::Welcome(){
 	return;
 }
 
-paraList Logic::ParseUserInput(string userInput){
+string Logic::ParseUserInput(string userInput){
 
 	 return ParserComponent.parseCommand(userInput);
 	
 }
+
+/*void Logic::executeCommand(paraList){
+	DataBase.addTask();
+}
+*/
 
 int main(){
 
@@ -28,10 +33,12 @@ int main(){
 	cout << userInput << endl;
 
 	//everything abover can work...//
-	paraList ParameterList = TSlogic.ParseUserInput(userInput);
+	string storageInput = TSlogic.ParseUserInput(userInput);
 
+	//string command = storageInput.getCommand();
+	//Task temptask = storageInput.getTask();
 
-
+	cout << "Parser: "<<storageInput << endl;
 
 	system("pause");
 	return 0;
