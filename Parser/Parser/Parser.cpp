@@ -30,12 +30,18 @@ void Parser::sortDetails(string &userInput)
 	return;
 }
 
-paraList Parser::parseCommand(string userInput)
+string Parser::parseCommand(string userInput)
 {  
 	
 	
-	sortCommand(userInput);
-	sortDetails(userInput);
+	//sortCommand(userInput);
+	//sortDetails(userInput);
 
-	return para;
+	
+  // para._command=userInput;
+	
+
+	//return para;
+
+	return userInput;
 }
