@@ -4,11 +4,11 @@
 #include <vector>
 using namespace std;
 
-
+/*
 Parser::Parser()
-{}
+{}*/
 
-
+/*
 void Parser::sortCommand(string &userInput)
 {   
     int index;
@@ -29,7 +29,7 @@ void Parser::sortDetails(string &userInput)
 	
 	return;
 }
-
+*/
 string Parser::parseCommand(string userInput)
 {  
 	
