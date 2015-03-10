@@ -40,8 +40,7 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 }
 
 void Task::changeTaskName(string newTaskName){
-//	_taskName = newTaskName;
-	cout<<"Hello"<<endl;
+	_taskName = newTaskName;
 	return;
 }
 

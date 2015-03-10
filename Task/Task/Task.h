@@ -21,7 +21,7 @@ private:
 		string time;
 	};
 
-	static string _taskName;
+	//static string _taskName;
 	static Timeframe _taskStart;
 	static Timeframe _taskEnd;
 	static Timeframe _taskDeadline;
@@ -32,6 +32,8 @@ private:
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
+
+	string _taskName;
 
 	void changeTaskName(string);
 
