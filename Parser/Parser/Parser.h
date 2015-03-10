@@ -1,22 +1,21 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include "paraList.h"
-#include "..\..\Task\Task\Task.h"
 #include <string>
 
 class Parser{
  
 
 private:
-paraList para;
 
 
 
 public:
+paraList para;
 Parser();
-void sortCommand(string userInput);
-void sortDetails(string userInput);
-void parseCommand(string userInput);
+void sortCommand(string &userInput);
+void sortDetails(string &userInput);
+paraList parseCommand(string userInput);
 
 
 
