@@ -14,9 +14,11 @@ void Parser::sortCommand()
  return;
 }
 
-int Parser::sortDetails()
+void Parser::sortDetails()
 {
-	return 1;
+
+	cout<<"Successful GT!";
+	return;
 }
 
 

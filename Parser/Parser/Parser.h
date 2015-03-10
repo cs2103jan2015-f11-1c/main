@@ -15,7 +15,7 @@ paraList para;
 public:
 Parser();
 void sortCommand();
-int sortDetails();
+void sortDetails();
 void parseCommand(string userInput);
 
 
