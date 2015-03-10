@@ -15,7 +15,8 @@ class Storage{
 private:
 
 public:
-
+	Storage();
+	int print();
 };
 
 #endif
