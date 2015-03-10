@@ -16,10 +16,10 @@ public:
 
 	Task getTask();
 	string getCommand();
-	void displayCommand();
+	string displayCommand();
 	void displayTaskName(string taskName);
-	void processCommand(string& inputCommand);
-	void processTask(string& inputTask);
+	void processCommand(string inputCommand);
+	void processTask(string inputTask);
 
 
 };
