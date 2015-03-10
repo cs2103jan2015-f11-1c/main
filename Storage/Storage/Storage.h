@@ -8,6 +8,7 @@
 #include <iterator>
 #include <vector>
 #include "..\..\Task\Task\Task.h"
+#include "..\..\Task\Task\Task.cpp"
 
 using namespace std;
 

@@ -1,32 +1,74 @@
-﻿Build started 10/3/2015 6:41:08 PM.
+﻿Build started 10/3/2015 6:49:36 PM.
      1>Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Logic\Logic.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Logic.cpp
          Logic.cpp
-     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.h(9): error C2059: syntax error : '<<'
-     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.h(10): error C2334: unexpected token(s) preceding ':'; skipping apparent function body
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(17): error C2059: syntax error : 'namespace'
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(17): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.cpp(5): error C2059: syntax error : 'namespace'
-     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.cpp(5): error C2238: unexpected token(s) preceding ';'
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sstream(12): error C2059: syntax error : 'namespace'
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sstream(12): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\fstream(13): error C2059: syntax error : 'namespace'
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\fstream(13): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(24): error C2059: syntax error : 'namespace'
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(24): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(31): error C2079: 'Parser::Logic::ParserComponent' uses undefined class 'Parser'
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(5): error C2059: syntax error : 'namespace'
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(5): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(7): error C3254: 'Parser' : class contains explicit override 'getUserInput' but does not derive from an interface that contains the function declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(7): error C2838: 'getUserInput' : illegal qualified name in member declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(11): error C3254: 'Parser' : class contains explicit override 'Welcome' but does not derive from an interface that contains the function declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(11): error C2838: 'Welcome' : illegal qualified name in member declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(16): error C3254: 'Parser' : class contains explicit override 'ParseUserInput' but does not derive from an interface that contains the function declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(16): error C2838: 'ParseUserInput' : illegal qualified name in member declaration
-     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(47): fatal error C1004: unexpected end-of-file found
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(21): error C2146: syntax error : missing ';' before identifier '_taskStart'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(22): error C2146: syntax error : missing ';' before identifier '_taskEnd'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(22): error C2086: 'int Task::Timeframe' : redefinition
+                 c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(21) : see declaration of 'Task::Timeframe'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(23): error C2146: syntax error : missing ';' before identifier '_taskDeadline'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(23): error C2086: 'int Task::Timeframe' : redefinition
+                 c:\users\liu gantian\desktop\tasksotong\main\task\task\task.h(21) : see declaration of 'Task::Timeframe'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(10): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(10): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(11): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(11): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(13): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(13): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(14): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(14): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(16): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(16): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(17): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(17): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(28): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(28): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(29): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(29): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(31): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(31): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(32): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(32): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(34): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(34): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(35): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(35): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(48): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(48): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(53): error C2065: '_taskStart' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(53): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(58): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(58): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(63): error C2065: '_taskEnd' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(63): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(68): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(68): error C2228: left of '.date' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(73): error C2065: '_taskDeadline' : undeclared identifier
+     1>c:\users\liu gantian\desktop\tasksotong\main\task\task\task.cpp(73): error C2228: left of '.time' must have class/struct/union
+                 type is 'unknown-type'
      1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Logic\Logic.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.45
+Time Elapsed 00:00:00.86

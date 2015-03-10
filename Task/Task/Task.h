@@ -10,16 +10,12 @@
 
 using namespace std;
 
+
 class Task{
 
 private:
 	static string MESSAGE_COMPLETE_TASK;
 	static string MESSAGE_INCOMPLETE_TASK;
-
-	struct Timeframe{
-		string date;
-		string time;
-	};
 
 	//static string _taskName;
 	static Timeframe _taskStart;
@@ -32,6 +28,11 @@ private:
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
+
+	struct Timeframe{
+		string date;
+		string time;
+	};
 
 	string _taskName;
 
