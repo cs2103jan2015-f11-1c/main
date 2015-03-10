@@ -1,13 +1,32 @@
-﻿Build started 10/3/2015 6:35:15 PM.
+﻿Build started 10/3/2015 6:41:08 PM.
      1>Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Logic\Logic.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Logic.cpp
          Logic.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Debug\Logic.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Debug\Logic.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Debug\Logic.lib" /MACHINE:X86 Debug\Logic.obj
-         Logic.vcxproj -> C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Debug\Logic.exe
-     1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Logic\Logic.vcxproj" (Build target(s)).
+     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.h(9): error C2059: syntax error : '<<'
+     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.h(10): error C2334: unexpected token(s) preceding ':'; skipping apparent function body
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(17): error C2059: syntax error : 'namespace'
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(17): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.cpp(5): error C2059: syntax error : 'namespace'
+     1>c:\users\liu gantian\desktop\tasksotong\main\parser\parser\parser.cpp(5): error C2238: unexpected token(s) preceding ';'
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sstream(12): error C2059: syntax error : 'namespace'
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sstream(12): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\fstream(13): error C2059: syntax error : 'namespace'
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\fstream(13): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(24): error C2059: syntax error : 'namespace'
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(24): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.h(31): error C2079: 'Parser::Logic::ParserComponent' uses undefined class 'Parser'
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(5): error C2059: syntax error : 'namespace'
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(5): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(7): error C3254: 'Parser' : class contains explicit override 'getUserInput' but does not derive from an interface that contains the function declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(7): error C2838: 'getUserInput' : illegal qualified name in member declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(11): error C3254: 'Parser' : class contains explicit override 'Welcome' but does not derive from an interface that contains the function declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(11): error C2838: 'Welcome' : illegal qualified name in member declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(16): error C3254: 'Parser' : class contains explicit override 'ParseUserInput' but does not derive from an interface that contains the function declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(16): error C2838: 'ParseUserInput' : illegal qualified name in member declaration
+     1>c:\users\liu gantian\desktop\tasksotong\main\logic\logic\logic.cpp(47): fatal error C1004: unexpected end-of-file found
+     1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\Logic\Logic\Logic.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.15
+Time Elapsed 00:00:00.45
