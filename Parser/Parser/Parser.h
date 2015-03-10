@@ -11,7 +11,7 @@ private:
 
 
 public:
-Parser();
+/*Parser();*/
 paraList para;
 /* void sortCommand(string &userInput);
 void sortDetails(string &userInput);*/
