@@ -10,6 +10,7 @@ class paraList{
 private:
    string command; 
 
+
 public:
 	
 	

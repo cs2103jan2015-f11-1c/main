@@ -14,8 +14,8 @@ paraList para;
 
 public:
 Parser();
-void sortCommand();
-void sortDetails();
+void sortCommand(string userInput);
+void sortDetails(string userInput);
 void parseCommand(string userInput);
 
 

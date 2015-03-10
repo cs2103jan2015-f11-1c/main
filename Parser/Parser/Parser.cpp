@@ -5,18 +5,17 @@
 using namespace std;
 
 
-/* Parser::Parser()
-{}*/
+Parser::Parser()
+{}
 
 
-void Parser::sortCommand()
+void Parser::sortCommand(string userInput)
 {
- return;
+  return;
 }
 
-void Parser::sortDetails()
+void Parser::sortDetails(string userInput)
 {
-
 	cout<<"Successful GT!";
 	return;
 }
