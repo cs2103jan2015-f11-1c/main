@@ -34,8 +34,12 @@ paraList Parser::parseCommand(string userInput)
 {  
 	
 	
-	sortCommand(userInput);
-	sortDetails(userInput);
+	//sortCommand(userInput);
+	//sortDetails(userInput);
+
+	paraList a;
+	a._command="add";
+	
 
 	return para;
 }

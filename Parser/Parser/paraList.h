@@ -9,10 +9,11 @@ using namespace std;
 class paraList{
 
 private:
-   string _command; 
-   Task _task; 
+ 
+public: 
+	string _command; 
+    Task _task; 
 
-public:
 	Task getTask();
 	string getCommand();
 	void displayCommand();
