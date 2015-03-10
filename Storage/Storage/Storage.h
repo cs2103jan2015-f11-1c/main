@@ -7,15 +7,17 @@
 #include <fstream>
 #include <iterator>
 #include <vector>
+#include "..\..\Task\Task\Task.h"
 
 using namespace std;
 
 class Storage{
 
 private:
-
+	//vector<Task*> taskList;
 public:
-
+	//addTask
+	void print();
 };
 
 #endif
