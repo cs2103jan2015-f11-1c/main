@@ -64,7 +64,6 @@
   <ItemGroup>
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="paraList.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="paraList.h" />

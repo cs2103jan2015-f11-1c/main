@@ -13,12 +13,12 @@ using namespace std;
 class paraList{
 
 private:
-    string _command; 
-   Task* _task; 
-public: 
-	paraList();
+    
    
-	 
+public: 
+    paraList();
+    string _command; 
+	Task* _task;  
 	Task* getTask();
 	string getCommand();
 	void displayTaskName(string taskName);
