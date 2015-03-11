@@ -17,8 +17,7 @@ void Logic::CommandPrompt(){
 	return;
 }
 
-
-paraList Logic::getParaList(string userInput){
+paraList* Logic::getParaList(string userInput){
 
 	return ParserComponent.parseCommand(userInput);
 }
@@ -41,7 +40,7 @@ string Logic::getCommand(paraList parameterList){
 
 }
 
-Task* Logic::getTask(paraList parameterList){
+Task Logic::getTask(paraList parameterList){
 	return parameterList.getTask();
 }
 

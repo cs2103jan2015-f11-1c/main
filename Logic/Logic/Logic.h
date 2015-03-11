@@ -31,14 +31,14 @@ private:
 	string userInput;
 
 public:
-
+	Task jy;
 	void Welcome();
 	void CommandPrompt();
-	paraList Logic::getParaList(string);
+	paraList* getParaList(string);
 	void writeFile(vector<string>, string);
 	string getUserInput();
 	string getCommand(paraList);
-	Task* getTask(paraList);
+	Task getTask(paraList);
 
 	void executeCommand(string, Task*);
 	void displayFeedback(string);
