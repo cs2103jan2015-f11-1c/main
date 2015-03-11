@@ -3,9 +3,14 @@
 using namespace std;
 
 
-Task paraList::getTask()
+paraList::paraList()
+{}
+
+
+Task* paraList::getTask()
 { return _task;
 }
+
 
 string paraList::getCommand()
 { return _command;
@@ -21,6 +26,7 @@ void paraList::displayTaskName(string taskName)
 void paraList::processCommand(string inputCommand)
 {
 	_command=inputCommand;
+	return;
 }
 
 void paraList::processTask(string inputTask)
