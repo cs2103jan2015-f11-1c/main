@@ -19,14 +19,18 @@
 #include <sstream> 
 #include <vector> 
 #include <fstream>
+#include <cctype>
+#include <algorithm>
 
 using namespace std;
 
 class Logic{
 
 private:
-	UI UserInterface;
+	
+	string _feedbackMessagetoUI = "Logic functions well.";
 
+	UI UserInterface;
 	Parser ParserComponent;
 
 	//Storage DataBase;
@@ -38,8 +42,11 @@ public:
 	void Welcome();
 	string getUserInput();
 	string ParseUserInput(string);
-	//void executeCommand(paraList);
-	void displayFeedback(UI, string);
+	string getCommand(paraList);
+	Task getTask(paraList);
+
+	void executeCommand(string);
+	void displayFeedback(string);
 
 
 };

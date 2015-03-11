@@ -1,7 +1,5 @@
 #include "Logic.h"
 
-
-
 using namespace std;
 
 string Logic::getUserInput(){
@@ -19,10 +17,35 @@ string Logic::ParseUserInput(string userInput){
 	
 }
 
-/*void Logic::executeCommand(paraList){
-	DataBase.addTask();
+string getCommand(paraList parameterList){
+	string command=parameterList.getCommand();
+	transform(command.begin(), command.end(), command.begin(), tolower);
+	return command;
+
 }
-*/
+Task getTask(paraList parameterList){
+	return parameterList.getTask();
+}
+
+
+void executeCommand(string command){
+	if (command == "add"){
+
+	
+	
+	
+	
+	
+	
+	}
+
+
+
+
+
+
+}
+
 
 int main(){
 
