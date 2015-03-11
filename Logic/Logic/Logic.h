@@ -26,19 +26,21 @@ private:
 	UI UserInterface;
 	Parser ParserComponent;
 
-	//Storage DataBase;
+	Storage DataBase;
 	//vector<Task*> CopyTaskList;
 	string userInput;
 
 public:
 
 	void Welcome();
+	void CommandPrompt();
+	paraList Logic::getParaList(string);
+	void writeFile(vector<string>, string);
 	string getUserInput();
-	string ParseUserInput(string);
 	string getCommand(paraList);
-	Task getTask(paraList);
+	Task* getTask(paraList);
 
-	void executeCommand(string);
+	void executeCommand(string, Task*);
 	void displayFeedback(string);
 
 
