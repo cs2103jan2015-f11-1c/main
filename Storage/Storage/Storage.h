@@ -17,11 +17,13 @@ private:
 	vector<Task*> taskList;
 
 public:
+	//vector<Task*> getTaskList();
+	
 	void updateTextFile();
 
 	void addTask(Task*);
 
-	//vector<Task*> getTaskList();
+	void deleteTask(unsigned int);
 
 	void setTaskName(string);
 
