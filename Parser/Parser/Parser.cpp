@@ -75,10 +75,7 @@ paraList* Parser::parseCommand(string userInput)
 	
 	cout<<"Starting parseCommand test...."<<endl;
 	sortCommand(userInput);
-	sortDetails(userInput);
-
-	
-    
+	sortDetails(userInput);   
 	
 
 	return para;

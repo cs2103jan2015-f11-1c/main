@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 #include <iterator>
 #include <vector>
 #include <list>
@@ -33,6 +34,8 @@ private:
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
+
+	string getTaskDetails();
 
 	string getTaskName(); 
 
