@@ -2,35 +2,69 @@
 
 void UI::displayWelcomeMessage() {
 
-	cout << _welcomeMessage;
+	cout << _welcomeMessage << endl;
 	return;
 }
 
 void UI::displayExitMessage() {
 
-	cout << _exitMessage;
+	cout << _exitMessage << endl;
 	return;
 }
 
 void UI::displayPromptInputMessage() {
 
-	cout << _promptInputMessage;
+	cout << _promptInputMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulAddMessage(string taskName) {
+
+	cout << taskName << _successfulAddMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulUpdateMessage(string taskName) {
+
+	cout << taskName << _successfulUpdateMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulDeleteMessage(string taskName) {
+
+	cout << taskName << _successfulDeleteMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulSortMessage() {
+
+	cout << _successfulSortMessage << endl;
 	return;
 }
 
 void UI::displayInvalidCommandMessage() {
 
-	cout << _invalidCommandMessage;
+	cout << _invalidCommandMessage << endl;
 	return;
 }
 
 void UI::displayDeleteErrorMessage() {
 
-	cout << _deleteErrorMessage;
+	cout << _deleteErrorMessage << endl;
 	return;
 }
 
+void UI::displayUpdateCompletedStatusErrorMessage() {
 
+	cout << _updateCompletedStatusErrorMessage << endl;
+	return;
+}
+
+void UI::displayUpdateNotCompletedStatusErrorMessage() {
+
+	cout << _updateNotCompletedStatusErrorMessage << endl;
+	return;
+}
 
 void UI::displayTask(vector<string> taskString) {
 
@@ -39,6 +73,7 @@ void UI::displayTask(vector<string> taskString) {
 		cout << *iter << " ";
 	}
 
+	cout << endl;
 	return;
 }
 
