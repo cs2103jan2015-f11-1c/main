@@ -14,10 +14,10 @@ class Parser{
 public:
 
 Parser();
-paraList para;
+paraList* para;
 void sortCommand(string &userInput);
 void sortDetails(string &userInput);
-paraList parseCommand(string userInput);
+paraList *parseCommand(string userInput);
 
 };
 
