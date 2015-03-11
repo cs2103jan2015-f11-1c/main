@@ -17,6 +17,8 @@ private:
 	vector<Task*> taskList;
 
 public:
+	void updateTextFile();
+
 	void addTask(Task*);
 
 	//vector<Task*> getTaskList();

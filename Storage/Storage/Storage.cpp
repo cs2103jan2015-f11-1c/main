@@ -4,6 +4,17 @@
 //	return taskList;
 //}
 
+void Storage::updateTextFile(){
+	ofstream updatedTaskList;
+	updatedTaskList.open("Jim's Task List.txt");
+	for (int i = 0; i < taskList.size(); i++){
+		updatedTaskList << taskList[i]->getTaskDetails() << endl;
+	}
+	updatedTaskList.close();
+
+	return;
+}
+
 void Storage::addTask(Task *individual_task){
 
 	string taskName = individual_task->getTaskName(); 
