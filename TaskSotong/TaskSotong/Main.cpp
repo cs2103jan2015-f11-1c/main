@@ -10,15 +10,15 @@ int main(){
 	TSlogic.Welcome();
 
 	string userInput = TSlogic.getUserInput();
-	cout << userInput << endl;
+	cout <<"from UI"<< userInput << endl;
 
 	//everything above can work...//
-	//string storageInput = TSlogic.ParseUserInput(userInput);
+    paraList storageInput = TSlogic.getParaList(userInput);
 
-	//string command = storageInput.getCommand();
-	//Task temptask = storageInput.getTask();
+	string command = storageInput.getCommand();
+	Task* temptask = storageInput.getTask();
 
-	//cout << "Parser: " << storageInput << endl;
+	cout << "Parser: " << command << endl;
 
 	system("pause");
 	return 0;

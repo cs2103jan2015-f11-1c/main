@@ -18,7 +18,7 @@ private:
 	string _successfulAddMessage = " was added successfully!";
 	string _successfulUpdateMessage = " was updated successfully!";
 	string _successfulDeleteMessage = " was deleted successfully!";
-	string _successfulSortMessage = "Sorted!"
+	string _successfulSortMessage = "Sorted!";
 
 	string _invalidCommandMessage = "Error, command not recognized. Please enter a valid command! (add, update, delete, sort, exit)";
 	string _deleteErrorMessage = "Error. Please enter a valid index!";
