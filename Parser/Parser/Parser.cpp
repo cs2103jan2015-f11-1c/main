@@ -1,14 +1,15 @@
 #include "Parser.h"
+#include "paraList.h"
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
 
-/*
-Parser::Parser()
-{}*/
 
-/*
+Parser::Parser()
+{}
+
+
 void Parser::sortCommand(string &userInput)
 {   
     int index;
@@ -29,19 +30,19 @@ void Parser::sortDetails(string &userInput)
 	
 	return;
 }
-*/
-string Parser::parseCommand(string userInput)
+
+paraList Parser::parseCommand(string userInput)
 {  
 	
 	
-	//sortCommand(userInput);
-	//sortDetails(userInput);
+	sortCommand(userInput);
+	sortDetails(userInput);
 
 	
-  // para._command=userInput;
+ 
 	
 
-	//return para;
+	return para;
 
-	return userInput;
+	
 }
