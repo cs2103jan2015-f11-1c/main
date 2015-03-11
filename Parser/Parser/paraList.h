@@ -13,14 +13,15 @@ using namespace std;
 class paraList{
 
 private:
-    
    
 public: 
     paraList();
     string _command; 
-	Task* _task;  
-	Task* getTask();
+	int number;
+	Task _task;  
+	Task getTask();
 	string getCommand();
+	void getinteger();
 	void displayTaskName(string taskName);
 	void processCommand(string inputCommand);
 	void processTask(string inputTask);

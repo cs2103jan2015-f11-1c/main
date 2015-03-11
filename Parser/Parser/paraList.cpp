@@ -7,7 +7,7 @@ paraList::paraList()
 {}
 
 
-Task* paraList::getTask()
+Task paraList::getTask()
 { return _task;
 }
 
