@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iterator>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -18,11 +19,10 @@ struct Timeframe{
 class Task{
 
 private:
-
 	static string MESSAGE_COMPLETE_TASK;
 	static string MESSAGE_INCOMPLETE_TASK;
 
-	//static string _taskName;
+	string _taskName;
 	Timeframe _taskStart;
 	Timeframe _taskEnd;
 	Timeframe _taskDeadline;
@@ -34,7 +34,18 @@ public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
 
-	string _taskName;
+	string getTaskName(); 
+
+	string getTaskStartDate();
+	string getTaskStartTime();
+
+	string getTaskEndDate();
+	string getTaskEndTime();
+
+	string getTaskDeadlineDate();
+	string getTaskDeadlineTime();
+
+	string getTaskPriority();
 
 	void changeTaskName(string);
 
