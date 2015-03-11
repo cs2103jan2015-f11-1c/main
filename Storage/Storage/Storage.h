@@ -7,7 +7,7 @@
 #include <fstream>
 #include <iterator>
 #include <vector>
-#include "..\..\Task\Task\Task.cpp"
+#include "..\..\Task\Task\Task.h"
 
 using namespace std;
 

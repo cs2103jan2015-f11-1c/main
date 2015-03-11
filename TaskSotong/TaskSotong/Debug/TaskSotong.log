@@ -1,46 +1,25 @@
-﻿Build started 11/3/2015 6:56:20 PM.
+﻿Build started 11/3/2015 7:12:38 PM.
      1>Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\Logic\Logic\Logic.cpp Main.cpp
-         Logic.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\Logic\Logic\Logic.cpp ..\..\Storage\Storage\Storage.cpp ..\..\Task\Task\Task.cpp Main.cpp
+         Task.cpp
+         Storage.cpp
          Generating Code...
          Compiling...
          Main.cpp
+         Logic.cpp
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.lib" /MACHINE:X86 Debug\Logic.obj
          Debug\paraList.obj
          Debug\Parser.obj
          Debug\Storage.obj
+         Debug\Task.obj
          Debug\UI.obj
          Debug\Main.obj
-     1>Storage.obj : error LNK2005: "public: __thiscall Task::Task(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (??0Task@@QAE@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0000000@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: __thiscall Task::Task(void)" (??0Task@@QAE@XZ) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskDeadlineDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskDeadlineDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskDeadlineTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskDeadlineTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskEndDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskEndDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskEndTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskEndTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskName(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskName@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskPriority(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskPriority@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskStartDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskStartDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "public: void __thiscall Task::changeTaskStartTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskStartTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > Task::MESSAGE_COMPLETE_TASK" (?MESSAGE_COMPLETE_TASK@Task@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in Logic.obj
-     1>Storage.obj : error LNK2005: "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > Task::MESSAGE_INCOMPLETE_TASK" (?MESSAGE_INCOMPLETE_TASK@Task@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: __thiscall Task::Task(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (??0Task@@QAE@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0000000@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: __thiscall Task::Task(void)" (??0Task@@QAE@XZ) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskDeadlineDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskDeadlineDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskDeadlineTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskDeadlineTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskEndDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskEndDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskEndTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskEndTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskName(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskName@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskPriority(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskPriority@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskStartDate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskStartDate@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "public: void __thiscall Task::changeTaskStartTime(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?changeTaskStartTime@Task@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > Task::MESSAGE_COMPLETE_TASK" (?MESSAGE_COMPLETE_TASK@Task@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in Logic.obj
-     1>Main.obj : error LNK2005: "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > Task::MESSAGE_INCOMPLETE_TASK" (?MESSAGE_INCOMPLETE_TASK@Task@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in Logic.obj
-     1>C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.exe : fatal error LNK1169: one or more multiply defined symbols found
-     1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" (Build target(s)) -- FAILED.
+         TaskSotong.vcxproj -> C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.exe
+     1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:02.23
+Time Elapsed 00:00:02.55

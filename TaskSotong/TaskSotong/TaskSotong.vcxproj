@@ -76,6 +76,7 @@
     <ClCompile Include="..\..\Parser\Parser\paraList.cpp" />
     <ClCompile Include="..\..\Parser\Parser\Parser.cpp" />
     <ClCompile Include="..\..\Storage\Storage\Storage.cpp" />
+    <ClCompile Include="..\..\Task\Task\Task.cpp" />
     <ClCompile Include="..\..\UI\UI\UI.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
