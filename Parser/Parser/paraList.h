@@ -1,9 +1,10 @@
 #ifndef PARALIST_H
 #define PARALIST_H
 #include <vector>
+#include <iostream>
 #include <string>
 #include "..\..\Task\Task\Task.h"
-#include "..\..\Task\Task\Task.cpp"
+
 
 using namespace std;
 
@@ -17,12 +18,11 @@ public:
 
 	Task getTask();
 	string getCommand();
-	string displayCommand();
 	void displayTaskName(string taskName);
 	void processCommand(string inputCommand);
 	void processTask(string inputTask);
 
-
+	
 };
 
 #endif

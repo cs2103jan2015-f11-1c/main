@@ -3,16 +3,21 @@
 
 #include<iostream>
 #include <string>
-//using namespace std;
+#include "paraList.h"
+
+
+using namespace std;
 
 class Parser{
 
+
+
 public:
-/*Parser();*/
-//paraList para;
-/* void sortCommand(string &userInput);
-void sortDetails(string &userInput);*/
-string parseCommand(string userInput);
+Parser();
+paraList para;
+void sortCommand(string &userInput);
+void sortDetails(string &userInput);
+paraList parseCommand(string userInput);
 
 
 
