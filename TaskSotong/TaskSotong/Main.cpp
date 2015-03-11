@@ -13,12 +13,18 @@ int main(){
 	cout <<"from UI"<< userInput << endl;
 
 	//everything above can work...//
-    paraList storageInput = TSlogic.getParaList(userInput);
+    paraList* storageInput = TSlogic.getParaList(userInput);
+	string command=storageInput->getCommand();
+	
+	Task task = storageInput->getTask();
 
-	string command = storageInput.getCommand();
-	Task* temptask = storageInput.getTask();
+	string abc = task.getTaskName();
+	string adf = task.getTaskStartDate();
+	string b = task.getTaskStartTime();
+	string c = task.getTaskEndDate();
+	string d = task.getTaskEndTime();
 
-	cout << "Parser: " << command << endl;
+	cout << "test " <<abc <<endl<<c<<endl<<d<< endl;
 
 	system("pause");
 	return 0;
