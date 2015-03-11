@@ -9,11 +9,10 @@
 #include "..\..\Parser\Parser\Parser.h"
 #include "..\..\Parser\Parser\Parser.cpp" 
 
-/*
-#include "..\..\Task\Task\Task.h"
-#include "..\..\Task\Task\Task.cpp"
 
-*/
+#include "..\..\Task\Task\Task.h"
+//#include "..\..\Task\Task\Task.cpp"
+
 
 #include <iostream> 
 #include <string> 
