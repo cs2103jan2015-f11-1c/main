@@ -1,20 +1,17 @@
 #ifndef PARSER_H
 #define PARSER_H
-#include "paraList.h"
+
+#include<iostream>
 #include <string>
+//using namespace std;
 
 class Parser{
- 
-
-private:
-
-
 
 public:
-Parser();
-static paraList para;
-void sortCommand(string &userInput);
-void sortDetails(string &userInput);
+/*Parser();*/
+//paraList para;
+/* void sortCommand(string &userInput);
+void sortDetails(string &userInput);*/
 string parseCommand(string userInput);
 
 

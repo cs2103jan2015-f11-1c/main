@@ -1,6 +1,5 @@
 #include "paraList.h"
 #include "Parser.h"
-#include "..\..\Task\Task\Task.h"
 
 
 Task paraList::getTask()
@@ -11,7 +10,7 @@ string paraList::getCommand()
 { return _command;
 }
 
-void paraList::displayCommand()
+string paraList::displayCommand()
 {
 	cout<<_command;
 	return;
@@ -24,12 +23,12 @@ void paraList::displayTaskName(string taskName)
 	return;
 }
 
-void paraList::processCommand(string& inputCommand)
+void paraList::processCommand(string inputCommand)
 {
 	_command=inputCommand;
 }
 
-void paraList::processTask(string& inputTask)
+void paraList::processTask(string inputTask)
 {
 	return;
 }

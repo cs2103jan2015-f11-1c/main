@@ -1,7 +1,5 @@
 #include "Logic.h"
 
-
-
 using namespace std;
 
 string Logic::getUserInput(){
@@ -13,11 +11,41 @@ void Logic::Welcome(){
 	return;
 }
 
-paraList Logic::ParseUserInput(string userInput){
+string Logic::ParseUserInput(string userInput){
 
 	 return ParserComponent.parseCommand(userInput);
 	
 }
+
+string getCommand(paraList parameterList){
+	string command=parameterList.getCommand();
+	transform(command.begin(), command.end(), command.begin(), tolower);
+	return command;
+
+}
+Task getTask(paraList parameterList){
+	return parameterList.getTask();
+}
+
+
+void executeCommand(string command){
+	if (command == "add"){
+
+	
+	
+	
+	
+	
+	
+	}
+
+
+
+
+
+
+}
+
 
 int main(){
 
@@ -28,10 +56,12 @@ int main(){
 	cout << userInput << endl;
 
 	//everything abover can work...//
-	paraList ParameterList = TSlogic.ParseUserInput(userInput);
+	string storageInput = TSlogic.ParseUserInput(userInput);
 
+	//string command = storageInput.getCommand();
+	//Task temptask = storageInput.getTask();
 
-
+	cout << "Parser: "<<storageInput << endl;
 
 	system("pause");
 	return 0;

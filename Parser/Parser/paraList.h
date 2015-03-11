@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "..\..\Task\Task\Task.h"
+#include "..\..\Task\Task\Task.cpp"
 
 using namespace std;
 
@@ -16,10 +17,10 @@ public:
 
 	Task getTask();
 	string getCommand();
-	void displayCommand();
+	string displayCommand();
 	void displayTaskName(string taskName);
-	void processCommand(string& inputCommand);
-	void processTask(string& inputTask);
+	void processCommand(string inputCommand);
+	void processTask(string inputTask);
 
 
 };
