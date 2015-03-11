@@ -1,9 +1,11 @@
 #ifndef PARALIST_H
 #define PARALIST_H
+
+#include "..\..\Task\Task\Task.h"
+
 #include <vector>
 #include <iostream>
 #include <string>
-#include "..\..\Task\Task\Task.h"
 
 
 using namespace std;

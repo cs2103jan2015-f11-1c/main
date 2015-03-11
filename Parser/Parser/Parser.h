@@ -1,9 +1,10 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "..\..\Parser\Parser\paraList.h"
+
 #include<iostream>
 #include <string>
-#include "paraList.h"
 
 
 using namespace std;

@@ -11,11 +11,11 @@ void Logic::Welcome(){
 	return;
 }
 
-string Logic::ParseUserInput(string userInput){
+//void Logic::ParseUserInput(string userInput){
 
-	 return ParserComponent.parseCommand(userInput);
+	// return ParserComponent.parseCommand(userInput);
 	
-}
+//}
 
 string getCommand(paraList parameterList){
 	string command=parameterList.getCommand();
@@ -43,27 +43,5 @@ void executeCommand(string command){
 
 
 
-
-}
-
-
-int main(){
-
-	Logic TSlogic;
-	TSlogic.Welcome();
-
-	string userInput = TSlogic.getUserInput();
-	cout << userInput << endl;
-
-	//everything abover can work...//
-	string storageInput = TSlogic.ParseUserInput(userInput);
-
-	//string command = storageInput.getCommand();
-	//Task temptask = storageInput.getTask();
-
-	cout << "Parser: "<<storageInput << endl;
-
-	system("pause");
-	return 0;
-
+	return;
 }
