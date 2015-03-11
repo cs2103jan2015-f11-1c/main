@@ -17,7 +17,6 @@ void Logic::CommandPrompt(){
 	return;
 }
 
-
 paraList Logic::getParaList(string userInput){
 
 	return ParserComponent.parseCommand(userInput);
