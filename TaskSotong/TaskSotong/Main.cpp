@@ -18,19 +18,21 @@ int main(int argc, char** argv){
 
 	Logic TSlogic;
 	TSlogic.Welcome();
+
+	
 	
 	string userInput = TSlogic.getUserInput();
+	while (userInput != "exit"){
+		paraList* storageInput = TSlogic.getParaList(userInput);
+		string command = storageInput->getCommand();
+		Task task = storageInput->getTask();
 
-	//everything above can work...//
-    paraList* storageInput = TSlogic.getParaList(userInput);
-	
-	string command=storageInput->getCommand();
-	Task task = storageInput->getTask();
+		cout << endl << "before execureCommand" << endl;
 
-	cout <<endl<< "before execureCommand" << endl;
-
-	//this line got problem
-	TSlogic.executeCommand(*storageInput, filename);
+		//this line got problem
+		TSlogic.executeCommand(*storageInput, filename);
+		userInput = TSlogic.getUserInput();
+	}
 
 	system("pause");
 	return 0;

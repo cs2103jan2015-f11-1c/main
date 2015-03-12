@@ -19,7 +19,7 @@ void Storage::updateTextFile(string outputFile){
 
 void Storage::addTask(Task *individual_task, string outputFile){
 
-	string taskName = individual_task->getTaskName(); 
+	/*string taskName = individual_task->getTaskName(); 
 	string taskStartDate = individual_task->getTaskStartDate();
 	string taskStartTime = individual_task->getTaskStartTime();
 	string taskEndDate = individual_task->getTaskEndDate();
@@ -27,14 +27,14 @@ void Storage::addTask(Task *individual_task, string outputFile){
 	string taskDeadlineDate = individual_task->getTaskDeadlineDate();
 	string taskDeadlineTime = individual_task->getTaskDeadlineTime();
 	string taskPriority = individual_task->getTaskPriority();
-
+	*/
 	taskList.push_back(individual_task); 
 
 	//vector<Task*>::iterator iter = taskList.end();
 	//(**iter).changeTaskName(taskName);
 	//string b=(**iter).getTaskName();
 	//cout<<b;
-	
+	/*
 	taskList.back()->changeTaskName(taskName);
 	taskList.back()->changeTaskStartDate(taskStartDate);
 	taskList.back()->changeTaskStartTime(taskStartTime);
@@ -43,7 +43,7 @@ void Storage::addTask(Task *individual_task, string outputFile){
 	taskList.back()->changeTaskDeadlineDate(taskDeadlineDate);
 	taskList.back()->changeTaskDeadlineTime(taskDeadlineTime);
 	taskList.back()->changeTaskPriority(taskPriority);
-
+	*/
 	/*
 	taskList[0]->changeTaskName(taskName);
 	taskList[0]->changeTaskStartDate(taskStartDate);
@@ -54,7 +54,6 @@ void Storage::addTask(Task *individual_task, string outputFile){
 	taskList[0]->changeTaskDeadlineTime(taskDeadlineTime);
 	taskList[0]->changeTaskPriority(taskPriority);
 	*/
-	updateTextFile(outputFile);
 	return;
 }
 
