@@ -71,7 +71,14 @@ void Parser::sortDetails(string &userInput)
 	para._task.changeTaskEndDate(c);
 	para._task.changeTaskEndTime(d);
 
-	
+	cout<<"eventname:"<<para._task.getTaskName()<<endl;
+		cout<<"start date:"<<para._task.getTaskStartDate()<<endl;
+		cout<<"start time:"<<para._task.getTaskStartTime()<<endl;
+		
+		cout<<"end date:"<<para._task.getTaskEndDate()<<endl;
+		cout<<"end time:"<<para._task.getTaskEndTime()<<endl;
+
+
 	return;
 }
 paraList* Parser::parseCommand(string userInput)
