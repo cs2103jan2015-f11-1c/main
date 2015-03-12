@@ -31,6 +31,8 @@ public:
 
 	void displaySpecificTask(unsigned int);
 
+	void updateTask(unsigned int, string, string);
+
 	void setTaskName(string);
 
 	void setTaskStartDate(string);
