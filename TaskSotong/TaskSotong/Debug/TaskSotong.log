@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+﻿Build started 12-Mar-15 3:21:27 PM.
+     1>Project "C:\Users\User\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" on node 2 (Build target(s)).
+       Project file contains ToolsVersion="12.0". This toolset is unknown or missing. You may be able to resolve this by installing the appropriate .NET Framework for this toolset. Treating the project as if it had ToolsVersion="4.0".
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB8020: The builds tools for v120 (Platform Toolset = 'v120') cannot be found. To build using the v120 build tools, either click the Project menu or right-click the solution, and then select "Update VC++ Projects...". Install v120 to build using the v120 build tools.
+     1>Done Building Project "C:\Users\User\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" (Build target(s)) -- FAILED.
+=======
 ﻿Build started 12/3/2015 3:25:09 PM.
      1>Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -14,7 +21,12 @@
          Debug\Main.obj
          TaskSotong.vcxproj -> C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.exe
      1>Done Building Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" (Build target(s)).
+>>>>>>> 1dfcd314773dc0eb2ce98b0cad2a0bc703d86d5f
 
-Build succeeded.
+Build FAILED.
 
+<<<<<<< HEAD
+Time Elapsed 00:00:00.01
+=======
 Time Elapsed 00:00:00.93
+>>>>>>> 1dfcd314773dc0eb2ce98b0cad2a0bc703d86d5f
