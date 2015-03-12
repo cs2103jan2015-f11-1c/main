@@ -25,6 +25,10 @@ public:
 
 	void deleteTask(unsigned int);
 
+	void displayAllTasks();
+
+	void displaySpecificTask(unsigned int);
+
 	void setTaskName(string);
 
 	void setTaskStartDate(string);
