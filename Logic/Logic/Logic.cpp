@@ -23,19 +23,12 @@ paraList* Logic::getParaList(string userInput){
 }
 
 
-
-/*void Logic::writeFile(vector<Task*> TaskList, string outputFile){
-	ofstream writeFile(outputFile);
-	for (int i = 0; i < TaskList.size(); i++){
-		writeFile << TextBuddyContent[i] << endl;
-	}
-	writeFile.close();
-}
-*/
-
 string Logic::getCommand(paraList parameterList){
+	cout << "calling get command" << endl;
 	string command=parameterList.getCommand();
+	cout << "get command" << endl;
 	transform(command.begin(), command.end(), command.begin(), tolower);
+	cout << "after transform" << endl;
 	return command;
 
 }
@@ -44,16 +37,18 @@ Task Logic::getTask(paraList parameterList){
 	return parameterList.getTask();
 }
 
-/*
-void Logic::executeCommand(paraList Input){
+
+void Logic::executeCommand(paraList Input, string outputFile){
+	cout << "before get command" << endl;
 	string command = getCommand(Input);
+	cout << "inbtw command" << endl;
 	Task oneTask = getTask(Input);
 
 	if (command == "add"){
-		Task tempTask = getTask();
-		DataBase.addTask(oneTask);
+		cout << "testing" << endl;
+		DataBase.addTask(&oneTask, outputFile);
 	}
-	else if (command == "display"){
+	/*else if (command == "display"){
 		DataBase.displayTask();
 	}
 	else if (command == "update"){
@@ -62,8 +57,7 @@ void Logic::executeCommand(paraList Input){
 	else if (command == " delete"){
 		DataBase.deleteTask();
 	}
-	
+	*/
 	return;
 	}
 
-	*/

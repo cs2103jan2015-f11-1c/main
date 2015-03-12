@@ -31,7 +31,6 @@ private:
 	string userInput;
 
 public:
-	Task jy;
 	void Welcome();
 	void CommandPrompt();
 	paraList* getParaList(string);
@@ -40,9 +39,8 @@ public:
 	string getCommand(paraList);
 	Task getTask(paraList);
 
-	void executeCommand(string, Task*);
+	void executeCommand(paraList, string);
 	void displayFeedback(string);
-
 
 };
 #endif
