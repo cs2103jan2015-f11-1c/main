@@ -8,20 +8,28 @@ vector<Task*> getTaskList(){
 
 void Storage::updateTextFile(string outputFile){
 	ofstream updatedTaskList;
-	updatedTaskList.open("updatedTaskList.txt");
-	for (unsigned int i = 0; i < taskList.size(); i++){
-		updatedTaskList << i+1 <<". "<< taskList[i]->getTaskDetails() << endl;
+	updatedTaskList.open(outputFile);
+	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+		updatedTaskList << textFileCopy[i] << endl;
 	}
 	updatedTaskList.close();
-	remove(outputFile.c_str());
-	rename("updatedTaskList.txt", outputFile.c_str());
 
 	return;
 }
 
+void Storage::initializeVector2(string outputFile){
+	ifstream readFile(outputFile);
+	string tempStorage;
+	while (getline(readFile, tempStorage)){
+		textFileCopy.push_back(tempStorage);
+	}
+	readFile.close();
+};
+
 void Storage::addTask(Task *individual_task, string outputFile){
 
 	taskList.push_back(individual_task); 
+	textFileCopy.push_back(individual_task->getTaskDetails());
 	updateTextFile(outputFile);
 	return;
 }
