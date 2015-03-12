@@ -19,18 +19,20 @@ int main(int argc, char** argv){
 	Logic TSlogic;
 	TSlogic.Welcome();
 
-	
-	
 	string userInput = TSlogic.getUserInput();
+	
+	TSlogic.callInitialise(filename);
+
 	while (userInput != "exit"){
+		
 		paraList* storageInput = TSlogic.getParaList(userInput);
 		string command = storageInput->getCommand();
 		Task task = storageInput->getTask();
 		string taskname = task.getTaskName();
-		cout << "second name: " << taskname << endl;
 
 		//this line got problem
 		TSlogic.executeCommand(*storageInput, filename);
+
 		userInput = TSlogic.getUserInput();
 	}
 

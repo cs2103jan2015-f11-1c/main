@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <sstream>
 
@@ -12,7 +13,6 @@ using namespace std;
 Parser::Parser()
 {}
 
-//sortcommand checked!
 void Parser::sortCommand(string &userInput)
 {   
 	
@@ -21,17 +21,16 @@ void Parser::sortCommand(string &userInput)
 	string temp = userInput.substr(0, index);
 	para.processCommand(temp);
 	userInput.erase(0,index+1);
-//	cout<<"Command:"<<para.getCommand()<<endl;
 	return;
 }
 
-//testing
 void Parser::sortDetails(string &userInput)
 {
     int index;
 	string _eventstartdetails;
 	string _eventenddetails;
 	
+<<<<<<< HEAD
 	if(userInput.find("from")==string::npos&&userInput.find("to")==string::npos)
 	{  
 		para._task.changeTaskName(userInput);
@@ -57,6 +56,13 @@ void Parser::sortDetails(string &userInput)
 	}
 	else
 	{
+=======
+	index=userInput.find("from")-1;
+	string tempName = userInput.substr(0, index);
+
+	para._task.changeTaskName(userInput.substr(0,index));
+		
+>>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 
 	processBeforeKeywordFrom(userInput);
 	index=userInput.find("to")-1;
@@ -74,30 +80,34 @@ void Parser::sortDetails(string &userInput)
 	     
         }
 
-	//Event Start details sort SLAP 
 	string a,b;
 	splitstring(a,b,_eventstartdetails);
 	para._task.changeTaskStartDate(a);
 	para._task.changeTaskStartTime(b);
 
-
-
 	//Event End details sort SLAP 
 	string c,d;
 	splitstring(c,d,_eventenddetails);
+	
+
 	para._task.changeTaskEndDate(c);
 	para._task.changeTaskEndTime(d);
+<<<<<<< HEAD
 	
 	return;  }
+=======
+
+	return;
+>>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 }
+
+
 paraList* Parser::parseCommand(string userInput)
 {  
-	
-	cout<<"Starting parseCommand test...."<<endl;
+
 	sortCommand(userInput);
 	processCommand(userInput);
 	
-//	
 	return &para;	
 }
 
@@ -116,31 +126,27 @@ void Parser::processCommand(string &userInput)
 	string command=para.getCommand();
 	int index;
 	
+<<<<<<< HEAD
 	
 
 	
 	
+=======
+>>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 	if(command=="add")
 	{
 		sortDetails(userInput);   	
-		cout<<"Task added..."<<endl;
-
 	}
 	else if(command=="delete")
 	{   istringstream iss (userInput);
-		iss>>index;
-	    cout<<"Delete command..."<<endl;
-		
+		iss>>index;	
 	    para.processDeleteNumber(index);
-		cout<<"Number that is input in the file:"<<para.getDeleteInteger()<<endl; 
-
 	}
 	else if(command=="display")
 	{   istringstream iss (userInput);
-		
-		cout<<"Displaying..."<<endl;
 	    iss>>index;
 	    para.processDisplayNumber(index);
+<<<<<<< HEAD
 		cout<<"Number that is input in the file:"<<para.getDisplayInteger()<<endl; 
 	    
 		cout<<"eventname:"<<para._task.getTaskName()<<endl;
@@ -150,12 +156,15 @@ void Parser::processCommand(string &userInput)
 		cout<<"end date:"<<para._task.getTaskEndDate()<<endl;
 		cout<<"end time:"<<para._task.getTaskEndTime()<<endl;
 		cout<<"p:"<<para._task.getTaskPriority()<<endl;
+=======
+>>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 	}
 	else if(command=="update")
 	{   int b,index;
 	    string a;
 		
 		
+<<<<<<< HEAD
 		cout<<"Update command..."<<endl;
 	    b=userInput.find_first_of(" ");
 	    a=userInput.substr(0,b);
@@ -170,10 +179,14 @@ void Parser::processCommand(string &userInput)
 		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl;
 		para.displayKeyword();
 		para.displayInput();
+=======
+	    iss>>index;
+	    para.processUpdateNumber(index);
+>>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 	}
 	else
 	{
-	 cout<<"Unknown command please try again..."<<endl;
+		command == "invalid";
 
 	}
 
