@@ -18,6 +18,8 @@ paraList para;
 void sortCommand(string &userInput);
 void sortDetails(string &userInput);
 paraList *parseCommand(string userInput);
+void processCommand(string &userInput);
+void splitstring (string &first,string &second,string &input);
 
 };
 

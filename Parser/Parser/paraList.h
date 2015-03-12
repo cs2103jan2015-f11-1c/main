@@ -13,18 +13,26 @@ using namespace std;
 class paraList{
 
 private:
-   
+   string _command; 
+   int deleteNumber;
+   int displayNumber;
+   int updateNumber;
+
 public: 
     paraList();
-    string _command; 
-	int number;
-	Task _task;  
+    Task _task;  
 	Task getTask();
 	string getCommand();
-	void getinteger();
+	int getDeleteInteger();
+	int getDisplayInteger();
+	int getUpdateInteger();
 	void displayTaskName(string taskName);
 	void processCommand(string inputCommand);
 	void processTask(string inputTask);
+	void processDeleteNumber(int index);
+	void processDisplayNumber(int index);
+    void processUpdateNumber(int index);
+	void clearAllNumber();
 
 	
 };

@@ -6,9 +6,9 @@ vector<Task*> getTaskList(){
 }
 */
 
-void Storage::updateTextFile(){
+void Storage::updateTextFile(string outputFile){
 	ofstream updatedTaskList;
-	updatedTaskList.open("Jim's Task List.txt");
+	updatedTaskList.open(outputFile);
 	for (unsigned int i = 0; i < taskList.size(); i++){
 		updatedTaskList << taskList[i]->getTaskDetails() << endl;
 	}
@@ -17,7 +17,7 @@ void Storage::updateTextFile(){
 	return;
 }
 
-void Storage::addTask(Task *individual_task){
+void Storage::addTask(Task *individual_task, string outputFile){
 
 	string taskName = individual_task->getTaskName(); 
 	string taskStartDate = individual_task->getTaskStartDate();
@@ -54,7 +54,7 @@ void Storage::addTask(Task *individual_task){
 	taskList[0]->changeTaskDeadlineTime(taskDeadlineTime);
 	taskList[0]->changeTaskPriority(taskPriority);
 	*/
-
+	updateTextFile(outputFile);
 	return;
 }
 

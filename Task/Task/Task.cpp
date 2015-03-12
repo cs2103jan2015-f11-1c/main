@@ -40,7 +40,7 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 	_taskStatus = MESSAGE_INCOMPLETE_TASK;
 }
 
-string Task::getTaskDetails(){
+/*string Task::getTaskDetails(){
 	ostringstream oss;
 	oss <<_taskName<<" "
 		<<_taskStart.date<<" "
@@ -54,6 +54,7 @@ string Task::getTaskDetails(){
 
 	return oss.str();
 }
+*/
 
 string Task::getTaskName(){
 	return _taskName;
