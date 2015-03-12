@@ -29,12 +29,6 @@ string paraList::getCommand()
 }
 
 
-void paraList::displayTaskName(string taskName)
-{
-	cout<<taskName<<endl;
-	return;
-}
-
 void paraList::processCommand(string inputCommand)
 {
 	_command=inputCommand;

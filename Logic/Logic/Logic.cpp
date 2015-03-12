@@ -34,12 +34,15 @@ Task Logic::getTask(paraList parameterList){
 	return parameterList.getTask();
 }
 
+void Logic::callInitialise(string outputFile){
+	DataBase.initializeVector2(outputFile);
+}
 
 void Logic::executeCommand(paraList Input, string outputFile){
 	
 	string command = getCommand(Input);
 	Task oneTask = getTask(Input);
-
+	//DataBase.initializeVector2(outputFile);
 	if (command == "add"){
 		DataBase.addTask(&oneTask, outputFile);
 		DataBase.updateTextFile(outputFile);

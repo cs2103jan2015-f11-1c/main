@@ -1,18 +1,14 @@
 #include "Storage.h"
 
-/*
-vector<Task*> getTaskList(){
-	return taskList;
-}
-*/
 
 void Storage::updateTextFile(string outputFile){
-	ofstream updatedTaskList;
-	updatedTaskList.open(outputFile);
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
-		updatedTaskList << textFileCopy[i] << endl;
+
+	ofstream writeFile(outputFile);
+	cout << textFileCopy.size() << endl;
+	for (int i = 0; i < textFileCopy.size(); i++){
+		writeFile<< textFileCopy[i] << endl;
 	}
-	updatedTaskList.close();
+	writeFile.close();
 
 	return;
 }
@@ -27,10 +23,8 @@ void Storage::initializeVector2(string outputFile){
 };
 
 void Storage::addTask(Task *individual_task, string outputFile){
-
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
-	updateTextFile(outputFile);
 	return;
 }
 
@@ -50,11 +44,15 @@ void Storage::displayAllTasks(){
 
 		return;
 	} else {
-		vector<Task*>::iterator iter;
+		for (int i = 0; i < textFileCopy.size(); i++){
+			cout << i+1 <<"\t" <<textFileCopy[i] << endl;
+		}
+
+		/*vector<Task*>::iterator iter;
 		for (iter = taskList.begin(); iter != taskList.end(); iter++){
 			cout << (**iter).getTaskDetails() << endl;
+			*/
 		}
-	}
 	return;
 }
 

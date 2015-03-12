@@ -39,6 +39,7 @@ public:
 	string getCommand(paraList);
 	Task getTask(paraList);
 
+	void callInitialise(string);
 	void executeCommand(paraList, string);
 	void displayFeedback(string);
 

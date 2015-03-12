@@ -18,7 +18,6 @@ private:
 	vector<string> textFileCopy;
 
 public:
-	//vector<Task*> getTaskList();
 	
 	void updateTextFile(string);
 
