@@ -24,11 +24,8 @@ paraList* Logic::getParaList(string userInput){
 
 
 string Logic::getCommand(paraList parameterList){
-	cout << "calling get command" << endl;
 	string command=parameterList.getCommand();
-	cout << "get command" << endl;
 	transform(command.begin(), command.end(), command.begin(), tolower);
-	cout << "after transform" << endl;
 	return command;
 
 }
@@ -47,8 +44,8 @@ void Logic::executeCommand(paraList Input, string outputFile){
 		DataBase.addTask(&oneTask, outputFile);
 		DataBase.updateTextFile(outputFile);
 		cout << "Task Added Succefully!" << endl;
-	}/*else if (command == "display"){
-		DataBase.();
+	}else if (command == "display"){
+		DataBase.displayAllTasks();
 	}
 	/*
 	else if (command == "update"){

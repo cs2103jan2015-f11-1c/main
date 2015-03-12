@@ -26,8 +26,8 @@ int main(int argc, char** argv){
 		paraList* storageInput = TSlogic.getParaList(userInput);
 		string command = storageInput->getCommand();
 		Task task = storageInput->getTask();
-
-		cout << endl << "before execureCommand" << endl;
+		string taskname = task.getTaskName();
+		cout << "second name: " << taskname << endl;
 
 		//this line got problem
 		TSlogic.executeCommand(*storageInput, filename);
