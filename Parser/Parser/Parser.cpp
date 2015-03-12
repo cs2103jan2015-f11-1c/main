@@ -20,6 +20,7 @@ void Parser::sortCommand(string &userInput)
 	string temp = userInput.substr(0, index);
 	para.processCommand(temp);
 	userInput.erase(0,index+1);
+//	cout<<"Command:"<<para.getCommand()<<endl;
 	return;
 }
 
@@ -32,12 +33,12 @@ void Parser::sortDetails(string &userInput)
 	
 	index=userInput.find("from")-1;
 	string tempName = userInput.substr(0, index);
-	cout << "tempName " << tempName << endl;
+//	cout << "Task Name: " << tempName << endl;
 	//changing task name 
 	
 	para._task.changeTaskName(userInput.substr(0,index));
-	cout << "CAN ACCESS TASK" << endl;
-	//above is ok
+	
+	
 
 	userInput.erase(0,index+6);
 	index=userInput.find("to")-1;
@@ -57,21 +58,19 @@ void Parser::sortDetails(string &userInput)
         }
 
 	//Event Start details sort SLAP 
-	string stString=_eventstartdetails;
-	index=stString.find_first_of(" ");
-	para._task.changeTaskStartDate(stString.substr(0,index));
-	stString.erase(0,index+1);
-	para._task.changeTaskStartTime(stString);
+	string a,b;
+	splitstring(a,b,_eventstartdetails);
+	para._task.changeTaskStartDate(a);
+	para._task.changeTaskStartTime(b);
+
+
 
 	//Event End details sort SLAP 
-    
-	cout << _eventenddetails;
-	string endString=_eventenddetails;
-	index=endString.find_first_of(" ");
-	para._task.changeTaskEndDate(endString.substr(0,index));
-	endString.erase(0,index+1);
-	para._task.changeTaskEndTime(endString);
-	
+	string c,d;
+	splitstring(c,d,_eventenddetails);
+	para._task.changeTaskEndDate(c);
+	para._task.changeTaskEndTime(d);
+
 	
 	return;
 }
@@ -80,7 +79,70 @@ paraList* Parser::parseCommand(string userInput)
 	
 	cout<<"Starting parseCommand test...."<<endl;
 	sortCommand(userInput);
-	sortDetails(userInput);   	
-
+	processCommand(userInput);
+	
+//	
 	return &para;	
+}
+
+void Parser::splitstring (string &first,string &second,string &input)
+{   int index;
+	index=input.find_first_of(" ");
+	first=input.substr(0,index);
+	input.erase(0,index+1);
+	second=input;
+
+	return;
+}
+
+void Parser::processCommand(string &userInput)
+{
+	string command=para.getCommand();
+	int index;
+	
+	
+	
+	
+	
+	if(command=="add")
+	{
+		sortDetails(userInput);   	
+		cout<<"Task added..."<<endl;
+
+	}
+	else if(command=="delete")
+	{   istringstream iss (userInput);
+		iss>>index;
+	    cout<<"Delete command..."<<endl;
+		
+	    para.processDeleteNumber(index);
+		cout<<"Number that is input in the file:"<<para.getDeleteInteger()<<endl; 
+
+	}
+	else if(command=="display")
+	{   istringstream iss (userInput);
+		
+		cout<<"Displaying..."<<endl;
+	    iss>>index;
+	    para.processDisplayNumber(index);
+		cout<<"Number that is input in the file:"<<para.getDisplayInteger()<<endl; 
+	    
+	}
+	else if(command=="update")
+	{    istringstream iss (userInput);
+		
+		cout<<"Update command..."<<endl;
+	    iss>>index;
+	    para.processUpdateNumber(index);
+		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl; 
+	}
+	else
+	{
+	 cout<<"Unknown command please try again..."<<endl;
+
+	}
+
+	para.clearAllNumber();
+
+	return;
 }
