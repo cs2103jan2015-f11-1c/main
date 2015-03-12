@@ -12,7 +12,7 @@ using namespace std;
 class Parser{
 
 public:
-
+	
 Parser();
 paraList para;
 void sortCommand(string &userInput);

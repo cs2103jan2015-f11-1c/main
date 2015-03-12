@@ -6,6 +6,7 @@ string Task::MESSAGE_INCOMPLETE_TASK = "Complete";
 Task::Task () {
 	
 	_taskName = "";
+	
 
 	_taskStart.date = "";
 	_taskStart.time = "";
