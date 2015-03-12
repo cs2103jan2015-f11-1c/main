@@ -21,6 +21,10 @@ paraList *parseCommand(string userInput);
 void processCommand(string &userInput);
 void splitstring (string &first,string &second,string &input);
 
+void processBeforeKeywordFrom(string &userinput);
+void processBeforeKeywordTo(string &userinput);
+string checkingKeywordX(string &userinput);
+
 };
 
 #endif

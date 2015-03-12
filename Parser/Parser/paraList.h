@@ -17,6 +17,8 @@ private:
    int deleteNumber;
    int displayNumber;
    int updateNumber;
+   string keyword;
+   string input;
 
 public: 
     paraList();
@@ -33,6 +35,10 @@ public:
 	void processDisplayNumber(int index);
     void processUpdateNumber(int index);
 	void clearAllNumber();
+	void processKeyWord(string a);
+	void processInput(string b);
+	void displayKeyword();
+	void displayInput();
 
 	
 };

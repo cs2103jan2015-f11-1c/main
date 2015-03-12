@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -31,18 +32,34 @@ void Parser::sortDetails(string &userInput)
 	string _eventstartdetails;
 	string _eventenddetails;
 	
-	index=userInput.find("from")-1;
-	string tempName = userInput.substr(0, index);
-//	cout << "Task Name: " << tempName << endl;
-	//changing task name 
-	
-	para._task.changeTaskName(userInput.substr(0,index));
-	
-	
+	if(userInput.find("from")==string::npos&&userInput.find("to")==string::npos)
+	{  
+		para._task.changeTaskName(userInput);
+	    return;
 
-	userInput.erase(0,index+6);
+	}
+	else if (userInput.find("from")!=string::npos&&userInput.find("to")==string::npos)
+	{
+		processBeforeKeywordFrom(userInput);
+		string sd,st;
+	
+		
+		splitstring(sd,st,checkingKeywordX(userInput));
+	    para._task.changeTaskStartDate(sd);
+	    para._task.changeTaskStartTime(st);
+		
+		return;
+	}
+	else if (userInput.find("from")==string::npos&&userInput.find("to")!=string::npos)
+	{
+		processBeforeKeywordTo(userInput);
+		return;
+	}
+	else
+	{
+
+	processBeforeKeywordFrom(userInput);
 	index=userInput.find("to")-1;
-	//getting start details 
 	_eventstartdetails=userInput.substr(0,index);
     userInput.erase(0,index+4);
 	//getting the priorities
@@ -70,16 +87,8 @@ void Parser::sortDetails(string &userInput)
 	splitstring(c,d,_eventenddetails);
 	para._task.changeTaskEndDate(c);
 	para._task.changeTaskEndTime(d);
-
-	cout<<"eventname:"<<para._task.getTaskName()<<endl;
-		cout<<"start date:"<<para._task.getTaskStartDate()<<endl;
-		cout<<"start time:"<<para._task.getTaskStartTime()<<endl;
-		
-		cout<<"end date:"<<para._task.getTaskEndDate()<<endl;
-		cout<<"end time:"<<para._task.getTaskEndTime()<<endl;
-
-
-	return;
+	
+	return;  }
 }
 paraList* Parser::parseCommand(string userInput)
 {  
@@ -108,7 +117,7 @@ void Parser::processCommand(string &userInput)
 	int index;
 	
 	
-	
+
 	
 	
 	if(command=="add")
@@ -134,14 +143,33 @@ void Parser::processCommand(string &userInput)
 	    para.processDisplayNumber(index);
 		cout<<"Number that is input in the file:"<<para.getDisplayInteger()<<endl; 
 	    
+		cout<<"eventname:"<<para._task.getTaskName()<<endl;
+		cout<<"start date:"<<para._task.getTaskStartDate()<<endl;
+		cout<<"start time:"<<para._task.getTaskStartTime()<<endl;
+		
+		cout<<"end date:"<<para._task.getTaskEndDate()<<endl;
+		cout<<"end time:"<<para._task.getTaskEndTime()<<endl;
+		cout<<"p:"<<para._task.getTaskPriority()<<endl;
 	}
 	else if(command=="update")
-	{    istringstream iss (userInput);
+	{   int b,index;
+	    string a;
+		
 		
 		cout<<"Update command..."<<endl;
-	    iss>>index;
-	    para.processUpdateNumber(index);
-		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl; 
+	    b=userInput.find_first_of(" ");
+	    a=userInput.substr(0,b);
+        istringstream iss (a);
+		iss>>index;
+		userInput.erase(0,b+1);
+		b=userInput.find_first_of(" ");
+		para.processKeyWord(userInput.substr(0,b));
+		userInput.erase(0,b+1);
+		para.processInput(userInput);
+		para.processUpdateNumber(index);
+		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl;
+		para.displayKeyword();
+		para.displayInput();
 	}
 	else
 	{
@@ -149,7 +177,53 @@ void Parser::processCommand(string &userInput)
 
 	}
 
-	para.clearAllNumber();
+
 
 	return;
+}
+
+void Parser::processBeforeKeywordFrom(string &userInput)
+{
+	int index;
+   
+	
+	index=userInput.find("from")-1;
+    para._task.changeTaskName(userInput.substr(0,index));
+	userInput.erase(0,index+6);
+
+	return;
+}
+
+
+void Parser::processBeforeKeywordTo(string &userInput)
+{   int index;
+	index=userInput.find("to")-1;
+	para._task.changeTaskName(userInput.substr(0,index));
+	userInput.erase(0,index+4);
+	string a,b;
+	splitstring(a,b,checkingKeywordX(userInput));
+	    para._task.changeTaskEndDate(a);
+	    para._task.changeTaskEndTime(b);
+		
+	return;
+}
+
+string Parser::checkingKeywordX(string &userInput)
+{   
+	string details;
+	
+	
+	
+	if(userInput.find("!")!=string::npos){  
+	 int index=userInput.find("!")-1;
+        details=userInput.substr(0,index);
+		userInput.erase(0,index+2);
+	    para._task.changeTaskPriority(userInput);}
+	else{   
+		para._task.changeTaskPriority("No priority");
+        details=userInput;
+	     
+        }
+
+	return details;
 }

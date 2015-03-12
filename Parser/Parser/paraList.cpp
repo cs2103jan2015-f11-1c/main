@@ -2,9 +2,9 @@
 #include <iostream>
 using namespace std;
 
-
 paraList::paraList()
 {}
+
 
 Task paraList::getTask()
 { return _task;
@@ -65,4 +65,27 @@ void paraList::clearAllNumber()
 	deleteNumber=NULL;
     displayNumber=NULL;
 	updateNumber=NULL;
+}
+
+void paraList::processKeyWord(string a)
+{
+	keyword=a;
+	return;
+}
+
+void paraList::processInput(string b)
+{
+	input=b;
+	return;
+}
+
+void paraList::displayKeyword()
+{
+	cout<<"keyword " << keyword<<endl;
+}
+
+void paraList::displayInput()
+{
+	cout<<"input " << input<<endl;
+
 }
