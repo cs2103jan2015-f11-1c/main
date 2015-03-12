@@ -5,7 +5,7 @@ void Storage::updateTextFile(string outputFile){
 	ofstream updatedTaskList;
 	updatedTaskList.open(outputFile);
 	for (unsigned int i = 0; i < textFileCopy.size(); i++){
-		updatedTaskList << textFileCopy[i] << endl;
+		updatedTaskList << i+1 <<". "<< textFileCopy[i] << endl;
 	}
 	updatedTaskList.close();
 
@@ -44,8 +44,10 @@ void Storage::displayAllTasks(){
 
 		return;
 	} else {
-		for (int i = 0; i < textFileCopy.size(); i++){
-			cout << i+1 <<". " << textFileCopy[i] << endl;
+		unsigned int i;
+		vector<Task*>::iterator iter;
+		for (iter = taskList.begin(), i=1; iter != taskList.end(); iter++, i++){
+			cout << i <<". "<< (**iter).getTaskDetails() << endl;
 		}
 	}
 	return;
