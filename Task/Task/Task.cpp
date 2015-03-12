@@ -107,7 +107,7 @@ void Task::changeTaskEndDate(string newEndDate){
 }
 
 void Task::changeTaskEndTime(string newEndTime){
-	_taskEnd.date = newEndTime;
+	_taskEnd.time = newEndTime;
 	return;
 }
 
