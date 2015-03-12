@@ -73,13 +73,13 @@ void paraList::processInput(string b)
 	return;
 }
 
-void paraList::displayKeyword()
+string paraList::getKeyword()
 {
-	cout<<"keyword " << keyword<<endl;
+	return keyword;
 }
 
-void paraList::displayInput()
+string paraList::getInput()
 {
-	cout<<"input " << input<<endl;
+	return input;
 
 }

@@ -37,8 +37,8 @@ public:
 	void clearAllNumber();
 	void processKeyWord(string a);
 	void processInput(string b);
-	void displayKeyword();
-	void displayInput();
+	string getKeyword();
+	string getInput();
 
 	
 };

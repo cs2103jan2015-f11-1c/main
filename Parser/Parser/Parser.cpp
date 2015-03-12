@@ -30,7 +30,6 @@ void Parser::sortDetails(string &userInput)
 	string _eventstartdetails;
 	string _eventenddetails;
 	
-<<<<<<< HEAD
 	if(userInput.find("from")==string::npos&&userInput.find("to")==string::npos)
 	{  
 		para._task.changeTaskName(userInput);
@@ -56,50 +55,44 @@ void Parser::sortDetails(string &userInput)
 	}
 	else
 	{
-=======
-	index=userInput.find("from")-1;
-	string tempName = userInput.substr(0, index);
+		index = userInput.find("from") - 1;
+		string tempName = userInput.substr(0, index);
 
-	para._task.changeTaskName(userInput.substr(0,index));
-		
->>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
+		para._task.changeTaskName(userInput.substr(0, index));
 
-	processBeforeKeywordFrom(userInput);
-	index=userInput.find("to")-1;
-	_eventstartdetails=userInput.substr(0,index);
-    userInput.erase(0,index+4);
-	//getting the priorities
-	if(userInput.find("!")!=string::npos){  
-		index=userInput.find("!")-1;
-        _eventenddetails=userInput.substr(0,index);
-		userInput.erase(0,index+2);
-	    para._task.changeTaskPriority(userInput);}
-	else{   
-		para._task.changeTaskPriority("No priority");
-        _eventenddetails=userInput.substr(0,index);
-	     
-        }
+		processBeforeKeywordFrom(userInput);
+		index = userInput.find("to") - 1;
+		_eventstartdetails = userInput.substr(0, index);
+		userInput.erase(0, index + 4);
+		//getting the priorities
+		if (userInput.find("!") != string::npos){
+			index = userInput.find("!") - 1;
+			_eventenddetails = userInput.substr(0, index);
+			userInput.erase(0, index + 2);
+			para._task.changeTaskPriority(userInput);
+		}
+		else{
+			//para._task.changeTaskPriority("No priority");
+			_eventenddetails = userInput.substr(0, index);
 
-	string a,b;
-	splitstring(a,b,_eventstartdetails);
-	para._task.changeTaskStartDate(a);
-	para._task.changeTaskStartTime(b);
+		}
 
-	//Event End details sort SLAP 
-	string c,d;
-	splitstring(c,d,_eventenddetails);
-	
+		string a, b;
+		splitstring(a, b, _eventstartdetails);
+		para._task.changeTaskStartDate(a);
+		para._task.changeTaskStartTime(b);
 
-	para._task.changeTaskEndDate(c);
-	para._task.changeTaskEndTime(d);
-<<<<<<< HEAD
-	
-	return;  }
-=======
+		//Event End details sort SLAP 
+		string c, d;
+		splitstring(c, d, _eventenddetails);
 
-	return;
->>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
+
+		para._task.changeTaskEndDate(c);
+		para._task.changeTaskEndTime(d);
+	}
+	return;  
 }
+
 
 
 paraList* Parser::parseCommand(string userInput)
@@ -126,13 +119,6 @@ void Parser::processCommand(string &userInput)
 	string command=para.getCommand();
 	int index;
 	
-<<<<<<< HEAD
-	
-
-	
-	
-=======
->>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 	if(command=="add")
 	{
 		sortDetails(userInput);   	
@@ -146,26 +132,12 @@ void Parser::processCommand(string &userInput)
 	{   istringstream iss (userInput);
 	    iss>>index;
 	    para.processDisplayNumber(index);
-<<<<<<< HEAD
-		cout<<"Number that is input in the file:"<<para.getDisplayInteger()<<endl; 
-	    
-		cout<<"eventname:"<<para._task.getTaskName()<<endl;
-		cout<<"start date:"<<para._task.getTaskStartDate()<<endl;
-		cout<<"start time:"<<para._task.getTaskStartTime()<<endl;
-		
-		cout<<"end date:"<<para._task.getTaskEndDate()<<endl;
-		cout<<"end time:"<<para._task.getTaskEndTime()<<endl;
-		cout<<"p:"<<para._task.getTaskPriority()<<endl;
-=======
->>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
+	   
 	}
 	else if(command=="update")
 	{   int b,index;
 	    string a;
 		
-		
-<<<<<<< HEAD
-		cout<<"Update command..."<<endl;
 	    b=userInput.find_first_of(" ");
 	    a=userInput.substr(0,b);
         istringstream iss (a);
@@ -176,21 +148,12 @@ void Parser::processCommand(string &userInput)
 		userInput.erase(0,b+1);
 		para.processInput(userInput);
 		para.processUpdateNumber(index);
-		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl;
-		para.displayKeyword();
-		para.displayInput();
-=======
-	    iss>>index;
-	    para.processUpdateNumber(index);
->>>>>>> 104a1b4d06580cb0a13b191b71633d718750c668
 	}
 	else
 	{
 		command == "invalid";
 
 	}
-
-
 
 	return;
 }
@@ -233,7 +196,7 @@ string Parser::checkingKeywordX(string &userInput)
 		userInput.erase(0,index+2);
 	    para._task.changeTaskPriority(userInput);}
 	else{   
-		para._task.changeTaskPriority("No priority");
+		//para._task.changeTaskPriority("No priority");
         details=userInput;
 	     
         }

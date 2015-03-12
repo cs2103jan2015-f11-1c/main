@@ -1,13 +1,11 @@
-﻿Build started 12/3/2015 8:00:42 PM.
+﻿Build started 12/3/2015 10:48:23 PM.
      1>Project "C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\TaskSotong\TaskSotong.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\Logic\Logic\Logic.cpp ..\..\Storage\Storage\Storage.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\Storage\Storage\Storage.cpp
          Storage.cpp
-     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(8): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(47): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(63): warning C4018: '>' : signed/unsigned mismatch
-         Logic.cpp
-         Generating Code...
+     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(7): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(54): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\liu gantian\desktop\tasksotong\main\storage\storage\storage.cpp(83): warning C4018: '>' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Liu Gantian\Desktop\TaskSotong\main\TaskSotong\Debug\TaskSotong.lib" /MACHINE:X86 Debug\Logic.obj
          Debug\paraList.obj
@@ -21,4 +19,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.38
+Time Elapsed 00:00:01.28

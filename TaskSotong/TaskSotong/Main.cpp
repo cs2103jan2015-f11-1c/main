@@ -30,7 +30,6 @@ int main(int argc, char** argv){
 		Task task = storageInput->getTask();
 		string taskname = task.getTaskName();
 
-		//this line got problem
 		TSlogic.executeCommand(*storageInput, filename);
 
 		userInput = TSlogic.getUserInput();

@@ -44,8 +44,8 @@ public:
 			<< _taskEnd.time << " "
 			<< _taskDeadline.date << " "
 			<< _taskDeadline.time << " "
-			<< _taskPriority << " "
-			<< _taskStatus << endl;
+			<< _taskPriority << " " << endl;
+			//<< _taskStatus << endl;
 
 		return oss.str();
 		

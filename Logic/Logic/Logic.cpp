@@ -54,13 +54,16 @@ void Logic::executeCommand(paraList Input, string outputFile){
 		DataBase.displayAllTasks();
 	}else if (command == "update"){
 		int updateInteger = Input.getUpdateInteger();
-		string keyword1 = Input.get
-		DataBase.updateTask(updateInteger, keyword1, string);
+		string keyword1 = Input.getKeyword();
+		string detail = Input.getInput();
+		DataBase.updateTask(updateInteger, keyword1, detail);
+		UserInterface.displaySuccessfulUpdateMessage();
 
 	}
-	else if (command == " delete"){
+	else if (command == "delete"){
 		int deleteInteger = Input.getDeleteInteger();
 		DataBase.deleteTask(deleteInteger);
+		UserInterface.displaySuccessfulDeleteMessage();
 	}
 	
 	return;

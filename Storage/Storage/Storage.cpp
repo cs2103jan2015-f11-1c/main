@@ -2,17 +2,16 @@
 
 
 void Storage::updateTextFile(string outputFile){
-<<<<<<< HEAD
 
 	ofstream writeFile(outputFile);
 	for (int i = 0; i < textFileCopy.size(); i++){
-		writeFile<< textFileCopy[i] << endl;
-=======
+		writeFile << textFileCopy[i] << endl;
+	}
+
 	ofstream updatedTaskList;
 	updatedTaskList.open(outputFile);
 	for (unsigned int i = 0; i < textFileCopy.size(); i++){
 		updatedTaskList << i+1 <<". "<< textFileCopy[i] << endl;
->>>>>>> a70f4c4dd90f0916faa28c30374bb0572e9b0cde
 	}
 	updatedTaskList.close();
 
@@ -39,22 +38,21 @@ void Storage::deleteTask(unsigned int taskIndex){
 	if(taskIndex < 1 || taskIndex > taskList.size()){
 		cout << "Invalid Number" << endl;
 	} else {
-		taskList.erase(taskList.begin() + taskIndex - 1);
+		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
+		//taskList.erase(taskList.begin() + taskIndex - 1);
 	}
 
 	return;
 }
 
 void Storage::displayAllTasks(){
-	if (taskList.empty()){
+	if (textFileCopy.empty()){
 		cout <<"Task list is empty"<< endl;
 
 		return;
 	} else {
-		unsigned int i;
-		vector<Task*>::iterator iter;
-		for (iter = taskList.begin(), i=1; iter != taskList.end(); iter++, i++){
-			cout << i <<". "<< (**iter).getTaskDetails() << endl;
+		for (int i = 0; i < textFileCopy.size(); i++){
+			cout<< i + 1<<". " <<textFileCopy[i]<< endl;
 		}
 	}
 	return;
@@ -116,6 +114,8 @@ void Storage::updateTask(unsigned int taskIndex, string keyword, string newInput
 									} else {
 										cout <<"Invalid keyword"<< endl;	
 									}
+								textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
+								textFileCopy.erase(textFileCopy.begin() + taskIndex);
 	}
 
 	return;
