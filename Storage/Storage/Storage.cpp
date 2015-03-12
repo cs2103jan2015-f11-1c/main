@@ -1,13 +1,15 @@
 #include "Storage.h"
 
-//vector<Task*> getTaskList(){
-//	return taskList;
-//}
+/*
+vector<Task*> getTaskList(){
+	return taskList;
+}
+*/
 
 void Storage::updateTextFile(){
 	ofstream updatedTaskList;
 	updatedTaskList.open("Jim's Task List.txt");
-	for (int i = 0; i < taskList.size(); i++){
+	for (unsigned int i = 0; i < taskList.size(); i++){
 		updatedTaskList << taskList[i]->getTaskDetails() << endl;
 	}
 	updatedTaskList.close();
@@ -33,6 +35,16 @@ void Storage::addTask(Task *individual_task){
 	//string b=(**iter).getTaskName();
 	//cout<<b;
 	
+	taskList.back()->changeTaskName(taskName);
+	taskList.back()->changeTaskStartDate(taskStartDate);
+	taskList.back()->changeTaskStartTime(taskStartTime);
+	taskList.back()->changeTaskEndDate(taskEndDate);
+	taskList.back()->changeTaskEndTime(taskEndTime);
+	taskList.back()->changeTaskDeadlineDate(taskDeadlineDate);
+	taskList.back()->changeTaskDeadlineTime(taskDeadlineTime);
+	taskList.back()->changeTaskPriority(taskPriority);
+
+	/*
 	taskList[0]->changeTaskName(taskName);
 	taskList[0]->changeTaskStartDate(taskStartDate);
 	taskList[0]->changeTaskStartTime(taskStartTime);
@@ -41,10 +53,17 @@ void Storage::addTask(Task *individual_task){
 	taskList[0]->changeTaskDeadlineDate(taskDeadlineDate);
 	taskList[0]->changeTaskDeadlineTime(taskDeadlineTime);
 	taskList[0]->changeTaskPriority(taskPriority);
+	*/
 
-	string taskNameOutput=taskList[0]->getTaskName();
-	cout<<taskNameOutput<<endl;
-	string taskPriorityOutput=taskList[0]->getTaskPriority();
-	cout<<taskPriorityOutput<<endl;
+	return;
+}
 
+void Storage::deleteTask(unsigned int taskIndex){
+	if(taskIndex < 1 || taskIndex > taskList.size()){
+		cout << "Invalid Number" << endl;
+	} else {
+		taskList.erase(taskList.begin() + taskIndex - 1);
+	}
+
+	return;
 }

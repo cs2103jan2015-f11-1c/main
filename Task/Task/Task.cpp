@@ -42,7 +42,7 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 
 string Task::getTaskDetails(){
 	ostringstream oss;
-	oss<<_taskName<<" "
+	oss <<_taskName<<" "
 		<<_taskStart.date<<" "
 		<<_taskStart.time<<" "
 		<<_taskEnd.date<<" "
@@ -108,7 +108,7 @@ void Task::changeTaskEndDate(string newEndDate){
 }
 
 void Task::changeTaskEndTime(string newEndTime){
-	_taskEnd.date = newEndTime;
+	_taskEnd.time = newEndTime;
 	return;
 }
 
