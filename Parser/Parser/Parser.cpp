@@ -67,6 +67,8 @@ void Parser::sortDetails(string &userInput)
 
 	return;
 }
+
+
 paraList* Parser::parseCommand(string userInput)
 {  
 
@@ -94,38 +96,26 @@ void Parser::processCommand(string &userInput)
 	if(command=="add")
 	{
 		sortDetails(userInput);   	
-		cout<<"Task added..."<<endl;
-
 	}
 	else if(command=="delete")
 	{   istringstream iss (userInput);
-		iss>>index;
-	    cout<<"Delete command..."<<endl;
-		
+		iss>>index;	
 	    para.processDeleteNumber(index);
-		cout<<"Number that is input in the file:"<<para.getDeleteInteger()<<endl; 
-
 	}
 	else if(command=="display")
 	{   istringstream iss (userInput);
-		
-		cout<<"Displaying..."<<endl;
 	    iss>>index;
 	    para.processDisplayNumber(index);
-		cout<<"Number that is input in the file:"<<para.getDisplayInteger()<<endl; 
-	    
 	}
 	else if(command=="update")
 	{    istringstream iss (userInput);
 		
-		cout<<"Update command..."<<endl;
 	    iss>>index;
 	    para.processUpdateNumber(index);
-		cout<<"Number that is input in the file:"<<para.getUpdateInteger()<<endl; 
 	}
 	else
 	{
-	 cout<<"Unknown command please try again..."<<endl;
+		command == "invalid";
 
 	}
 

@@ -18,21 +18,21 @@ void UI::displayPromptInputMessage() {
 	return;
 }
 
-void UI::displaySuccessfulAddMessage(string taskName) {
+void UI::displaySuccessfulAddMessage() {
 
-	cout << taskName << _successfulAddMessage << endl;
+	cout << _successfulAddMessage << endl;
 	return;
 }
 
-void UI::displaySuccessfulUpdateMessage(string taskName) {
+void UI::displaySuccessfulUpdateMessage() {
 
-	cout << taskName << _successfulUpdateMessage << endl;
+	cout << _successfulUpdateMessage << endl;
 	return;
 }
 
-void UI::displaySuccessfulDeleteMessage(string taskName) {
+void UI::displaySuccessfulDeleteMessage() {
 
-	cout << taskName << _successfulDeleteMessage << endl;
+	cout << _successfulDeleteMessage << endl;
 	return;
 }
 

@@ -40,24 +40,29 @@ void Logic::callInitialise(string outputFile){
 
 void Logic::executeCommand(paraList Input, string outputFile){
 	
-	string command = getCommand(Input);
-	Task oneTask = getTask(Input);
-	//DataBase.initializeVector2(outputFile);
-	if (command == "add"){
+	string command = Input.getCommand();
+	
+	Task oneTask = Input.getTask();
+
+	if (command == "invalid"){
+		UserInterface.displayInvalidCommandMessage();
+	}else if (command == "add"){
 		DataBase.addTask(&oneTask, outputFile);
 		DataBase.updateTextFile(outputFile);
-		cout << "Task Added Succefully!" << endl;
+		UserInterface.displaySuccessfulAddMessage();
 	}else if (command == "display"){
 		DataBase.displayAllTasks();
-	}
-	/*
-	else if (command == "update"){
-		DataBase.updateTask();
+	}else if (command == "update"){
+		int updateInteger = Input.getUpdateInteger();
+		string keyword1 = Input.get
+		DataBase.updateTask(updateInteger, keyword1, string);
+
 	}
 	else if (command == " delete"){
-		DataBase.deleteTask();
+		int deleteInteger = Input.getDeleteInteger();
+		DataBase.deleteTask(deleteInteger);
 	}
-	*/
+	
 	return;
 	}
 

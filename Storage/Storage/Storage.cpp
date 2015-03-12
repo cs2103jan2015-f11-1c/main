@@ -4,7 +4,6 @@
 void Storage::updateTextFile(string outputFile){
 
 	ofstream writeFile(outputFile);
-	cout << textFileCopy.size() << endl;
 	for (int i = 0; i < textFileCopy.size(); i++){
 		writeFile<< textFileCopy[i] << endl;
 	}
