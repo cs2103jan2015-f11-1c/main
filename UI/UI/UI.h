@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -42,7 +43,7 @@ public:
 	void displayUpdateCompletedStatusErrorMessage();
 	void displayUpdateNotCompletedStatusErrorMessage();
 
-	void displayTask(vector<string> taskString);
+	void displayTaskList(vector<string> taskList);
 
 	string acceptUserInput();
 };
