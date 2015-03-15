@@ -23,7 +23,7 @@ public:
 
 	void initializeVector2(string);
 
-	void addTask(Task*, string);
+	void addTask(Task*);
 
 	void deleteTask(unsigned int);
 

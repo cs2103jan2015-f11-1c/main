@@ -47,7 +47,7 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	if (command == "invalid"){
 		UserInterface.displayInvalidCommandMessage();
 	}else if (command == "add"){
-		DataBase.addTask(&oneTask, outputFile);
+		DataBase.addTask(&oneTask);
 		DataBase.updateTextFile(outputFile);
 		UserInterface.displaySuccessfulAddMessage();
 	}else if (command == "display"){
