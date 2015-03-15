@@ -17,6 +17,8 @@ int main()
 	test.parseCommand(teststring);
 	
 	
+	system("pause");
+	
 	
 	
 	return 0; 

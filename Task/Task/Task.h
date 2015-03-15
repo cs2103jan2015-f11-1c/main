@@ -5,9 +5,9 @@
 #include <string>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 #include <iterator>
 #include <vector>
-#include <list>
 
 using namespace std;
 
@@ -29,10 +29,25 @@ private:
 	string _taskPriority;
 	string _taskStatus;
 
-
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
+
+	string getTaskDetails(){
+	
+		ostringstream oss;
+		oss << _taskName << " "
+			<< _taskStart.date << " "
+			<< _taskStart.time << " "
+			<< _taskEnd.date << " "
+			<< _taskEnd.time << " "
+			<< _taskDeadline.date << " "
+			<< _taskDeadline.time << " "
+			<< _taskPriority << " " << endl;
+			//<< _taskStatus << endl;
+
+		return oss.str();		
+	}
 
 	string getTaskName(); 
 

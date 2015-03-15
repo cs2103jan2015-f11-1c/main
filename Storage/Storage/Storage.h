@@ -15,11 +15,23 @@ class Storage{
 
 private:
 	vector<Task*> taskList;
+	vector<string> textFileCopy;
 
 public:
+	
+	void updateTextFile(string);
+
+	void initializeVector2(string);
+
 	void addTask(Task*);
 
-	//vector<Task*> getTaskList();
+	void deleteTask(unsigned int);
+
+	void displayAllTasks();
+
+	void displaySpecificTask(unsigned int);
+
+	void updateTask(unsigned int, string, string);
 
 	void setTaskName(string);
 

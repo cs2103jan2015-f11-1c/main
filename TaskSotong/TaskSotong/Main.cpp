@@ -1,24 +1,39 @@
 #include "..\..\Logic\Logic\Logic.h"
 
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
-int main(){
+int main(int argc, char** argv){
+
+	string filename;
+	if (argc < 2) {
+		cout << "need filename!" << endl;
+	}
+	
+	for (int i = 0; i < strlen(argv[1]); i++) {
+		filename += argv[1][i];
+	}
 
 	Logic TSlogic;
 	TSlogic.Welcome();
 
 	string userInput = TSlogic.getUserInput();
-	cout << userInput << endl;
+	
+	TSlogic.callInitialise(filename);
 
-	//everything above can work...//
-	//string storageInput = TSlogic.ParseUserInput(userInput);
+	while (userInput != "exit"){
+		
+		paraList* storageInput = TSlogic.getParaList(userInput);
+		string command = storageInput->getCommand();
+		Task task = storageInput->getTask();
+		string taskname = task.getTaskName();
 
-	//string command = storageInput.getCommand();
-	//Task temptask = storageInput.getTask();
+		TSlogic.executeCommand(*storageInput, filename);
 
-	//cout << "Parser: " << storageInput << endl;
+		userInput = TSlogic.getUserInput();
+	}
 
 	system("pause");
 	return 0;
