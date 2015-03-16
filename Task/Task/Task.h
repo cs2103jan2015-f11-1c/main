@@ -44,7 +44,7 @@ public:
 			<< _taskDeadline.date << " "
 			<< _taskDeadline.time << " "
 			<< _taskPriority << " " << endl;
-			//<< _taskStatus << endl;
+			<< _taskStatus << endl;
 
 		return oss.str();		
 	}
@@ -75,7 +75,7 @@ public:
 
 	void changeTaskPriority(string);
 
-	void changeTaskStatus();
+	void changeTaskStatus(string);
 };
 
 #endif

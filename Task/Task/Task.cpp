@@ -1,7 +1,7 @@
 #include "Task.h"
 
-string Task::MESSAGE_COMPLETE_TASK = "Incomplete";
-string Task::MESSAGE_INCOMPLETE_TASK = "Complete";
+string Task::MESSAGE_COMPLETE_TASK = "Complete";
+string Task::MESSAGE_INCOMPLETE_TASK = "Incomplete";
 
 Task::Task () {
 	
@@ -111,12 +111,14 @@ void Task::changeTaskPriority(string newTaskPriority){
 	return;
 }
 
-/*
-void Task::changeTaskStatus(){
-	if (mark == true){
+void Task::changeTaskStatus(string newTaskStatus){
+	if (newTaskStatus == "mark"){
 		_taskStatus = MESSAGE_COMPLETE_TASK;
+
+		return;
 	} else {
 		_taskStatus = MESSAGE_INCOMPLETE_TASK;
 	}
+
+	return;
 }
-*/
