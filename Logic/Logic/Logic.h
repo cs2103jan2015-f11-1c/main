@@ -38,6 +38,7 @@ public:
 	string getUserInput();
 	string getCommand(paraList);
 	Task getTask(paraList);
+	vector<string> getTextFileCopy();
 
 	void callInitialise(string);
 	void executeCommand(paraList, string);

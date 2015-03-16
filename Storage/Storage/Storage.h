@@ -23,6 +23,8 @@ public:
 
 	void initializeVector2(string);
 
+	vector<string> returnTextFileCopy();
+
 	void addTask(Task*, string);
 
 	void deleteTask(unsigned int);
