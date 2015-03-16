@@ -68,7 +68,7 @@ void UI::displayUpdateNotCompletedStatusErrorMessage() {
 
 void UI::displayTaskList(vector<string> taskList) {
 
-	vector<string> iterator iter;
+	vector<string>::iterator iter;
 
 	for(iter = taskList.begin(); iter != taskList.end(); ++iter) {
 		cout << *iter << endl;

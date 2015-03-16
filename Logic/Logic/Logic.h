@@ -27,7 +27,7 @@ private:
 	Parser ParserComponent;
 
 	Storage DataBase;
-	//vector<Task*> CopyTaskList;
+	
 	string userInput;
 
 public:

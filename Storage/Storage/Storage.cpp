@@ -3,21 +3,13 @@
 
 void Storage::updateTextFile(string outputFile){
 
-	ofstream writeFile(outputFile);
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
-		writeFile << textFileCopy[i] << endl;
-	}
-
 	ofstream updatedTaskList;
 	updatedTaskList.open(outputFile);
-<<<<<<< HEAD
+
 	for (int i = 0; i < textFileCopy.size(); i++){
-		updatedTaskList << i+1 <<". "<< textFileCopy[i] << endl;
-=======
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
 		updatedTaskList << i + 1 << ". " << textFileCopy[i] << endl;
->>>>>>> e7f94e41d5d4b54079a074f77e810237ffb66087
 	}
+
 	updatedTaskList.close();
 
 	return;
@@ -32,15 +24,14 @@ void Storage::initializeVector2(string outputFile){
 	readFile.close();
 };
 
-<<<<<<< HEAD
+
 vector<string> Storage::returnTextFileCopy(){
 	return textFileCopy;
 }
 
-void Storage::addTask(Task *individual_task, string outputFile){
-=======
+
 void Storage::addTask(Task *individual_task){
->>>>>>> e7f94e41d5d4b54079a074f77e810237ffb66087
+
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
 
