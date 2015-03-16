@@ -29,7 +29,6 @@ private:
 	string _taskPriority;
 	string _taskStatus;
 
-
 public:
 	Task();
 	Task(string,string,string,string,string,string,string,string);
@@ -47,8 +46,7 @@ public:
 			<< _taskPriority << " " << endl;
 			//<< _taskStatus << endl;
 
-		return oss.str();
-		
+		return oss.str();		
 	}
 
 	string getTaskName(); 

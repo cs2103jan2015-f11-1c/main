@@ -66,16 +66,17 @@ void UI::displayUpdateNotCompletedStatusErrorMessage() {
 	return;
 }
 
-void UI::displayTask(vector<string> taskString) {
+void UI::displayTaskList(vector<string> taskList) {
 
-	vector<string>::iterator iter;
-	for(iter = taskString.begin(); iter != taskString.end(); ++iter) {
-		cout << *iter << " ";
+	vector<string> iterator iter;
+
+	for(iter = taskList.begin(); iter != taskList.end(); ++iter) {
+		cout << *iter << endl;
 	}
 
-	cout << endl;
 	return;
 }
+
 
 string UI::acceptUserInput() {
 

@@ -23,9 +23,13 @@ public:
 
 	void initializeVector2(string);
 
+<<<<<<< HEAD
 	vector<string> returnTextFileCopy();
 
 	void addTask(Task*, string);
+=======
+	void addTask(Task*);
+>>>>>>> e7f94e41d5d4b54079a074f77e810237ffb66087
 
 	void deleteTask(unsigned int);
 
