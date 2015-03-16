@@ -34,6 +34,11 @@ Task Logic::getTask(paraList parameterList){
 	return parameterList.getTask();
 }
 
+vector<string> Logic::getTextFileCopy(){
+	return DataBase.returnTextFileCopy();
+
+}
+
 void Logic::callInitialise(string outputFile){
 	DataBase.initialiseTextFile(outputFile);
 }

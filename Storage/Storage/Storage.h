@@ -23,6 +23,10 @@ public:
 
 	void initialiseTextFile(string);
 
+	vector<string> returnTextFileCopy();
+
+	void addTask(Task*, string);
+
 	void addTask(Task*);
 
 	void deleteTask(unsigned int);

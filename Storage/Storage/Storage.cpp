@@ -3,16 +3,13 @@
 
 void Storage::updateTextFile(string outputFile){
 
-	ofstream writeFile(outputFile);
-	for (int i = 0; i < textFileCopy.size(); i++){
-		writeFile << textFileCopy[i] << endl;
-	}
-
 	ofstream updatedTaskList;
 	updatedTaskList.open(outputFile);
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+
+	for (int i = 0; i < textFileCopy.size(); i++){
 		updatedTaskList << i + 1 << ". " << textFileCopy[i] << endl;
 	}
+
 	updatedTaskList.close();
 
 	return;
@@ -27,7 +24,14 @@ void Storage::initialiseTextFile(string outputFile){
 	readFile.close();
 };
 
+
+vector<string> Storage::returnTextFileCopy(){
+	return textFileCopy;
+}
+
+
 void Storage::addTask(Task *individual_task){
+
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
 
