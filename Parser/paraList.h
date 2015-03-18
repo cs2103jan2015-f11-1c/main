@@ -37,6 +37,7 @@ public:
 	void processInput(string b);
 	string getKeyword();
 	string getInput();
+	void clearTask();
 
 	
 };
