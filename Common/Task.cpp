@@ -39,6 +39,19 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 	_taskStatus = MESSAGE_INCOMPLETE_TASK;
 }
 
+string Task::checkNull(string Input){
+
+	if (Input.empty()){
+		return Input;
+	}
+	else{
+		string space = " ";
+		Input = Input.append(space);
+		return Input;
+	}
+
+}
+
 string Task::getTaskName(){
 	return _taskName;
 }
