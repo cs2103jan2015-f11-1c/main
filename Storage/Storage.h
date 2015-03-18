@@ -21,7 +21,7 @@ public:
 	
 	void updateTextFile(string);
 
-	void initializeVector2(string);
+	void initialiseTextFile(string);
 
 	vector<string> returnTextFileCopy();
 
@@ -37,20 +37,7 @@ public:
 
 	void updateTask(unsigned int, string, string);
 
-	void setTaskName(string);
-
-	void setTaskStartDate(string);
-	void setTaskStartTime(string);
-
-	void setTaskEndDate(string);
-	void setTaskEndTime(string);
-
-	void setTaskDeadlineDate(string);
-	void setTaskDeadlineTime(string);
-
-	void setTaskPriority(string);
-
-	void changeTaskStatus();
+	void markTask(unsigned int, string);
 
 };
 

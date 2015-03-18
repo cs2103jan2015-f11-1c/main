@@ -15,7 +15,7 @@ void Storage::updateTextFile(string outputFile){
 	return;
 }
 
-void Storage::initializeVector2(string outputFile){
+void Storage::initialiseTextFile(string outputFile){
 	ifstream readFile(outputFile);
 	string tempStorage;
 	while (getline(readFile, tempStorage)){
@@ -121,4 +121,24 @@ void Storage::updateTask(unsigned int taskIndex, string keyword, string newInput
 	}
 
 	return;
+}
+
+void Storage::markTask(unsigned int taskIndex, string keyword){
+	if (taskList.empty()){
+		cout << "Task list is empty" << endl;
+
+		return;
+	} else {
+		if (taskIndex < 1 || taskIndex > taskList.size()){
+			cout << "Invalid number" << endl;
+
+			return;
+		} else {
+			taskList[taskIndex - 1]->changeTaskStatus(keyword);
+			textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
+			textFileCopy.erase(textFileCopy.begin() + taskIndex);		
+		}
+
+		return;
+	}
 }

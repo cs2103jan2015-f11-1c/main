@@ -40,7 +40,7 @@ vector<string> Logic::getTextFileCopy(){
 }
 
 void Logic::callInitialise(string outputFile){
-	DataBase.initializeVector2(outputFile);
+	DataBase.initialiseTextFile(outputFile);
 }
 
 void Logic::executeCommand(paraList Input, string outputFile){
