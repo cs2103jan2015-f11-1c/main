@@ -57,17 +57,20 @@ void Logic::executeCommand(paraList Input, string outputFile){
 		UserInterface.displaySuccessfulAddMessage();
 	}else if (command == "display"){
 		DataBase.displayAllTasks();
+		DataBase.updateTextFile(outputFile);
 	}else if (command == "update"){
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
 		DataBase.updateTask(updateInteger, keyword1, detail);
+		DataBase.updateTextFile(outputFile);
 		UserInterface.displaySuccessfulUpdateMessage();
 
 	}
 	else if (command == "delete"){
 		int deleteInteger = Input.getDeleteInteger();
 		DataBase.deleteTask(deleteInteger);
+		DataBase.updateTextFile(outputFile);
 		UserInterface.displaySuccessfulDeleteMessage();
 	}
 	

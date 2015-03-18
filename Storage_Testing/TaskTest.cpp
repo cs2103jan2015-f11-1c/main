@@ -117,34 +117,39 @@ namespace Task_Testing
 
 		}
 		
+		TEST_METHOD(changeTaskName_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority");
+			string actual;
+			test->changeTaskName("Name1");
+			actual = test->getTaskName();
+
+			string expected = "Name1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStartDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority");
+			string actual;
+			test->changeTaskStartDate("StartDate1");
+			actual = test->getTaskStartDate();
+
+			string expected = "StartDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		
 	};
 }
 
 
-/*	string _taskName;
-Timeframe _taskStart;
-Timeframe _taskEnd;
-Timeframe _taskDeadline;
-string _taskPriority;
-string _taskStatus;
-
-string getTaskDetails(){
-
-ostringstream oss;
-oss << _taskName << " "
-<< _taskStart.date << " "
-<< _taskStart.time << " "
-<< _taskEnd.date << " "
-<< _taskEnd.time << " "
-<< _taskDeadline.date << " "
-<< _taskDeadline.time << " "
-<< _taskPriority << " " << endl;
-//<< _taskStatus << endl;
-
-return oss.str();
-}
-
-void changeTaskName(string);
+/*
 
 void changeTaskStartDate(string);
 void changeTaskStartTime(string);
