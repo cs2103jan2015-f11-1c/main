@@ -43,14 +43,8 @@ public:
 			<< _taskEnd.time << " "
 			<< _taskDeadline.date << " "
 			<< _taskDeadline.time << " "
-<<<<<<< HEAD:Common/Task.h
 			<< _taskPriority;
 			//<< _taskStatus << endl;
-=======
-			<< _taskPriority << " " << endl;
-			<< _taskStatus << endl;
->>>>>>> 76f8bf7a49e6ededa9d7085522e34275e17565e7:Task/Task/Task.h
-
 		return oss.str();		
 	}
 
