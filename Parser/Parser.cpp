@@ -97,7 +97,7 @@ void Parser::sortDetails(string &userInput)
 
 paraList* Parser::parseCommand(string userInput)
 {  
-
+	para.clearTask();
 	sortCommand(userInput);
 	processCommand(userInput);
 	
@@ -154,6 +154,7 @@ void Parser::processCommand(string &userInput)
 		command == "invalid";
 
 	}
+	
 
 	return;
 }

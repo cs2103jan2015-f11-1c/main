@@ -83,3 +83,21 @@ string paraList::getInput()
 	return input;
 
 }
+
+
+void paraList::clearTask()
+{
+	_task.changeTaskDeadlineDate("");
+	_task.changeTaskDeadlineTime("");
+	_task.changeTaskEndDate("");
+	_task.changeTaskEndTime("");
+	_task.changeTaskStartDate("");
+	_task.changeTaskStartTime("");
+	_task.changeTaskName("");
+	_task.changeTaskStatus("");
+	_task.changeTaskPriority("");
+
+
+
+	return;
+}
