@@ -1,6 +1,6 @@
 #ifndef TASK_H
 #define TASK_H
-
+ //testing
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -44,7 +44,8 @@ public:
 			<< _taskDeadline.date << " "
 			<< _taskDeadline.time << " "
 			<< _taskPriority;
-			//<< _taskStatus << endl;
+			//<< _taskStatus;
+
 		return oss.str();		
 	}
 
