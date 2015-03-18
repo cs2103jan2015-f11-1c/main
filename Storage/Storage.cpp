@@ -24,11 +24,9 @@ void Storage::initialiseTextFile(string outputFile){
 	readFile.close();
 };
 
-
 vector<string> Storage::returnTextFileCopy(){
 	return textFileCopy;
 }
-
 
 void Storage::addTask(Task *individual_task){
 
