@@ -9,6 +9,19 @@ namespace Task_Testing
 	{
 	public:
 		
+		TEST_METHOD(checkNull_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority");
+			string actual;
+
+			actual= test->checkNull("Name");
+
+			string expected = "Name ";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
 		TEST_METHOD(getTaskName_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority");
@@ -143,24 +156,8 @@ namespace Task_Testing
 
 		}
 
-
 		
 	};
 }
 
 
-/*
-
-void changeTaskStartDate(string);
-void changeTaskStartTime(string);
-
-void changeTaskEndDate(string);
-void changeTaskEndTime(string);
-
-void changeTaskDeadlineDate(string);
-void changeTaskDeadlineTime(string);
-
-void changeTaskPriority(string);
-
-void changeTaskStatus();
-*/
