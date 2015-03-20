@@ -24,36 +24,50 @@ void Parser::sortCommand(string &userInput)
 	return;
 }
 
+
+
+
+
+
+
 void Parser::sortDetails(string &userInput)
 {
     int index;
 	string _eventstartdetails;
 	string _eventenddetails;
-	
-	if(userInput.find("from")==string::npos&&userInput.find("to")==string::npos)
-	{  
-		para._task.changeTaskName(userInput);
-	    return;
+	keywordType Keyword;
+	Keyword = determineKeywords(userInput);
 
-	}
-	else if (userInput.find("from")!=string::npos&&userInput.find("to")==string::npos)
+
+	switch (Keyword)
+	{
+	case NONE:
+	{	para._task.changeTaskName(checkingKeywordX(userInput));
+	return; }
+	case STARTONLY:
 	{
 		processBeforeKeywordFrom(userInput);
-		string sd,st;
-	
-		
-		splitstring(sd,st,checkingKeywordX(userInput));
-	    para._task.changeTaskStartDate(sd);
-	    para._task.changeTaskStartTime(st);
-		
+		string sd, st;
+
+
+		splitstring(sd, st, checkingKeywordX(userInput));
+		para._task.changeTaskStartDate(sd);
+		para._task.changeTaskStartTime(st);
+
 		return;
 	}
-	else if (userInput.find("from")==string::npos&&userInput.find("to")!=string::npos)
+	case ENDONLY:
 	{
 		processBeforeKeywordTo(userInput);
 		return;
 	}
-	else
+	case DEADLINE:
+	{
+
+		processBeforeKeywordBy(userInput);
+		return;
+	}
+	case START_END:
 	{
 		index = userInput.find("from") - 1;
 		string tempName = userInput.substr(0, index);
@@ -89,6 +103,7 @@ void Parser::sortDetails(string &userInput)
 
 		para._task.changeTaskEndDate(c);
 		para._task.changeTaskEndTime(d);
+	}
 	}
 	return;  
 }
@@ -185,6 +200,26 @@ void Parser::processBeforeKeywordTo(string &userInput)
 	return;
 }
 
+
+void Parser::processBeforeKeywordBy(string &userInput)
+{
+	int index;
+	index = userInput.find("by") - 1;
+	para._task.changeTaskName(userInput.substr(0, index));
+	userInput.erase(0, index + 4);
+	string a, b;
+	splitstring(a, b, checkingKeywordX(userInput));
+	para._task.changeTaskDeadlineDate(a);
+	para._task.changeTaskDeadlineTime(b);
+
+	return;
+}
+
+
+
+
+
+
 string Parser::checkingKeywordX(string &userInput)
 {   
 	string details;
@@ -203,4 +238,33 @@ string Parser::checkingKeywordX(string &userInput)
         }
 
 	return details;
+}
+
+Parser::keywordType Parser::determineKeywords(string userInput)
+{
+	if (userInput.find("from") == string::npos&&userInput.find("to") == string::npos&&userInput.find("by") == string::npos)
+	{
+		return NONE;
+	}
+	else if (userInput.find("from") != string::npos&&userInput.find("to") == string::npos)
+	{
+		
+
+		return STARTONLY;
+	}
+	else if (userInput.find("from") == string::npos&&userInput.find("to") != string::npos)
+	{
+		
+		return ENDONLY;
+	}
+	else if (userInput.find("by") != string::npos)
+	{
+
+		
+		return DEADLINE;
+	}
+	else
+	{
+		return  START_END;
+	}
 }
