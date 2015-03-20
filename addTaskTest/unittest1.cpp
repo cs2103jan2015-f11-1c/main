@@ -19,12 +19,10 @@ namespace addTask_Test
 			addTaskObject.executeCommand(*parameterList, outputFile);
 			vector<string> actualOutputVector = addTaskObject.getTextFileCopy();
 
-			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority";
+			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incompleted";
 			string actualOutputString = actualOutputVector[0];
 
 			Assert::AreEqual(expectedOutputString, actualOutputString);
-
-			//Assert::AreEqual(expectedOutput[0], actualOutput[0]);
 
 
 		}

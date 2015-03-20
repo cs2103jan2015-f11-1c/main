@@ -1,7 +1,7 @@
 #include "Task.h"
 
-string Task::MESSAGE_COMPLETE_TASK = "Complete";
-string Task::MESSAGE_INCOMPLETE_TASK = "Incomplete";
+string Task::MESSAGE_COMPLETE_TASK = "Completed";
+string Task::MESSAGE_INCOMPLETE_TASK = "Incompleted";
 
 Task::Task () {
 	
@@ -21,7 +21,7 @@ Task::Task () {
 	_taskStatus = MESSAGE_INCOMPLETE_TASK;
 }
 
-Task::Task (string taskName, string taskStartDate, string taskStartTime, string taskEndDate, string taskEndTime, string taskDeadlineDate, string taskDeadlineTime, string taskPriority) {
+Task::Task (string taskName, string taskStartDate, string taskStartTime, string taskEndDate, string taskEndTime, string taskDeadlineDate, string taskDeadlineTime, string taskPriority, string taskStatus) {
 	
 	_taskName = taskName;
 
@@ -82,6 +82,10 @@ string Task::getTaskDeadlineTime(){
 
 string Task::getTaskPriority(){
 	return _taskPriority;
+}
+
+string Task::getTaskStatus(){
+	return _taskStatus;
 }
 
 void Task::changeTaskName(string newTaskName){
