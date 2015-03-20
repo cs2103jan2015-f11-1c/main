@@ -14,7 +14,7 @@
     <ProjectGuid>{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Storage_Testing</RootNamespace>
-    <ProjectName>Task_Testing</ProjectName>
+    <ProjectName>Common_Testing</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

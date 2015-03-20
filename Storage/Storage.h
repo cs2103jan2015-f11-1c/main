@@ -25,7 +25,7 @@ public:
 
 	vector<string> returnTextFileCopy();
 
-	void addTask(Task*, string);
+	//void addTask(Task*, string);
 
 	void addTask(Task*);
 
