@@ -131,6 +131,19 @@ namespace ParaList_Testing
 			Assert::AreEqual(actual, expected);
 		}
 
+		TEST_METHOD(clearAllNumber_test)
+		{
+			paraList test;
+			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+			test.processUpdateNumber(1);
+			int actual = test.getUpdateInteger();
+			int expected = 1;
+
+			Assert::AreEqual(actual, expected);
+		}
+
 		
 
 	};
