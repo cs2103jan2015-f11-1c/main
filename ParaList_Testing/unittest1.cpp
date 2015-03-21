@@ -137,11 +137,20 @@ namespace ParaList_Testing
 			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
 			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
 
-			test.processUpdateNumber(1);
-			int actual = test.getUpdateInteger();
-			int expected = 1;
+			test.clearAllNumber();
+
+			int actual = test.getDeleteInteger();
+			int expected = NULL;
+
+			int actual1 = test.getDisplayInteger();
+			int expected1 = NULL;
+
+			int actual2 = test.getUpdateInteger();
+			int expected2 = NULL;
 
 			Assert::AreEqual(actual, expected);
+			Assert::AreEqual(actual1, expected1);
+			Assert::AreEqual(actual2, expected2);
 		}
 
 		
