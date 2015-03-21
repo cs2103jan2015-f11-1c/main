@@ -24,12 +24,6 @@ void Parser::sortCommand(string &userInput)
 	return;
 }
 
-
-
-
-
-
-
 void Parser::sortDetails(string &userInput)
 {
     int index;
