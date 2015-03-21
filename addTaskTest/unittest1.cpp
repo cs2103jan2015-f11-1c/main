@@ -3,13 +3,13 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace addTask_Test
+namespace Logic_Test
 {
-	TEST_CLASS(addTask_Test)
+	TEST_CLASS(Logic_Test)
 	{
 	public:
 
-		TEST_METHOD(addTask_Successful)
+		TEST_METHOD()
 		{
 			Logic addTaskObject;
 
@@ -27,29 +27,50 @@ namespace addTask_Test
 
 		}
 
+		/*
+		TEST_METHOD(addTask_Successful)
+		{
+			Logic addTaskObject;
+
+			string userInput = "add Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority";
+			paraList* parameterList = addTaskObject.getParaList(userInput);
+			string outputFile = "addTaskTest.txt";
+			addTaskObject.executeCommand(*parameterList, outputFile);
+			vector<string> actualOutputVector = addTaskObject.getTextFileCopy();
+
+			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incompleted";
+			string actualOutputString = actualOutputVector[0];
+
+			Assert::AreEqual(expectedOutputString, actualOutputString);
+
+
+		}
+		*/
+
 	};
 }
 
 /*
-void updateTextFile(string);
+void Welcome();
 
-void initialiseTextFile(string);
+void CommandPrompt();
 
-vector<string> returnTextFileCopy();
+paraList* getParaList(string);
 
-//void addTask(Task*, string);
+void writeFile(vector<string>, string);
 
-void addTask(Task*);
+string getUserInput();
 
-void deleteTask(unsigned int);
+string getCommand(paraList);
 
-void displayAllTasks();
+Task getTask(paraList);
 
-void displaySpecificTask(unsigned int);
+vector<string> getTextFileCopy();
 
-void updateTask(unsigned int, string, string);
+void callInitialise(string);
 
-void markTask(unsigned int, string);
+void executeCommand(paraList, string);
 
+void displayFeedback(string);
 
 */
