@@ -18,6 +18,7 @@ private:
    string keyword;
    string input;
 
+
 public: 
     paraList();
     Task _task;  

@@ -7,7 +7,8 @@ paraList::paraList()
 
 
 Task paraList::getTask()
-{ return _task;
+{ 
+	return _task;
 }
 
 int paraList::getDeleteInteger()

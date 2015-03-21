@@ -9,7 +9,7 @@ namespace Logic_Test
 	{
 	public:
 
-		TEST_METHOD()
+		TEST_METHOD(addTask_Successful)
 		{
 			Logic addTaskObject;
 
@@ -65,12 +65,15 @@ string getCommand(paraList);
 
 Task getTask(paraList);
 
+void copyTestFilefromStorage();
+
 vector<string> getTextFileCopy();
 
 void callInitialise(string);
 
+bool notExistingTask(Task*);
+
 void executeCommand(paraList, string);
 
 void displayFeedback(string);
-
 */

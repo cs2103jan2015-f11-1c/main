@@ -39,7 +39,7 @@ public:
 	
 	paraList* getParaList(string);
 	
-	void writeFile(vector<string>, string);
+	//void writeFile(vector<string>, string);
 	
 	string getUserInput();
 	
