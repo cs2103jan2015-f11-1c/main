@@ -153,6 +153,58 @@ namespace ParaList_Testing
 			Assert::AreEqual(actual2, expected2);
 		}
 
+		TEST_METHOD(getKeyword_test)
+		{
+			paraList test;
+			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+			
+			string actual = test.getKeyword();
+			string expected = "KEYWORD";
+
+			Assert::AreEqual(actual, expected);
+		}
+
+
+		TEST_METHOD(getInput_test)
+		{
+			paraList test;
+			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+			string actual = test.getInput();
+			string expected = "INPUT";
+
+			Assert::AreEqual(actual, expected);
+		}
+
+		TEST_METHOD(processKeyWord_test)
+		{
+			paraList test;
+			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+			test.processKeyWord("KEYWORD!");
+			string actual = test.getKeyword();
+			string expected = "KEYWORD!";
+
+			Assert::AreEqual(actual, expected);
+		}
+
+		TEST_METHOD(processInput_test)
+		{
+			paraList test;
+			Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+			test.processInput("INPUT!");
+			string actual = test.getInput();
+			string expected = "INPUT!";
+
+			Assert::AreEqual(actual, expected);
+		}
 		
 
 	};
@@ -161,14 +213,7 @@ namespace ParaList_Testing
 /*
 paraList();
 //for unit testing purpose.
-void setparaList(string, int, int, int, string, string, Task);
-Task _task;
 
-void clearAllNumber();
-void processKeyWord(string a);
-void processInput(string b);
-string getKeyword();
-string getInput();
 void clearTask();
 
 */

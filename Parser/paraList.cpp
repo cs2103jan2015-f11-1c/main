@@ -106,10 +106,7 @@ void paraList::clearTask()
 	_task.changeTaskStartDate("");
 	_task.changeTaskStartTime("");
 	_task.changeTaskName("");
-	_task.changeTaskStatus("");
 	_task.changeTaskPriority("");
-
-
-
+	_task.changeTaskStatus("");
 	return;
 }
