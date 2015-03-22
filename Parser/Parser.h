@@ -19,17 +19,26 @@ enum keywordType { START_END, STARTONLY, ENDONLY , DEADLINE ,NONE  };
 	
 Parser();
 paraList para;
-void sortCommand(string &userInput);
-void sortDetails(string &userInput);
-paraList *parseCommand(string userInput);
-void processCommand(string &userInput);
-void splitstring (string &first,string &second,string &input);
+void sortCommand(string &);
+void sortDetails(string &);
+paraList *parseCommand(string );
+void processCommand(string &);
+void splitstring (string &,string &,string &);
 
-void processBeforeKeywordFrom(string &userinput);
-void processBeforeKeywordTo(string &userinput);
-void processBeforeKeywordBy(string &userinput);
-string checkingKeywordX(string &userinput);
-keywordType determineKeywords(string userInput);
+void processBeforeKeywordFrom(string &);
+void processBeforeKeywordTo(string &);
+void processBeforeKeywordBy(string &);
+string checkingKeywordX(string &);
+keywordType determineKeywords(string );
+void checkStart(string&, string &, string );
+void checkEnd(string&, string &, string );
+void empty(string&, string &, string&, string &, string);
+string checkST(string );
+string checkSD(string );
+void processX(string );
+void getNoneToken(string,int&,int&,int&);
+void processNum(int& , int&, int& ,int&);
+
 
 };
 
