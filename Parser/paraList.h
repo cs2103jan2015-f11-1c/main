@@ -18,16 +18,23 @@ private:
    string keyword;
    string input;
 
+
 public: 
     paraList();
+	//for unit testing purpose.
+	void setparaList(string, int, int, int, string, string, Task);
     Task _task;  
 	Task getTask();
 	string getCommand();
 	int getDeleteInteger();
 	int getDisplayInteger();
 	int getUpdateInteger();
+
+	//what's the use of this ah? -GT
 	void displayTaskName(string taskName);
 	void processCommand(string inputCommand);
+
+	//what's the use of this ah? -GT
 	void processTask(string inputTask);
 	void processDeleteNumber(int index);
 	void processDisplayNumber(int index);

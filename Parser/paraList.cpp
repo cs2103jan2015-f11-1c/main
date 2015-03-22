@@ -5,9 +5,21 @@ using namespace std;
 paraList::paraList()
 {}
 
+void paraList::setparaList(string command1, int deleteNumber1, int displayNumber1, int updateNumber1, string keyword1, string input1, Task task1){
+	_command=command1;
+	deleteNumber=deleteNumber1;
+	displayNumber=displayNumber1;
+	updateNumber=updateNumber1;
+	keyword=keyword1;
+	input=input1;
+	_task = task1;
+	
+	return;
+}
 
 Task paraList::getTask()
-{ return _task;
+{ 
+	return _task;
 }
 
 int paraList::getDeleteInteger()
@@ -94,10 +106,7 @@ void paraList::clearTask()
 	_task.changeTaskStartDate("");
 	_task.changeTaskStartTime("");
 	_task.changeTaskName("");
-	_task.changeTaskStatus("");
 	_task.changeTaskPriority("");
-
-
-
+	_task.changeTaskStatus("");
 	return;
 }

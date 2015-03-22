@@ -34,13 +34,28 @@ Task Logic::getTask(paraList parameterList){
 	return parameterList.getTask();
 }
 
+void Logic::copyTestFilefromStorage(){
+	textFileCopy_fromStorage = getTextFileCopy();
+	return;
+}
+
 vector<string> Logic::getTextFileCopy(){
 	return DataBase.returnTextFileCopy();
-
 }
 
 void Logic::callInitialise(string outputFile){
 	DataBase.initialiseTextFile(outputFile);
+}
+
+bool Logic::notExistingTask(Task* task){
+	string taskDetail;
+	taskDetail = task->getTaskDetails();
+	for (unsigned int i = 0; i < textFileCopy_fromStorage.size(); i++){
+		if (taskDetail == textFileCopy_fromStorage[i]){
+			return false;
+		}
+	}
+	return true;
 }
 
 void Logic::executeCommand(paraList Input, string outputFile){
@@ -52,9 +67,14 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	if (command == "invalid"){
 		UserInterface.displayInvalidCommandMessage();
 	}else if (command == "add"){
-		DataBase.addTask(&oneTask);
-		DataBase.updateTextFile(outputFile);
-		UserInterface.displaySuccessfulAddMessage();
+		if (notExistingTask(&oneTask)){
+			DataBase.addTask(&oneTask);
+			DataBase.updateTextFile(outputFile);
+			UserInterface.displaySuccessfulAddMessage();
+		}
+		else{
+			cout << "Existing Task! Please enter a new task! :(" << endl;
+		}
 	}else if (command == "display"){
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(outputFile);

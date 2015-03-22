@@ -21,28 +21,42 @@ class Logic{
 
 private:
 	
-	string _feedbackMessagetoUI = "Logic functions well.";
-
 	UI UserInterface;
 
 	Parser ParserComponent;
 
 	Storage DataBase;
+
+	vector<string> textFileCopy_fromStorage;
 	
 	string userInput;
 
 public:
+
 	void Welcome();
+
 	void CommandPrompt();
+	
 	paraList* getParaList(string);
-	void writeFile(vector<string>, string);
+	
+	//void writeFile(vector<string>, string);
+	
 	string getUserInput();
+	
 	string getCommand(paraList);
+	
 	Task getTask(paraList);
+	
+	void copyTestFilefromStorage();
+
 	vector<string> getTextFileCopy();
 
 	void callInitialise(string);
+
+	bool notExistingTask(Task*);
+	
 	void executeCommand(paraList, string);
+	
 	void displayFeedback(string);
 
 };

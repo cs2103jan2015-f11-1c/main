@@ -31,7 +31,7 @@ private:
 
 public:
 	Task();
-	Task(string,string,string,string,string,string,string,string);
+	Task(string,string,string,string,string,string,string,string,string);
 
 	string getTaskDetails(){
 
@@ -42,8 +42,8 @@ public:
 		string time2=checkNull(_taskEnd.time);
 		string date3=checkNull(_taskDeadline.date);
 		string time3 = checkNull(_taskDeadline.time);
-
-		string priority=_taskPriority;
+		string priority = checkNull(_taskPriority);
+		string status=_taskStatus;
 
 		ostringstream oss;
 		oss << taskName
@@ -53,8 +53,8 @@ public:
 			<< time2
 			<< date3
 			<< time3
-			<< priority;
-			//<< _taskStatus;
+			<< priority
+			<< _taskStatus;
 
 		return oss.str();		
 	}
@@ -73,6 +73,7 @@ public:
 	string getTaskDeadlineTime();
 
 	string getTaskPriority();
+	string getTaskStatus();
 
 	void changeTaskName(string);
 

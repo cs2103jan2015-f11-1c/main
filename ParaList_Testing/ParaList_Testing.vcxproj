@@ -11,10 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}</ProjectGuid>
+    <ProjectGuid>{E983CEAD-1518-4995-915B-E464A81D4DD8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Storage_Testing</RootNamespace>
-    <ProjectName>Common_Testing</ProjectName>
+    <RootNamespace>ParaList_Testing</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,11 +90,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TaskTest.cpp" />
+    <ClCompile Include="unittest1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.vcxproj">
-      <Project>{d9509d78-9494-4917-8d40-509a6cdec63d}</Project>
+    <ProjectReference Include="..\Parser\Parser.vcxproj">
+      <Project>{45e6554b-7189-4059-949f-b4abe65d720b}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

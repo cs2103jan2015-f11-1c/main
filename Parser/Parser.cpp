@@ -25,9 +25,12 @@ void Parser::sortCommand(string &userInput)
 	return;
 }
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 2c39aa7ed07155728950f15243c4f923f5e3a3e7
 void Parser::sortDetails(string &userInput)
 {
     int index;

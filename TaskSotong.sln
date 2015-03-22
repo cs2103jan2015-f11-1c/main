@@ -15,9 +15,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UI", "UI\UI.vcxproj", "{D71CE680-C037-4B84-B13B-DCBD922D0225}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "addTaskTest", "addTaskTest\addTaskTest.vcxproj", "{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logic_Testing", "addTaskTest\addTaskTest.vcxproj", "{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Task_Testing", "Storage_Testing\Storage_Testing.vcxproj", "{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common_Testing", "Storage_Testing\Storage_Testing.vcxproj", "{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaList_Testing", "ParaList_Testing\ParaList_Testing.vcxproj", "{E983CEAD-1518-4995-915B-E464A81D4DD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Debug|Win32.Build.0 = Debug|Win32
 		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Release|Win32.ActiveCfg = Release|Win32
 		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Release|Win32.Build.0 = Release|Win32
+		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Debug|Win32.Build.0 = Debug|Win32
+		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Release|Win32.ActiveCfg = Release|Win32
+		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

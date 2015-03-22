@@ -18,14 +18,13 @@ private:
 	vector<string> textFileCopy;
 
 public:
-	
-	void updateTextFile(string);
 
 	void initialiseTextFile(string);
+	void updateTextFile(string);
 
 	vector<string> returnTextFileCopy();
 
-	void addTask(Task*, string);
+	//void addTask(Task*, string);
 
 	void addTask(Task*);
 

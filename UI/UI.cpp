@@ -6,6 +6,7 @@ void UI::displayWelcomeMessage() {
 	return;
 }
 
+
 void UI::displayExitMessage() {
 
 	cout << _exitMessage << endl;
