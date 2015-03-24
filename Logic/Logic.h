@@ -36,6 +36,8 @@ public:
 	void Welcome();
 
 	void CommandPrompt();
+
+	string getExePath();
 	
 	paraList* getParaList(string);
 	

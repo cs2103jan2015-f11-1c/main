@@ -1,9 +1,41 @@
 #include <iostream>
 #include <sstream>
 #include "..\Logic\Logic.h"
+#include <direct.h>
 
 using namespace std;
 
+int main(){
+
+	Logic TSlogic;
+	TSlogic.Welcome();
+	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath()<<endl;
+
+	/*string userInput = TSlogic.getUserInput();
+
+	TSlogic.callInitialise(filename);
+
+	while (userInput != "exit"){
+
+		paraList* storageInput = TSlogic.getParaList(userInput);
+		string command = storageInput->getCommand();
+		Task task = storageInput->getTask();
+		string taskname = task.getTaskName();
+
+		TSlogic.executeCommand(*storageInput, filename);
+
+		userInput = TSlogic.getUserInput();
+	}
+	*/
+
+	system("pause");
+	return 0;
+
+
+
+}
+
+/*
 int main(int argc, char** argv){
 
 	string filename;
@@ -37,4 +69,4 @@ int main(int argc, char** argv){
 	system("pause");
 	return 0;
 
-}
+}*/
