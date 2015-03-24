@@ -5,16 +5,16 @@
 
 using namespace std;
 
+static string filename = "gantian.txt";
+
 int main(){
 
 	Logic TSlogic;
 	TSlogic.Welcome();
 	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath()<<endl;
+	cout << "Do you want to change saving file directory? [Y/N]";
 
-	cout << "Please enter a filename: (e.g. gantian.txt) " << endl;
-
-	string filename;
-	cin >> filename;
+	//TSlogic.processChangeDirectoryRequest();
 
 	
 	TSlogic.callInitialise(filename);
