@@ -4,7 +4,6 @@
 using namespace std;
 
 string Logic::getUserInput(){
-	CommandPrompt();
 	return UserInterface.acceptUserInput();
 }
 

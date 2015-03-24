@@ -11,9 +11,16 @@ int main(){
 	TSlogic.Welcome();
 	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath()<<endl;
 
-	/*string userInput = TSlogic.getUserInput();
+	cout << "Please enter a filename: (e.g. gantian.txt) " << endl;
 
+	string filename;
+	cin >> filename;
+
+	
 	TSlogic.callInitialise(filename);
+
+	string userInput = TSlogic.getUserInput();
+	
 
 	while (userInput != "exit"){
 
@@ -24,9 +31,13 @@ int main(){
 
 		TSlogic.executeCommand(*storageInput, filename);
 
+		cout << endl;
+		TSlogic.CommandPrompt();
+		
 		userInput = TSlogic.getUserInput();
+	
 	}
-	*/
+	
 
 	system("pause");
 	return 0;
