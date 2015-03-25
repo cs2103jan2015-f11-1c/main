@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iterator>
 #include <vector>
+#include <stack>
 #include "..\Common\Task.h"
 
 using namespace std;
@@ -14,17 +15,22 @@ using namespace std;
 class Storage{
 
 private:
+
 	vector<Task*> taskList;
 	vector<string> textFileCopy;
+	stack<string> commandStack;
+	stack<Task*> deleteTaskObjectStack;
+	stack<int> deleteTaskIndexStack;
+
+	static string MESSAGE_EMPTY_STACK;
 
 public:
 
-	void initialiseTextFile(string);
 	void updateTextFile(string);
 
-	vector<string> returnTextFileCopy();
+	void initialiseTextFile(string);
 
-	//void addTask(Task*, string);
+	vector<string> returnTextFileCopy();
 
 	void addTask(Task*);
 
@@ -37,6 +43,10 @@ public:
 	void updateTask(unsigned int, string, string);
 
 	void markTask(unsigned int, string);
+
+	void undoAction();
+
+	string getPreviousCommand();
 
 };
 

@@ -1,7 +1,7 @@
 #include "Task.h"
 
 string Task::MESSAGE_COMPLETE_TASK = "Completed";
-string Task::MESSAGE_INCOMPLETE_TASK = "Incompleted";
+string Task::MESSAGE_INCOMPLETE_TASK = "Incomplete";
 
 Task::Task () {
 	
@@ -39,17 +39,15 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 	_taskStatus = MESSAGE_INCOMPLETE_TASK;
 }
 
-string Task::checkNull(string Input){
+string Task::checkNull(string input){
 
-	if (Input.empty()){
-		return Input;
-	}
-	else{
+	if (input.empty()){
+		return input;
+	} else {
 		string space = " ";
-		Input = Input.append(space);
-		return Input;
+		input = input.append(space);
+		return input;
 	}
-
 }
 
 string Task::getTaskName(){

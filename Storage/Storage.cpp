@@ -1,7 +1,14 @@
 #include "Storage.h"
 
+string Storage::MESSAGE_EMPTY_STACK = "-1";
 
 void Storage::updateTextFile(string outputFile){
+
+	ofstream writeFile(outputFile);
+
+	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+		writeFile << textFileCopy[i] << endl;
+	}
 
 	ofstream updatedTaskList;
 	updatedTaskList.open(outputFile);
@@ -37,10 +44,14 @@ void Storage::addTask(Task *individual_task){
 }
 
 void Storage::deleteTask(unsigned int taskIndex){
-	if(taskIndex < 1 || taskIndex > taskList.size()){
+	if (taskIndex < 1 || taskIndex > taskList.size()){
 		cout << "Invalid Number" << endl;
-	} else {
+	}
+	else {
+		deleteTaskObjectStack.push(taskList.back());
+		deleteTaskIndexStack.push(taskIndex);
 		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
+		taskList.erase(taskList.begin() + taskIndex - 1);
 	}
 
 	return;
@@ -138,5 +149,35 @@ void Storage::markTask(unsigned int taskIndex, string keyword){
 		}
 
 		return;
+	}
+}
+
+void Storage::undoAction(){
+	string previousCommand = getPreviousCommand();
+	commandStack.pop();
+
+	if (previousCommand == "add"){
+		unsigned int previousSize = taskList.size();
+		deleteTask(taskList.size());
+	}
+	else {
+		if (previousCommand == "delete"){
+			Task *newTask = deleteTaskObjectStack.top();
+			deleteTaskObjectStack.pop();
+			unsigned int formerIndex = deleteTaskIndexStack.top();
+			deleteTaskIndexStack.pop();
+			taskList.insert(taskList.begin() + (formerIndex - 1), newTask);
+			textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask->getTaskDetails());
+		}
+	}
+	return;
+}
+
+string Storage::getPreviousCommand(){
+	if (commandStack.empty()){
+		return MESSAGE_EMPTY_STACK;
+	}
+	else {
+		return commandStack.top();
 	}
 }

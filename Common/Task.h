@@ -1,6 +1,6 @@
 #ifndef TASK_H
 #define TASK_H
- //testing
+
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -19,6 +19,7 @@ struct Timeframe{
 class Task{
 
 private:
+
 	static string MESSAGE_COMPLETE_TASK;
 	static string MESSAGE_INCOMPLETE_TASK;
 
@@ -30,6 +31,7 @@ private:
 	string _taskStatus;
 
 public:
+
 	Task();
 	Task(string,string,string,string,string,string,string,string,string);
 
