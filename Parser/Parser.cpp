@@ -29,6 +29,8 @@ void Parser::sortCommand(string &userInput)
 }
 
 
+
+
 void Parser::sortDetails(string &userInput)
 {
     int index;
@@ -197,6 +199,32 @@ void Parser::processCommand(string &userInput)
 		userInput.erase(0,b+1);
 		para.processInput(userInput);
 		para.processUpdateNumber(index);
+	}
+	else if (command == "mark")
+	{
+		istringstream iss(userInput);
+		iss >> index;
+		para.processMarkIndex(index);
+
+		para.processMarkStatus("mark");
+
+
+	}
+	else if (command == "unmark")
+	{
+		istringstream iss(userInput);
+		iss >> index;
+		para.processMarkIndex(index);
+
+		para.processMarkStatus("unmark");
+
+
+
+	}
+	else if (command == "save")
+	{
+		para.processUserDir(userInput);
+
 	}
 	else
 	{

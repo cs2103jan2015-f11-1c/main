@@ -120,11 +120,11 @@ namespace Task_Testing
 
 		TEST_METHOD(getTaskStatus_test)
 		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
 			string actual;
 			actual = test->getTaskStatus();
 
-			string expected = "Incompleted";
+			string expected = "Incomplete";
 
 			Assert::AreEqual(expected, actual);
 
@@ -132,11 +132,11 @@ namespace Task_Testing
 
 		TEST_METHOD(getTaskDetails_test)
 		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
 			string actual;
 			actual = test->getTaskDetails();
 
-			string expected = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incompleted";
+			string expected = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
 
 			Assert::AreEqual(expected, actual);
 
@@ -248,7 +248,7 @@ namespace Task_Testing
 
 		TEST_METHOD(changeTaskStatus_test)
 		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
 			string actual;
 			test->changeTaskStatus("mark");
 			actual = test->getTaskStatus();
@@ -260,7 +260,7 @@ namespace Task_Testing
 			Task* test2 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
 			test2->changeTaskStatus("abcd");
 			string actual2 = test2->getTaskStatus();
-			string expected2 = "Incompleted";
+			string expected2 = "Incomplete";
 
 			Assert::AreEqual(expected2, actual2);
 

@@ -110,3 +110,52 @@ void paraList::clearTask()
 	_task.changeTaskStatus("");
 	return;
 }
+
+void paraList::processMarkIndex(int index)
+{
+
+
+	markIndex = index;
+
+
+	return;
+}
+
+
+void paraList::processMarkStatus(string keyword)
+{
+
+	markStatus=keyword;
+
+
+	return;
+}
+
+void paraList::processUserDir(string directory)
+{
+
+	userDir=directory;
+
+	return;
+}
+
+string paraList::getuserdir()
+{
+	return userDir;
+
+
+}
+
+string  paraList::getmarkstatus()
+{
+
+	return markStatus;
+
+
+}
+
+int paraList::getmarkindex()
+{
+
+	return markIndex;
+}

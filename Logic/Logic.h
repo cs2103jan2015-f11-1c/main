@@ -20,7 +20,7 @@ using namespace std;
 class Logic{
 
 private:
-	
+
 	UI UserInterface;
 
 	Parser ParserComponent;
@@ -28,25 +28,40 @@ private:
 	Storage DataBase;
 
 	vector<string> textFileCopy_fromStorage;
-	
+
 	string userInput;
+	string _filename;
 
 public:
 
 	void Welcome();
 
 	void CommandPrompt();
+
+	string getExePath();
+
+	//bool validDirectory(string);
+
+	void createNewDirectory(string);
+
+	void changeFileDirectory(string);
+
+	void processChangeDirectoryRequest(string);
 	
+	void setFileName(string);
+
+	string getFileName();
+
 	paraList* getParaList(string);
-	
+
 	//void writeFile(vector<string>, string);
-	
+
 	string getUserInput();
-	
+
 	string getCommand(paraList);
-	
+
 	Task getTask(paraList);
-	
+
 	void copyTestFilefromStorage();
 
 	vector<string> getTextFileCopy();
@@ -54,9 +69,9 @@ public:
 	void callInitialise(string);
 
 	bool notExistingTask(Task*);
-	
+
 	void executeCommand(paraList, string);
-	
+
 	void displayFeedback(string);
 
 };

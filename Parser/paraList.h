@@ -15,8 +15,12 @@ private:
    int deleteNumber;
    int displayNumber;
    int updateNumber;
+   int markIndex;
    string keyword;
    string input;
+   string markStatus;
+   string userDir;
+  
 
 
 public: 
@@ -29,6 +33,11 @@ public:
 	int getDeleteInteger();
 	int getDisplayInteger();
 	int getUpdateInteger();
+	string getuserdir();
+	string getmarkstatus();
+	int getmarkindex();
+
+
 
 	//what's the use of this ah? -GT
 	void displayTaskName(string taskName);
@@ -45,6 +54,9 @@ public:
 	string getKeyword();
 	string getInput();
 	void clearTask();
+	void processMarkIndex(int);
+	void processMarkStatus(string);
+	void processUserDir(string);
 
 	
 };

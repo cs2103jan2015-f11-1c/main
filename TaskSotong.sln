@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common_Testing", "Storage_T
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaList_Testing", "ParaList_Testing\ParaList_Testing.vcxproj", "{E983CEAD-1518-4995-915B-E464A81D4DD8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tasksotongUI", "tasksotongUI\tasksotongUI.vcxproj", "{9EED76F0-0B94-4802-9418-BFE797D26C90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -63,6 +65,10 @@ Global
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Debug|Win32.Build.0 = Debug|Win32
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Release|Win32.ActiveCfg = Release|Win32
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Release|Win32.Build.0 = Release|Win32
+		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Debug|Win32.Build.0 = Debug|Win32
+		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Release|Win32.ActiveCfg = Release|Win32
+		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
