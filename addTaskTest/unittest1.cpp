@@ -15,8 +15,7 @@ namespace Logic_Test
 
 			string userInput = "add Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority";
 			paraList* parameterList = addTaskObject.getParaList(userInput);
-			string outputFile = "addTaskTest.txt";
-			addTaskObject.executeCommand(*parameterList, outputFile);
+			addTaskObject.executeCommand(*parameterList);
 			vector<string> actualOutputVector = addTaskObject.getTextFileCopy();
 
 			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";

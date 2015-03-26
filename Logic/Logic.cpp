@@ -88,7 +88,6 @@ void Logic::createNewDirectory(string userFileDirectory){
 	directoryParts.pop();
 
 	while (!directoryParts.empty()){
-		cout << directory << endl;
 		cout << directoryParts.top() << endl;
 		directory = directory + directoryParts.top();
 		_mkdir(directory.c_str());
@@ -103,7 +102,7 @@ void Logic::createNewDirectory(string userFileDirectory){
 void Logic::changeFileDirectory(string userFileDirectory){
 
 	createNewDirectory(userFileDirectory);
-	_filename = userFileDirectory;
+	setFileName(userFileDirectory);
 	//"C:\ts\ts1\gt.txt";
 
 	return;
@@ -112,7 +111,6 @@ void Logic::changeFileDirectory(string userFileDirectory){
 
 void Logic::processChangeDirectoryRequest(string userFileDirectory){
 
-		cout << "you want to save it here? " << userFileDirectory << endl;
 		changeFileDirectory(userFileDirectory);
 	return;
 
@@ -174,7 +172,7 @@ bool Logic::notExistingTask(Task* task){
 	return true;
 }
 
-void Logic::executeCommand(paraList Input, string outputFile){
+void Logic::executeCommand(paraList Input){
 
 	string command = Input.getCommand();
 
@@ -186,7 +184,7 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	else if (command == "add"){
 		if (notExistingTask(&oneTask)){
 			DataBase.addTask(&oneTask);
-			DataBase.updateTextFile(outputFile);
+			DataBase.updateTextFile(_filename);
 			UserInterface.displaySuccessfulAddMessage();
 		}
 		else{
@@ -195,28 +193,27 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	}
 	else if (command == "display"){
 		DataBase.displayAllTasks();
-		DataBase.updateTextFile(outputFile);
+		DataBase.updateTextFile(_filename);
 	}
 	else if (command == "update"){
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
 		DataBase.updateTask(updateInteger, keyword1, detail);
-		DataBase.updateTextFile(outputFile);
+		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulUpdateMessage();
-
 	}
 	else if (command == "delete"){
 		int deleteInteger = Input.getDeleteInteger();
 		DataBase.deleteTask(deleteInteger);
-		DataBase.updateTextFile(outputFile);
+		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulDeleteMessage();
 	}
 	else if (command == "save"){
 
 		string userDirectory = Input.getuserdir();
-		cout << "parser's directory: " << endl;
 		processChangeDirectoryRequest(userDirectory);
+		cout << "Saving derectory changed! :D" << endl;
 	}
 	else if (command == "mark"){
 		int markIndex = Input.getmarkindex();
@@ -225,9 +222,7 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	else if (command == "unmark"){
 
 		int markIndex = Input.getmarkindex();
-		DataBase.markTask(markIndex, "unmark");
-	
-	
+		DataBase.markTask(markIndex, "unmark");	
 	}
 	else if (command == "clear"){
 		DataBase.clearAllTasks();

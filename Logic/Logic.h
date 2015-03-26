@@ -70,7 +70,7 @@ public:
 
 	bool notExistingTask(Task*);
 
-	void executeCommand(paraList, string);
+	void executeCommand(paraList);
 
 	void displayFeedback(string);
 
