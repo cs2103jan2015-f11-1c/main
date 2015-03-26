@@ -14,9 +14,8 @@ int main(){
 	cout << "Hello testing" << endl;
 	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath() << endl;
 
-	TSlogic.setFileName("joonfai.txt");
+	TSlogic.setFileName("taskSotong.txt");
 	string filename = TSlogic.getFileName();
-	cout << "filename: " << filename << endl;
 
 	TSlogic.callInitialise(filename);
 	TSlogic.CommandPrompt();
@@ -30,7 +29,7 @@ int main(){
 		Task task = storageInput->getTask();
 		string taskname = task.getTaskName();
 
-		TSlogic.executeCommand(*storageInput, filename);
+		TSlogic.executeCommand(*storageInput);
 
 		cout << endl;
 		TSlogic.CommandPrompt();
