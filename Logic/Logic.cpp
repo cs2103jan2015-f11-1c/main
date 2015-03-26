@@ -214,13 +214,28 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	}
 	else if (command == "save"){
 
-		//string userDirectory = Input.getUserDirectory();
-		//processChangeDirectoryRequest(userDirectory);
+		string userDirectory = Input.getuserdir();
+		cout << "parser's directory: " << endl;
+		processChangeDirectoryRequest(userDirectory);
 	}
 	else if (command == "mark"){
-		//int markIndex = Input.getMarkIndex();
-		DataBase.markTask(3, "asshole");
+		int markIndex = Input.getmarkindex();
+		DataBase.markTask(markIndex, "mark");
 	}
+	else if (command == "unmark"){
+
+		int markIndex = Input.getmarkindex();
+		DataBase.markTask(markIndex, "unmark");
+	
+	
+	}
+	else if (command == "clear"){
+		DataBase.clearAllTasks();
+	}
+	else if (command == "undo"){
+		DataBase.undoAction();
+	}
+
 	return;
 }
 
