@@ -110,25 +110,10 @@ void Logic::changeFileDirectory(string userFileDirectory){
 
 }
 
-void Logic::processChangeDirectoryRequest(){
+void Logic::processChangeDirectoryRequest(string userFileDirectory){
 
-	string choice;
-	cin >> choice;
-	if (choice == "N"){
-		_filename = "1.txt";
-	}
-	else if (choice == "Y"){
-		cout << "Where? " << endl;
-
-		string userFileDirectory;
-		cin >> userFileDirectory;
 		cout << "you want to save it here? " << userFileDirectory << endl;
 		changeFileDirectory(userFileDirectory);
-	}
-	else {
-		cout << "Invalid command! file is saved in current location! :<" << endl;
-	}
-
 	return;
 
 }
@@ -220,6 +205,11 @@ void Logic::executeCommand(paraList Input, string outputFile){
 		DataBase.deleteTask(deleteInteger);
 		DataBase.updateTextFile(outputFile);
 		UserInterface.displaySuccessfulDeleteMessage();
+	}
+	else if (command == "save"){
+
+		string userDirectory = Input.getUserDirectory();
+		processChangeDirectoryRequest(userDirectory);
 	}
 
 	return;
