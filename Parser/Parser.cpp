@@ -11,7 +11,7 @@
 using namespace std;
 
 const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
-const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
+const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
 const regex TIME_PATTERN("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 
 Parser::Parser()
