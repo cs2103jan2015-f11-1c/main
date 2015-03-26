@@ -10,6 +10,9 @@
 
 using namespace std;
 
+const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
+const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
+const regex TIME_PATTERN("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 
 Parser::Parser()
 {}
@@ -25,12 +28,7 @@ void Parser::sortCommand(string &userInput)
 	return;
 }
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 2c39aa7ed07155728950f15243c4f923f5e3a3e7
 void Parser::sortDetails(string &userInput)
 {
     int index;
@@ -312,9 +310,9 @@ string Parser::checkST(string userinput)
 {
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
-	regex timePattern("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
+
 	const sregex_token_iterator d;
-	for (sregex_token_iterator e(userinput.begin(), userinput.end(), timePattern); e != d; ++e)
+	for (sregex_token_iterator e(userinput.begin(), userinput.end(),TIME_PATTERN); e != d; ++e)
 	{
 		
 		time[count2] = *e;
@@ -329,12 +327,12 @@ string Parser::checkST(string userinput)
 
 string Parser::checkSD(string userinput)
 {
-	regex datePattern("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
+
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
 
 	const sregex_token_iterator end;
-	for (sregex_token_iterator i(userinput.begin(), userinput.end(), datePattern); i != end; ++i)
+	for (sregex_token_iterator i(userinput.begin(), userinput.end(),DATE_PATTERN); i != end; ++i)
 	{
 		
 		date[count1] = *i;
@@ -364,10 +362,6 @@ void Parser::empty(string&startdate, string &starttime, string&enddate, string &
 
 
 
-
-
-
-
 	return;
 
 
@@ -379,16 +373,16 @@ void Parser::processX(string userinput)
 
 	string  keyword[50];
 	int  count = 0;
-	regex XPattern("(!)\\w+\\b",std::tr1::regex_constants::icase);
+	
 	smatch X;
 	const sregex_token_iterator d;
-	for (sregex_token_iterator e(userinput.begin(), userinput.end(), XPattern); e != d; ++e)
+	for (sregex_token_iterator e(userinput.begin(), userinput.end(), X_PATTERN); e != d; ++e)
 	{
 
 		keyword[count] = *e;
 		count++;
 	}
-	if (regex_search(userinput, X, XPattern))
+	if (regex_search(userinput,X,X_PATTERN))
     para._task.changeTaskPriority(keyword[0].substr(1));
 
 
@@ -401,18 +395,16 @@ void Parser::processX(string userinput)
 void Parser::getNoneToken(string userinput, int& xtoken, int& timetoken, int& datetoken)
 {
 	
-	regex XPattern("(!)\\w+\\b", std::tr1::regex_constants::icase);
-	regex datePattern("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
-	regex timePattern("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
+	
 
 	smatch matchX,matchdate,matchtime;
 	
 	
-	if(regex_search(userinput, matchX, XPattern))
+	if(regex_search(userinput, matchX, X_PATTERN))
     xtoken = matchX.position(0);
-	if(regex_search(userinput, matchdate, datePattern))
+	if(regex_search(userinput, matchdate, DATE_PATTERN))
     datetoken = matchdate.position(0);
-	if(regex_search(userinput, matchtime, timePattern))
+	if(regex_search(userinput, matchtime,TIME_PATTERN))
     timetoken = matchtime.position(0);
 	
 	

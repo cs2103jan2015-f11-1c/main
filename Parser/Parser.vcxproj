@@ -66,10 +66,12 @@
   <ItemGroup>
     <ClInclude Include="paraList.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="parserProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="paraList.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="parserProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
