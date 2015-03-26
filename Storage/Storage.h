@@ -48,6 +48,8 @@ public:
 
 	string getPreviousCommand();
 
+	void clearAllTasks();
+
 };
 
 #endif

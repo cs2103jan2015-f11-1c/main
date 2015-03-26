@@ -9,16 +9,7 @@ void Storage::updateTextFile(string outputFile){
 	for (unsigned int i = 0; i < textFileCopy.size(); i++){
 		writeFile << textFileCopy[i] << endl;
 	}
-	/*
-	ofstream updatedTaskList;
-	updatedTaskList.open(outputFile);
 
-	for (int i = 0; i < textFileCopy.size(); i++){
-		updatedTaskList << textFileCopy[i] << endl;
-	}
-
-	updatedTaskList.close();
-	*/
 	return;
 }
 
@@ -50,8 +41,8 @@ void Storage::deleteTask(unsigned int taskIndex){
 	else {
 		deleteTaskObjectStack.push(taskList.back());
 		deleteTaskIndexStack.push(taskIndex);
-		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
-		
+
+		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);	
 		taskList.erase(taskList.begin() + taskIndex - 1);
 	}
 
@@ -181,4 +172,11 @@ string Storage::getPreviousCommand(){
 	else {
 		return commandStack.top();
 	}
+}
+
+void Storage::clearAllTasks(){
+	taskList.clear();
+	textFileCopy.clear();
+
+	return;
 }
