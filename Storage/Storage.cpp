@@ -27,7 +27,6 @@ vector<string> Storage::returnTextFileCopy(){
 }
 
 void Storage::addTask(Task *individual_task){
-
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
 
@@ -144,6 +143,7 @@ void Storage::markTask(unsigned int taskIndex, string keyword){
 	}
 }
 
+//Add support for keywords "mark", "unmark", "clearAllTasks", "update"
 void Storage::undoAction(){
 	string previousCommand = getPreviousCommand();
 	commandStack.pop();
@@ -177,6 +177,26 @@ string Storage::getPreviousCommand(){
 void Storage::clearAllTasks(){
 	taskList.clear();
 	textFileCopy.clear();
+
+	return;
+}
+
+//For future versions, can include functionality to search for words regardless of capitilization
+void Storage::searchTask(const string& searchEntry){
+	vector<string>::iterator iter = textFileCopy.begin();
+	int count = 0;
+
+	while (iter != textFileCopy.end()){
+		if (iter->find(searchEntry) != string::npos){
+			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			count++;
+		}
+		iter++;
+	}
+
+	if (count == 0){
+		cout << "No matching results" << endl;
+	}
 
 	return;
 }
