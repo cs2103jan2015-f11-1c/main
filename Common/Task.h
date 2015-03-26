@@ -56,7 +56,7 @@ public:
 			<< date3
 			<< time3
 			<< priority
-			<< _taskStatus;
+			<< status;
 
 		return oss.str();		
 	}

@@ -29,6 +29,7 @@ vector<string> Storage::returnTextFileCopy(){
 void Storage::addTask(Task *individual_task){
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
+	commandStack.push("add");
 
 	return;
 }
@@ -40,6 +41,7 @@ void Storage::deleteTask(unsigned int taskIndex){
 	else {
 		deleteTaskObjectStack.push(taskList.back());
 		deleteTaskIndexStack.push(taskIndex);
+		commandStack.push("delete");
 
 		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);	
 		taskList.erase(taskList.begin() + taskIndex - 1);
@@ -148,26 +150,36 @@ void Storage::undoAction(){
 	string previousCommand = getPreviousCommand();
 	commandStack.pop();
 
+	if (previousCommand == "invalid"){
+		cout << MESSAGE_EMPTY_STACK << endl;
+		
+		return;
+	}
+
 	if (previousCommand == "add"){
-		unsigned int previousSize = taskList.size();
-		deleteTask(taskList.size());
+		textFileCopy.erase(textFileCopy.begin() + taskList.size() - 1);
+		taskList.erase(taskList.begin() + taskList.size() - 1);
+
+		return;
 	}
-	else {
-		if (previousCommand == "delete"){
-			Task *newTask = deleteTaskObjectStack.top();
-			deleteTaskObjectStack.pop();
-			unsigned int formerIndex = deleteTaskIndexStack.top();
-			deleteTaskIndexStack.pop();
-			taskList.insert(taskList.begin() + (formerIndex - 1), newTask);
-			textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask->getTaskDetails());
-		}
+
+	if (previousCommand == "delete"){
+		Task *newTask = deleteTaskObjectStack.top();
+		deleteTaskObjectStack.pop();
+		unsigned int formerIndex = deleteTaskIndexStack.top();
+		deleteTaskIndexStack.pop();
+		taskList.insert(taskList.begin() + (formerIndex - 1), newTask);
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask->getTaskDetails());
+	
+		return;
 	}
+	
 	return;
 }
 
 string Storage::getPreviousCommand(){
 	if (commandStack.empty()){
-		return MESSAGE_EMPTY_STACK;
+		return "invalid";
 	}
 	else {
 		return commandStack.top();

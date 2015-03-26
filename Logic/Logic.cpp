@@ -221,12 +221,13 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	else if (command == "mark"){
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(markIndex, "mark");
+		DataBase.updateTextFile(outputFile);
 	}
 	else if (command == "unmark"){
 
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(markIndex, "unmark");
-	
+		DataBase.updateTextFile(outputFile);
 	
 	}
 	else if (command == "clear"){
@@ -234,6 +235,7 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	}
 	else if (command == "undo"){
 		DataBase.undoAction();
+		DataBase.updateTextFile(outputFile);
 	}
 
 	return;
