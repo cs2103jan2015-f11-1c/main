@@ -5,22 +5,23 @@
 
 using namespace std;
 
-static string filename = "gantian.txt";
+//static string filename = "gantian.txt";
 
 int main(){
 
 	Logic TSlogic;
 	TSlogic.Welcome();
-	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath()<<endl;
-	cout << "Do you want to change saving file directory? [Y/N]";
+	cout << "Hello testing" << endl;
+	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath() << endl;
+	cout << "Do you want to change saving file directory? [Y/N]" << endl;
 
-	//TSlogic.processChangeDirectoryRequest();
+	TSlogic.processChangeDirectoryRequest();
+	string filename = TSlogic.getFileName();
 
-	
 	TSlogic.callInitialise(filename);
 
 	string userInput = TSlogic.getUserInput();
-	
+
 
 	while (userInput != "exit"){
 
@@ -33,11 +34,11 @@ int main(){
 
 		cout << endl;
 		TSlogic.CommandPrompt();
-		
+
 		userInput = TSlogic.getUserInput();
-	
+
 	}
-	
+
 
 	system("pause");
 	return 0;
@@ -49,35 +50,35 @@ int main(){
 /*
 int main(int argc, char** argv){
 
-	string filename;
-	if (argc < 2) {
-		cout << "need filename!" << endl;
-	}
-	
-	for (int i = 0; i < strlen(argv[1]); i++) {
-		filename += argv[1][i];
-	}
+string filename;
+if (argc < 2) {
+cout << "need filename!" << endl;
+}
 
-	Logic TSlogic;
-	TSlogic.Welcome();
+for (int i = 0; i < strlen(argv[1]); i++) {
+filename += argv[1][i];
+}
 
-	string userInput = TSlogic.getUserInput();
-	
-	TSlogic.callInitialise(filename);
+Logic TSlogic;
+TSlogic.Welcome();
 
-	while (userInput != "exit"){
-		
-		paraList* storageInput = TSlogic.getParaList(userInput);
-		string command = storageInput->getCommand();
-		Task task = storageInput->getTask();
-		string taskname = task.getTaskName();
+string userInput = TSlogic.getUserInput();
 
-		TSlogic.executeCommand(*storageInput, filename);
+TSlogic.callInitialise(filename);
 
-		userInput = TSlogic.getUserInput();
-	}
+while (userInput != "exit"){
 
-	system("pause");
-	return 0;
+paraList* storageInput = TSlogic.getParaList(userInput);
+string command = storageInput->getCommand();
+Task task = storageInput->getTask();
+string taskname = task.getTaskName();
+
+TSlogic.executeCommand(*storageInput, filename);
+
+userInput = TSlogic.getUserInput();
+}
+
+system("pause");
+return 0;
 
 }*/
