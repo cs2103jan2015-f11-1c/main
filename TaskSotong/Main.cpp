@@ -14,11 +14,12 @@ int main(){
 	cout << "Hello testing" << endl;
 	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath() << endl;
 
-
+	TSlogic.setFileName("joonfai.txt");
 	string filename = TSlogic.getFileName();
+	cout << "filename: " << filename << endl;
 
 	TSlogic.callInitialise(filename);
-
+	TSlogic.CommandPrompt();
 	string userInput = TSlogic.getUserInput();
 
 

@@ -19,7 +19,7 @@ namespace Logic_Test
 			addTaskObject.executeCommand(*parameterList, outputFile);
 			vector<string> actualOutputVector = addTaskObject.getTextFileCopy();
 
-			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incompleted";
+			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
 			string actualOutputString = actualOutputVector[0];
 
 			Assert::AreEqual(expectedOutputString, actualOutputString);
@@ -55,9 +55,21 @@ void Welcome();
 
 void CommandPrompt();
 
+string getExePath();
+
+//bool validDirectory(string);
+
+void createNewDirectory(string);
+
+void changeFileDirectory(string);
+
+void processChangeDirectoryRequest(string);
+
+string getFileName();
+
 paraList* getParaList(string);
 
-void writeFile(vector<string>, string);
+//void writeFile(vector<string>, string);
 
 string getUserInput();
 

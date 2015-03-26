@@ -118,6 +118,12 @@ void Logic::processChangeDirectoryRequest(string userFileDirectory){
 
 }
 
+void Logic::setFileName(string updatedFileName){
+	_filename = updatedFileName;
+	return;
+}
+
+
 string Logic::getFileName(){
 	return _filename;
 }
@@ -208,10 +214,13 @@ void Logic::executeCommand(paraList Input, string outputFile){
 	}
 	else if (command == "save"){
 
-		string userDirectory = Input.getUserDirectory();
-		processChangeDirectoryRequest(userDirectory);
+		//string userDirectory = Input.getUserDirectory();
+		//processChangeDirectoryRequest(userDirectory);
 	}
-
+	else if (command == "mark"){
+		//int markIndex = Input.getMarkIndex();
+		DataBase.markTask(3, "asshole");
+	}
 	return;
 }
 

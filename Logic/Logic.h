@@ -47,6 +47,8 @@ public:
 	void changeFileDirectory(string);
 
 	void processChangeDirectoryRequest(string);
+	
+	void setFileName(string);
 
 	string getFileName();
 
