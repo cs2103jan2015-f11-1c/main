@@ -49,6 +49,19 @@ namespace ParaList_Testing
 			int expected = 1;
 
 			Assert::AreEqual(actual, expected);
+			
+			//This is a boundary testing for getDeleteInteger. 
+			//when the user key in delete 0, it is an invalid index, just outside the boundary
+			paraList test1;
+			Task* taskTest1 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test1.setparaList("add", 0, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+			int actual1 = test.getDeleteInteger();
+			int expected1 = 0;
+
+			Assert::AreEqual(actual, expected);
+
 		}
 
 		TEST_METHOD(getDisplayInteger_test)
