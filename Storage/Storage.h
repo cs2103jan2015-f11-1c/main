@@ -50,6 +50,8 @@ public:
 
 	void clearAllTasks();
 
+	void searchTask(const string&);
+
 };
 
 #endif
