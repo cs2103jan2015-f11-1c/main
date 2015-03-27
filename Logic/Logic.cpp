@@ -16,6 +16,7 @@ void Logic::Welcome(){
 	return;
 }
 
+//this function only gets the directory of the .exe file, not where the .txt file is. 
 string Logic::getExePath(){
 
 	char buffer[MAX_PATH];
@@ -88,7 +89,8 @@ void Logic::createNewDirectory(string userFileDirectory){
 	directoryParts.pop();
 
 	while (!directoryParts.empty()){
-		cout << directoryParts.top() << endl;
+		//for debugging purpose
+		//cout << directoryParts.top() << endl;
 		directory = directory + directoryParts.top();
 		_mkdir(directory.c_str());
 		directoryParts.pop();
@@ -218,25 +220,21 @@ void Logic::executeCommand(paraList Input){
 	else if (command == "mark"){
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(markIndex, "mark");
-		DataBase.updateTextFile(outputFile);
+		DataBase.updateTextFile(_filename);
 	}
 	else if (command == "unmark"){
 
 		int markIndex = Input.getmarkindex();
-<<<<<<< HEAD
+
 		DataBase.markTask(markIndex, "unmark");
-		DataBase.updateTextFile(outputFile);
-	
-=======
-		DataBase.markTask(markIndex, "unmark");	
->>>>>>> b51bccfa3e62a377d079bb9fa7426403cb3fcbee
+		DataBase.updateTextFile(_filename);
 	}
 	else if (command == "clear"){
 		DataBase.clearAllTasks();
 	}
 	else if (command == "undo"){
 		DataBase.undoAction();
-		DataBase.updateTextFile(outputFile);
+		DataBase.updateTextFile(_filename);
 	}
 
 	return;
