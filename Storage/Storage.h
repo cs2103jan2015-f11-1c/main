@@ -8,6 +8,8 @@
 #include <iterator>
 #include <vector>
 #include <stack>
+#include <cctype>
+#include <functional>
 #include "..\Common\Task.h"
 
 using namespace std;
@@ -50,7 +52,9 @@ public:
 
 	void clearAllTasks();
 
-	void searchTask(const string&);
+	void searchTask(string, const string&);
+
+	void sortTaskByName(string);
 
 };
 
