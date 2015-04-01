@@ -197,7 +197,10 @@ void Storage::clearAllTasks(){
 	return;
 }
 
-//For future versions, can include functionality to search for words regardless of capitilization
+bool caseInsensitiveEqual(char ch1, char ch2){
+	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
+}
+
 void Storage::searchTask(string fileName, const string& searchEntry){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
@@ -206,13 +209,13 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 	int count = 0;
 
 	while (iter != textFileCopy.end()){
-		if (iter->find(searchEntry) != string::npos){
+		string::const_iterator pos = search(iter->begin(), iter->end(), searchEntry.begin(), searchEntry.end(), caseInsensitiveEqual);
+		if (pos != iter->end()){
 			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
 			count++;
 		}
 		iter++;
 	}
-
 	if (count == 0){
 		cout << "No matching results" << endl;
 	}
@@ -220,21 +223,21 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 	return;
 }
 
-struct case_insensitive_less : public binary_function < char, char, bool >{
+struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	bool operator () (char x, char y) const {
 		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
 	}
 };
 
-bool NoCaseLess(const string &a, const string &b){
-	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), case_insensitive_less());
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
 }
 
 void Storage::sortTaskByName(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
-	sort(textFileCopy.begin(), textFileCopy.end(), NoCaseLess);
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 
 	return;
 }
