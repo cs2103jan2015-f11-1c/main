@@ -1,6 +1,6 @@
 #include "Storage.h"
 
-string Storage::MESSAGE_EMPTY_STACK = "-1";
+string Storage::MESSAGE_EMPTY_STACK = "Nothing to undo!";
 
 void Storage::updateTextFile(string outputFile){
 
@@ -29,6 +29,7 @@ vector<string> Storage::returnTextFileCopy(){
 void Storage::addTask(Task *individual_task){
 	taskList.push_back(individual_task); 
 	textFileCopy.push_back(individual_task->getTaskDetails());
+	commandStack.push("add");
 
 	return;
 }
@@ -36,10 +37,10 @@ void Storage::addTask(Task *individual_task){
 void Storage::deleteTask(unsigned int taskIndex){
 	if (taskIndex < 1 || taskIndex > taskList.size()){
 		cout << "Invalid Number" << endl;
-	}
-	else {
+	} else {
 		deleteTaskObjectStack.push(taskList.back());
 		deleteTaskIndexStack.push(taskIndex);
+		commandStack.push("delete");
 
 		textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);	
 		taskList.erase(taskList.begin() + taskIndex - 1);
@@ -54,7 +55,7 @@ void Storage::displayAllTasks(){
 
 		return;
 	} else {
-		for (int i = 0; i < textFileCopy.size(); i++){
+		for (unsigned int i = 0; i < textFileCopy.size(); i++){
 			cout << i + 1 << ". " << textFileCopy[i] << endl;
 		}
 	}
@@ -134,7 +135,13 @@ void Storage::markTask(unsigned int taskIndex, string keyword){
 
 			return;
 		} else {
+			cout << taskList[taskIndex - 1]->getTaskName() << endl;
+			cout << taskList[taskIndex - 1]->getTaskStatus() << endl;
+			cout << taskList[taskIndex - 1]->getTaskDetails() << endl;
 			taskList[taskIndex - 1]->changeTaskStatus(keyword);
+			cout << taskList[taskIndex - 1]->getTaskName() << endl;
+			cout << taskList[taskIndex - 1]->getTaskStatus() << endl;
+			cout << taskList[taskIndex - 1]->getTaskDetails() << endl;
 			textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
 			textFileCopy.erase(textFileCopy.begin() + taskIndex);	
 		}
@@ -148,28 +155,37 @@ void Storage::undoAction(){
 	string previousCommand = getPreviousCommand();
 	commandStack.pop();
 
+	if (previousCommand == "invalid"){
+		cout << MESSAGE_EMPTY_STACK << endl;
+		
+		return;
+	}
+
 	if (previousCommand == "add"){
-		unsigned int previousSize = taskList.size();
-		deleteTask(taskList.size());
+		textFileCopy.erase(textFileCopy.begin() + taskList.size() - 1);
+		taskList.erase(taskList.begin() + taskList.size() - 1);
+
+		return;
 	}
-	else {
-		if (previousCommand == "delete"){
-			Task *newTask = deleteTaskObjectStack.top();
-			deleteTaskObjectStack.pop();
-			unsigned int formerIndex = deleteTaskIndexStack.top();
-			deleteTaskIndexStack.pop();
-			taskList.insert(taskList.begin() + (formerIndex - 1), newTask);
-			textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask->getTaskDetails());
-		}
+
+	if (previousCommand == "delete"){
+		Task *newTask = deleteTaskObjectStack.top();
+		deleteTaskObjectStack.pop();
+		unsigned int formerIndex = deleteTaskIndexStack.top();
+		deleteTaskIndexStack.pop();
+		taskList.insert(taskList.begin() + (formerIndex - 1), newTask);
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask->getTaskDetails());
+	
+		return;
 	}
+	
 	return;
 }
 
 string Storage::getPreviousCommand(){
 	if (commandStack.empty()){
-		return MESSAGE_EMPTY_STACK;
-	}
-	else {
+		return "invalid";
+	} else {
 		return commandStack.top();
 	}
 }
@@ -181,22 +197,47 @@ void Storage::clearAllTasks(){
 	return;
 }
 
-//For future versions, can include functionality to search for words regardless of capitilization
-void Storage::searchTask(const string& searchEntry){
+bool caseInsensitiveEqual(char ch1, char ch2){
+	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
+}
+
+void Storage::searchTask(string fileName, const string& searchEntry){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
 	vector<string>::iterator iter = textFileCopy.begin();
 	int count = 0;
 
 	while (iter != textFileCopy.end()){
-		if (iter->find(searchEntry) != string::npos){
+		string::const_iterator pos = search(iter->begin(), iter->end(), searchEntry.begin(), searchEntry.end(), caseInsensitiveEqual);
+		if (pos != iter->end()){
 			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
 			count++;
 		}
 		iter++;
 	}
-
 	if (count == 0){
 		cout << "No matching results" << endl;
 	}
+
+	return;
+}
+
+struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	bool operator () (char x, char y) const {
+		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
+	}
+};
+
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
+}
+
+void Storage::sortTaskByName(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 
 	return;
 }

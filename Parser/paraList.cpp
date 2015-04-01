@@ -24,7 +24,13 @@ Task paraList::getTask()
 
 int paraList::getDeleteInteger()
 {
-	return deleteNumber;
+	if (deleteNumber <= 0){
+		cout << "error deteced! " << endl;
+		return 0;
+	}
+	else{
+		return deleteNumber;
+}
 }
 int paraList::getDisplayInteger()
 {
