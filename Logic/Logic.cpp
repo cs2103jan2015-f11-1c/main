@@ -26,38 +26,6 @@ string Logic::getExePath() {
 
 }
 
-/*bool Logic::validDirectory(string userFileDirectory){
-
-int index = userFileDirectory.find_last_of('\\');
-string input = userFileDirectory.substr(0, index);
-char buffer_1[100];
-
-strcpy_s(buffer_1, input.c_str());
-
-char *lpStr1;
-lpStr1 = buffer_1;
-int retval;
-
-retval = PathFileExists(lpStr1);
-if (retval == 1)
-{
-cout << "Search for the file path of : " << lpStr1 << endl;
-cout << "The file requested \"" << lpStr1 << "\" is a valid file" << endl;
-cout << "The return from function is : " << retval << endl;
-return true;
-}
-
-else
-{
-cout << "\nThe file requested " << lpStr1 << " is not a valid file" << endl;
-cout << "The return from function is : " << retval << endl;
-return false;
-}
-
-
-}
-*/
-
 void Logic::createNewDirectory(string userFileDirectory) {
 
 	int index = userFileDirectory.find_last_of('\\');
@@ -93,8 +61,6 @@ void Logic::createNewDirectory(string userFileDirectory) {
 		directory = directory + directoryParts.top();
 		_mkdir(directory.c_str());
 		directoryParts.pop();
-
-
 	}
 
 	return;
@@ -105,16 +71,12 @@ void Logic::changeFileDirectory(string userFileDirectory) {
 	createNewDirectory(userFileDirectory);
 	setFileName(userFileDirectory);
 	//"C:\ts\ts1\gt.txt";
-
 	return;
-
 }
 
 void Logic::processChangeDirectoryRequest(string userFileDirectory) {
-
 	changeFileDirectory(userFileDirectory);
 	return;
-
 }
 
 void Logic::setFileName(string updatedFileName) {
@@ -136,7 +98,6 @@ paraList* Logic::getParaList(string userInput) {
 
 	return ParserComponent.parseCommand(userInput);
 }
-
 
 string Logic::getCommand(paraList parameterList) {
 	string command = parameterList.getCommand();
