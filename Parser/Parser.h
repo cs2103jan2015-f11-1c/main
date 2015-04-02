@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include "paraList.h"
+#include "parserProcess.h"
 
 #include<iostream>
 #include <string>
@@ -41,6 +42,7 @@ void processX(string );
 void getNoneToken(string,int&,int&,int&);
 void processNum(int& , int&, int& ,int&);
 void getLocalTime();
+void processDate();
 
 };
 

@@ -170,10 +170,12 @@ void Parser::processCommand(string &userInput)
 {
 	string command=para.getCommand();
 	int index;
+	parserProcess a;
 	
 	if(command=="add")
 	{
-		sortDetails(userInput);   	
+		sortDetails(userInput);
+		processDate();
 	}
 	else if(command=="delete")
 	{   istringstream iss (userInput);
@@ -475,4 +477,41 @@ void Parser::processNum(int& a,int& b,int& c,int& answer)
 
 	}
 	return;
+}
+
+
+
+void Parser::processDate()
+{
+	parserProcess end,start,deadline;
+	string startStr = para._task.getTaskStartDate();
+	string endStr = para._task.getTaskEndDate();
+	string deadlineStr = para._task.getTaskDeadlineDate();
+
+
+	if (startStr!="")
+	{
+		start.setNowDT();
+		start.processDate(startStr);
+		para._task.changeTaskStartDate(start.parserReturnDate());
+
+	}
+	if (endStr != "")
+	{
+		end.setNowDT();
+		end.processDate(endStr);
+		para._task.changeTaskEndDate(end.parserReturnDate());
+	}
+	if (deadlineStr != "")
+	{   
+		
+		deadline.setNowDT();
+		deadline.processDate(deadlineStr);
+		para._task.changeTaskDeadlineDate(deadline.parserReturnDate());
+	}
+
+
+
+
+
 }
