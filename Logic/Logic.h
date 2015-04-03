@@ -31,6 +31,7 @@ private:
 
 	string userInput;
 	string _filename;
+	string feedbackMessage;
 
 public:
 
@@ -66,9 +67,11 @@ public:
 
 	bool notExistingTask(Task*);
 
+	string getFeedbackMsg();
+
 	void executeCommand(paraList);
 
-	void displayFeedback(string);
+	
 
 };
 #endif

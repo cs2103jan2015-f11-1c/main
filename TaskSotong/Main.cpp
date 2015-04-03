@@ -25,7 +25,7 @@ int main(){
 		paraList* storageInput = TSlogic.getParaList(userInput);
 		string command = storageInput->getCommand();
 		Task task = storageInput->getTask();
-		string taskname = task.getTaskName();
+		//string taskname = task.getTaskName();
 
 		TSlogic.executeCommand(*storageInput);
 
