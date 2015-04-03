@@ -14,7 +14,10 @@ using namespace std;
 const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
 const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
 const regex TIME_PATTERN("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
-
+const regex FROM_TO_BY_PATTERN("\b(from)\b|\b(to)\b|\b(by)\b");
+const regex FROM_PATTERN("\b(from)\b");
+const regex TO_PATTERN("\b(to)\b");
+const regex BY_PATTERN("\b(by)\b");
 Parser::Parser()
 {}
 
@@ -48,9 +51,9 @@ void Parser::sortDetails(string &userInput)
 
 	string dltime, dldate;
 	getNoneToken(userInput, a, b, c);
-	//cout << a << endl << b << endl << c << endl;
+	cout << a << endl << b << endl << c << endl;
 	processNum(a, b, c, process);
-	//cout << "min" << process << endl;
+	cout << "min" << process << endl;
 
 
 
@@ -229,6 +232,13 @@ void Parser::processCommand(string &userInput)
 		para.processUserDir(userInput);
 
 	}
+	else if (command == "search")
+	{
+
+		para.processSearchWord(userInput);
+
+
+	}
 	else
 	{
 		command == "invalid";
@@ -301,22 +311,22 @@ string Parser::checkingKeywordX(string &userInput)
 
 Parser::keywordType Parser::determineKeywords(string userInput)
 {
-	if (userInput.find("from") == string::npos&&userInput.find("to") == string::npos&&userInput.find("by") == string::npos)
+	if (!regex_search(userInput,FROM_TO_BY_PATTERN))
 	{
 		return NONE;
 	}
-	else if (userInput.find("from") != string::npos&&userInput.find("to") == string::npos)
+	else if (!regex_search(userInput, FROM_PATTERN))
 	{
 		
 
 		return STARTONLY;
 	}
-	else if (userInput.find("from") == string::npos&&userInput.find("to") != string::npos)
+	else if (!regex_search(userInput, TO_PATTERN))
 	{
 		
 		return ENDONLY;
 	}
-	else if (userInput.find("by") != string::npos)
+	else if (!regex_search(userInput, BY_PATTERN))
 	{
 
 		
