@@ -178,12 +178,21 @@ void Logic::executeCommand(paraList Input) {
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
-		DataBase.markTask(markIndex, "mark");
+		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+<<<<<<< HEAD
+=======
+
+	} else if (command == "unmark") {
+>>>>>>> 2641e9b8653cab6da83d3aca16e54bd56f2c6f53
 
 	} else if (command == "unmark") {
 		int markIndex = Input.getmarkindex();
+<<<<<<< HEAD
 		DataBase.markTask(markIndex, "unmark");
+=======
+		DataBase.unmarkTask(_filename, markIndex);
+>>>>>>> 2641e9b8653cab6da83d3aca16e54bd56f2c6f53
 		DataBase.updateTextFile(_filename);
 
 	} else if (command == "clear") {

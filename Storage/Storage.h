@@ -24,7 +24,11 @@ private:
 	stack<Task*> deleteTaskObjectStack;
 	stack<int> deleteTaskIndexStack;
 
-	static string MESSAGE_EMPTY_STACK;
+	static string ERROR_EMPTY_STACK;
+	static string ERROR_INVALID_NUMBER;
+	static string ERROR_EMPTY_LIST;
+	static string ERROR_TASK_PREVIOUSLY_COMPLETED;
+	static string ERROR_TASK_PREVIOUSLY_INCOMPLETE;
 
 public:
 
@@ -44,7 +48,9 @@ public:
 
 	void updateTask(unsigned int, string, string);
 
-	void markTask(unsigned int, string);
+	void markTask(string, unsigned int);
+
+	void unmarkTask(string, unsigned int);
 
 	void undoAction();
 
