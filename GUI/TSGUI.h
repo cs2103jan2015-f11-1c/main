@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <queue>
 #include <msclr/marshal_cppstd.h>
 #include "Logic.h"
 
@@ -144,14 +147,16 @@ namespace GUI {
 		
 		Logic TSlogic;
 		TSlogic.setFileName("taskSotong.txt");
+		ifstream readFile("taskSotong.txt");
 		std::string filename = TSlogic.getFileName();
 		TSlogic.callInitialise(filename);
 
 		if (e->KeyChar == (char)13){
+			
 			String^ input = commandline->Text;
 			std::string userInput = msclr::interop::marshal_as< std::string >(input);
-			
-			String^ output = gcnew String(userInput.c_str());
+
+
 			if (userInput != "exit") {
 
 				paraList* storageInput = TSlogic.getParaList(userInput);
@@ -159,14 +164,34 @@ namespace GUI {
 				Task task = storageInput->getTask();
 				TSlogic.executeCommand(*storageInput);
 			
-				//displaytasklist on window
-				//
+				std::string x;
+				queue<string> taskVector;
+				std::string entireList;
 
+				while (getline(readFile, x)) {
+					taskVector.push(x);
+				}
+
+				while (!taskVector.empty()) {
+					
+					std::string taskLine = taskVector.front();
+					entireList = entireList + taskLine + "\r\n";
+					taskVector.pop();
+				}
+
+				String^ displayList = gcnew String(entireList.c_str());
+				displaybox->Text = displayList;
+
+
+				std::string feedbackmsg = TSlogic.getFeedbackMsg();
+				String^ feedback = gcnew String(feedbackmsg.c_str());
+				feedbackbox->Text = feedback;
 			}
-
-			std::string feedbackmsg = TSlogic.getFeedbackMsg();
-			String^ feedback = gcnew String(feedbackmsg.c_str());
-			feedbackbox->Text = feedback;
+			
+			std::string restoreCommandLine = "";
+			String^ restoreCmdLine = gcnew String(restoreCommandLine.c_str());
+			commandline->Text = restoreCmdLine;
+			
 		}
 	}  
 	private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
