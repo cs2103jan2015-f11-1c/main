@@ -172,14 +172,15 @@ void Logic::executeCommand(paraList Input) {
 		cout << "Saving derectory changed! :D" << endl;
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
-		DataBase.markTask(markIndex, "mark");
+		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+
 	} else if (command == "unmark") {
 
 		int markIndex = Input.getmarkindex();
-
-		DataBase.markTask(markIndex, "unmark");
+		DataBase.unmarkTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
 	} else if (command == "undo") {

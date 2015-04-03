@@ -1,6 +1,10 @@
 #include "Storage.h"
 
-string Storage::MESSAGE_EMPTY_STACK = "Nothing to undo!";
+string Storage::ERROR_EMPTY_STACK = "Nothing to undo!";
+string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
+string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
+string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as completed!";
+string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 
 void Storage::updateTextFile(string outputFile){
 
@@ -20,6 +24,8 @@ void Storage::initialiseTextFile(string outputFile){
 		textFileCopy.push_back(tempStorage);
 	}
 	readFile.close();
+
+	return;
 };
 
 vector<string> Storage::returnTextFileCopy(){
@@ -124,30 +130,62 @@ void Storage::updateTask(unsigned int taskIndex, string keyword, string newInput
 	return;
 }
 
-void Storage::markTask(unsigned int taskIndex, string keyword){
-	if (taskList.empty()){
+void Storage::markTask(string fileName, unsigned int taskIndex){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (textFileCopy.empty()){
 		cout << "Task list is empty" << endl;
 
 		return;
-	} else {
-		if (taskIndex < 1 || taskIndex > taskList.size()){
-			cout << "Invalid number" << endl;
+	}
 
-			return;
-		} else {
-			cout << taskList[taskIndex - 1]->getTaskName() << endl;
-			cout << taskList[taskIndex - 1]->getTaskStatus() << endl;
-			cout << taskList[taskIndex - 1]->getTaskDetails() << endl;
-			taskList[taskIndex - 1]->changeTaskStatus(keyword);
-			cout << taskList[taskIndex - 1]->getTaskName() << endl;
-			cout << taskList[taskIndex - 1]->getTaskStatus() << endl;
-			cout << taskList[taskIndex - 1]->getTaskDetails() << endl;
-			textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
-			textFileCopy.erase(textFileCopy.begin() + taskIndex);	
-		}
+	if (taskIndex < 1 || taskIndex > textFileCopy.size()){
+		cout << "Invalid number" << endl;
 
 		return;
 	}
+
+	size_t index = 0;
+	unsigned int lengthOfIncomplete = 10;
+
+	index = textFileCopy[taskIndex - 1].find("Incomplete", index);
+	if (index == string::npos){
+		cout << ERROR_TASK_PREVIOUSLY_COMPLETED << endl;
+	} else {
+		textFileCopy[taskIndex - 1].replace(index, lengthOfIncomplete, "Completed");
+	}
+
+	return;
+}
+
+void Storage::unmarkTask(string fileName, unsigned int taskIndex){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (textFileCopy.empty()){
+		cout << "Task list is empty" << endl;
+
+		return;
+	}
+
+	if (taskIndex < 1 || taskIndex > textFileCopy.size()){
+		cout << "Invalid number" << endl;
+
+		return;
+	}
+
+	size_t index = 0;
+	unsigned int lengthOfCompleted = 9;
+
+	index = textFileCopy[taskIndex - 1].find("Completed", index);
+	if (index == string::npos){
+		cout << ERROR_TASK_PREVIOUSLY_INCOMPLETE << endl;
+	} else {
+		textFileCopy[taskIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+	}
+
+	return;
 }
 
 //Add support for keywords "mark", "unmark", "clearAllTasks", "update"
@@ -156,7 +194,7 @@ void Storage::undoAction(){
 	commandStack.pop();
 
 	if (previousCommand == "invalid"){
-		cout << MESSAGE_EMPTY_STACK << endl;
+		cout << ERROR_EMPTY_STACK << endl;
 		
 		return;
 	}
