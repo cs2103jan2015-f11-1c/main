@@ -165,7 +165,7 @@ void Logic::executeCommand(paraList Input) {
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
-		DataBase.updateTask(updateInteger, keyword1, detail);
+		DataBase.updateTask(_filename, updateInteger, keyword1, detail);
 		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulUpdateMessage();
 

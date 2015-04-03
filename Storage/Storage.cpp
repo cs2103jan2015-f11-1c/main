@@ -89,7 +89,14 @@ void Storage::displayAllTasks(){
 }
 
 //For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
-void Storage::updateTask(unsigned int taskIndex, string keyword, string newInput){
+void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
+		return;
+	}
+	
 	vector<Task*>::iterator iter = taskList.begin();
 	vector<Task*>::iterator iterEnd = taskList.end();
 
@@ -149,6 +156,8 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 		cout << ERROR_TASK_PREVIOUSLY_COMPLETED << endl;
 	} else {
 		textFileCopy[taskIndex - 1].replace(index, lengthOfIncomplete, "Completed");
+		markTaskIndexStack.push(taskIndex);
+		commandStack.push("mark");
 	}
 
 	return;
@@ -170,12 +179,14 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 		cout << ERROR_TASK_PREVIOUSLY_INCOMPLETE << endl;
 	} else {
 		textFileCopy[taskIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+		unmarkTaskIndexStack.push(taskIndex);
+		commandStack.push("unmark");
 	}
 
 	return;
 }
 
-//Add support for keywords "mark", "unmark", "clearAllTasks", "update", "sort"
+//Add support for keywords "clearAllTasks", "update", "sort"
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -205,12 +216,54 @@ void Storage::undoAction(){
 		return;
 	}
 	
+	if (previousCommand == "mark"){
+		unsigned int formerIndex = markTaskIndexStack.top();
+		markTaskIndexStack.pop();
+
+		size_t index = 0;
+		unsigned int lengthOfCompleted = 9;
+
+		index = textFileCopy[formerIndex - 1].find("Completed", index);
+		textFileCopy[formerIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+
+		return;
+	}
+
+	if (previousCommand == "unmark"){
+		unsigned int formerIndex = unmarkTaskIndexStack.top();
+		unmarkTaskIndexStack.pop();
+
+		size_t index = 0;
+		unsigned int lengthOfIncomplete = 10;
+
+		index = textFileCopy[formerIndex - 1].find("Incomplete", index);
+		textFileCopy[formerIndex - 1].replace(index, lengthOfIncomplete, "Completed");
+	
+		return;
+	}
+
+	if (previousCommand == "clear"){
+		string newTextFileCopy = clearAllTasksStack.top();
+		clearAllTasksStack.pop();
+
+	}
+
 	return;
 }
 
 void Storage::clearAllTasks(){
-	taskList.clear();
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	string backupText;
+	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+		backupText.append(textFileCopy[i] + '\n');
+	}
+
 	textFileCopy.clear();
+	clearAllTasksStack.push(backupText);
+	//commandStack.push("clear");
 
 	return;
 }
@@ -222,6 +275,10 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 void Storage::searchTask(string fileName, const string& searchEntry){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
 
 	vector<string>::iterator iter = textFileCopy.begin();
 	int count = 0;
@@ -254,6 +311,10 @@ bool noCaseLess(const string &a, const string &b){
 void Storage::sortTaskByName(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
 
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 

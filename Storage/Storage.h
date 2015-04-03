@@ -24,6 +24,8 @@ private:
 	stack<string> deleteTaskDetailsStack;
 	stack<int> deleteTaskIndexStack;
 	stack<int> markTaskIndexStack;
+	stack<int> unmarkTaskIndexStack;
+	stack<string> clearAllTasksStack;
 
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_INVALID_NUMBER;
@@ -48,7 +50,7 @@ public:
 
 	void displayAllTasks();
 
-	void updateTask(unsigned int, string, string);
+	void updateTask(string, unsigned int, string, string);
 
 	void markTask(string, unsigned int);
 
