@@ -40,8 +40,6 @@ public:
 
 	string getExePath();
 
-	//bool validDirectory(string);
-
 	void createNewDirectory(string);
 
 	void changeFileDirectory(string);
@@ -53,8 +51,6 @@ public:
 	string getFileName();
 
 	paraList* getParaList(string);
-
-	//void writeFile(vector<string>, string);
 
 	string getUserInput();
 
