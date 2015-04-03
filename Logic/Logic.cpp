@@ -7,11 +7,17 @@
 
 using namespace std;
 
-string Error_invalidUserInput = "Invalid User Input. Please Enter again! :<";
-//string FeedBack_taskAdded
-
-
-
+string Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
+string FeedBack_taskAdded = "Task Added Successfully! :>";
+string FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
+string FeedBack_displayAllTasks = "All Tasks Are Displayed!";
+string FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
+string FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
+string FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
+string FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
+string FeedBack_changeFileDirectory= "Saving derectory changed! :D";
+string FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
+string FeedBack_UnmarkTask = "Unmarked The Task!";
 
 string Logic::getUserInput() {
 	return UserInterface.acceptUserInput();
@@ -143,7 +149,6 @@ bool Logic::notExistingTask(Task* task) {
 
 
 string Logic::getFeedbackMsg() {
-
 	return feedbackMessage;
 
 }
@@ -158,54 +163,68 @@ void Logic::executeCommand(paraList Input) {
 	
 	if (command == "invalid") {
 
-		//feedbackMessage = INVALID_MESSAGE;
+		feedbackMessage = Error_invalidUserInput;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
-			feedbackMessage = "testtest";
-		} else {
+			feedbackMessage = FeedBack_taskAdded;
 
-			feedbackMessage = "testtest";
+		} else {
+			feedbackMessage = FeedBack_existingTask;
+
 		}
 	} else if (command == "display") {
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_displayAllTasks;
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
-		DataBase.updateTask(updateInteger, keyword1, detail);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		copyTestFilefromStorage();
+		if (updateInteger >= textFileCopy_fromStorage.size()||updateInteger<=0) {
+			feedbackMessage = FeedBack_updateTaskUnsuccessfully;
+
+		} else {
+			DataBase.updateTask(updateInteger, keyword1, detail);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_updateTaskSuccessfully;
+		
+		}
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		DataBase.deleteTask(_filename, deleteInteger);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		copyTestFilefromStorage();
+		if (deleteInteger >= textFileCopy_fromStorage.size() || deleteInteger <= 0) {
+			feedbackMessage = FeedBack_deleteTaskUnsuccessfully;
+		
+		} else {
+			DataBase.deleteTask(_filename, deleteInteger);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_deleteTaskSuccessfully;
+		
+		}
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		processChangeDirectoryRequest(userDirectory);
-		feedbackMessage = "testtest";
-		//cout << "Saving derectory changed! :D" << endl;
+		feedbackMessage = FeedBack_changeFileDirectory;
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_MarkTaskSuccessfully;
 
 	} else if (command == "unmark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.unmarkTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_UnmarkTask;
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
