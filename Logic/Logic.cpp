@@ -15,9 +15,14 @@ string FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
 string FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
 string FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
 string FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
-string FeedBack_changeFileDirectory= "Saving derectory changed! :D";
+string FeedBack_changeFileDirectory= "Saving directory changed! :D";
 string FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
 string FeedBack_UnmarkTask = "Unmarked The Task!";
+string FeedBack_ClearTask="All Tasks Cleared!";
+string FeedBack_UndoTask = "Undo Done! :D";
+string FeedBack_SearchTask = "Search Result Displayed! :D";
+string FeedBack_SortTasks="Tasks Sorted Accordingly!";
+
 
 string Logic::getUserInput() {
 	return UserInterface.acceptUserInput();
@@ -228,16 +233,22 @@ void Logic::executeCommand(paraList Input) {
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
+		feedbackMessage = FeedBack_ClearTask;
 
 	} else if (command == "undo") {
 		DataBase.undoAction();
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_UndoTask;
+
 	} else if (command == "search") {
-		//tobe added
+		//string searchKeyWord= Input
+		feedbackMessage = FeedBack_SearchTask;
 
 	} else if (command == "sort") {
 		DataBase.sortTaskByName(_filename);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_SortTasks;
+
 	}
 
 	return;
