@@ -145,6 +145,19 @@ void paraList::processUserDir(string directory)
 	return;
 }
 
+void paraList::processSearchWord(string keyWord)
+{
+	searchKeyword = keyWord;
+
+
+	return;
+}
+
+
+
+
+
+
 string paraList::getuserdir()
 {
 	return userDir;
@@ -165,3 +178,4 @@ int paraList::getmarkindex()
 
 	return markIndex;
 }
+

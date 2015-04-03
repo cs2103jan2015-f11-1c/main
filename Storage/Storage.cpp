@@ -186,7 +186,12 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
+<<<<<<< HEAD
 //Add support for keywords "clearAllTasks", "update", "sort"
+=======
+//Add support  for keywords "mark", "unmark", "clearAllTasks", "update"
+//Add support for keywords "mark", "unmark", "clearAllTasks", "update", "sort"
+>>>>>>> 2d6fc7637e724e7f8236a08f802a49cd87dd2093
 void Storage::undoAction(){
 
 	if (commandStack.empty()){

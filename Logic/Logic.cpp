@@ -7,6 +7,23 @@
 
 using namespace std;
 
+string Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
+string FeedBack_taskAdded = "Task Added Successfully! :>";
+string FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
+string FeedBack_displayAllTasks = "All Tasks Are Displayed!";
+string FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
+string FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
+string FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
+string FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
+string FeedBack_changeFileDirectory= "Saving directory changed! :D";
+string FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
+string FeedBack_UnmarkTask = "Unmarked The Task!";
+string FeedBack_ClearTask="All Tasks Cleared!";
+string FeedBack_UndoTask = "Undo Done! :D";
+string FeedBack_SearchTask = "Search Result Displayed! :D";
+string FeedBack_SortTasks="Tasks Sorted Accordingly!";
+
+
 string Logic::getUserInput() {
 	return UserInterface.acceptUserInput();
 }
@@ -135,6 +152,12 @@ bool Logic::notExistingTask(Task* task) {
 	return true;
 }
 
+
+string Logic::getFeedbackMsg() {
+	return feedbackMessage;
+
+}
+
 void Logic::executeCommand(paraList Input) {
 
 	string command = Input.getCommand();
@@ -145,63 +168,93 @@ void Logic::executeCommand(paraList Input) {
 	
 	if (command == "invalid") {
 
-		UserInterface.displayInvalidCommandMessage();
+		feedbackMessage = Error_invalidUserInput;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
-			UserInterface.displaySuccessfulAddMessage();
-		} else {
+			feedbackMessage = FeedBack_taskAdded;
 
-			cout << "Existing Task! Please enter a new task! :(" << endl;
+		} else {
+			feedbackMessage = FeedBack_existingTask;
+
 		}
 	} else if (command == "display") {
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_displayAllTasks;
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
+<<<<<<< HEAD
 		DataBase.updateTask(_filename, updateInteger, keyword1, detail);
 		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulUpdateMessage();
+=======
+		copyTestFilefromStorage();
+		if (updateInteger >= textFileCopy_fromStorage.size()||updateInteger<=0) {
+			feedbackMessage = FeedBack_updateTaskUnsuccessfully;
+
+		} else {
+			DataBase.updateTask(updateInteger, keyword1, detail);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_updateTaskSuccessfully;
+		
+		}
+>>>>>>> 2d6fc7637e724e7f8236a08f802a49cd87dd2093
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		DataBase.deleteTask(_filename, deleteInteger);
-		DataBase.updateTextFile(_filename);
-		UserInterface.displaySuccessfulDeleteMessage();
+		copyTestFilefromStorage();
+		if (deleteInteger >= textFileCopy_fromStorage.size() || deleteInteger <= 0) {
+			feedbackMessage = FeedBack_deleteTaskUnsuccessfully;
+		
+		} else {
+			DataBase.deleteTask(_filename, deleteInteger);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_deleteTaskSuccessfully;
+		
+		}
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		processChangeDirectoryRequest(userDirectory);
-		cout << "Saving derectory changed! :D" << endl;
+		feedbackMessage = FeedBack_changeFileDirectory;
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_MarkTaskSuccessfully;
 
 	} else if (command == "unmark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.unmarkTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_UnmarkTask;
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
+		feedbackMessage = FeedBack_ClearTask;
 
 	} else if (command == "undo") {
 		DataBase.undoAction();
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_UndoTask;
+
 	} else if (command == "search") {
-		//tobe added
+		//string searchKeyWord= Input
+		feedbackMessage = FeedBack_SearchTask;
 
 	} else if (command == "sort") {
 		DataBase.sortTaskByName(_filename);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_SortTasks;
+
 	}
 
 	return;

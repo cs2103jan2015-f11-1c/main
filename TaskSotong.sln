@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TaskSotong", "TaskSotong\TaskSotong.vcxproj", "{7E7175CE-B5A5-49E4-B1DF-5B8DECACC1BA}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaList_Testing", "ParaList_Testing\ParaList_Testing.vcxproj", "{E983CEAD-1518-4995-915B-E464A81D4DD8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tasksotongUI", "tasksotongUI\tasksotongUI.vcxproj", "{9EED76F0-0B94-4802-9418-BFE797D26C90}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "GUI\GUI.vcxproj", "{80331731-3063-45CF-9032-F3EABF969CCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Debug|Win32.Build.0 = Debug|Win32
 		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Release|Win32.ActiveCfg = Release|Win32
 		{9EED76F0-0B94-4802-9418-BFE797D26C90}.Release|Win32.Build.0 = Release|Win32
+		{80331731-3063-45CF-9032-F3EABF969CCB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{80331731-3063-45CF-9032-F3EABF969CCB}.Debug|Win32.Build.0 = Debug|Win32
+		{80331731-3063-45CF-9032-F3EABF969CCB}.Release|Win32.ActiveCfg = Release|Win32
+		{80331731-3063-45CF-9032-F3EABF969CCB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
