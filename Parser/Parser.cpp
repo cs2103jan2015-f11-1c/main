@@ -14,10 +14,10 @@ using namespace std;
 const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
 const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
 const regex TIME_PATTERN("((1[0-2]|0[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|0[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
-const regex FROM_TO_BY_PATTERN("\b(from)\b|\b(to)\b|\b(by)\b");
-const regex FROM_PATTERN("\b(from)\b");
-const regex TO_PATTERN("\b(to)\b");
-const regex BY_PATTERN("\b(by)\b");
+const regex FROM_TO_BY_PATTERN("\\b(from)\\b|\\b(to)\\b|\\b(by)\\b");
+const regex FROM_PATTERN("\\b(from)\\b");
+const regex TO_PATTERN("\\b(to)\\b");
+const regex BY_PATTERN("\\b(by)\\b");
 Parser::Parser()
 {}
 
@@ -313,27 +313,29 @@ Parser::keywordType Parser::determineKeywords(string userInput)
 {
 	if (!regex_search(userInput,FROM_TO_BY_PATTERN))
 	{
+		cout << "a";
 		return NONE;
 	}
-	else if (!regex_search(userInput, FROM_PATTERN))
+	else if (userInput.find("from")!= string::npos&&userInput.find("to") == string::npos)
 	{
 		
-
+		cout << "b";
 		return STARTONLY;
 	}
-	else if (!regex_search(userInput, TO_PATTERN))
+	else if (userInput.find("from")== string::npos&&userInput.find("to") != string::npos)
 	{
-		
+		cout << "c";
 		return ENDONLY;
 	}
-	else if (!regex_search(userInput, BY_PATTERN))
+	else if (userInput.find("by") != string::npos)
 	{
 
-		
+		cout << "deadline";
 		return DEADLINE;
 	}
 	else
 	{
+		cout << "startend";
 		return  START_END;
 	}
 }
