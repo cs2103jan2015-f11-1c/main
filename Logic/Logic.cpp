@@ -7,6 +7,12 @@
 
 using namespace std;
 
+string Error_invalidUserInput = "Invalid User Input. Please Enter again! :<";
+//string FeedBack_taskAdded
+
+
+
+
 string Logic::getUserInput() {
 	return UserInterface.acceptUserInput();
 }
@@ -135,6 +141,13 @@ bool Logic::notExistingTask(Task* task) {
 	return true;
 }
 
+
+string Logic::getFeedbackMsg() {
+
+	return feedbackMessage;
+
+}
+
 void Logic::executeCommand(paraList Input) {
 
 	string command = Input.getCommand();
@@ -145,21 +158,22 @@ void Logic::executeCommand(paraList Input) {
 	
 	if (command == "invalid") {
 
-		UserInterface.displayInvalidCommandMessage();
+		//feedbackMessage = INVALID_MESSAGE;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
-			UserInterface.displaySuccessfulAddMessage();
+			feedbackMessage = "testtest";
 		} else {
 
-			cout << "Existing Task! Please enter a new task! :(" << endl;
+			feedbackMessage = "testtest";
 		}
 	} else if (command == "display") {
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = "testtest";
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
@@ -167,28 +181,31 @@ void Logic::executeCommand(paraList Input) {
 		string detail = Input.getInput();
 		DataBase.updateTask(updateInteger, keyword1, detail);
 		DataBase.updateTextFile(_filename);
-		UserInterface.displaySuccessfulUpdateMessage();
+		feedbackMessage = "testtest";
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 		DataBase.deleteTask(_filename, deleteInteger);
 		DataBase.updateTextFile(_filename);
-		UserInterface.displaySuccessfulDeleteMessage();
+		feedbackMessage = "testtest";
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		processChangeDirectoryRequest(userDirectory);
-		cout << "Saving derectory changed! :D" << endl;
+		feedbackMessage = "testtest";
+		//cout << "Saving derectory changed! :D" << endl;
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = "testtest";
 
 	} else if (command == "unmark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.unmarkTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = "testtest";
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
