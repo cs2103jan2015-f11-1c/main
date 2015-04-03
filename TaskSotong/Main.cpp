@@ -5,8 +5,6 @@
 
 using namespace std;
 
-//static string filename = "gantian.txt";
-
 int main(){
 
 	Logic TSlogic;
@@ -38,11 +36,7 @@ int main(){
 
 	}
 
-
 	system("pause");
 	return 0;
-
-
-
 }
 

@@ -37,15 +37,15 @@ public:
 
 	string getTaskDetails(){
 
-		string taskName=checkNull(_taskName);
-		string date1=checkNull(_taskStart.date);
-		string time1=checkNull(_taskStart.time);
-		string date2=checkNull(_taskEnd.date);
-		string time2=checkNull(_taskEnd.time);
-		string date3=checkNull(_taskDeadline.date);
+		string taskName = checkNull(_taskName);
+		string date1 = checkNull(_taskStart.date);
+		string time1 = checkNull(_taskStart.time);
+		string date2 = checkNull(_taskEnd.date);
+		string time2 = checkNull(_taskEnd.time);
+		string date3 = checkNull(_taskDeadline.date);
 		string time3 = checkNull(_taskDeadline.time);
 		string priority = checkNull(_taskPriority);
-		string status=_taskStatus;
+		string status = _taskStatus;
 
 		ostringstream oss;
 		oss << taskName

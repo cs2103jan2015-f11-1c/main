@@ -164,7 +164,7 @@ namespace GUI {
 
 			}
 
-			std::string feedbackmsg = "task added successfully";
+			std::string feedbackmsg = TSlogic.getFeedbackMsg();
 			String^ feedback = gcnew String(feedbackmsg.c_str());
 			feedbackbox->Text = feedback;
 		}

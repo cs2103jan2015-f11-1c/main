@@ -20,6 +20,7 @@ private:
    string input;
    string markStatus;
    string userDir;
+   string searchKeyword;
   
 
 
@@ -57,6 +58,7 @@ public:
 	void processMarkIndex(int);
 	void processMarkStatus(string);
 	void processUserDir(string);
+	void processSearchWord(string);
 
 	
 };
