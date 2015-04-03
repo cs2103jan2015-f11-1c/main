@@ -145,7 +145,7 @@ void Storage::markTask(unsigned int taskIndex, string keyword){
 	}
 }
 
-//Add support for keywords "mark", "unmark", "clearAllTasks", "update"
+//Add support  for keywords "mark", "unmark", "clearAllTasks", "update"
 void Storage::undoAction(){
 	string previousCommand = getPreviousCommand();
 	commandStack.pop();

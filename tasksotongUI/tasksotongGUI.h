@@ -54,7 +54,7 @@ namespace tasksotongUI {
 
 	private: System::Windows::Forms::TextBox^  WelcomeBox;
 
-	private: System::Windows::Forms::Button^  CompleteButton;
+
 	private: System::Windows::Forms::Button^  IncompleteButton;
 	private: System::Windows::Forms::Button^  PriorityButton;
 	private: System::Windows::Forms::Button^  DeadlineButton;
@@ -65,6 +65,7 @@ namespace tasksotongUI {
 		/// <summary>
 		/// Required designer variable.
 		Logic *TSLogic;
+	private: System::Windows::Forms::Button^  CompleteButton;
 
 		/// </summary>
 		System::ComponentModel::Container ^components;
@@ -80,12 +81,12 @@ namespace tasksotongUI {
 			this->UserInputBox = (gcnew System::Windows::Forms::TextBox());
 			this->DisplayTaskBox = (gcnew System::Windows::Forms::TextBox());
 			this->WelcomeBox = (gcnew System::Windows::Forms::TextBox());
-			this->CompleteButton = (gcnew System::Windows::Forms::Button());
 			this->IncompleteButton = (gcnew System::Windows::Forms::Button());
 			this->PriorityButton = (gcnew System::Windows::Forms::Button());
 			this->DeadlineButton = (gcnew System::Windows::Forms::Button());
 			this->Enter = (gcnew System::Windows::Forms::Button());
 			this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
+			this->CompleteButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// UserInputBox
@@ -109,11 +110,11 @@ namespace tasksotongUI {
 			this->DisplayTaskBox->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->DisplayTaskBox->ForeColor = System::Drawing::Color::WhiteSmoke;
-			this->DisplayTaskBox->Location = System::Drawing::Point(12, 109);
+			this->DisplayTaskBox->Location = System::Drawing::Point(12, 110);
 			this->DisplayTaskBox->Multiline = true;
 			this->DisplayTaskBox->Name = L"DisplayTaskBox";
 			this->DisplayTaskBox->ReadOnly = true;
-			this->DisplayTaskBox->Size = System::Drawing::Size(509, 229);
+			this->DisplayTaskBox->Size = System::Drawing::Size(509, 228);
 			this->DisplayTaskBox->TabIndex = 1;
 			this->DisplayTaskBox->Text = L"\r\nＺzz...   (¦3ꇤ[▓▓]\r\n\r\n\r\n...Your taskSotong list is empty...ᕙ(⇀‸↼‶)ᕗ\r\n";
 			this->DisplayTaskBox->Click += gcnew System::EventHandler(this, &tasksotongGUI::DisplayTaskBox_TextChanged);
@@ -134,20 +135,6 @@ namespace tasksotongUI {
 			this->WelcomeBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->WelcomeBox->Click += gcnew System::EventHandler(this, &tasksotongGUI::WelcomeBox_TextChanged);
 			this->WelcomeBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::WelcomeBox_TextChanged);
-			// 
-			// CompleteButton
-			// 
-			this->CompleteButton->BackColor = System::Drawing::Color::LightPink;
-			this->CompleteButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->CompleteButton->ForeColor = System::Drawing::SystemColors::Control;
-			this->CompleteButton->Location = System::Drawing::Point(543, 24);
-			this->CompleteButton->Name = L"CompleteButton";
-			this->CompleteButton->Size = System::Drawing::Size(210, 64);
-			this->CompleteButton->TabIndex = 3;
-			this->CompleteButton->Text = L"VIEW Completed";
-			this->CompleteButton->UseVisualStyleBackColor = false;
-			this->CompleteButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::Complete_click);
 			// 
 			// IncompleteButton
 			// 
@@ -207,6 +194,20 @@ namespace tasksotongUI {
 			this->vScrollBar1->Name = L"vScrollBar1";
 			this->vScrollBar1->Size = System::Drawing::Size(17, 226);
 			this->vScrollBar1->TabIndex = 8;
+			// 
+			// CompleteButton
+			// 
+			this->CompleteButton->BackColor = System::Drawing::Color::LightPink;
+			this->CompleteButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->CompleteButton->ForeColor = System::Drawing::SystemColors::Control;
+			this->CompleteButton->Location = System::Drawing::Point(543, 24);
+			this->CompleteButton->Name = L"CompleteButton";
+			this->CompleteButton->Size = System::Drawing::Size(210, 64);
+			this->CompleteButton->TabIndex = 3;
+			this->CompleteButton->Text = L"VIEW Completed";
+			this->CompleteButton->UseVisualStyleBackColor = false;
+			this->CompleteButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::Complete_click);
 			// 
 			// tasksotongGUI
 			// 
@@ -271,7 +272,7 @@ namespace tasksotongUI {
 			Task task = storageInput->getTask();
 			string taskname = task.getTaskName();
 
-			TSLogic->executeCommand(*storageInput, "gt.txt");
+			TSLogic->executeCommand(*storageInput);
 
 
 			string temp1;
@@ -299,7 +300,7 @@ namespace tasksotongUI {
 	}
 
 	private: System::Void DisplayTaskBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-	}
+ 	}
 	private: System::Void IncompleteButton_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
 	private: System::Void PriorityButton_Click(System::Object^  sender, System::EventArgs^  e) {
