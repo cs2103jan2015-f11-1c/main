@@ -196,8 +196,8 @@ void Logic::executeCommand(paraList Input) {
 		//tobe added
 
 	} else if (command == "sort") {
-		//tobe added
-
+		DataBase.sortTaskByName(_filename);
+		DataBase.updateTextFile(_filename);
 	}
 
 	return;
