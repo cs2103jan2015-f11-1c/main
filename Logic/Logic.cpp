@@ -7,6 +7,12 @@
 
 using namespace std;
 
+string Error_invalidUserInput = "Invalid User Input. Please Enter again! :<";
+//string FeedBack_taskAdded
+
+
+
+
 string Logic::getUserInput() {
 	return UserInterface.acceptUserInput();
 }
@@ -152,7 +158,7 @@ void Logic::executeCommand(paraList Input) {
 	
 	if (command == "invalid") {
 
-		feedbackMessage = "testtest";
+		//feedbackMessage = INVALID_MESSAGE;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
