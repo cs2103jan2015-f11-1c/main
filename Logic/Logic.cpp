@@ -190,22 +190,17 @@ void Logic::executeCommand(paraList Input) {
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
 		string detail = Input.getInput();
-<<<<<<< HEAD
-		DataBase.updateTask(_filename, updateInteger, keyword1, detail);
-		DataBase.updateTextFile(_filename);
-		UserInterface.displaySuccessfulUpdateMessage();
-=======
+
 		copyTestFilefromStorage();
 		if (updateInteger >= textFileCopy_fromStorage.size()||updateInteger<=0) {
 			feedbackMessage = FeedBack_updateTaskUnsuccessfully;
 
 		} else {
-			DataBase.updateTask(updateInteger, keyword1, detail);
+			DataBase.updateTask(_filename, updateInteger, keyword1, detail);
 			DataBase.updateTextFile(_filename);
 			feedbackMessage = FeedBack_updateTaskSuccessfully;
 		
 		}
->>>>>>> 2d6fc7637e724e7f8236a08f802a49cd87dd2093
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
