@@ -126,7 +126,8 @@ void Logic::callInitialise(string outputFile) {
 bool Logic::notExistingTask(Task* task) {
 	string taskDetail;
 	taskDetail = task->getTaskDetails();
-	for (unsigned int i = 0; i < textFileCopy_fromStorage.size(); i++) {
+	copyTestFilefromStorage();
+	for (unsigned int i = 0; i < textFileCopy_fromStorage.size(); i++) { 
 		if (taskDetail == textFileCopy_fromStorage[i]) {
 			return false;
 		}
@@ -141,13 +142,16 @@ void Logic::executeCommand(paraList Input) {
 	Task oneTask = Input.getTask();
 
 	if (command == "invalid") {
+
 		UserInterface.displayInvalidCommandMessage();
+
 	} else if (command == "add") {
-		if (notExistingTask(&oneTask)) {
+		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
 			UserInterface.displaySuccessfulAddMessage();
 		} else {
+
 			cout << "Existing Task! Please enter a new task! :(" << endl;
 		}
 	} else if (command == "display") {
