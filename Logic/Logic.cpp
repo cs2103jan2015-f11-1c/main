@@ -139,13 +139,12 @@ void Logic::executeCommand(paraList Input) {
 
 	string command = Input.getCommand();
 
-	Task oneTask = Input.getTask();
-
 	if (command == "invalid") {
 
 		UserInterface.displayInvalidCommandMessage();
 
 	} else if (command == "add") {
+		Task oneTask = Input.getTask();
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
@@ -157,6 +156,7 @@ void Logic::executeCommand(paraList Input) {
 	} else if (command == "display") {
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(_filename);
+
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
 		string keyword1 = Input.getKeyword();
@@ -164,31 +164,40 @@ void Logic::executeCommand(paraList Input) {
 		DataBase.updateTask(updateInteger, keyword1, detail);
 		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulUpdateMessage();
+
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 		DataBase.deleteTask(deleteInteger);
 		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulDeleteMessage();
-	} else if (command == "save") {
 
+	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		processChangeDirectoryRequest(userDirectory);
 		cout << "Saving derectory changed! :D" << endl;
+
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(markIndex, "mark");
 		DataBase.updateTextFile(_filename);
+
 	} else if (command == "unmark") {
-
 		int markIndex = Input.getmarkindex();
-
 		DataBase.markTask(markIndex, "unmark");
 		DataBase.updateTextFile(_filename);
+
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
+
 	} else if (command == "undo") {
 		DataBase.undoAction();
 		DataBase.updateTextFile(_filename);
+	} else if (command == "search") {
+		//tobe added
+
+	} else if (command == "sort") {
+		//tobe added
+
 	}
 
 	return;
