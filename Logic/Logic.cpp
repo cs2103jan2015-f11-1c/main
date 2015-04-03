@@ -139,6 +139,10 @@ void Logic::executeCommand(paraList Input) {
 
 	string command = Input.getCommand();
 
+	//for (unsigned int i = 0; i < command.length(); ++i){
+	//	command[i] == tolower(command[i]);
+	//}
+	
 	if (command == "invalid") {
 
 		UserInterface.displayInvalidCommandMessage();
@@ -167,7 +171,7 @@ void Logic::executeCommand(paraList Input) {
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		DataBase.deleteTask(deleteInteger);
+		DataBase.deleteTask(_filename, deleteInteger);
 		DataBase.updateTextFile(_filename);
 		UserInterface.displaySuccessfulDeleteMessage();
 
