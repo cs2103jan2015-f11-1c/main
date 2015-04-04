@@ -2,9 +2,12 @@
 
 string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
 string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
+string Storage::ERROR_NO_COMPLETED_TASKS = "You have not completed any tasks!";
+string Storage::ERROR_NO_INCOMPLETE_TASKS = "You have completed all outstanding tasks!";
 string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as completed!";
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
+string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -83,6 +86,51 @@ void Storage::displayAllTasks(){
 		
 	for (unsigned int i = 0; i < textFileCopy.size(); i++){
 		cout << i + 1 << ". " << textFileCopy[i] << endl;
+	}
+
+	return;
+}
+
+void Storage::performSearchForViewingTasks(string keyword, int& count){
+
+	vector<string>::iterator iter = textFileCopy.begin();
+
+	while (iter != textFileCopy.end()){
+		if (iter->find(keyword) != string::npos){
+			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			count++;
+		}
+		iter++;
+	}
+
+	return;
+}
+
+void Storage::viewCompletedTasks(){
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	int count = 0;
+	performSearchForViewingTasks("Completed", count);
+
+	if (count == 0){
+		cout << ERROR_NO_COMPLETED_TASKS << endl;
+	}
+
+	return;
+}
+
+void Storage::viewIncompleteTasks(){
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	int count = 0;
+	performSearchForViewingTasks("Incomplete", count);
+
+	if (count == 0){
+		cout << ERROR_NO_INCOMPLETE_TASKS << endl;
 	}
 
 	return;
@@ -292,7 +340,7 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 		iter++;
 	}
 	if (count == 0){
-		cout << "No matching results" << endl;
+		cout << ERROR_INVALID_SEARCH_TERM << endl;
 	}
 
 	return;
