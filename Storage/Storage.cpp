@@ -234,7 +234,7 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
-//Add support for keywords "clearAllTasks", "update", "sort"
+//Add support for keywords "update", "sort"
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -291,9 +291,16 @@ void Storage::undoAction(){
 	}
 
 	if (previousCommand == "clear"){
-		string newTextFileCopy = clearAllTasksStack.top();
+		string formerTextFileCopy = clearAllTasksStack.top();
 		clearAllTasksStack.pop();
 
+		istringstream iss(formerTextFileCopy);
+		string line;
+		while (getline(iss, line)){
+			textFileCopy.push_back(line);
+		}
+
+		return;
 	}
 
 	return;
@@ -311,7 +318,7 @@ void Storage::clearAllTasks(){
 
 	textFileCopy.clear();
 	clearAllTasksStack.push(backupText);
-	//commandStack.push("clear");
+	commandStack.push("clear");
 
 	return;
 }
