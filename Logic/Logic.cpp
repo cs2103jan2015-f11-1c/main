@@ -7,21 +7,21 @@
 
 using namespace std;
 
-string Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
-string FeedBack_taskAdded = "Task Added Successfully! :>";
-string FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
-string FeedBack_displayAllTasks = "All Tasks Are Displayed!";
-string FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
-string FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
-string FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
-string FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
-string FeedBack_changeFileDirectory= "Saving directory changed! :D";
-string FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
-string FeedBack_UnmarkTask = "Unmarked The Task!";
-string FeedBack_ClearTask="All Tasks Cleared!";
-string FeedBack_UndoTask = "Undo Done! :D";
-string FeedBack_SearchTask = "Search Result Displayed! :D";
-string FeedBack_SortTasks="Tasks Sorted Accordingly!";
+string Logic::Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
+string Logic::FeedBack_taskAdded = "Task Added Successfully! :>";
+string Logic::FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
+string Logic::FeedBack_displayAllTasks = "All Tasks Are Displayed!";
+string Logic::FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
+string Logic::FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
+string Logic::FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
+string Logic::FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
+string Logic::FeedBack_changeFileDirectory = "Saving directory changed! :D";
+string Logic::FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
+string Logic::FeedBack_UnmarkTask = "Unmarked The Task!";
+string Logic::FeedBack_ClearTask = "All Tasks Cleared!";
+string Logic::FeedBack_UndoTask = "Undo Done! :D";
+string Logic::FeedBack_SearchTask = "Search Result Displayed! :D";
+string Logic::FeedBack_SortTasks = "Tasks Sorted Accordingly!";
 
 
 string Logic::getUserInput() {
@@ -116,7 +116,7 @@ paraList* Logic::getParaList(string userInput) {
 	return ParserComponent.parseCommand(userInput);
 }
 
-string Logic::getCommand(paraList parameterList) {
+string Logic::getLowerCaseCommand(paraList parameterList) {
 	string command = parameterList.getCommand();
 	transform(command.begin(), command.end(), command.begin(), tolower);
 	return command;
@@ -160,8 +160,9 @@ string Logic::getFeedbackMsg() {
 
 void Logic::executeCommand(paraList Input) {
 
-	string command = Input.getCommand();
+	string command = getLowerCaseCommand(Input);
 
+	cout << "commmand= " << command << endl;
 	//for (unsigned int i = 0; i < command.length(); ++i){
 	//	command[i] == tolower(command[i]);
 	//}
@@ -172,6 +173,8 @@ void Logic::executeCommand(paraList Input) {
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
+		string taskdetails = oneTask.getTaskDetails();
+		cout << "taskdetails: " << taskdetails << endl;
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
