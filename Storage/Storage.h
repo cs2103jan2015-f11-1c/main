@@ -9,11 +9,15 @@
 #include <iterator>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <cctype>
 #include <functional>
 #include "..\Common\Task.h"
 
 using namespace std;
+
+bool caseInsensitiveEqual(char, char);
+bool noCaseLess(const string &a, const string &b);
 
 class Storage{
 
@@ -43,6 +47,7 @@ private:
 	bool isInvalidIndex(unsigned int);
 	void performSearchForViewingTasks(string, int&);
 	bool isSortedByName(vector<string>);
+	void performSort(queue<string>&, string);
 
 public:
 
@@ -79,6 +84,8 @@ public:
 	void searchTask(string, const string&);
 
 	void sortTaskByName(string);
+
+	void sortTaskByStatus(string);
 
 };
 

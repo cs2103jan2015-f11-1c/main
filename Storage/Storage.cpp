@@ -52,6 +52,19 @@ bool Storage::isSortedByName(vector<string> textFileDuplicate){
 	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
 }
 
+void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
+	vector<string>::iterator iter = textFileCopy.begin();
+	while (iter != textFileCopy.end()){
+		string::const_iterator pos = search(iter->begin(), iter->end(), keyword.begin(), keyword.end(), caseInsensitiveEqual);
+		if (pos != iter->end()){
+			sortedTextFileCopy.push(*iter);
+		}
+		iter++;
+	}
+
+	return;
+}
+
 void Storage::updateTextFile(string fileName){
 
 	ofstream writeFile(fileName);
@@ -384,4 +397,27 @@ void Storage::sortTaskByName(string fileName){
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 
 	return;
+}
+
+void Storage::sortTaskByStatus(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "Completed";
+	string keyword2 = "Incomplete";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
 }
