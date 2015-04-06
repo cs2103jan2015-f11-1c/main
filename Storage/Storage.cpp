@@ -8,7 +8,9 @@ string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as comple
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
 string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_ONLY_ONE_TASK = "There is no need to sort a single task!";
 string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
+string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -45,11 +47,21 @@ void Storage::performSearchForViewingTasks(string keyword, int& count){
 	return;
 }
 
+bool Storage::isOnlyOneTask(){
+
+	return (textFileCopy.size() == 1);
+}
+
 bool Storage::isSortedByName(vector<string> textFileDuplicate){
 	for (auto &words : textFileDuplicate)
 		transform(words.begin(), words.end(), words.begin(), toupper);
 
 	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+}
+
+bool Storage::isSortedByStatus(){
+
+	return (textFileCopy == sortByStatusAfterStack.top());
 }
 
 void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
@@ -319,6 +331,15 @@ void Storage::undoAction(){
 		return;
 	}
 
+	if (previousCommand == "sort by status"){
+		vector<string> formerTextFileCopy = sortByStatusBeforeStack.top();
+		sortByStatusBeforeStack.pop();
+
+		textFileCopy = formerTextFileCopy;
+
+		return;
+	}
+
 	return;
 }
 
@@ -387,6 +408,11 @@ void Storage::sortTaskByName(string fileName){
 		return;
 	}
 
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
 	if (isSortedByName(textFileCopy)){
 		cout << ERROR_INVALID_NAME_SORT << endl;
 		return;
@@ -407,6 +433,20 @@ void Storage::sortTaskByStatus(string fileName){
 		return;
 	}
 
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
+	if (sortByStatusAfterStack.size() > 0 && isSortedByStatus()){
+		cout << ERROR_INVALID_STATUS_SORT << endl;
+		sortByStatusAfterStack.pop();
+		return;
+	}
+
+	commandStack.push("sort by status");
+	sortByStatusBeforeStack.push(textFileCopy);
+
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 	queue<string> sortedTextFileCopy;
 	string keyword1 = "Completed";
@@ -420,6 +460,7 @@ void Storage::sortTaskByStatus(string fileName){
 		textFileCopy.push_back(sortedTextFileCopy.front());
 		sortedTextFileCopy.pop();
 	}
+	sortByStatusAfterStack.push(textFileCopy);
 
 	return;
 }
