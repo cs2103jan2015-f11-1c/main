@@ -87,6 +87,8 @@ public:
 
 	void sortTaskByStatus(string);
 
+	void sortTaskByPriority(string);
+
 };
 
 #endif

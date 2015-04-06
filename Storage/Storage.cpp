@@ -420,4 +420,33 @@ void Storage::sortTaskByStatus(string fileName){
 		textFileCopy.push_back(sortedTextFileCopy.front());
 		sortedTextFileCopy.pop();
 	}
+
+	return;
+}
+
+void Storage::sortTaskByPriority(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "high";
+	string keyword2 = "medium";
+	string keyword3 = "low";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+	performSort(sortedTextFileCopy, keyword3);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
+
+	return;
 }
