@@ -137,54 +137,40 @@ void Storage::viewIncompleteTasks(){
 }
 
 //For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
-void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
+void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, string keyword, string newInput){
+	//textFileCopy.clear();
+	//initialiseTextFile(fileName);
 
 	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
 		return;
 	}
-	
-	vector<Task*>::iterator iter = taskList.begin();
-	vector<Task*>::iterator iterEnd = taskList.end();
 
-	if (taskIndex > iterEnd - iter){
-		cout << "Invalid index" << endl;
+	cout << task->getTaskDetails();
 
-		return;
+	if (keyword == "name"){
+		task->changeTaskName(newInput);
+		cout << task->getTaskName();
+	} else if (keyword == "start-date"){
+		task->changeTaskStartDate(newInput);
+	} else if (keyword == "start-time"){
+		task->changeTaskStartTime(newInput);
+	} else if (keyword == "end-date"){
+		task->changeTaskEndDate(newInput);
+	} else if (keyword == "end-time"){
+		task->changeTaskEndTime(newInput);
+	} else if (keyword == "deadline-date"){
+		task->changeTaskDeadlineDate(newInput);
+	} else if (keyword == "deadline-time"){
+		task->changeTaskDeadlineTime(newInput);
+	} else if (keyword == "priority"){
+		task->changeTaskPriority(newInput);
 	} else {
-		iter = iter + taskIndex - 1;
-
-		if (keyword == "name"){
-			(**iter).changeTaskName(newInput);
-		} else 
-			if (keyword == "start-date"){
-				(**iter).changeTaskStartDate(newInput);
-			} else 
-				if (keyword == "start-time"){
-					(**iter).changeTaskStartTime(newInput);
-				} else 
-					if (keyword == "end-date"){
-						(**iter).changeTaskEndDate(newInput);
-					} else 
-						if (keyword == "end-time"){
-							(**iter).changeTaskEndTime(newInput);
-						} else 
-							if (keyword == "deadline-date"){
-								(**iter).changeTaskDeadlineDate(newInput);
-							} else
-								if (keyword == "deadline-time"){
-									(**iter).changeTaskDeadlineTime(newInput);
-								} else
-									if (keyword == "priority"){
-										(**iter).changeTaskPriority(newInput);
-									} else {
-										cout << "Invalid keyword" << endl;	
-									}
-									textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
-									textFileCopy.erase(textFileCopy.begin() + taskIndex);
+		cout << "Invalid keyword" << endl;
 	}
-
+	cout << task->getTaskDetails();
+	textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, task->getTaskDetails());
+	textFileCopy.erase(textFileCopy.begin() + taskIndex);
+	
 	return;
 }
 

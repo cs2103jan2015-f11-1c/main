@@ -64,7 +64,7 @@ public:
 
 	updateKeyword getUpdateKeyword(string);
 
-	void updateTask(string, unsigned int, string, string);
+	void updateTask(string, unsigned int, Task*, string, string);
 
 	void markTask(string, unsigned int);
 
