@@ -33,6 +33,23 @@ private:
 	string _filename;
 	string feedbackMessage;
 
+	static string Error_invalidUserInput;
+	static string FeedBack_taskAdded;
+	static string FeedBack_existingTask;
+	static string FeedBack_displayAllTasks;
+	static string FeedBack_updateTaskSuccessfully;
+	static string FeedBack_updateTaskUnsuccessfully;
+	static string FeedBack_deleteTaskSuccessfully;
+	static string FeedBack_deleteTaskUnsuccessfully;
+	static string FeedBack_changeFileDirectory;
+	static string FeedBack_MarkTaskSuccessfully;
+	static string FeedBack_UnmarkTask;
+	static string FeedBack_ClearTask;
+	static string FeedBack_UndoTask;
+	static string FeedBack_SearchTask;
+	static string FeedBack_SortTasks;
+
+
 public:
 
 	void Welcome();
@@ -55,7 +72,7 @@ public:
 
 	string getUserInput();
 
-	string getCommand(paraList);
+	string getLowerCaseCommand(paraList);
 
 	Task getTask(paraList);
 

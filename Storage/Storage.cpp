@@ -2,9 +2,13 @@
 
 string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
 string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
+string Storage::ERROR_NO_COMPLETED_TASKS = "You have not completed any tasks!";
+string Storage::ERROR_NO_INCOMPLETE_TASKS = "You have completed all outstanding tasks!";
 string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as completed!";
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
+string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -24,6 +28,41 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	}
 
 	return false;
+}
+
+void Storage::performSearchForViewingTasks(string keyword, int& count){
+
+	vector<string>::iterator iter = textFileCopy.begin();
+
+	while (iter != textFileCopy.end()){
+		if (iter->find(keyword) != string::npos){
+			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			count++;
+		}
+		iter++;
+	}
+
+	return;
+}
+
+bool Storage::isSortedByName(vector<string> textFileDuplicate){
+	for (auto &words : textFileDuplicate)
+		transform(words.begin(), words.end(), words.begin(), toupper);
+
+	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+}
+
+void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
+	vector<string>::iterator iter = textFileCopy.begin();
+	while (iter != textFileCopy.end()){
+		string::const_iterator pos = search(iter->begin(), iter->end(), keyword.begin(), keyword.end(), caseInsensitiveEqual);
+		if (pos != iter->end()){
+			sortedTextFileCopy.push(*iter);
+		}
+		iter++;
+	}
+
+	return;
 }
 
 void Storage::updateTextFile(string fileName){
@@ -88,48 +127,71 @@ void Storage::displayAllTasks(){
 	return;
 }
 
-//For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
-void Storage::updateTask(unsigned int taskIndex, string keyword, string newInput){
-	vector<Task*>::iterator iter = taskList.begin();
-	vector<Task*>::iterator iterEnd = taskList.end();
-
-	if (taskIndex > iterEnd - iter){
-		cout << "Invalid index" << endl;
-
+void Storage::viewCompletedTasks(){
+	if (isEmptyTextFile()){
 		return;
-	} else {
-		iter = iter + taskIndex - 1;
-
-		if (keyword == "name"){
-			(**iter).changeTaskName(newInput);
-		} else 
-			if (keyword == "start-date"){
-				(**iter).changeTaskStartDate(newInput);
-			} else 
-				if (keyword == "start-time"){
-					(**iter).changeTaskStartTime(newInput);
-				} else 
-					if (keyword == "end-date"){
-						(**iter).changeTaskEndDate(newInput);
-					} else 
-						if (keyword == "end-time"){
-							(**iter).changeTaskEndTime(newInput);
-						} else 
-							if (keyword == "deadline-date"){
-								(**iter).changeTaskDeadlineDate(newInput);
-							} else
-								if (keyword == "deadline-time"){
-									(**iter).changeTaskDeadlineTime(newInput);
-								} else
-									if (keyword == "priority"){
-										(**iter).changeTaskPriority(newInput);
-									} else {
-										cout << "Invalid keyword" << endl;	
-									}
-									textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
-									textFileCopy.erase(textFileCopy.begin() + taskIndex);
 	}
 
+	int count = 0;
+	performSearchForViewingTasks("Completed", count);
+
+	if (count == 0){
+		cout << ERROR_NO_COMPLETED_TASKS << endl;
+	}
+
+	return;
+}
+
+void Storage::viewIncompleteTasks(){
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	int count = 0;
+	performSearchForViewingTasks("Incomplete", count);
+
+	if (count == 0){
+		cout << ERROR_NO_INCOMPLETE_TASKS << endl;
+	}
+
+	return;
+}
+
+//For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
+void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, string keyword, string newInput){
+	//textFileCopy.clear();
+	//initialiseTextFile(fileName);
+
+	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
+		return;
+	}
+
+	cout << task->getTaskDetails();
+
+	if (keyword == "name"){
+		task->changeTaskName(newInput);
+		cout << task->getTaskName();
+	} else if (keyword == "start-date"){
+		task->changeTaskStartDate(newInput);
+	} else if (keyword == "start-time"){
+		task->changeTaskStartTime(newInput);
+	} else if (keyword == "end-date"){
+		task->changeTaskEndDate(newInput);
+	} else if (keyword == "end-time"){
+		task->changeTaskEndTime(newInput);
+	} else if (keyword == "deadline-date"){
+		task->changeTaskDeadlineDate(newInput);
+	} else if (keyword == "deadline-time"){
+		task->changeTaskDeadlineTime(newInput);
+	} else if (keyword == "priority"){
+		task->changeTaskPriority(newInput);
+	} else {
+		cout << "Invalid keyword" << endl;
+	}
+	cout << task->getTaskDetails();
+	textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, task->getTaskDetails());
+	textFileCopy.erase(textFileCopy.begin() + taskIndex);
+	
 	return;
 }
 
@@ -149,6 +211,8 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 		cout << ERROR_TASK_PREVIOUSLY_COMPLETED << endl;
 	} else {
 		textFileCopy[taskIndex - 1].replace(index, lengthOfIncomplete, "Completed");
+		markTaskIndexStack.push(taskIndex);
+		commandStack.push("mark");
 	}
 
 	return;
@@ -170,12 +234,14 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 		cout << ERROR_TASK_PREVIOUSLY_INCOMPLETE << endl;
 	} else {
 		textFileCopy[taskIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+		unmarkTaskIndexStack.push(taskIndex);
+		commandStack.push("unmark");
 	}
 
 	return;
 }
 
-//Add support for keywords "mark", "unmark", "clearAllTasks", "update", "sort"
+//Add support for keywords "update", "sort"
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -205,12 +271,70 @@ void Storage::undoAction(){
 		return;
 	}
 	
+	if (previousCommand == "mark"){
+		unsigned int formerIndex = markTaskIndexStack.top();
+		markTaskIndexStack.pop();
+
+		size_t index = 0;
+		unsigned int lengthOfCompleted = 9;
+
+		index = textFileCopy[formerIndex - 1].find("Completed", index);
+		textFileCopy[formerIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+
+		return;
+	}
+
+	if (previousCommand == "unmark"){
+		unsigned int formerIndex = unmarkTaskIndexStack.top();
+		unmarkTaskIndexStack.pop();
+
+		size_t index = 0;
+		unsigned int lengthOfIncomplete = 10;
+
+		index = textFileCopy[formerIndex - 1].find("Incomplete", index);
+		textFileCopy[formerIndex - 1].replace(index, lengthOfIncomplete, "Completed");
+	
+		return;
+	}
+
+	if (previousCommand == "clear"){
+		string formerTextFileCopy = clearAllTasksStack.top();
+		clearAllTasksStack.pop();
+
+		istringstream iss(formerTextFileCopy);
+		string line;
+		while (getline(iss, line)){
+			textFileCopy.push_back(line);
+		}
+
+		return;
+	}
+
+	if (previousCommand == "sort by name"){
+		vector<string> formerTextFileCopy = sortByNameStack.top();
+		sortByNameStack.pop();
+
+		textFileCopy = formerTextFileCopy;
+
+		return;
+	}
+
 	return;
 }
 
 void Storage::clearAllTasks(){
-	taskList.clear();
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	string backupText;
+	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+		backupText.append(textFileCopy[i] + '\n');
+	}
+
 	textFileCopy.clear();
+	clearAllTasksStack.push(backupText);
+	commandStack.push("clear");
 
 	return;
 }
@@ -222,6 +346,10 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 void Storage::searchTask(string fileName, const string& searchEntry){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
 
 	vector<string>::iterator iter = textFileCopy.begin();
 	int count = 0;
@@ -235,7 +363,7 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 		iter++;
 	}
 	if (count == 0){
-		cout << "No matching results" << endl;
+		cout << ERROR_INVALID_SEARCH_TERM << endl;
 	}
 
 	return;
@@ -255,7 +383,70 @@ void Storage::sortTaskByName(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	if (isSortedByName(textFileCopy)){
+		cout << ERROR_INVALID_NAME_SORT << endl;
+		return;
+	}
+
+	commandStack.push("sort by name");
+	sortByNameStack.push(textFileCopy);
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+
+	return;
+}
+
+void Storage::sortTaskByStatus(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "Completed";
+	string keyword2 = "Incomplete";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
+
+	return;
+}
+
+void Storage::sortTaskByPriority(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "high";
+	string keyword2 = "medium";
+	string keyword3 = "low";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+	performSort(sortedTextFileCopy, keyword3);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
 
 	return;
 }

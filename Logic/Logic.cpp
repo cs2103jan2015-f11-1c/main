@@ -7,10 +7,21 @@
 
 using namespace std;
 
-string Error_invalidUserInput = "Invalid User Input. Please Enter again! :<";
-//string FeedBack_taskAdded
-
-
+string Logic::Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
+string Logic::FeedBack_taskAdded = "Task Added Successfully! :>";
+string Logic::FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
+string Logic::FeedBack_displayAllTasks = "All Tasks Are Displayed!";
+string Logic::FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
+string Logic::FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
+string Logic::FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
+string Logic::FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
+string Logic::FeedBack_changeFileDirectory = "Saving directory changed! :D";
+string Logic::FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
+string Logic::FeedBack_UnmarkTask = "Unmarked The Task!";
+string Logic::FeedBack_ClearTask = "All Tasks Cleared!";
+string Logic::FeedBack_UndoTask = "Undo Done! :D";
+string Logic::FeedBack_SearchTask = "Search Result Displayed! :D";
+string Logic::FeedBack_SortTasks = "Tasks Sorted Accordingly!";
 
 
 string Logic::getUserInput() {
@@ -105,7 +116,7 @@ paraList* Logic::getParaList(string userInput) {
 	return ParserComponent.parseCommand(userInput);
 }
 
-string Logic::getCommand(paraList parameterList) {
+string Logic::getLowerCaseCommand(paraList parameterList) {
 	string command = parameterList.getCommand();
 	transform(command.begin(), command.end(), command.begin(), tolower);
 	return command;
@@ -143,82 +154,120 @@ bool Logic::notExistingTask(Task* task) {
 
 
 string Logic::getFeedbackMsg() {
-
 	return feedbackMessage;
 
 }
 
 void Logic::executeCommand(paraList Input) {
 
-	string command = Input.getCommand();
+	string command = getLowerCaseCommand(Input);
 
+	cout << "commmand= " << command << endl;
 	//for (unsigned int i = 0; i < command.length(); ++i){
 	//	command[i] == tolower(command[i]);
 	//}
 	
 	if (command == "invalid") {
 
-		//feedbackMessage = INVALID_MESSAGE;
+		feedbackMessage = Error_invalidUserInput;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
+		string taskdetails = oneTask.getTaskDetails();
+		cout << "taskdetails: " << taskdetails << endl;
 		if (notExistingTask(&oneTask)==true) {
 			DataBase.addTask(&oneTask);
 			DataBase.updateTextFile(_filename);
-			feedbackMessage = "testtest";
-		} else {
+			feedbackMessage = FeedBack_taskAdded;
 
-			feedbackMessage = "testtest";
+		} else {
+			feedbackMessage = FeedBack_existingTask;
+
 		}
 	} else if (command == "display") {
 		DataBase.displayAllTasks();
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_displayAllTasks;
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
-		string keyword1 = Input.getKeyword();
-		string detail = Input.getInput();
-		DataBase.updateTask(updateInteger, keyword1, detail);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		string parameterToBeUpdated = Input.getKeyword();
+		string detailToBeUpdated = Input.getInput();
+		vector<string> textFileCopy2 = getTextFileCopy();
+		string input = textFileCopy2[updateInteger - 1];
+		while ( input.back() != ' '){
+			input.pop_back();
+		}
+		//input.substr(0, input.size() - input.find_last_of(' '));
+		cout << input << endl;
+		paraList* pList = getParaList("add " + input);
+		Task taskToBeUpdated = pList->getTask();
+		cout << taskToBeUpdated.getTaskName() << endl;
+		cout << taskToBeUpdated.getTaskStartDate() << endl;
+		cout << taskToBeUpdated.getTaskDetails() << endl;
+		//cout << updateInteger << endl;
+		//cout << parameterToBeUpdated << endl;
+		//cout << detailToBeUpdated << endl;
+
+		copyTestFilefromStorage();
+		if (updateInteger >= textFileCopy_fromStorage.size() || updateInteger <= 0) {
+			feedbackMessage = FeedBack_updateTaskUnsuccessfully;
+
+		} else {
+			DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_updateTaskSuccessfully;
+		
+		}
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		DataBase.deleteTask(_filename, deleteInteger);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		copyTestFilefromStorage();
+		if (deleteInteger >= textFileCopy_fromStorage.size() || deleteInteger <= 0) {
+			feedbackMessage = FeedBack_deleteTaskUnsuccessfully;
+		
+		} else {
+			DataBase.deleteTask(_filename, deleteInteger);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_deleteTaskSuccessfully;
+		
+		}
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		processChangeDirectoryRequest(userDirectory);
-		feedbackMessage = "testtest";
-		//cout << "Saving derectory changed! :D" << endl;
+		feedbackMessage = FeedBack_changeFileDirectory;
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.markTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_MarkTaskSuccessfully;
 
 	} else if (command == "unmark") {
 		int markIndex = Input.getmarkindex();
 		DataBase.unmarkTask(_filename, markIndex);
 		DataBase.updateTextFile(_filename);
-		feedbackMessage = "testtest";
+		feedbackMessage = FeedBack_UnmarkTask;
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();
+		feedbackMessage = FeedBack_ClearTask;
 
 	} else if (command == "undo") {
 		DataBase.undoAction();
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_UndoTask;
+
 	} else if (command == "search") {
-		//tobe added
+		//string searchKeyWord= Input
+		feedbackMessage = FeedBack_SearchTask;
 
 	} else if (command == "sort") {
 		DataBase.sortTaskByName(_filename);
 		DataBase.updateTextFile(_filename);
+		feedbackMessage = FeedBack_SortTasks;
+
 	}
 
 	return;
