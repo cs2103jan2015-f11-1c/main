@@ -27,6 +27,7 @@ private:
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<string> clearAllTasksStack;
+	stack<vector<string>> sortByNameStack;
 
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_INVALID_NUMBER;
@@ -36,9 +37,12 @@ private:
 	static string ERROR_TASK_PREVIOUSLY_INCOMPLETE;
 	static string ERROR_CANNOT_UNDO;
 	static string ERROR_INVALID_SEARCH_TERM;
+	static string ERROR_INVALID_NAME_SORT;
 
 	bool isEmptyTextFile();
 	bool isInvalidIndex(unsigned int);
+	void performSearchForViewingTasks(string, int&);
+	bool isSortedByName(vector<string>);
 
 public:
 
@@ -55,8 +59,6 @@ public:
 	void deleteTask(string, unsigned int);
 
 	void displayAllTasks();
-
-	void performSearchForViewingTasks(string, int&);
 
 	void viewCompletedTasks();
 

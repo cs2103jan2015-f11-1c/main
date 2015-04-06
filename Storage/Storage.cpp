@@ -8,6 +8,7 @@ string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as comple
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
 string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -27,6 +28,28 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	}
 
 	return false;
+}
+
+void Storage::performSearchForViewingTasks(string keyword, int& count){
+
+	vector<string>::iterator iter = textFileCopy.begin();
+
+	while (iter != textFileCopy.end()){
+		if (iter->find(keyword) != string::npos){
+			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			count++;
+		}
+		iter++;
+	}
+
+	return;
+}
+
+bool Storage::isSortedByName(vector<string> textFileDuplicate){
+	for (auto &words : textFileDuplicate)
+		transform(words.begin(), words.end(), words.begin(), toupper);
+
+	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
 }
 
 void Storage::updateTextFile(string fileName){
@@ -86,21 +109,6 @@ void Storage::displayAllTasks(){
 		
 	for (unsigned int i = 0; i < textFileCopy.size(); i++){
 		cout << i + 1 << ". " << textFileCopy[i] << endl;
-	}
-
-	return;
-}
-
-void Storage::performSearchForViewingTasks(string keyword, int& count){
-
-	vector<string>::iterator iter = textFileCopy.begin();
-
-	while (iter != textFileCopy.end()){
-		if (iter->find(keyword) != string::npos){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
-			count++;
-		}
-		iter++;
 	}
 
 	return;
@@ -289,6 +297,15 @@ void Storage::undoAction(){
 		return;
 	}
 
+	if (previousCommand == "sort by name"){
+		vector<string> formerTextFileCopy = sortByNameStack.top();
+		sortByNameStack.pop();
+
+		textFileCopy = formerTextFileCopy;
+
+		return;
+	}
+
 	return;
 }
 
@@ -357,6 +374,13 @@ void Storage::sortTaskByName(string fileName){
 		return;
 	}
 
+	if (isSortedByName(textFileCopy)){
+		cout << ERROR_INVALID_NAME_SORT << endl;
+		return;
+	}
+
+	commandStack.push("sort by name");
+	sortByNameStack.push(textFileCopy);
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 
 	return;
