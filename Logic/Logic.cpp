@@ -73,8 +73,7 @@ void Logic::createNewDirectory(string userFileDirectory) {
 	directoryParts.pop();
 
 	while (!directoryParts.empty()) {
-		//for debugging purpose
-		//cout << directoryParts.top() << endl;
+	
 		directory = directory + directoryParts.top();
 		_mkdir(directory.c_str());
 		directoryParts.pop();
@@ -88,11 +87,6 @@ void Logic::changeFileDirectory(string userFileDirectory) {
 	createNewDirectory(userFileDirectory);
 	setFileName(userFileDirectory);
 	//"C:\ts\ts1\gt.txt";
-	return;
-}
-
-void Logic::processChangeDirectoryRequest(string userFileDirectory) {
-	changeFileDirectory(userFileDirectory);
 	return;
 }
 
@@ -220,7 +214,7 @@ void Logic::executeCommand(paraList Input) {
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
-		processChangeDirectoryRequest(userDirectory);
+		changeFileDirectory(userDirectory);
 		feedbackMessage = FeedBack_changeFileDirectory;
 
 	} else if (command == "mark") {

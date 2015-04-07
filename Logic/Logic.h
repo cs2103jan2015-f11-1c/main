@@ -22,9 +22,7 @@ class Logic{
 private:
 
 	UI UserInterface;
-
 	Parser ParserComponent;
-
 	Storage DataBase;
 
 	vector<string> textFileCopy_fromStorage;
