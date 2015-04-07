@@ -5,7 +5,12 @@
 #include <stack>
 
 
+
 using namespace std;
+
+string Logic::_savingLocationHistory = "taskSotong_saving_Location_history.txt";
+//string Logic::_filename = "taskSotong.txt";
+
 
 string Logic::Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
 string Logic::FeedBack_taskAdded = "Task Added Successfully! :>";
@@ -17,16 +22,76 @@ string Logic::FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
 string Logic::FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
 string Logic::FeedBack_changeFileDirectory = "Saving directory changed! :D";
 string Logic::FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
-string Logic::FeedBack_UnmarkTask = "Unmarked The Task!";
+string Logic::FeedBack_markTaskUnsuccessfully="Nah.. Index Out Of Range! Cannot Mark!";
+string Logic::FeedBack_UnmarkTaskSuccessfully = "Unmarked The Task!";
+string Logic::FeedBack_UnmarkTaskUnsuccessfully = "Nah.. Index Out Of Range! Cannot Unmark!";
 string Logic::FeedBack_ClearTask = "All Tasks Cleared!";
 string Logic::FeedBack_UndoTask = "Undo Done! :D";
 string Logic::FeedBack_SearchTask = "Search Result Displayed! :D";
 string Logic::FeedBack_SortTasks = "Tasks Sorted Accordingly!";
 
+void Logic::initialiseFileLocationFile() {
 
-string Logic::getUserInput() {
-	return UserInterface.acceptUserInput();
+
+	ifstream readFile(_savingLocationHistory);
+	string tempStorage;
+
+	while (getline(readFile, tempStorage)) {
+		cout <<"test"<< tempStorage << endl;
+		fileLocation.push_back(tempStorage);
+	
+	}
+	readFile.close();
+
+	return;
+
 }
+
+
+void Logic::writeFileLocation(vector<string> fileLocation) {
+
+	ofstream writeFile(_savingLocationHistory);
+
+	for (unsigned int i = 0; i < fileLocation.size(); i++) {
+		writeFile << fileLocation[i] << endl;
+	}
+
+	return;
+
+}
+
+bool Logic::checkIfFileIsAtExeLocation() {
+
+	int lastIndex = fileLocation.size();
+	if (lastIndex == 0) {
+		return true;
+	}else{
+
+		string lastLocation = fileLocation[lastIndex-1];
+		string exeLocation = getExePath();
+
+		if (lastLocation == exeLocation) {
+			return true;			
+		} else {
+			return false;
+		}
+	}
+
+}
+
+string Logic::getLastFileLocation() {
+
+	int lastIndex = fileLocation.size();
+
+	return fileLocation[lastIndex-1];
+}
+
+void Logic::updatefileLocation(string userDirectory) {
+
+	fileLocation.push_back(userDirectory);
+	return;
+}
+
 
 void Logic::Welcome() {
 	UserInterface.displayWelcomeMessage();
@@ -90,10 +155,13 @@ void Logic::changeFileDirectory(string userFileDirectory) {
 	return;
 }
 
+
 void Logic::setFileName(string updatedFileName) {
 	_filename = updatedFileName;
+	cout << "inside, _filename: " << _filename << endl;
 	return;
 }
+
 
 
 string Logic::getFileName() {
@@ -108,6 +176,10 @@ void Logic::CommandPrompt() {
 paraList* Logic::getParaList(string userInput) {
 
 	return ParserComponent.parseCommand(userInput);
+}
+
+string Logic::getUserInput() {
+	return UserInterface.acceptUserInput();
 }
 
 string Logic::getLowerCaseCommand(paraList parameterList) {
@@ -217,7 +289,7 @@ void Logic::executeCommand(paraList Input) {
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 		copyTestFilefromStorage();
-		if (deleteInteger >= textFileCopy_fromStorage.size() || deleteInteger <= 0) {
+		if (deleteInteger > textFileCopy_fromStorage.size() || deleteInteger <= 0) {
 			feedbackMessage = FeedBack_deleteTaskUnsuccessfully;
 		
 		} else {
@@ -231,18 +303,30 @@ void Logic::executeCommand(paraList Input) {
 		string userDirectory = Input.getuserdir();
 		changeFileDirectory(userDirectory);
 		feedbackMessage = FeedBack_changeFileDirectory;
+		updatefileLocation(userDirectory);
+		writeFileLocation(fileLocation);
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
-		DataBase.markTask(_filename, markIndex);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = FeedBack_MarkTaskSuccessfully;
+		if (markIndex > textFileCopy_fromStorage.size() || markIndex <= 0) {
+			feedbackMessage = FeedBack_markTaskUnsuccessfully;
+
+		} else {
+			DataBase.markTask(_filename, markIndex);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_MarkTaskSuccessfully;
+		}
 
 	} else if (command == "unmark") {
-		int markIndex = Input.getmarkindex();
-		DataBase.unmarkTask(_filename, markIndex);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = FeedBack_UnmarkTask;
+		int unmarkIndex = Input.getmarkindex();
+		if (unmarkIndex > textFileCopy_fromStorage.size() || unmarkIndex <= 0) {
+			feedbackMessage = FeedBack_UnmarkTaskUnsuccessfully;
+
+		} else {
+			DataBase.unmarkTask(_filename, unmarkIndex);
+			DataBase.updateTextFile(_filename);
+			feedbackMessage = FeedBack_UnmarkTaskSuccessfully;
+		}
 
 	} else if (command == "clear") {
 		DataBase.clearAllTasks();

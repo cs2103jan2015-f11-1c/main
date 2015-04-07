@@ -9,16 +9,31 @@ int main(){
 
 	Logic TSlogic;
 	TSlogic.Welcome();
-	cout << "Hello testing" << endl;
-	cout << "Your TaskSotong is currently at: " << TSlogic.getExePath() << endl;
+	
+	TSlogic.initialiseFileLocationFile();
+	cout << "finish initialising?" << endl;
+	bool areInTheSameLocation=TSlogic.checkIfFileIsAtExeLocation();
+	cout << "bool check: " << areInTheSameLocation << endl;
+	string filename;
+	if (areInTheSameLocation == false) {
+	
+		string lastFileLocation = TSlogic.getLastFileLocation();
+		TSlogic.setFileName(lastFileLocation);
+	} else {
 
-	TSlogic.setFileName("taskSotong.txt");
-	string filename = TSlogic.getFileName();
+		cout << "exePath: " << TSlogic.getExePath() << endl;
+		string exePath = TSlogic.getExePath()+"\\taskSotong.txt";
+		cout << "new path: " << exePath << endl;
+		TSlogic.setFileName(exePath);
 
+	}
+	filename = TSlogic.getFileName();
+	
+	cout << "Your TaskSotong is currently at: " << filename << endl;
+	
 	TSlogic.callInitialise(filename);
 	TSlogic.CommandPrompt();
 	string userInput = TSlogic.getUserInput();
-
 
 	while (userInput != "exit"){
 

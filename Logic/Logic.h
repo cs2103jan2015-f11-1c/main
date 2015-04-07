@@ -26,7 +26,9 @@ private:
 	Storage DataBase;
 
 	vector<string> textFileCopy_fromStorage;
+	vector<string> fileLocation;
 
+	static string _savingLocationHistory;
 	string userInput;
 	string _filename;
 	string feedbackMessage;
@@ -41,7 +43,9 @@ private:
 	static string FeedBack_deleteTaskUnsuccessfully;
 	static string FeedBack_changeFileDirectory;
 	static string FeedBack_MarkTaskSuccessfully;
-	static string FeedBack_UnmarkTask;
+	static string FeedBack_markTaskUnsuccessfully;
+	static string FeedBack_UnmarkTaskSuccessfully;
+	static string FeedBack_UnmarkTaskUnsuccessfully;
 	static string FeedBack_ClearTask;
 	static string FeedBack_UndoTask;
 	static string FeedBack_SearchTask;
@@ -49,6 +53,16 @@ private:
 
 
 public:
+
+	void initialiseFileLocationFile();
+
+	void writeFileLocation(vector<string>);
+
+	bool checkIfFileIsAtExeLocation();
+
+	string getLastFileLocation();
+
+	void updatefileLocation(string);
 
 	void Welcome();
 
