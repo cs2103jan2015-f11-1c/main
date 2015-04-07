@@ -9,11 +9,15 @@
 #include <iterator>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <cctype>
 #include <functional>
 #include "..\Common\Task.h"
 
 using namespace std;
+
+bool caseInsensitiveEqual(char, char);
+bool noCaseLess(const string &a, const string &b);
 
 class Storage{
 
@@ -27,6 +31,9 @@ private:
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<string> clearAllTasksStack;
+	stack<vector<string>> sortByNameStack;
+	stack<vector<string>> sortByStatusBeforeStack;
+	stack<vector<string>> sortByStatusAfterStack;
 
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_INVALID_NUMBER;
@@ -36,9 +43,17 @@ private:
 	static string ERROR_TASK_PREVIOUSLY_INCOMPLETE;
 	static string ERROR_CANNOT_UNDO;
 	static string ERROR_INVALID_SEARCH_TERM;
+	static string ERROR_ONLY_ONE_TASK;
+	static string ERROR_INVALID_NAME_SORT;
+	static string ERROR_INVALID_STATUS_SORT;
 
 	bool isEmptyTextFile();
 	bool isInvalidIndex(unsigned int);
+	void performSearchForViewingTasks(string, int&);
+	bool isOnlyOneTask();
+	bool isSortedByName(vector<string>);
+	bool isSortedByStatus();
+	void performSort(queue<string>&, string);
 
 public:
 
@@ -56,15 +71,13 @@ public:
 
 	void displayAllTasks();
 
-	void performSearchForViewingTasks(string, int&);
-
 	void viewCompletedTasks();
 
 	void viewIncompleteTasks();
 
 	updateKeyword getUpdateKeyword(string);
 
-	void updateTask(string, unsigned int, string, string);
+	void updateTask(string, unsigned int, Task*, string, string);
 
 	void markTask(string, unsigned int);
 
@@ -77,6 +90,10 @@ public:
 	void searchTask(string, const string&);
 
 	void sortTaskByName(string);
+
+	void sortTaskByStatus(string);
+
+	void sortTaskByPriority(string);
 
 };
 

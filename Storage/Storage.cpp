@@ -8,6 +8,9 @@ string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as comple
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
 string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_ONLY_ONE_TASK = "There is no need to sort a single task!";
+string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
+string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -27,6 +30,51 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	}
 
 	return false;
+}
+
+void Storage::performSearchForViewingTasks(string keyword, int& count){
+
+	vector<string>::iterator iter = textFileCopy.begin();
+
+	while (iter != textFileCopy.end()){
+		if (iter->find(keyword) != string::npos){
+			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			count++;
+		}
+		iter++;
+	}
+
+	return;
+}
+
+bool Storage::isOnlyOneTask(){
+
+	return (textFileCopy.size() == 1);
+}
+
+bool Storage::isSortedByName(vector<string> textFileDuplicate){
+	for (auto &words : textFileDuplicate)
+		transform(words.begin(), words.end(), words.begin(), toupper);
+
+	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+}
+
+bool Storage::isSortedByStatus(){
+
+	return (textFileCopy == sortByStatusAfterStack.top());
+}
+
+void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
+	vector<string>::iterator iter = textFileCopy.begin();
+	while (iter != textFileCopy.end()){
+		string::const_iterator pos = search(iter->begin(), iter->end(), keyword.begin(), keyword.end(), caseInsensitiveEqual);
+		if (pos != iter->end()){
+			sortedTextFileCopy.push(*iter);
+		}
+		iter++;
+	}
+
+	return;
 }
 
 void Storage::updateTextFile(string fileName){
@@ -91,21 +139,6 @@ void Storage::displayAllTasks(){
 	return;
 }
 
-void Storage::performSearchForViewingTasks(string keyword, int& count){
-
-	vector<string>::iterator iter = textFileCopy.begin();
-
-	while (iter != textFileCopy.end()){
-		if (iter->find(keyword) != string::npos){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
-			count++;
-		}
-		iter++;
-	}
-
-	return;
-}
-
 void Storage::viewCompletedTasks(){
 	if (isEmptyTextFile()){
 		return;
@@ -137,54 +170,40 @@ void Storage::viewIncompleteTasks(){
 }
 
 //For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
-void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
+void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, string keyword, string newInput){
+	//textFileCopy.clear();
+	//initialiseTextFile(fileName);
 
 	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
 		return;
 	}
-	
-	vector<Task*>::iterator iter = taskList.begin();
-	vector<Task*>::iterator iterEnd = taskList.end();
 
-	if (taskIndex > iterEnd - iter){
-		cout << "Invalid index" << endl;
+	cout << task->getTaskDetails();
 
-		return;
+	if (keyword == "name"){
+		task->changeTaskName(newInput);
+		cout << task->getTaskName();
+	} else if (keyword == "start-date"){
+		task->changeTaskStartDate(newInput);
+	} else if (keyword == "start-time"){
+		task->changeTaskStartTime(newInput);
+	} else if (keyword == "end-date"){
+		task->changeTaskEndDate(newInput);
+	} else if (keyword == "end-time"){
+		task->changeTaskEndTime(newInput);
+	} else if (keyword == "deadline-date"){
+		task->changeTaskDeadlineDate(newInput);
+	} else if (keyword == "deadline-time"){
+		task->changeTaskDeadlineTime(newInput);
+	} else if (keyword == "priority"){
+		task->changeTaskPriority(newInput);
 	} else {
-		iter = iter + taskIndex - 1;
-
-		if (keyword == "name"){
-			(**iter).changeTaskName(newInput);
-		} else 
-			if (keyword == "start-date"){
-				(**iter).changeTaskStartDate(newInput);
-			} else 
-				if (keyword == "start-time"){
-					(**iter).changeTaskStartTime(newInput);
-				} else 
-					if (keyword == "end-date"){
-						(**iter).changeTaskEndDate(newInput);
-					} else 
-						if (keyword == "end-time"){
-							(**iter).changeTaskEndTime(newInput);
-						} else 
-							if (keyword == "deadline-date"){
-								(**iter).changeTaskDeadlineDate(newInput);
-							} else
-								if (keyword == "deadline-time"){
-									(**iter).changeTaskDeadlineTime(newInput);
-								} else
-									if (keyword == "priority"){
-										(**iter).changeTaskPriority(newInput);
-									} else {
-										cout << "Invalid keyword" << endl;	
-									}
-									textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, taskList[taskIndex - 1]->getTaskDetails());
-									textFileCopy.erase(textFileCopy.begin() + taskIndex);
+		cout << "Invalid keyword" << endl;
 	}
-
+	cout << task->getTaskDetails();
+	textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, task->getTaskDetails());
+	textFileCopy.erase(textFileCopy.begin() + taskIndex);
+	
 	return;
 }
 
@@ -303,6 +322,24 @@ void Storage::undoAction(){
 		return;
 	}
 
+	if (previousCommand == "sort by name"){
+		vector<string> formerTextFileCopy = sortByNameStack.top();
+		sortByNameStack.pop();
+
+		textFileCopy = formerTextFileCopy;
+
+		return;
+	}
+
+	if (previousCommand == "sort by status"){
+		vector<string> formerTextFileCopy = sortByStatusBeforeStack.top();
+		sortByStatusBeforeStack.pop();
+
+		textFileCopy = formerTextFileCopy;
+
+		return;
+	}
+
 	return;
 }
 
@@ -371,7 +408,86 @@ void Storage::sortTaskByName(string fileName){
 		return;
 	}
 
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
+	if (isSortedByName(textFileCopy)){
+		cout << ERROR_INVALID_NAME_SORT << endl;
+		return;
+	}
+
+	commandStack.push("sort by name");
+	sortByNameStack.push(textFileCopy);
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+
+	return;
+}
+
+void Storage::sortTaskByStatus(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
+	if (sortByStatusAfterStack.size() > 0 && isSortedByStatus()){
+		cout << ERROR_INVALID_STATUS_SORT << endl;
+		sortByStatusAfterStack.pop();
+		return;
+	}
+
+	commandStack.push("sort by status");
+	sortByStatusBeforeStack.push(textFileCopy);
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "Completed";
+	string keyword2 = "Incomplete";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
+	sortByStatusAfterStack.push(textFileCopy);
+
+	return;
+}
+
+void Storage::sortTaskByPriority(string fileName){
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
+
+	if (isEmptyTextFile()){
+		return;
+	}
+
+	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	queue<string> sortedTextFileCopy;
+	string keyword1 = "high";
+	string keyword2 = "medium";
+	string keyword3 = "low";
+
+	performSort(sortedTextFileCopy, keyword1);
+	performSort(sortedTextFileCopy, keyword2);
+	performSort(sortedTextFileCopy, keyword3);
+
+	textFileCopy.clear();
+	while (!sortedTextFileCopy.empty()){
+		textFileCopy.push_back(sortedTextFileCopy.front());
+		sortedTextFileCopy.pop();
+	}
 
 	return;
 }
