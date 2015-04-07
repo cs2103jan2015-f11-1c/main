@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <direct.h>
 #include <stack>
+#include <stdio.h>
 
 
 
@@ -158,7 +159,6 @@ void Logic::changeFileDirectory(string userFileDirectory) {
 
 void Logic::setFileName(string updatedFileName) {
 	_filename = updatedFileName;
-	cout << "inside, _filename: " << _filename << endl;
 	return;
 }
 
@@ -306,7 +306,15 @@ void Logic::executeCommand(paraList Input) {
 		updatefileLocation(userDirectory);
 		writeFileLocation(fileLocation);
 
-	} else if (command == "mark") {
+		//For parser to implement!!! remind jy!
+
+	} else if(command=="erasesavinghistory"){
+		for (int i = 0; i < (fileLocation.size()-1); i++) {
+
+			int j=remove(fileLocation[i].c_str);
+		}
+	
+	}else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		if (markIndex > textFileCopy_fromStorage.size() || markIndex <= 0) {
 			feedbackMessage = FeedBack_markTaskUnsuccessfully;
