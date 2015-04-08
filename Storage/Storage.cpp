@@ -124,8 +124,7 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 		return;
 	}
 
-	deleteTaskDetailsStack.push(textFileCopy[taskIndex - 1]);
-	deleteTaskIndexStack.push(taskIndex);
+	deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
 
 	textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
@@ -175,7 +174,6 @@ void Storage::viewIncompleteTasks(){
 	return;
 }
 
-//For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
 void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, string keyword, string newInput){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
@@ -184,9 +182,11 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, st
 		return;
 	}
 
+	updateTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex);
+	commandStack.push("update");
+
 	if (keyword == "name"){
 		task->changeTaskName(newInput);
-		cout << task->getTaskName();
 	} else if (keyword == "start-date"){
 		task->changeTaskStartDate(newInput);
 	} else if (keyword == "start-time"){
@@ -257,7 +257,6 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
-//Add support for keywords "update", "sort"
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -276,14 +275,23 @@ void Storage::undoAction(){
 	}
 
 	if (previousCommand == "delete"){
-		string newTask = deleteTaskDetailsStack.top();
-		deleteTaskDetailsStack.pop();
+		string deletedTask = get<0>(deleteTaskStack.top());
+		unsigned int formerIndex = get<1>(deleteTaskStack.top());
+		deleteTaskStack.pop();
 
-		unsigned int formerIndex = deleteTaskIndexStack.top();
-		deleteTaskIndexStack.pop();
-
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask);
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), deletedTask);
 	
+		return;
+	}
+
+	if (previousCommand == "update"){
+		string originalTask = get<0>(updateTaskStack.top());
+		unsigned int formerIndex = get<1>(updateTaskStack.top());
+		updateTaskStack.pop();
+
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), originalTask);
+		textFileCopy.erase(textFileCopy.begin() + formerIndex);
+
 		return;
 	}
 	

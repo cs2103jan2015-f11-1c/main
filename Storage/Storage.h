@@ -2,6 +2,7 @@
 #define STORAGE_H
 
 #include <iostream>
+#include <utility>
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -26,8 +27,8 @@ private:
 	vector<Task*> taskList;
 	vector<string> textFileCopy;
 	stack<string> commandStack;
-	stack<string> deleteTaskDetailsStack;
-	stack<int> deleteTaskIndexStack;
+	stack<pair<string, unsigned int>> deleteTaskStack;
+	stack<pair<string, unsigned int>> updateTaskStack;
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<string> clearAllTasksStack;
@@ -61,8 +62,6 @@ private:
 
 public:
 
-	enum updateKeyword { INVALID_KEYWORD, NAME, START_DATE, START_TIME, END_DATE_END_TIME, DEADLINE_DATE, DEADLINE_TIME, PRIORITY };
-
 	void updateTextFile(string);
 
 	void initialiseTextFile(string);
@@ -78,8 +77,6 @@ public:
 	void viewCompletedTasks();
 
 	void viewIncompleteTasks();
-
-	updateKeyword getUpdateKeyword(string);
 
 	void updateTask(string, unsigned int, Task*, string, string);
 
