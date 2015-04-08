@@ -5,7 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <msclr/marshal_cppstd.h>
-#include "Logic.h"
+#include "..\Logic\Logic.h"
 
 namespace GUI {
 

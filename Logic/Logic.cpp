@@ -335,7 +335,7 @@ void Logic::executeCommand(paraList Input) {
 		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {
-		//string searchKeyWord= Input
+		//string searchKeyWord = Input.()
 		_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 
 	} else if (command == "sort") {
