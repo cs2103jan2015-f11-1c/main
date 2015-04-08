@@ -9,37 +9,38 @@
 
 using namespace std;
 
-string Logic::_savingLocationHistory = "taskSotong_saving_Location_history.txt";
-//string Logic::_filename = "taskSotong.txt";
+string Logic::SAVING_LOCATON_HISTORY = "taskSotong_saving_Location_history.txt";
 
 
-string Logic::Error_invalidUserInput = "Invalid User Input. Please Enter Again! :<";
-string Logic::FeedBack_taskAdded = "Task Added Successfully! :>";
-string Logic::FeedBack_existingTask = "That Task Has Already Existed~! Please Enter A New Task~";
-string Logic::FeedBack_displayAllTasks = "All Tasks Are Displayed!";
-string Logic::FeedBack_updateTaskSuccessfully = "Task Updated Successfully!";
-string Logic::FeedBack_updateTaskUnsuccessfully = "Failed To Update Task!";
-string Logic::FeedBack_deleteTaskSuccessfully = "Task Deleted Successfully!";
-string Logic::FeedBack_deleteTaskUnsuccessfully = "Failed To Delete The Task!";
-string Logic::FeedBack_changeFileDirectory = "Saving directory changed! :D";
-string Logic::FeedBack_MarkTaskSuccessfully = "Task Marked Completed! ";
-string Logic::FeedBack_markTaskUnsuccessfully="Nah.. Index Out Of Range! Cannot Mark!";
-string Logic::FeedBack_UnmarkTaskSuccessfully = "Unmarked The Task!";
-string Logic::FeedBack_UnmarkTaskUnsuccessfully = "Nah.. Index Out Of Range! Cannot Unmark!";
-string Logic::FeedBack_ClearTask = "All Tasks Cleared!";
-string Logic::FeedBack_UndoTask = "Undo Done! :D";
-string Logic::FeedBack_SearchTask = "Search Result Displayed! :D";
-string Logic::FeedBack_SortTasks = "Tasks Sorted Accordingly!";
+string Logic::ERROR_INVALID_USERINPUT = "Invalid User Input. Please Enter Again! :<";
+string Logic::ERROR_EXISTING_TASK = "That Task Has Already Existed~! Please Enter A New Task~";
+string Logic::ERROR_TASK_UPDATED_UNSUCCESSFULLY = "Failed To Update The Task!";
+string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
+string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
+string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
+
+string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
+string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
+string Logic::FEEDBACK_TASK_UPDATED_SUCCESSFULLY = "Task Updated Successfully!";
+string Logic::FEEDBACK_TASK_DELETED_SUCCESSFULLY = "Task Deleted Successfully!";
+string Logic::FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED = "Saving directory changed! :D";
+string Logic::FEEDBACK_TASK_MARKED_SUCCESSFULLY = "Task Marked Completed! ";
+string Logic::FEEDBACK_TASK_UNMARKED_SUCCESSFULLY = "Unmarked The Task!";
+string Logic::FEEDBACK_CLEAR_ALL_TASKS = "All Tasks Cleared!";
+string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Done! :D";
+
+string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
+string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 
 void Logic::initialiseFileLocationFile() {
 
 
-	ifstream readFile(_savingLocationHistory);
+	ifstream readFile(SAVING_LOCATON_HISTORY);
 	string tempStorage;
 
 	while (getline(readFile, tempStorage)) {
 		cout <<"test"<< tempStorage << endl;
-		fileLocation.push_back(tempStorage);
+		_fileLocation.push_back(tempStorage);
 	
 	}
 	readFile.close();
@@ -51,7 +52,7 @@ void Logic::initialiseFileLocationFile() {
 
 void Logic::writeFileLocation(vector<string> fileLocation) {
 
-	ofstream writeFile(_savingLocationHistory);
+	ofstream writeFile(SAVING_LOCATON_HISTORY);
 
 	for (unsigned int i = 0; i < fileLocation.size(); i++) {
 		writeFile << fileLocation[i] << endl;
@@ -63,12 +64,12 @@ void Logic::writeFileLocation(vector<string> fileLocation) {
 
 bool Logic::checkIfFileIsAtExeLocation() {
 
-	int lastIndex = fileLocation.size();
+	int lastIndex = _fileLocation.size();
 	if (lastIndex == 0) {
 		return true;
 	}else{
 
-		string lastLocation = fileLocation[lastIndex-1];
+		string lastLocation = _fileLocation[lastIndex-1];
 		string exeLocation = getExePath();
 
 		if (lastLocation == exeLocation) {
@@ -82,20 +83,20 @@ bool Logic::checkIfFileIsAtExeLocation() {
 
 string Logic::getLastFileLocation() {
 
-	int lastIndex = fileLocation.size();
+	int lastIndex = _fileLocation.size();
 
-	return fileLocation[lastIndex-1];
+	return _fileLocation[lastIndex-1];
 }
 
 void Logic::updatefileLocation(string userDirectory) {
 
-	fileLocation.push_back(userDirectory);
+	_fileLocation.push_back(userDirectory);
 	return;
 }
 
 
 void Logic::Welcome() {
-	UserInterface.displayWelcomeMessage();
+	_UserInterface.displayWelcomeMessage();
 	return;
 }
 
@@ -169,17 +170,17 @@ string Logic::getFileName() {
 }
 
 void Logic::CommandPrompt() {
-	UserInterface.displayPromptInputMessage();
+	_UserInterface.displayPromptInputMessage();
 	return;
 }
 
 paraList* Logic::getParaList(string userInput) {
 
-	return ParserComponent.parseCommand(userInput);
+	return _ParserComponent.parseCommand(userInput);
 }
 
 string Logic::getUserInput() {
-	return UserInterface.acceptUserInput();
+	return _UserInterface.acceptUserInput();
 }
 
 string Logic::getLowerCaseCommand(paraList parameterList) {
@@ -194,24 +195,24 @@ Task Logic::getTask(paraList parameterList) {
 }
 
 void Logic::copyTestFilefromStorage() {
-	textFileCopy_fromStorage = getTextFileCopy();
+	_storageTextFileCopy = getTextFileCopy();
 	return;
 }
 
 vector<string> Logic::getTextFileCopy() {
-	return DataBase.returnTextFileCopy();
+	return _DataBase.returnTextFileCopy();
 }
 
 void Logic::callInitialise(string outputFile) {
-	DataBase.initialiseTextFile(outputFile);
+	_DataBase.initialiseTextFile(outputFile);
 }
 
 bool Logic::notExistingTask(Task* task) {
 	string taskDetail;
 	taskDetail = task->getTaskDetails();
 	copyTestFilefromStorage();
-	for (unsigned int i = 0; i < textFileCopy_fromStorage.size(); i++) { 
-		if (taskDetail == textFileCopy_fromStorage[i]) {
+	for (unsigned int i = 0; i < _storageTextFileCopy.size(); i++) { 
+		if (taskDetail == _storageTextFileCopy[i]) {
 			return false;
 		}
 	}
@@ -220,7 +221,7 @@ bool Logic::notExistingTask(Task* task) {
 
 
 string Logic::getFeedbackMsg() {
-	return feedbackMessage;
+	return _feedbackMessage;
 
 }
 
@@ -235,25 +236,25 @@ void Logic::executeCommand(paraList Input) {
 	
 	if (command == "invalid") {
 
-		feedbackMessage = Error_invalidUserInput;
+		_feedbackMessage = ERROR_INVALID_USERINPUT;
 
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
 		string taskdetails = oneTask.getTaskDetails();
 		cout << "taskdetails: " << taskdetails << endl;
 		if (notExistingTask(&oneTask)==true) {
-			DataBase.addTask(&oneTask);
-			DataBase.updateTextFile(_filename);
-			feedbackMessage = FeedBack_taskAdded;
+			_DataBase.addTask(&oneTask);
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 
 		} else {
-			feedbackMessage = FeedBack_existingTask;
+			_feedbackMessage = ERROR_EXISTING_TASK;
 
 		}
 	} else if (command == "display") {
-		DataBase.displayAllTasks();
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = FeedBack_displayAllTasks;
+		_DataBase.displayAllTasks();
+		_DataBase.updateTextFile(_filename);
+		_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
@@ -276,83 +277,83 @@ void Logic::executeCommand(paraList Input) {
 		//cout << detailToBeUpdated << endl;
 
 		copyTestFilefromStorage();
-		if (updateInteger >= textFileCopy_fromStorage.size() || updateInteger <= 0) {
-			feedbackMessage = FeedBack_updateTaskUnsuccessfully;
+		if (updateInteger >= _storageTextFileCopy.size() || updateInteger <= 0) {
+			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
 
 		} else {
-			DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
-			DataBase.updateTextFile(_filename);
-			feedbackMessage = FeedBack_updateTaskSuccessfully;
+			_DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 		
 		}
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 		copyTestFilefromStorage();
-		if (deleteInteger > textFileCopy_fromStorage.size() || deleteInteger <= 0) {
-			feedbackMessage = FeedBack_deleteTaskUnsuccessfully;
+		if (deleteInteger > _storageTextFileCopy.size() || deleteInteger <= 0) {
+			_feedbackMessage = ERROR_TASK_DELETED_UNSUCCESSFULLY;
 		
 		} else {
-			DataBase.deleteTask(_filename, deleteInteger);
-			DataBase.updateTextFile(_filename);
-			feedbackMessage = FeedBack_deleteTaskSuccessfully;
+			_DataBase.deleteTask(_filename, deleteInteger);
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
 		
 		}
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		changeFileDirectory(userDirectory);
-		feedbackMessage = FeedBack_changeFileDirectory;
+		_feedbackMessage = FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
 		updatefileLocation(userDirectory);
-		writeFileLocation(fileLocation);
+		writeFileLocation(_fileLocation);
 
 		//For parser to implement!!! remind jy!
 
 	} else if(command=="erasesavinghistory"){
-		for (int i = 0; i < (fileLocation.size()-1); i++) {
+		for (int i = 0; i < (_fileLocation.size()-1); i++) {
 
-			int j=remove(fileLocation[i].c_str);
+			int j=remove(_fileLocation[i].c_str);
 		}
 	
 	}else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
-		if (markIndex > textFileCopy_fromStorage.size() || markIndex <= 0) {
-			feedbackMessage = FeedBack_markTaskUnsuccessfully;
+		if (markIndex > _storageTextFileCopy.size() || markIndex <= 0) {
+			_feedbackMessage = ERROR_TASK_MARKED_UNSUCCESSFULLY;
 
 		} else {
-			DataBase.markTask(_filename, markIndex);
-			DataBase.updateTextFile(_filename);
-			feedbackMessage = FeedBack_MarkTaskSuccessfully;
+			_DataBase.markTask(_filename, markIndex);
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "unmark") {
 		int unmarkIndex = Input.getmarkindex();
-		if (unmarkIndex > textFileCopy_fromStorage.size() || unmarkIndex <= 0) {
-			feedbackMessage = FeedBack_UnmarkTaskUnsuccessfully;
+		if (unmarkIndex > _storageTextFileCopy.size() || unmarkIndex <= 0) {
+			_feedbackMessage = ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
 
 		} else {
-			DataBase.unmarkTask(_filename, unmarkIndex);
-			DataBase.updateTextFile(_filename);
-			feedbackMessage = FeedBack_UnmarkTaskSuccessfully;
+			_DataBase.unmarkTask(_filename, unmarkIndex);
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "clear") {
-		DataBase.clearAllTasks();
-		feedbackMessage = FeedBack_ClearTask;
+		_DataBase.clearAllTasks();
+		_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
 
 	} else if (command == "undo") {
-		DataBase.undoAction();
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = FeedBack_UndoTask;
+		_DataBase.undoAction();
+		_DataBase.updateTextFile(_filename);
+		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {
 		//string searchKeyWord= Input
-		feedbackMessage = FeedBack_SearchTask;
+		_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 
 	} else if (command == "sort") {
-		DataBase.sortTaskByName(_filename);
-		DataBase.updateTextFile(_filename);
-		feedbackMessage = FeedBack_SortTasks;
+		_DataBase.sortTaskByName(_filename);
+		_DataBase.updateTextFile(_filename);
+		_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 	}
 
