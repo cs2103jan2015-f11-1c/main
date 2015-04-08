@@ -300,7 +300,7 @@ void Logic::executeCommand(paraList Input) {
 	} else if(command=="erasesavinghistory"){
 		for (int i = 0; i < (_fileLocation.size()-1); i++) {
 
-			int j=remove(_fileLocation[i].c_str);
+			//int j=remove(_fileLocation[i].c_str);
 		}
 	
 	}else if (command == "mark") {
