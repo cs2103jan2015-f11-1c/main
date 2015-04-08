@@ -34,6 +34,8 @@ private:
 	stack<vector<string>> sortByNameStack;
 	stack<vector<string>> sortByStatusBeforeStack;
 	stack<vector<string>> sortByStatusAfterStack;
+	stack<vector<string>> sortByPriorityBeforeStack;
+	stack<vector<string>> sortByPriorityAfterStack;
 
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_INVALID_NUMBER;
@@ -46,6 +48,7 @@ private:
 	static string ERROR_ONLY_ONE_TASK;
 	static string ERROR_INVALID_NAME_SORT;
 	static string ERROR_INVALID_STATUS_SORT;
+	static string ERROR_INVALID_PRIORITY_SORT;
 
 	bool isEmptyTextFile();
 	bool isInvalidIndex(unsigned int);
@@ -53,6 +56,7 @@ private:
 	bool isOnlyOneTask();
 	bool isSortedByName(vector<string>);
 	bool isSortedByStatus();
+	bool isSortedByPriority();
 	void performSort(queue<string>&, string);
 
 public:
