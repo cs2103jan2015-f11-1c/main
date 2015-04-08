@@ -53,7 +53,10 @@ namespace GUI {
 
 	private: System::Windows::Forms::MonthCalendar^  monthCalendar1;
 	private: System::Windows::Forms::TextBox^  feedbackbox;
-	private: System::Windows::Forms::Label^  tasksotonglabel;
+	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::Label^  label1;
+
+
 
 
 
@@ -71,63 +74,89 @@ namespace GUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(TSGUI::typeid));
 			this->commandline = (gcnew System::Windows::Forms::TextBox());
 			this->displaybox = (gcnew System::Windows::Forms::TextBox());
 			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
 			this->feedbackbox = (gcnew System::Windows::Forms::TextBox());
-			this->tasksotonglabel = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// commandline
 			// 
-			this->commandline->Location = System::Drawing::Point(12, 279);
+			this->commandline->Location = System::Drawing::Point(189, 214);
 			this->commandline->Name = L"commandline";
-			this->commandline->Size = System::Drawing::Size(602, 20);
+			this->commandline->Size = System::Drawing::Size(634, 20);
 			this->commandline->TabIndex = 0;
 			this->commandline->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &TSGUI::commandline_KeyPress);
 			// 
 			// displaybox
 			// 
-			this->displaybox->Font = (gcnew System::Drawing::Font(L"Celeste Hand", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->displaybox->BackColor = System::Drawing::Color::DarkOrchid;
+			this->displaybox->Font = (gcnew System::Drawing::Font(L"Arial Narrow", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->displaybox->ForeColor = System::Drawing::Color::White;
 			this->displaybox->Location = System::Drawing::Point(12, 12);
 			this->displaybox->Multiline = true;
 			this->displaybox->Name = L"displaybox";
 			this->displaybox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->displaybox->Size = System::Drawing::Size(363, 261);
+			this->displaybox->Size = System::Drawing::Size(452, 194);
 			this->displaybox->TabIndex = 2;
 			// 
 			// monthCalendar1
 			// 
-			this->monthCalendar1->Location = System::Drawing::Point(387, 78);
+			this->monthCalendar1->ForeColor = System::Drawing::Color::Purple;
+			this->monthCalendar1->Location = System::Drawing::Point(475, 12);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 3;
+			this->monthCalendar1->TitleBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->monthCalendar1->TitleForeColor = System::Drawing::Color::Purple;
+			this->monthCalendar1->TrailingForeColor = System::Drawing::Color::Purple;
 			// 
 			// feedbackbox
 			// 
-			this->feedbackbox->Location = System::Drawing::Point(387, 250);
+			this->feedbackbox->Font = (gcnew System::Drawing::Font(L"Arial", 9.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->feedbackbox->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->feedbackbox->Location = System::Drawing::Point(475, 183);
 			this->feedbackbox->Name = L"feedbackbox";
-			this->feedbackbox->Size = System::Drawing::Size(227, 20);
+			this->feedbackbox->Size = System::Drawing::Size(348, 22);
 			this->feedbackbox->TabIndex = 4;
 			// 
-			// tasksotonglabel
+			// pictureBox1
 			// 
-			this->tasksotonglabel->AutoSize = true;
-			this->tasksotonglabel->Font = (gcnew System::Drawing::Font(L"Celeste Hand", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->tasksotonglabel->Location = System::Drawing::Point(387, -3);
-			this->tasksotonglabel->Name = L"tasksotonglabel";
-			this->tasksotonglabel->Size = System::Drawing::Size(247, 72);
-			this->tasksotonglabel->TabIndex = 5;
-			this->tasksotonglabel->Text = L"TaskSotong";
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(703, 12);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(114, 162);
+			this->pictureBox1->TabIndex = 5;
+			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &TSGUI::pictureBox1_Click_1);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Narrow", 11.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::Purple;
+			this->label1->Location = System::Drawing::Point(10, 213);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(173, 20);
+			this->label1->TabIndex = 6;
+			this->label1->Text = L"What would you like to do\?";
 			// 
 			// TSGUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Window;
-			this->ClientSize = System::Drawing::Size(630, 314);
-			this->Controls->Add(this->tasksotonglabel);
+			this->ClientSize = System::Drawing::Size(834, 243);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->feedbackbox);
 			this->Controls->Add(this->monthCalendar1);
 			this->Controls->Add(this->displaybox);
@@ -135,6 +164,7 @@ namespace GUI {
 			this->Name = L"TSGUI";
 			this->Text = L"TSGUI";
 			this->Load += gcnew System::EventHandler(this, &TSGUI::TSGUI_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -167,11 +197,12 @@ namespace GUI {
 				std::string x;
 				queue<string> taskVector;
 				std::string entireList;
+				entireList = "";
 
 				while (getline(readFile, x)) {
 					taskVector.push(x);
 				}
-
+				
 				while (!taskVector.empty()) {
 					
 					std::string taskLine = taskVector.front();
@@ -199,94 +230,11 @@ namespace GUI {
 
 
 
+private: System::Void tasksotonglabel_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void pictureBox1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
-/*
-#include "UI.h"
-
-void UI::displayWelcomeMessage() {
-
-	cout << _welcomeMessage << endl;
-	return;
-}
-
-
-void UI::displayExitMessage() {
-
-	cout << _exitMessage << endl;
-	return;
-}
-
-void UI::displayPromptInputMessage() {
-
-	cout << _promptInputMessage << endl;
-	return;
-}
-
-void UI::displaySuccessfulAddMessage() {
-
-	cout << _successfulAddMessage << endl;
-	return;
-}
-
-void UI::displaySuccessfulUpdateMessage() {
-
-	cout << _successfulUpdateMessage << endl;
-	return;
-}
-
-void UI::displaySuccessfulDeleteMessage() {
-
-	cout << _successfulDeleteMessage << endl;
-	return;
-}
-
-void UI::displaySuccessfulSortMessage() {
-
-	cout << _successfulSortMessage << endl;
-	return;
-}
-
-void UI::displayInvalidCommandMessage() {
-
-	cout << _invalidCommandMessage << endl;
-	return;
-}
-
-void UI::displayDeleteErrorMessage() {
-
-	cout << _deleteErrorMessage << endl;
-	return;
-}
-
-void UI::displayUpdateCompletedStatusErrorMessage() {
-
-	cout << _updateCompletedStatusErrorMessage << endl;
-	return;
-}
-
-void UI::displayUpdateNotCompletedStatusErrorMessage() {
-
-	cout << _updateNotCompletedStatusErrorMessage << endl;
-	return;
-}
-
-void UI::displayTaskList(vector<string> taskList) {
-
-	vector<string>::iterator iter;
-
-	for (iter = taskList.begin(); iter != taskList.end(); ++iter) {
-		cout << *iter << endl;
-	}
-
-	return;
-}
-
-
-string UI::acceptUserInput() {
-
-	string userInput;
-	getline(cin, userInput);
-	return userInput;
-}
-*/
