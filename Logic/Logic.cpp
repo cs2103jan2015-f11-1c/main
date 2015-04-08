@@ -228,11 +228,6 @@ string Logic::getFeedbackMsg() {
 void Logic::executeCommand(paraList Input) {
 
 	string command = getLowerCaseCommand(Input);
-
-	cout << "commmand= " << command << endl;
-	//for (unsigned int i = 0; i < command.length(); ++i){
-	//	command[i] == tolower(command[i]);
-	//}
 	
 	if (command == "invalid") {
 
@@ -260,21 +255,14 @@ void Logic::executeCommand(paraList Input) {
 		int updateInteger = Input.getUpdateInteger();
 		string parameterToBeUpdated = Input.getKeyword();
 		string detailToBeUpdated = Input.getInput();
-		vector<string> textFileCopy2 = getTextFileCopy();
-		string input = textFileCopy2[updateInteger - 1];
-		while ( input.back() != ' '){
+		vector<string> myTextFileCopy = getTextFileCopy();
+		string input = myTextFileCopy[updateInteger - 1];
+		while (input.back() != ' '){
 			input.pop_back();
 		}
-		//input.substr(0, input.size() - input.find_last_of(' '));
-		cout << input << endl;
+
 		paraList* pList = getParaList("add " + input);
 		Task taskToBeUpdated = pList->getTask();
-		cout << taskToBeUpdated.getTaskName() << endl;
-		cout << taskToBeUpdated.getTaskStartDate() << endl;
-		cout << taskToBeUpdated.getTaskDetails() << endl;
-		//cout << updateInteger << endl;
-		//cout << parameterToBeUpdated << endl;
-		//cout << detailToBeUpdated << endl;
 
 		copyTestFilefromStorage();
 		if (updateInteger >= _storageTextFileCopy.size() || updateInteger <= 0) {
