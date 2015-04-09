@@ -50,13 +50,13 @@ public:
 //to be updated 
 		ostringstream oss;
 		oss <<setw(15)<<left<< taskName 
-			<< date1
-			<< time1
-			<< date2
-			<< time2
-			<< date3
-			<< time3
-			<< priority
+			<<setw(7)<< date1
+			<<setw(5)<< time1
+			<<setw(7)<< date2
+			<<setw(5)<< time2
+			<<setw(7)<< date3
+			<<setw(5)<< time3
+			<<setw(4)<< priority
 			<< status;
 
 		return oss.str();		

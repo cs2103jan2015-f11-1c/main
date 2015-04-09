@@ -70,25 +70,17 @@ public:
 
 	void updatefileLocation(string);
 
-	void Welcome();
-
-	void CommandPrompt();
-
 	string getExePath();
 
 	void createNewDirectory(string);
 
 	void changeFileDirectory(string);
-
-	void processChangeDirectoryRequest(string);
 	
 	void setFileName(string);
 
 	string getFileName();
 
 	paraList* getParaList(string);
-
-	string getUserInput();
 
 	string getLowerCaseCommand(paraList);
 
@@ -109,8 +101,6 @@ public:
 	vector<string> getReturnGUI();
 
 	string executeCommand(paraList);
-
-	
 
 };
 #endif
