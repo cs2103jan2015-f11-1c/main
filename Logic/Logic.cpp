@@ -259,7 +259,21 @@ string Logic::getFeedbackMsg() {
 
 }
 
-void Logic::executeCommand(paraList Input) {
+
+void Logic::setReturnGUI(vector<string> resultVector) {
+
+	_resultVector = resultVector;
+
+
+}
+
+vector<string> Logic::getReturnGUI() {
+
+	return _resultVector;
+
+}
+
+string Logic::executeCommand(paraList Input) {
 
 	string command = getLowerCaseCommand(Input);
 	
@@ -270,10 +284,12 @@ void Logic::executeCommand(paraList Input) {
 	} else if (command == "add") {
 		Task oneTask = Input.getTask();
 		string taskdetails = oneTask.getTaskDetails();
-		cout << "taskdetails: " << taskdetails << endl;
+		
 		if (notExistingTask(&oneTask)==true) {
 			_DataBase.addTask(&oneTask);
 			_DataBase.updateTextFile(_filename);
+			copyTestFilefromStorage();
+			setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 
 		} else {
@@ -283,6 +299,8 @@ void Logic::executeCommand(paraList Input) {
 	} else if (command == "display") {
 		_DataBase.displayAllTasks();
 		_DataBase.updateTextFile(_filename);
+		copyTestFilefromStorage();
+		setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
 
 	} else if (command == "update") {
@@ -305,6 +323,8 @@ void Logic::executeCommand(paraList Input) {
 		} else {
 			_DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
+			copyTestFilefromStorage();
+			setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 		
 		}
@@ -318,6 +338,8 @@ void Logic::executeCommand(paraList Input) {
 		} else {
 			_DataBase.deleteTask(_filename, deleteInteger);
 			_DataBase.updateTextFile(_filename);
+			copyTestFilefromStorage();
+			setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
 		
 		}
@@ -328,6 +350,8 @@ void Logic::executeCommand(paraList Input) {
 		_feedbackMessage = FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
 		updatefileLocation(userDirectory);
 		writeFileLocation(_fileLocation);
+		copyTestFilefromStorage();
+		setReturnGUI(_storageTextFileCopy);
 
 		//For parser to implement!!! remind jy!
 
@@ -345,6 +369,8 @@ void Logic::executeCommand(paraList Input) {
 		} else {
 			_DataBase.markTask(_filename, markIndex);
 			_DataBase.updateTextFile(_filename);
+			copyTestFilefromStorage();
+			setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
 
@@ -356,29 +382,47 @@ void Logic::executeCommand(paraList Input) {
 		} else {
 			_DataBase.unmarkTask(_filename, unmarkIndex);
 			_DataBase.updateTextFile(_filename);
+			copyTestFilefromStorage();
+			setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "clear") {
 		_DataBase.clearAllTasks();
+		copyTestFilefromStorage();
+		setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
 
 	} else if (command == "undo") {
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
+		copyTestFilefromStorage();
+		setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {
 		//string searchKeyWord = Input.()
+		//returnGUI
 		_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 
 	} else if (command == "sort") {
 		_DataBase.sortTaskByName(_filename);
 		_DataBase.updateTextFile(_filename);
+		copyTestFilefromStorage();
+		setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 	}
+	else {
+		if (command[0] == '\n') {
+			_feedbackMessage = "SHIT";
+		}
+		else {
+			_feedbackMessage = "DUNG";
+		}
+		//_feedbackMessage = command[0];
+	}
 
-	return;
+	return _feedbackMessage;
 }
 

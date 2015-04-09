@@ -131,7 +131,7 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 
 	return;
 }
-
+//need to be deleted-GT
 void Storage::displayAllTasks(){
 	if (isEmptyTextFile()){
 		return;

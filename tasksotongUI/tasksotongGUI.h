@@ -119,9 +119,9 @@ namespace tasksotongUI {
 				 // WelcomeBox
 				 // 
 				 this->WelcomeBox->BackColor = System::Drawing::Color::MistyRose;
-				 this->WelcomeBox->Font = (gcnew System::Drawing::Font(L"Kristen ITC", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				 this->WelcomeBox->Font = (gcnew System::Drawing::Font(L"Segoe UI Symbol", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 					 static_cast<System::Byte>(0)));
-				 this->WelcomeBox->ForeColor = System::Drawing::Color::SlateGray;
+				 this->WelcomeBox->ForeColor = System::Drawing::Color::Goldenrod;
 				 this->WelcomeBox->Location = System::Drawing::Point(12, 31);
 				 this->WelcomeBox->Multiline = true;
 				 this->WelcomeBox->Name = L"WelcomeBox";
@@ -240,40 +240,40 @@ namespace tasksotongUI {
 
 
 	private: System::Void UserInputBox_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+		//DisplayTaskBox->Text = "debugging1: " + UserInputBox->Text + "testing1";
+		if (e->KeyChar == (char)13) {
+			string tempUserInput = msclr::interop::marshal_as<std::string>(UserInputBox->Text);
 
+			int i = tempUserInput.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSUVWXYZ");
+			string userInput = tempUserInput.substr(i);
 
+			//DisplayTaskBox->Text ="debugging2: "+ UserInputBox->Text + "testing2";
 
-		
+			paraList* storageInput = TSLogic->getParaList(userInput);
+
+			std::string feedbackmsg = TSLogic->executeCommand(*storageInput);
+			//DisplayTaskBox->Clear();
+			vector<string> textFileCopy_fromLogic = TSLogic->getReturnGUI();
 			
-				string userInput = msclr::interop::marshal_as<std::string>(UserInputBox->Text);
-				//DisplayTaskBox->Text = "debugging1: " + UserInputBox->Text + "testing1";
-				if (e->KeyChar == (char)13) {
+			//String^ stringnewlala = gcnew String(userInput.c_str());
+			//DisplayTaskBox->Text = stringnewlala + "\r\n" + textFileCopy_fromLogic.size().ToString();
 
-					//DisplayTaskBox->Text ="debugging2: "+ UserInputBox->Text + "testing2";
+			//DisplayTaskBox->Text = textFileCopy_fromLogic.size().ToString();
 
-					paraList* storageInput = TSLogic->getParaList(userInput);
+			string itemString;
+			for (int i = 0; i < textFileCopy_fromLogic.size(); i++) {
+				itemString = itemString + to_string(i+1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
+			}
+			String^ displayList = gcnew String(itemString.c_str());
+			DisplayTaskBox->Text = displayList;
 
-					TSLogic->executeCommand(*storageInput);
+			//std::string feedbackmsg = TSLogic->getFeedbackMsg();
+			String^ feedback = gcnew String(feedbackmsg.c_str());
+			WelcomeBox->Text = feedback;
 
-					vector<string> textFileCopy_fromLogic = TSLogic->getTextFileCopy();
-
-					for (int i = 0; i < textFileCopy_fromLogic.size(); i++) {
-						string tempString = textFileCopy_fromLogic[i];
-						String^ displayList = gcnew String(tempString.c_str());
-						DisplayTaskBox->Text = displayList;
-					}
-
-
-					std::string feedbackmsg = TSLogic->getFeedbackMsg();
-					String^ feedback = gcnew String(feedbackmsg.c_str());
-					WelcomeBox->Text = feedback;
-
-					UserInputBox->Clear();
-				}
-			
-
-
-		
+			UserInputBox->Clear();
+			//DisplayTaskBox->Text = "can work???";
+		}
 
 	}
 

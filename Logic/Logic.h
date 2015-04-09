@@ -27,6 +27,7 @@ private:
 
 	vector<string> _storageTextFileCopy;
 	vector<string> _fileLocation;
+	vector<string> _resultVector;
 
 
 	string _userInput;
@@ -102,8 +103,12 @@ public:
 	bool notExistingTask(Task*);
 
 	string getFeedbackMsg();
+	
+	void setReturnGUI(vector<string>);
 
-	void executeCommand(paraList);
+	vector<string> getReturnGUI();
+
+	string executeCommand(paraList);
 
 	
 
