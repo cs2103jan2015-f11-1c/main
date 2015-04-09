@@ -35,6 +35,10 @@ const regex SUN_INPUT("(sundays?\\b)|(suns?\\b)", std::tr1::regex_constants::ica
 const regex TODAY_INPUT("(t(o+|)d(a+|)(y))", std::tr1::regex_constants::icase);
 const regex TMR_INPUT("(t(\\w+|)m(\\w+|)(w|r))", std::tr1::regex_constants::icase);
 const regex YEST_INPUT("(y(\\w+|)(e|s)(\\w+|)(t|r|y))", std::tr1::regex_constants::icase);
+const regex AMPM_INPUT("(1[0-2]|[1-9])[:|\.]([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)", std::tr1::regex_constants::icase);
+const regex AMPM_SHORT_INPUT("(((1[0-2]|[1-9])(\\s)?(am|pm|noon)))", std::tr1::regex_constants::icase);
+const regex NIL_INPUT("((1[0-2]|0[1-9])((:|\.)[0-5][0-9]))|(((1[0-2]|[1-9])(\\s)))", std::tr1::regex_constants::icase);
+const regex OCLOCK_INPUT("((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
 {
@@ -512,5 +516,183 @@ string parserProcess::parserReturnDate()
 	oss << processedDateStore.day << "/" << processedDateStore.month << "/" << processedDateStore.year;
 
 	return oss.str();
+
+}
+
+void parserProcess::processTime(string timeInput)
+{
+
+    timeKeyWord time;
+	time = sortTimeKeyWord(timeInput);
+	cout << "m" << endl;
+	switch (time)
+	{
+	case(AM_PM):
+		{
+		cout << "ampm" << endl;
+		processTimeAmPm(timeInput);
+		    
+			return;
+			
+		}
+	case(OCLOCK):
+		{
+
+		processTimeNatExp(timeInput);
+
+			return;
+		}
+	case(SHORT_AM_PM):
+		{
+	
+	
+		processTimeShortAmPm(timeInput);
+		    return;
+	
+		}
+	case(NIL):
+	{
+
+		return;
+
+	}
+
+
+
+
+	}
+
+}
+
+
+parserProcess::timeKeyWord  parserProcess::sortTimeKeyWord(string& timeInput)
+{
+
+	
+	
+	
+	
+	if (regex_search(timeInput, AMPM_INPUT))
+	{
+		return AM_PM;
+
+	}
+	else if (regex_search(timeInput, OCLOCK_INPUT))
+	{
+
+		return OCLOCK;
+	}
+	else if (regex_search(timeInput, AMPM_SHORT_INPUT))
+	{
+
+		return SHORT_AM_PM;
+	}
+
+
+
+}
+
+void parserProcess::processTimeAmPm(string& timeInput)
+{
+	istringstream iss(timeInput);
+	int hours, mins;
+	char sym,status;
+	iss >> hours;
+	iss >> sym;
+	iss >> mins;
+	iss >> status;
+	covertTime(status,hours);
+
+	processedtimeStore.min = mins;
+	processedtimeStore.hours = hours;
+
+	return;
+
+
+}
+void parserProcess::processTimeNil(string& timeInput)
+{
+	istringstream iss(timeInput);
+	int hours, mins;
+	char sym, status;
+	iss >> hours;
+	iss >> sym;
+	iss >> mins;
+	iss >> status;
+
+	processedtimeStore.min = mins;
+	processedtimeStore.hours = hours;
+
+	return;
+
+
+
+}
+
+void parserProcess::processTimeNatExp(string& timeInput)
+{
+	istringstream iss(timeInput);
+	int hours;
+	char c;
+	iss >> hours;
+	
+	processedtimeStore.hours = hours;
+	processedtimeStore.min = 0;
+}
+
+
+
+
+void parserProcess::processTimeShortAmPm(string& timeInput)
+{
+
+	istringstream iss(timeInput);
+	int hours;
+	char c;
+	iss >> hours;
+	iss >> c;
+
+	covertTime(c, hours);
+	processedtimeStore.min = 0;
+	processedtimeStore.hours = hours;
+
+	return;
+
+}
+
+
+void parserProcess::covertTime(char& status,int& hour)
+{
+	if (status == 'p' | status == 'P')
+	{
+		hour = hour + 12;
+
+	}
+	return;
+
+}
+
+
+string parserProcess::parserReturnTime()
+{
+
+	ostringstream oss;
+	if (processedtimeStore.min<10)
+	{
+		oss << processedtimeStore.hours << ":0" << processedtimeStore.min;
+	}
+	else
+	{
+		oss << processedtimeStore.hours << ":" << processedtimeStore.min;
+
+	}
+
+
+
+	return oss.str();
+
+	
+
+
 
 }

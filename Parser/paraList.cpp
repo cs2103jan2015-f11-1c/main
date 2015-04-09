@@ -179,3 +179,9 @@ int paraList::getmarkindex()
 	return markIndex;
 }
 
+string paraList::getSearchKey()
+{
+
+
+	return searchKeyword;
+}
