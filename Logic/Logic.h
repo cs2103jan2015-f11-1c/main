@@ -57,6 +57,8 @@ private:
 
 public:
 
+	void initialiseSetUp();
+
 	void initialiseFileLocationFile();
 
 	void writeFileLocation(vector<string>);

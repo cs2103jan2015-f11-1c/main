@@ -32,6 +32,40 @@ string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Done! :D";
 string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 
+
+void Logic::initialiseSetUp() {
+	
+
+	initialiseFileLocationFile();
+	cout << "finish initialising?" << endl;
+	bool areInTheSameLocation = checkIfFileIsAtExeLocation();
+	cout << "bool check: " << areInTheSameLocation << endl;
+	string filename;
+	if (areInTheSameLocation == false) {
+
+		string lastFileLocation = getLastFileLocation();
+		setFileName(lastFileLocation);
+	} else {
+
+		cout << "exePath: " << getExePath() << endl;
+		string exePath = getExePath() + "\\taskSotong.txt";
+		cout << "new path: " << exePath << endl;
+		setFileName(exePath);
+
+	}
+	filename = getFileName();
+
+	cout << "Your TaskSotong is currently at: " << filename << endl;
+
+	callInitialise(filename);
+	//CommandPrompt();
+
+
+}
+
+
+
+
 void Logic::initialiseFileLocationFile() {
 
 

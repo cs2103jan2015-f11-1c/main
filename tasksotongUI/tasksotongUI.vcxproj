@@ -72,6 +72,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.vcxproj">
+      <Project>{58f4754e-4696-429b-a8c1-f8aa089265a4}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TaskSotong\TaskSotong.vcxproj">
       <Project>{7e7175ce-b5a5-49e4-b1df-5b8decacc1ba}</Project>
     </ProjectReference>
