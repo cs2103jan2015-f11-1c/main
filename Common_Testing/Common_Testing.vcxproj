@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}</ProjectGuid>
+    <ProjectGuid>{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Storage_Testing</RootNamespace>
+    <RootNamespace>Common_Testing</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -90,14 +90,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Storage_Testing.cpp" />
+    <ClCompile Include="Common_Testing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logic\Logic.vcxproj">
-      <Project>{58f4754e-4696-429b-a8c1-f8aa089265a4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Storage\Storage.vcxproj">
-      <Project>{df169fb4-a944-48fc-849d-a09a016f9cef}</Project>
+    <ProjectReference Include="..\Common\Common.vcxproj">
+      <Project>{d9509d78-9494-4917-8d40-509a6cdec63d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

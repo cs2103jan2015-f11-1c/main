@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TaskSotong", "TaskSotong\TaskSotong.vcxproj", "{7E7175CE-B5A5-49E4-B1DF-5B8DECACC1BA}"
 EndProject
@@ -17,13 +17,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UI", "UI\UI.vcxproj", "{D71
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logic_Testing", "addTaskTest\addTaskTest.vcxproj", "{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common_Testing", "Storage_Testing\Storage_Testing.vcxproj", "{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParaList_Testing", "ParaList_Testing\ParaList_Testing.vcxproj", "{E983CEAD-1518-4995-915B-E464A81D4DD8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tasksotongUI", "tasksotongUI\tasksotongUI.vcxproj", "{9EED76F0-0B94-4802-9418-BFE797D26C90}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "GUI\GUI.vcxproj", "{80331731-3063-45CF-9032-F3EABF969CCB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common_Testing", "Common_Testing\Common_Testing.vcxproj", "{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Storage_Testing", "Storage_Testing\Storage_Testing.vcxproj", "{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +61,6 @@ Global
 		{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}.Debug|Win32.Build.0 = Debug|Win32
 		{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}.Release|Win32.ActiveCfg = Release|Win32
 		{D75D8D5F-31F6-4942-8AE8-FF2F45D6EB1F}.Release|Win32.Build.0 = Release|Win32
-		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Debug|Win32.ActiveCfg = Debug|Win32
-		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Debug|Win32.Build.0 = Debug|Win32
-		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Release|Win32.ActiveCfg = Release|Win32
-		{CFC97C8C-BD89-4F21-BDC6-7BCE5912B895}.Release|Win32.Build.0 = Release|Win32
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Debug|Win32.Build.0 = Debug|Win32
 		{E983CEAD-1518-4995-915B-E464A81D4DD8}.Release|Win32.ActiveCfg = Release|Win32
@@ -75,6 +73,14 @@ Global
 		{80331731-3063-45CF-9032-F3EABF969CCB}.Debug|Win32.Build.0 = Debug|Win32
 		{80331731-3063-45CF-9032-F3EABF969CCB}.Release|Win32.ActiveCfg = Release|Win32
 		{80331731-3063-45CF-9032-F3EABF969CCB}.Release|Win32.Build.0 = Release|Win32
+		{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}.Debug|Win32.Build.0 = Debug|Win32
+		{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}.Release|Win32.ActiveCfg = Release|Win32
+		{A0FA1A02-BD2A-4AD0-A170-930FD5D015BD}.Release|Win32.Build.0 = Release|Win32
+		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Debug|Win32.Build.0 = Debug|Win32
+		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Release|Win32.ActiveCfg = Release|Win32
+		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

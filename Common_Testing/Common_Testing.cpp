@@ -4,17 +4,17 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Task_Testing
-{		
+{
 	TEST_CLASS(Task_Testing)
 	{
 	public:
-		
+
 		TEST_METHOD(checkNull_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
 			string actual;
 
-			actual= test->checkNull("Name");
+			actual = test->checkNull("Name");
 
 			string expected = "Name ";
 
@@ -31,7 +31,7 @@ namespace Task_Testing
 			string expectedName = "Name";
 
 			Assert::AreEqual(expectedName, actualName);
-		
+
 		}
 
 		TEST_METHOD(getTaskStartDate_test)
@@ -142,7 +142,7 @@ namespace Task_Testing
 			Assert::AreEqual(expected, actual);
 
 		}
-		
+
 		TEST_METHOD(changeTaskName_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
@@ -207,7 +207,7 @@ namespace Task_Testing
 			Assert::AreEqual(expected, actual);
 
 		}
-		
+
 		TEST_METHOD(changeTaskDeadlineDate_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
@@ -233,7 +233,7 @@ namespace Task_Testing
 			Assert::AreEqual(expected, actual);
 
 		}
-		
+
 		TEST_METHOD(changeTaskPriority_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
@@ -269,4 +269,3 @@ namespace Task_Testing
 		}
 	};
 }
-
