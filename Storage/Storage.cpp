@@ -8,7 +8,10 @@ string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as comple
 string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
 string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
 string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_ONLY_ONE_TASK = "There is no need to sort a single task!";
 string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
+string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
+string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
 
 bool Storage::isEmptyTextFile(){
 	if (textFileCopy.empty()){
@@ -45,11 +48,26 @@ void Storage::performSearchForViewingTasks(string keyword, int& count){
 	return;
 }
 
+bool Storage::isOnlyOneTask(){
+
+	return (textFileCopy.size() == 1);
+}
+
 bool Storage::isSortedByName(vector<string> textFileDuplicate){
 	for (auto &words : textFileDuplicate)
 		transform(words.begin(), words.end(), words.begin(), toupper);
 
 	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+}
+
+bool Storage::isSortedByStatus(){
+
+	return (textFileCopy == sortByStatusAfterStack.top());
+}
+
+bool Storage::isSortedByPriority(){
+
+	return (textFileCopy == sortByPriorityAfterStack.top());
 }
 
 void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
@@ -106,8 +124,7 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 		return;
 	}
 
-	deleteTaskDetailsStack.push(textFileCopy[taskIndex - 1]);
-	deleteTaskIndexStack.push(taskIndex);
+	deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
 
 	textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
@@ -157,20 +174,19 @@ void Storage::viewIncompleteTasks(){
 	return;
 }
 
-//For future versions, to update multiple variables in one line, maybe can try vector<string> keyword and vector<string> newInput
 void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, string keyword, string newInput){
-	//textFileCopy.clear();
-	//initialiseTextFile(fileName);
+	textFileCopy.clear();
+	initialiseTextFile(fileName);
 
 	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
 		return;
 	}
 
-	cout << task->getTaskDetails();
+	updateTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex);
+	commandStack.push("update");
 
 	if (keyword == "name"){
 		task->changeTaskName(newInput);
-		cout << task->getTaskName();
 	} else if (keyword == "start-date"){
 		task->changeTaskStartDate(newInput);
 	} else if (keyword == "start-time"){
@@ -188,7 +204,7 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, Task* task, st
 	} else {
 		cout << "Invalid keyword" << endl;
 	}
-	cout << task->getTaskDetails();
+
 	textFileCopy.insert(textFileCopy.begin() + taskIndex - 1, task->getTaskDetails());
 	textFileCopy.erase(textFileCopy.begin() + taskIndex);
 	
@@ -241,7 +257,6 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
-//Add support for keywords "update", "sort"
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -260,14 +275,23 @@ void Storage::undoAction(){
 	}
 
 	if (previousCommand == "delete"){
-		string newTask = deleteTaskDetailsStack.top();
-		deleteTaskDetailsStack.pop();
+		string deletedTask = get<0>(deleteTaskStack.top());
+		unsigned int formerIndex = get<1>(deleteTaskStack.top());
+		deleteTaskStack.pop();
 
-		unsigned int formerIndex = deleteTaskIndexStack.top();
-		deleteTaskIndexStack.pop();
-
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), newTask);
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), deletedTask);
 	
+		return;
+	}
+
+	if (previousCommand == "update"){
+		string originalTask = get<0>(updateTaskStack.top());
+		unsigned int formerIndex = get<1>(updateTaskStack.top());
+		updateTaskStack.pop();
+
+		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), originalTask);
+		textFileCopy.erase(textFileCopy.begin() + formerIndex);
+
 		return;
 	}
 	
@@ -311,10 +335,25 @@ void Storage::undoAction(){
 	}
 
 	if (previousCommand == "sort by name"){
-		vector<string> formerTextFileCopy = sortByNameStack.top();
+
+		textFileCopy = sortByNameStack.top();
 		sortByNameStack.pop();
 
-		textFileCopy = formerTextFileCopy;
+		return;
+	}
+
+	if (previousCommand == "sort by status"){
+
+		textFileCopy = sortByStatusBeforeStack.top();
+		sortByStatusBeforeStack.pop();
+
+		return;
+	}
+
+	if (previousCommand == "sort by priority"){
+
+		textFileCopy = sortByPriorityBeforeStack.top();
+		sortByPriorityBeforeStack.pop();
 
 		return;
 	}
@@ -387,6 +426,11 @@ void Storage::sortTaskByName(string fileName){
 		return;
 	}
 
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
 	if (isSortedByName(textFileCopy)){
 		cout << ERROR_INVALID_NAME_SORT << endl;
 		return;
@@ -407,6 +451,20 @@ void Storage::sortTaskByStatus(string fileName){
 		return;
 	}
 
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
+	if (sortByStatusAfterStack.size() > 0 && isSortedByStatus()){
+		cout << ERROR_INVALID_STATUS_SORT << endl;
+		sortByStatusAfterStack.pop();
+		return;
+	}
+
+	commandStack.push("sort by status");
+	sortByStatusBeforeStack.push(textFileCopy);
+
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 	queue<string> sortedTextFileCopy;
 	string keyword1 = "Completed";
@@ -420,6 +478,7 @@ void Storage::sortTaskByStatus(string fileName){
 		textFileCopy.push_back(sortedTextFileCopy.front());
 		sortedTextFileCopy.pop();
 	}
+	sortByStatusAfterStack.push(textFileCopy);
 
 	return;
 }
@@ -431,6 +490,20 @@ void Storage::sortTaskByPriority(string fileName){
 	if (isEmptyTextFile()){
 		return;
 	}
+
+	if (isOnlyOneTask()){
+		cout << ERROR_ONLY_ONE_TASK << endl;
+		return;
+	}
+
+	if (sortByPriorityAfterStack.size() > 0 && isSortedByPriority()){
+		cout << ERROR_INVALID_PRIORITY_SORT << endl;
+		sortByPriorityAfterStack.pop();
+		return;
+	}
+
+	commandStack.push("sort by priority");
+	sortByPriorityBeforeStack.push(textFileCopy);
 
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 	queue<string> sortedTextFileCopy;
@@ -447,6 +520,7 @@ void Storage::sortTaskByPriority(string fileName){
 		textFileCopy.push_back(sortedTextFileCopy.front());
 		sortedTextFileCopy.pop();
 	}
+	sortByPriorityAfterStack.push(textFileCopy);
 
 	return;
 }

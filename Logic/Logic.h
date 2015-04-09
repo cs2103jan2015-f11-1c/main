@@ -21,36 +21,53 @@ class Logic{
 
 private:
 
-	UI UserInterface;
+	UI _UserInterface;
+	Parser _ParserComponent;
+	Storage _DataBase;
 
-	Parser ParserComponent;
+	vector<string> _storageTextFileCopy;
+	vector<string> _fileLocation;
 
-	Storage DataBase;
 
-	vector<string> textFileCopy_fromStorage;
-
-	string userInput;
+	string _userInput;
 	string _filename;
-	string feedbackMessage;
+	string _feedbackMessage;
 
-	static string Error_invalidUserInput;
-	static string FeedBack_taskAdded;
-	static string FeedBack_existingTask;
-	static string FeedBack_displayAllTasks;
-	static string FeedBack_updateTaskSuccessfully;
-	static string FeedBack_updateTaskUnsuccessfully;
-	static string FeedBack_deleteTaskSuccessfully;
-	static string FeedBack_deleteTaskUnsuccessfully;
-	static string FeedBack_changeFileDirectory;
-	static string FeedBack_MarkTaskSuccessfully;
-	static string FeedBack_UnmarkTask;
-	static string FeedBack_ClearTask;
-	static string FeedBack_UndoTask;
-	static string FeedBack_SearchTask;
-	static string FeedBack_SortTasks;
+	static string SAVING_LOCATON_HISTORY;
+
+	static string ERROR_INVALID_USERINPUT;
+	static string ERROR_EXISTING_TASK;
+	static string ERROR_TASK_UPDATED_UNSUCCESSFULLY;
+	static string ERROR_TASK_DELETED_UNSUCCESSFULLY;
+	static string ERROR_TASK_MARKED_UNSUCCESSFULLY;
+	static string ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
+
+	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+	static string FEEDBACK_DISPLAY_ALL_TASKS;
+	static string FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+	static string FEEDBACK_TASK_DELETED_SUCCESSFULLY;
+	static string FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
+	static string FEEDBACK_TASK_MARKED_SUCCESSFULLY;
+	static string FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
+	static string FEEDBACK_CLEAR_ALL_TASKS;
+	static string FEEDBACK_UNDO_PREVIOUS_TASK;
+	static string FEEDBACK_SEARCH_TASK_BY_KEYWORD;
+	static string FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 
 public:
+
+	void initialiseSetUp();
+
+	void initialiseFileLocationFile();
+
+	void writeFileLocation(vector<string>);
+
+	bool checkIfFileIsAtExeLocation();
+
+	string getLastFileLocation();
+
+	void updatefileLocation(string);
 
 	void Welcome();
 
