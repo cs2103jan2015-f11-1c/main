@@ -19,6 +19,7 @@ int main(){
 
 		TSlogic.executeCommand(*storageInput);
 
+
 		cout << endl;
 		TSlogic.CommandPrompt();
 
