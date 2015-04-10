@@ -49,14 +49,14 @@ public:
 		string status = _taskStatus;
 //to be updated 
 		ostringstream oss;
-		oss <<setw(15)<<left<< taskName 
-			<<setw(7)<< date1
-			<<setw(5)<< time1
-			<<setw(7)<< date2
-			<<setw(5)<< time2
-			<<setw(7)<< date3
-			<<setw(5)<< time3
-			<<setw(4)<< priority
+		oss << setw(15) << right << taskName
+			<<setw(7)<< right << date1
+			<< setw(5)<< right << time1
+			<< setw(7)<< right << date2
+			<< setw(5)<< right << time2
+			<< setw(7)<< right << date3
+			<< setw(5)<< right << time3
+			<< setw(4)<< right << priority
 			<< status;
 
 		return oss.str();		
