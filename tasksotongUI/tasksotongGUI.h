@@ -22,6 +22,192 @@ namespace tasksotongUI {
 	/// <summary>
 	/// Summary for tasksotongGUI
 	/// </summary>
+
+
+
+//hashtable added
+	// Hash map class template
+	/*template <typename K, typename V, typename F = KeyHash<K>>
+	class HashMap {
+	public:
+		HashMap() {
+			// construct zero initialized hash table of size
+			table = new HashNode<K, V> *[TABLE_SIZE]();
+		}
+
+		~HashMap() {
+			// destroy all buckets one by one
+			for (int i = 0; i < TABLE_SIZE; ++i) {
+				HashNode<K, V> *entry = table[i];
+				while (entry != NULL) {
+					HashNode<K, V> *prev = entry;
+					entry = entry->getNext();
+					delete prev;
+				}
+				table[i] = NULL;
+			}
+			// destroy the hash table
+			delete[] table;
+		}
+
+		bool get(const K &key, V &value) {
+			unsigned long hashValue = hashFunc(key);
+			HashNode<K, V> *entry = table[hashValue];
+
+			while (entry != NULL) {
+				if (entry->getKey() == key) {
+					value = entry->getValue();
+					return true;
+				}
+				entry = entry->getNext();
+			}
+			return false;
+		}
+
+		void put(const K &key, const V &value) {
+			unsigned long hashValue = hashFunc(key);
+			HashNode<K, V> *prev = NULL;
+			HashNode<K, V> *entry = table[hashValue];
+
+			while (entry != NULL && entry->getKey() != key) {
+				prev = entry;
+				entry = entry->getNext();
+			}
+
+			if (entry == NULL) {
+				entry = new HashNode<K, V>(key, value);
+				if (prev == NULL) {
+					// insert as first bucket
+					table[hashValue] = entry;
+				} else {
+					prev->setNext(entry);
+				}
+			} else {
+				// just update the value
+				entry->setValue(value);
+			}
+		}
+
+		void remove(const K &key) {
+			unsigned long hashValue = hashFunc(key);
+			HashNode<K, V> *prev = NULL;
+			HashNode<K, V> *entry = table[hashValue];
+
+			while (entry != NULL && entry->getKey() != key) {
+				prev = entry;
+				entry = entry->getNext();
+			}
+
+			if (entry == NULL) {
+				// key not found
+				return;
+			} else {
+				if (prev == NULL) {
+					// remove first bucket of the list
+					table[hashValue] = entry->getNext();
+				} else {
+					prev->setNext(entry->getNext());
+				}
+				delete entry;
+			}
+		}
+
+	private:
+		// hash table
+		HashNode<K, V> **table;
+		F hashFunc;
+	};
+
+
+	
+
+
+	private enum Accelerators {
+		Unspecified = 0, Home, Save, Print, Logout
+	};
+
+	HashMap _accelHash() = new HashMap();
+	public class AcceleratorKey {
+		private Keys key_ = Keys.None;
+		public AcceleratorKey() {
+		}
+
+		public AcceleratorKey(Keys key) {
+			key_ = key;
+		}
+
+		public Keys Key
+		{
+			get{ return key_; }
+			set{ key_ = value; }
+		}
+
+		public override Int32 GetHashCode() {
+				return (Int32)key_;
+			}
+
+			public override bool Equals(Object obj) {
+				// It is unlikely that two hashcodes would
+				// be equal... :)
+				if (obj.GetHashCode() == (Int32)key_) return true;
+
+				return false;
+			}
+	}
+
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.H),
+		Accelerators.Home);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.S),
+		Accelerators.Save);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.P),
+		Accelerators.Print);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.X),
+		Accelerators.Logout);
+
+	protected override bool ProcessCmdKey(ref Message msg,
+		Keys keyData) {
+		// Check this key...
+		bool bHandled = false;
+
+		// Look up value
+		Accelerators accel = Accelerators.Unspecified;
+		if (_accelHash.ContainsKey(AcceleratorKey(keyData))) {
+			accel = (Accelerators)_accelHash[key];
+
+			switch (accel) {
+			case Accelerators.Home:
+				DisplayHome();
+				bHandled = true;
+				break;
+
+			case Accelerators.Save:
+				Save();
+				bHandled = true;
+				break;
+
+			case Accelerators.Print:
+				Print();
+				bHandled = true;
+				break;
+
+			case Accelerators.Logout:
+				LogOut();
+				bHandled = true;
+				break;
+
+			case Accelerators.Unspecified:
+			default:
+				break;
+
+			} // switch
+		} // if
+
+		return bHandled;
+	}
+	*/
+
+//HashTable ended
+
 	public ref class tasksotongGUI : public System::Windows::Forms::Form {
 	public:
 		tasksotongGUI(void) {
@@ -46,7 +232,7 @@ namespace tasksotongUI {
 	private: System::Windows::Forms::Button^  Enter;
 	protected:
 
-	private: System::Windows::Forms::TextBox^  DisplayTaskBox;
+
 
 	private: System::Windows::Forms::TextBox^  WelcomeBox;
 
@@ -76,6 +262,7 @@ namespace tasksotongUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  sortByDeadlineToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  sortByPriorityToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  tOBEENTEREDBYANDYToolStripMenuItem;
+	private: System::Windows::Forms::RichTextBox^  Display_richTextBox;
 
 			 /// </summary>
 			 System::ComponentModel::Container ^components;
@@ -88,7 +275,6 @@ namespace tasksotongUI {
 			 void InitializeComponent(void) {
 				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(tasksotongGUI::typeid));
 				 this->UserInputBox = (gcnew System::Windows::Forms::TextBox());
-				 this->DisplayTaskBox = (gcnew System::Windows::Forms::TextBox());
 				 this->WelcomeBox = (gcnew System::Windows::Forms::TextBox());
 				 this->IncompleteButton = (gcnew System::Windows::Forms::Button());
 				 this->PriorityButton = (gcnew System::Windows::Forms::Button());
@@ -100,14 +286,15 @@ namespace tasksotongUI {
 				 this->toolStripDropDownButton1 = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 				 this->featuresToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->flexibleCommandToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->tOBEENTEREDBYJIEYANGToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->updateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->sortToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->sortByNameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->sortByDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->sortByDeadlineToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->sortByPriorityToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->updateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->tOBEENTEREDBYANDYToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->Display_richTextBox = (gcnew System::Windows::Forms::RichTextBox());
 				 this->Help->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
@@ -118,16 +305,6 @@ namespace tasksotongUI {
 				 this->UserInputBox->ForeColor = System::Drawing::Color::MintCream;
 				 this->UserInputBox->Name = L"UserInputBox";
 				 this->UserInputBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &tasksotongGUI::UserInputBox_KeyPress);
-				 // 
-				 // DisplayTaskBox
-				 // 
-				 this->DisplayTaskBox->BackColor = System::Drawing::Color::RosyBrown;
-				 resources->ApplyResources(this->DisplayTaskBox, L"DisplayTaskBox");
-				 this->DisplayTaskBox->ForeColor = System::Drawing::Color::WhiteSmoke;
-				 this->DisplayTaskBox->Name = L"DisplayTaskBox";
-				 this->DisplayTaskBox->ReadOnly = true;
-				 this->DisplayTaskBox->Click += gcnew System::EventHandler(this, &tasksotongGUI::DisplayTaskBox_TextChanged);
-				 this->DisplayTaskBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::DisplayTaskBox_TextChanged);
 				 // 
 				 // WelcomeBox
 				 // 
@@ -218,6 +395,11 @@ namespace tasksotongUI {
 				 this->flexibleCommandToolStripMenuItem->Name = L"flexibleCommandToolStripMenuItem";
 				 resources->ApplyResources(this->flexibleCommandToolStripMenuItem, L"flexibleCommandToolStripMenuItem");
 				 // 
+				 // tOBEENTEREDBYJIEYANGToolStripMenuItem
+				 // 
+				 this->tOBEENTEREDBYJIEYANGToolStripMenuItem->Name = L"tOBEENTEREDBYJIEYANGToolStripMenuItem";
+				 resources->ApplyResources(this->tOBEENTEREDBYJIEYANGToolStripMenuItem, L"tOBEENTEREDBYJIEYANGToolStripMenuItem");
+				 // 
 				 // sortToolStripMenuItem
 				 // 
 				 this->sortToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
@@ -226,17 +408,6 @@ namespace tasksotongUI {
 				 });
 				 this->sortToolStripMenuItem->Name = L"sortToolStripMenuItem";
 				 resources->ApplyResources(this->sortToolStripMenuItem, L"sortToolStripMenuItem");
-				 // 
-				 // tOBEENTEREDBYJIEYANGToolStripMenuItem
-				 // 
-				 this->tOBEENTEREDBYJIEYANGToolStripMenuItem->Name = L"tOBEENTEREDBYJIEYANGToolStripMenuItem";
-				 resources->ApplyResources(this->tOBEENTEREDBYJIEYANGToolStripMenuItem, L"tOBEENTEREDBYJIEYANGToolStripMenuItem");
-				 // 
-				 // updateToolStripMenuItem
-				 // 
-				 this->updateToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tOBEENTEREDBYANDYToolStripMenuItem });
-				 this->updateToolStripMenuItem->Name = L"updateToolStripMenuItem";
-				 resources->ApplyResources(this->updateToolStripMenuItem, L"updateToolStripMenuItem");
 				 // 
 				 // sortByNameToolStripMenuItem
 				 // 
@@ -258,10 +429,25 @@ namespace tasksotongUI {
 				 this->sortByPriorityToolStripMenuItem->Name = L"sortByPriorityToolStripMenuItem";
 				 resources->ApplyResources(this->sortByPriorityToolStripMenuItem, L"sortByPriorityToolStripMenuItem");
 				 // 
+				 // updateToolStripMenuItem
+				 // 
+				 this->updateToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tOBEENTEREDBYANDYToolStripMenuItem });
+				 this->updateToolStripMenuItem->Name = L"updateToolStripMenuItem";
+				 resources->ApplyResources(this->updateToolStripMenuItem, L"updateToolStripMenuItem");
+				 // 
 				 // tOBEENTEREDBYANDYToolStripMenuItem
 				 // 
 				 this->tOBEENTEREDBYANDYToolStripMenuItem->Name = L"tOBEENTEREDBYANDYToolStripMenuItem";
 				 resources->ApplyResources(this->tOBEENTEREDBYANDYToolStripMenuItem, L"tOBEENTEREDBYANDYToolStripMenuItem");
+				 // 
+				 // Display_richTextBox
+				 // 
+				 this->Display_richTextBox->BackColor = System::Drawing::Color::RosyBrown;
+				 resources->ApplyResources(this->Display_richTextBox, L"Display_richTextBox");
+				 this->Display_richTextBox->ForeColor = System::Drawing::Color::WhiteSmoke;
+				 this->Display_richTextBox->Name = L"Display_richTextBox";
+				 this->Display_richTextBox->ReadOnly = true;
+				 this->Display_richTextBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::Display_richTextBox_TextChanged);
 				 // 
 				 // tasksotongGUI
 				 // 
@@ -276,8 +462,8 @@ namespace tasksotongUI {
 				 this->Controls->Add(this->IncompleteButton);
 				 this->Controls->Add(this->CompleteButton);
 				 this->Controls->Add(this->WelcomeBox);
-				 this->Controls->Add(this->DisplayTaskBox);
 				 this->Controls->Add(this->UserInputBox);
+				 this->Controls->Add(this->Display_richTextBox);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->MaximizeBox = false;
 				 this->Name = L"tasksotongGUI";
@@ -319,7 +505,7 @@ namespace tasksotongUI {
 				itemString = itemString + to_string(i+1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
 			}
 			String^ displayList = gcnew String(itemString.c_str());
-			DisplayTaskBox->Text = displayList;
+			Display_richTextBox->Text = displayList;
 			
 			
 
@@ -332,8 +518,6 @@ namespace tasksotongUI {
 		}
 
 	}
-
-
 
 	private: System::Void Enter_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -359,11 +543,14 @@ namespace tasksotongUI {
 	private: System::Void tasksotongGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 
 		TSLogic->initialiseSetUp();
+
 	}
 
 
 	private: System::Void featuresToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
+private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
 

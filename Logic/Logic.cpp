@@ -52,9 +52,6 @@ void Logic::initialiseSetUp() {
 
 }
 
-
-
-
 void Logic::initialiseFileLocationFile() {
 
 
@@ -232,7 +229,6 @@ void Logic::setReturnGUI(vector<string> resultVector) {
 
 	_resultVector = resultVector;
 
-
 }
 
 vector<string> Logic::getReturnGUI() {
@@ -369,16 +365,16 @@ string Logic::executeCommand(paraList Input) {
 		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {
-		string searchKeyWord = Input.getSearchKey();
+		//string searchKeyWord = Input.getSearchKey();
 		//_DataBase.searchTask(searchKeyWord);
-		_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
+		//_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 
 	} else if (command == "sort") {
-		_DataBase.sortTaskByName(_filename);
-		_DataBase.updateTextFile(_filename);
-		copyTestFilefromStorage();
-		setReturnGUI(_storageTextFileCopy);
-		_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
+		//_DataBase.sortTaskByName(_filename);
+		//_DataBase.updateTextFile(_filename);
+		//copyTestFilefromStorage();
+		//setReturnGUI(_storageTextFileCopy);
+		//_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 	} else {
 		if (command[0] == '\n') {

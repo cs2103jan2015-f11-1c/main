@@ -11,24 +11,24 @@ using namespace std;
 class paraList{
 
 private:
-   string _command; 
-   int deleteNumber;
-   int displayNumber;
-   int updateNumber;
-   int markIndex;
-   string keyword;
-   string input;
-   string markStatus;
-   string userDir;
-   string searchKeyword;
-  
+	string _command;
+	int deleteNumber;
+	int displayNumber;
+	int updateNumber;
+	int markIndex;
+	string keyword;
+	string input;
+	string markStatus;
+	string userDir;
+	string searchKeyword;
 
 
-public: 
-    paraList();
+
+public:
+	paraList();
 	//for unit testing purpose.
 	void setparaList(string, int, int, int, string, string, Task);
-    Task _task;  
+	Task _task;
 	Task getTask();
 	string getCommand();
 	int getDeleteInteger();
@@ -49,7 +49,7 @@ public:
 	void processTask(string inputTask);
 	void processDeleteNumber(int index);
 	void processDisplayNumber(int index);
-    void processUpdateNumber(int index);
+	void processUpdateNumber(int index);
 	void clearAllNumber();
 	void processKeyWord(string a);
 	void processInput(string b);
@@ -61,7 +61,7 @@ public:
 	void processUserDir(string);
 	void processSearchWord(string);
 
-	
+
 };
 
 #endif

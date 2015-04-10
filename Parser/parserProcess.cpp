@@ -522,35 +522,35 @@ string parserProcess::parserReturnDate()
 void parserProcess::processTime(string timeInput)
 {
 
-    timeKeyWord time;
+	timeKeyWord time;
 	time = sortTimeKeyWord(timeInput);
 	cout << "m" << endl;
 	switch (time)
 	{
-	case(AM_PM):
-		{
+	case(AM_PM) :
+	{
 		cout << "ampm" << endl;
 		processTimeAmPm(timeInput);
-		    
-			return;
-			
-		}
-	case(OCLOCK):
-		{
+
+		return;
+
+	}
+	case(OCLOCK) :
+	{
 
 		processTimeNatExp(timeInput);
 
-			return;
-		}
-	case(SHORT_AM_PM):
-		{
-	
-	
+		return;
+	}
+	case(SHORT_AM_PM) :
+	{
+
+
 		processTimeShortAmPm(timeInput);
-		    return;
-	
-		}
-	case(NIL):
+		return;
+
+	}
+	case(NIL) :
 	{
 
 		return;
@@ -568,10 +568,10 @@ void parserProcess::processTime(string timeInput)
 parserProcess::timeKeyWord  parserProcess::sortTimeKeyWord(string& timeInput)
 {
 
-	
-	
-	
-	
+
+
+
+
 	if (regex_search(timeInput, AMPM_INPUT))
 	{
 		return AM_PM;
@@ -596,12 +596,12 @@ void parserProcess::processTimeAmPm(string& timeInput)
 {
 	istringstream iss(timeInput);
 	int hours, mins;
-	char sym,status;
+	char sym, status;
 	iss >> hours;
 	iss >> sym;
 	iss >> mins;
 	iss >> status;
-	covertTime(status,hours);
+	covertTime(status, hours);
 
 	processedtimeStore.min = mins;
 	processedtimeStore.hours = hours;
@@ -635,7 +635,7 @@ void parserProcess::processTimeNatExp(string& timeInput)
 	int hours;
 	char c;
 	iss >> hours;
-	
+
 	processedtimeStore.hours = hours;
 	processedtimeStore.min = 0;
 }
@@ -661,7 +661,7 @@ void parserProcess::processTimeShortAmPm(string& timeInput)
 }
 
 
-void parserProcess::covertTime(char& status,int& hour)
+void parserProcess::covertTime(char& status, int& hour)
 {
 	if (status == 'p' | status == 'P')
 	{
@@ -691,7 +691,7 @@ string parserProcess::parserReturnTime()
 
 	return oss.str();
 
-	
+
 
 
 

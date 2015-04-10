@@ -382,7 +382,7 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
 }
 
-void Storage::searchTask(string fileName, const string& searchEntry){
+/*vector<string> Storage::searchTask(string fileName, const string& searchEntry){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
@@ -391,12 +391,13 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 	}
 
 	vector<string>::iterator iter = textFileCopy.begin();
+	vector<string> returnTextFileCopy;
 	int count = 0;
 
 	while (iter != textFileCopy.end()){
 		string::const_iterator pos = search(iter->begin(), iter->end(), searchEntry.begin(), searchEntry.end(), caseInsensitiveEqual);
 		if (pos != iter->end()){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
+			returnTextFileCopy.push_back(*iter);
 			count++;
 		}
 		iter++;
@@ -405,8 +406,9 @@ void Storage::searchTask(string fileName, const string& searchEntry){
 		cout << ERROR_INVALID_SEARCH_TERM << endl;
 	}
 
-	return;
+	return returnTextFileCopy;
 }
+
 
 struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	bool operator () (char x, char y) const {
@@ -418,7 +420,7 @@ bool noCaseLess(const string &a, const string &b){
 	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
 }
 
-void Storage::sortTaskByName(string fileName){
+vector<string> Storage::sortTaskByName(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
@@ -440,10 +442,10 @@ void Storage::sortTaskByName(string fileName){
 	sortByNameStack.push(textFileCopy);
 	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
 
-	return;
+	return textFileCopy;
 }
 
-void Storage::sortTaskByStatus(string fileName){
+vector<string> Storage::sortTaskByStatus(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
@@ -480,10 +482,10 @@ void Storage::sortTaskByStatus(string fileName){
 	}
 	sortByStatusAfterStack.push(textFileCopy);
 
-	return;
+	return sortByStatusAfterStack.top();
 }
 
-void Storage::sortTaskByPriority(string fileName){
+vector<string> Storage::sortTaskByPriority(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
@@ -522,5 +524,6 @@ void Storage::sortTaskByPriority(string fileName){
 	}
 	sortByPriorityAfterStack.push(textFileCopy);
 
-	return;
+	return sortByPriorityAfterStack.top();
 }
+*/

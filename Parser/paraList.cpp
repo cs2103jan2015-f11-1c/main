@@ -6,20 +6,20 @@ paraList::paraList()
 {}
 
 void paraList::setparaList(string command1, int deleteNumber1, int displayNumber1, int updateNumber1, string keyword1, string input1, Task task1){
-	_command=command1;
-	deleteNumber=deleteNumber1;
-	displayNumber=displayNumber1;
-	updateNumber=updateNumber1;
-	keyword=keyword1;
-	input=input1;
+	_command = command1;
+	deleteNumber = deleteNumber1;
+	displayNumber = displayNumber1;
+	updateNumber = updateNumber1;
+	keyword = keyword1;
+	input = input1;
 	_task = task1;
 
-	
+
 	return;
 }
 
 Task paraList::getTask()
-{ 
+{
 	return _task;
 }
 
@@ -31,7 +31,7 @@ int paraList::getDeleteInteger()
 	}
 	else{
 		return deleteNumber;
-}
+	}
 }
 int paraList::getDisplayInteger()
 {
@@ -44,13 +44,14 @@ int paraList::getUpdateInteger()
 
 
 string paraList::getCommand()
-{ return _command;
+{
+	return _command;
 }
 
 
 void paraList::processCommand(string inputCommand)
 {
-	_command=inputCommand;
+	_command = inputCommand;
 	return;
 }
 
@@ -60,35 +61,35 @@ void paraList::processTask(string inputTask)
 }
 void paraList::processDeleteNumber(int index)
 {
-	deleteNumber=index;
+	deleteNumber = index;
 }
 
 void paraList::processDisplayNumber(int index)
 {
-	displayNumber=index;
+	displayNumber = index;
 }
 
 void paraList::processUpdateNumber(int index)
 {
-	updateNumber=index;
+	updateNumber = index;
 }
 
 void paraList::clearAllNumber()
 {
-	deleteNumber=NULL;
-    displayNumber=NULL;
-	updateNumber=NULL;
+	deleteNumber = NULL;
+	displayNumber = NULL;
+	updateNumber = NULL;
 }
 
 void paraList::processKeyWord(string a)
 {
-	keyword=a;
+	keyword = a;
 	return;
 }
 
 void paraList::processInput(string b)
 {
-	input=b;
+	input = b;
 	return;
 }
 
@@ -132,7 +133,7 @@ void paraList::processMarkIndex(int index)
 void paraList::processMarkStatus(string keyword)
 {
 
-	markStatus=keyword;
+	markStatus = keyword;
 
 
 	return;
@@ -141,7 +142,7 @@ void paraList::processMarkStatus(string keyword)
 void paraList::processUserDir(string directory)
 {
 
-	userDir=directory;
+	userDir = directory;
 
 	return;
 }
