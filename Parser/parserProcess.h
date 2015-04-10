@@ -67,7 +67,7 @@ public:
 	enum dayName { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY };
 	enum Time { JAN, FEB, MAR, APR, JUN, JUL, AUG, SEPT, OCT, NOV, DEC };
 	enum datekeyWord { DAY_NAME, DAY_NUM, DAY_NATURALISED };
-	enum timeKeyWord {  SHORT_AM_PM ,AM_PM, NIL, OCLOCK};
+	enum timeKeyWord { SHORT_AM_PM, AM_PM, NIL, OCLOCK };
 	enum natExp{ TODAY, YEST, TMR };
 	void processDate(string);
 	void processTime(string);
@@ -97,8 +97,8 @@ public:
 	void processTimeNil(string&);
 	void processTimeNatExp(string&);
 	void processTimeShortAmPm(string&);
-	void covertTime(char& ,int&);
-	
+	void covertTime(char&, int&);
+
 };
 
 #endif
