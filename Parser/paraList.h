@@ -37,6 +37,7 @@ public:
 	string getuserdir();
 	string getmarkstatus();
 	int getmarkindex();
+	string getSearchKey();
 
 
 

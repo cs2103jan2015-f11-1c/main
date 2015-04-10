@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iterator>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -46,16 +47,16 @@ public:
 		string time3 = checkNull(_taskDeadline.time);
 		string priority = checkNull(_taskPriority);
 		string status = _taskStatus;
-
+//to be updated 
 		ostringstream oss;
-		oss << taskName
-			<< date1
-			<< time1
-			<< date2
-			<< time2
-			<< date3
-			<< time3
-			<< priority
+		oss <<setw(15)<<left<< taskName 
+			<<setw(7)<< date1
+			<<setw(5)<< time1
+			<<setw(7)<< date2
+			<<setw(5)<< time2
+			<<setw(7)<< date3
+			<<setw(5)<< time3
+			<<setw(4)<< priority
 			<< status;
 
 		return oss.str();		

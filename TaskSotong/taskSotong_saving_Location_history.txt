@@ -1,2 +1,3 @@
 C:\\1\2\3\4.txt
-c:\\1\2\3\test2.txt
+C:1\2\3\fai.txt
+C:\\1\2\3\fai.txt

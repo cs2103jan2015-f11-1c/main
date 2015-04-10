@@ -67,6 +67,7 @@ public:
 	enum dayName { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY };
 	enum Time { JAN, FEB, MAR, APR, JUN, JUL, AUG, SEPT, OCT, NOV, DEC };
 	enum datekeyWord { DAY_NAME, DAY_NUM, DAY_NATURALISED };
+	enum timeKeyWord {  SHORT_AM_PM ,AM_PM, NIL, OCLOCK};
 	enum natExp{ TODAY, YEST, TMR };
 	void processDate(string);
 	void processTime(string);
@@ -76,7 +77,6 @@ public:
 	void processDateNatExp(string&);
 	void processDateName(string&);
 	void processDateNum(string&);
-	void processTime();
 	void setNowDT();
 	void setRawDT(string&, string&);
 	bool monthDayIndicator(int&); //true for 31 days, false for 30 days 
@@ -87,11 +87,18 @@ public:
 	datekeyWord sortDateType(string&);
 	dayName sortDayName(string&);
 	dateStore dateNumCalculator(int&, int&);
+	timeKeyWord sortTimeKeyWord(string&);
 	natExp sortNatExp(string&);
 	void printProcessed();
 	void printNow();
 	string parserReturnDate();
-
+	string parserReturnTime();
+	void processTimeAmPm(string&);
+	void processTimeNil(string&);
+	void processTimeNatExp(string&);
+	void processTimeShortAmPm(string&);
+	void covertTime(char& ,int&);
+	
 };
 
 #endif

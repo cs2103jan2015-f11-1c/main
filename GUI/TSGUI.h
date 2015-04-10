@@ -224,12 +224,11 @@ namespace GUI {
 			commandline->Text = restoreCmdLine;
 			
 		}
-	}  
-	private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 
 
-
+private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+}
 private: System::Void tasksotonglabel_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
