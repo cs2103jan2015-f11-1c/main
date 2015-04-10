@@ -88,13 +88,13 @@ public:
 
 	void clearAllTasks();
 
-	void searchTask(string, const string&);
+	vector<string> searchTask(string, const string&);
 
-	void sortTaskByName(string);
+	vector<string> sortTaskByName(string);
 
-	void sortTaskByStatus(string);
+	vector<string> sortTaskByStatus(string);
 
-	void sortTaskByPriority(string);
+	vector<string> sortTaskByPriority(string);
 
 };
 
