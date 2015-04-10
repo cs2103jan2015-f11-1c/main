@@ -27,6 +27,7 @@ private:
 
 	vector<string> _storageTextFileCopy;
 	vector<string> _fileLocation;
+	vector<string> _resultVector;
 
 
 	string _userInput;
@@ -69,25 +70,17 @@ public:
 
 	void updatefileLocation(string);
 
-	void Welcome();
-
-	void CommandPrompt();
-
 	string getExePath();
 
 	void createNewDirectory(string);
 
 	void changeFileDirectory(string);
-
-	void processChangeDirectoryRequest(string);
 	
 	void setFileName(string);
 
 	string getFileName();
 
 	paraList* getParaList(string);
-
-	string getUserInput();
 
 	string getLowerCaseCommand(paraList);
 
@@ -102,10 +95,12 @@ public:
 	bool notExistingTask(Task*);
 
 	string getFeedbackMsg();
-
-	void executeCommand(paraList);
-
 	
+	void setReturnGUI(vector<string>);
+
+	vector<string> getReturnGUI();
+
+	string executeCommand(paraList);
 
 };
 #endif
