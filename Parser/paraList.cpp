@@ -13,6 +13,7 @@ void paraList::setparaList(string command1, int deleteNumber1, int displayNumber
 	keyword=keyword1;
 	input=input1;
 	_task = task1;
+
 	
 	return;
 }
