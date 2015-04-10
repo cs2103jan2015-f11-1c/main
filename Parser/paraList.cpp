@@ -15,6 +15,14 @@ void paraList::setparaList(string command1, int deleteNumber1, int displayNumber
 	_task = task1;
 
 	
+
+
+
+
+
+
+
+
 	return;
 }
 
