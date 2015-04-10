@@ -52,9 +52,6 @@ void Logic::initialiseSetUp() {
 
 }
 
-
-
-
 void Logic::initialiseFileLocationFile() {
 
 
@@ -231,7 +228,6 @@ string Logic::getFeedbackMsg() {
 void Logic::setReturnGUI(vector<string> resultVector) {
 
 	_resultVector = resultVector;
-
 
 }
 

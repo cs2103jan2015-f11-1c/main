@@ -9,22 +9,25 @@ namespace Logic_Test
 	{
 	public:
 
-		TEST_METHOD(addTask_Successful)
+		TEST_METHOD(executeCommand)
 		{
-			Logic addTaskObject;
+			Logic testLogic;
 
-			string userInput = "add Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority";
-			paraList* parameterList = addTaskObject.getParaList(userInput);
-			addTaskObject.executeCommand(*parameterList);
-			vector<string> actualOutputVector = addTaskObject.getTextFileCopy();
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
 
-			string expectedOutputString = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
-			string actualOutputString = actualOutputVector[0];
+			paraList testParaList;
+			testParaList.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test);
+		
+			string feedBack=testLogic.executeCommand(testParaList);
+			
+			string expectedOutputString = feedBack;
+			string actualOutputString = "Task Added Successfully! :>";
 
 			Assert::AreEqual(expectedOutputString, actualOutputString);
 
 
 		}
+
 
 		/*
 		TEST_METHOD(addTask_Successful)
