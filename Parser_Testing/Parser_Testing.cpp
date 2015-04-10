@@ -20,7 +20,7 @@ namespace Parser_Testing
 			a.parseCommand(userInput);
 
 			output = a.para._task.getTaskName();
-			Assert::AreEqual(output, expectedOutput);
+			Assert::AreEqual(output,expectedOutput);
 
 		}
 	

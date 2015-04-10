@@ -15,8 +15,10 @@ const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
 const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
 const regex TIME_PATTERN("((1[0-2]|[1-9])((:|\.)[0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 const regex EXP_PATTERN("(:)(f|F)\\b|(:)(t|T)\\b|(:)(b|B)\\b|\\b(from)\\b|\\b(to)\\b|\\b(by)\\b|\\b(on)\\b|\\b(at)\\b|\\b(before)\\b|\\b(after)\\b", std::tr1::regex_constants::icase);
-const regex FROM_PATTERN("(:)(f|F)\\b", std::tr1::regex_constants::icase);
-const regex TO_PATTERN("(:)(t|T)\\b", std::tr1::regex_constants::icase);
+const regex F_PATTERN("(:)(f|F)\\b", std::tr1::regex_constants::icase);
+const regex T_PATTERN("(:)(t|T)\\b", std::tr1::regex_constants::icase);
+const regex FROM_PATTERN("\\b(from)\\b", std::tr1::regex_constants::icase);
+const regex TO_PATTERN("\\b(to)\\b", std::tr1::regex_constants::icase);
 const regex BY_PATTERN("(:)(b|B)\\b", std::tr1::regex_constants::icase);
 const regex ADD_PATTERN("\\b(add)\\b", std::tr1::regex_constants::icase);
 const regex DELETE_PATTERN("\\b(delete)\\b", std::tr1::regex_constants::icase);
@@ -68,6 +70,16 @@ void Parser::sortDetails(string &userInput)
 
 	switch (Keyword)
 	{
+	case ABST_NIL:
+	{
+
+
+		para._task.changeTaskName(userInput);
+
+
+
+		return;
+	}
 	case NONE:
 	{	int a = 1000, b = 1000, c = 1000, process = 0;
 
@@ -262,37 +274,35 @@ void Parser::sortDetails(string &userInput)
 	}
 	case FROM_TO:
 	{
+		index = userInput.find("from") - 1;
+		string tempName = userInput.substr(0, index);
+
+		para._task.changeTaskName(userInput.substr(0, index));
+
 		processBeforeKeywordFrom(userInput);
 		index = userInput.find("to") - 1;
 		_eventstartdetails = userInput.substr(0, index);
 		userInput.erase(0, index + 4);
-		//getting the priorities
-		if (userInput.find("!") != string::npos){
-			index = userInput.find("!") - 1;
-			_eventenddetails = userInput.substr(0, index);
-			userInput.erase(0, index + 2);
-			para._task.changeTaskPriority(userInput);
-		}
-		else{
-			para._task.changeTaskPriority("No priority");
-			_eventenddetails = userInput.substr(0, index);
 
-		}
 
-		//Event Start details sort SLAP 
+
+		_eventenddetails = userInput;
+		cout << "eventstart" << _eventstartdetails << endl;
+		cout << "eventend" << _eventenddetails << endl;
+
+
 		string a, b;
-		splitstring(a, b, _eventstartdetails);
+		checkStart(a, b, _eventstartdetails);
 		para._task.changeTaskStartDate(a);
 		para._task.changeTaskStartTime(b);
+		processX(_eventstartdetails);
 
 
-
-		//Event End details sort SLAP 
 		string c, d;
-		splitstring(c, d, _eventenddetails);
+		checkEnd(c, d, _eventenddetails);
 		para._task.changeTaskEndDate(c);
 		para._task.changeTaskEndTime(d);
-
+		processX(_eventenddetails);
 		return;
 
 
@@ -385,9 +395,7 @@ void Parser::processCommand(string &userInput)
 		istringstream iss(userInput);
 		iss >> index;
 		para.processMarkIndex(index);
-
 		para.processMarkStatus("unmark");
-
 
 
 	}
@@ -477,18 +485,36 @@ string Parser::checkingKeywordX(string &userInput)
 
 Parser::keywordType Parser::determineKeywords(string userInput)
 {
-	if (!regex_search(userInput, EXP_PATTERN))
+
+	string command = para.getCommand();
+
+	cout << "command:" << command << endl;
+
+	if (command.find("#") != string::npos)
+	{
+
+		para.processCommand(command.substr(0, 3));
+		cout << "b" << endl;
+		return ABST_NIL;
+	}
+	else if (!regex_search(userInput, EXP_PATTERN))
 	{
 		cout << "a" << endl;
 		return NONE;
 	}
-	else if (regex_search(userInput, FROM_PATTERN) && !regex_search(userInput, TO_PATTERN))
+	else if (regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN))
+	{
+		cout << "from to";
+		return FROM_TO;
+
+	}
+	else if (regex_search(userInput, F_PATTERN) && !regex_search(userInput, T_PATTERN))
 	{
 
 		cout << "b";
 		return STARTONLY;
 	}
-	else if (!regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN))
+	else if (!regex_search(userInput, F_PATTERN) && regex_search(userInput, T_PATTERN))
 	{
 		cout << "c";
 		return ENDONLY;
@@ -498,12 +524,6 @@ Parser::keywordType Parser::determineKeywords(string userInput)
 
 		cout << "deadline";
 		return DEADLINE;
-	}
-	else if (userInput.find("from") != string::npos&&userInput.find("to") != string::npos)
-	{
-
-		return FROM_TO;
-
 	}
 	else if (regex_search(userInput, NTRL_FROM_PATTERN))
 	{
