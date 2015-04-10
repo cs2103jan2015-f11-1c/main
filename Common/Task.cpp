@@ -36,7 +36,11 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 
 	_taskPriority = taskPriority;
 
-	_taskStatus = MESSAGE_INCOMPLETE_TASK;
+	if (taskStatus.empty()){
+		_taskStatus = MESSAGE_INCOMPLETE_TASK;
+	} else {
+		_taskStatus = taskStatus;
+	}
 }
 
 string Task::checkNull(string input){
