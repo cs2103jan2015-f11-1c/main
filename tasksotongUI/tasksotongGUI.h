@@ -25,188 +25,188 @@ namespace tasksotongUI {
 
 
 
-//hashtable added
+	//hashtable added
 	// Hash map class template
 	/*template <typename K, typename V, typename F = KeyHash<K>>
 	class HashMap {
 	public:
-		HashMap() {
-			// construct zero initialized hash table of size
-			table = new HashNode<K, V> *[TABLE_SIZE]();
-		}
+	HashMap() {
+	// construct zero initialized hash table of size
+	table = new HashNode<K, V> *[TABLE_SIZE]();
+	}
 
-		~HashMap() {
-			// destroy all buckets one by one
-			for (int i = 0; i < TABLE_SIZE; ++i) {
-				HashNode<K, V> *entry = table[i];
-				while (entry != NULL) {
-					HashNode<K, V> *prev = entry;
-					entry = entry->getNext();
-					delete prev;
-				}
-				table[i] = NULL;
-			}
-			// destroy the hash table
-			delete[] table;
-		}
+	~HashMap() {
+	// destroy all buckets one by one
+	for (int i = 0; i < TABLE_SIZE; ++i) {
+	HashNode<K, V> *entry = table[i];
+	while (entry != NULL) {
+	HashNode<K, V> *prev = entry;
+	entry = entry->getNext();
+	delete prev;
+	}
+	table[i] = NULL;
+	}
+	// destroy the hash table
+	delete[] table;
+	}
 
-		bool get(const K &key, V &value) {
-			unsigned long hashValue = hashFunc(key);
-			HashNode<K, V> *entry = table[hashValue];
+	bool get(const K &key, V &value) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *entry = table[hashValue];
 
-			while (entry != NULL) {
-				if (entry->getKey() == key) {
-					value = entry->getValue();
-					return true;
-				}
-				entry = entry->getNext();
-			}
-			return false;
-		}
+	while (entry != NULL) {
+	if (entry->getKey() == key) {
+	value = entry->getValue();
+	return true;
+	}
+	entry = entry->getNext();
+	}
+	return false;
+	}
 
-		void put(const K &key, const V &value) {
-			unsigned long hashValue = hashFunc(key);
-			HashNode<K, V> *prev = NULL;
-			HashNode<K, V> *entry = table[hashValue];
+	void put(const K &key, const V &value) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *prev = NULL;
+	HashNode<K, V> *entry = table[hashValue];
 
-			while (entry != NULL && entry->getKey() != key) {
-				prev = entry;
-				entry = entry->getNext();
-			}
+	while (entry != NULL && entry->getKey() != key) {
+	prev = entry;
+	entry = entry->getNext();
+	}
 
-			if (entry == NULL) {
-				entry = new HashNode<K, V>(key, value);
-				if (prev == NULL) {
-					// insert as first bucket
-					table[hashValue] = entry;
-				} else {
-					prev->setNext(entry);
-				}
-			} else {
-				// just update the value
-				entry->setValue(value);
-			}
-		}
+	if (entry == NULL) {
+	entry = new HashNode<K, V>(key, value);
+	if (prev == NULL) {
+	// insert as first bucket
+	table[hashValue] = entry;
+	} else {
+	prev->setNext(entry);
+	}
+	} else {
+	// just update the value
+	entry->setValue(value);
+	}
+	}
 
-		void remove(const K &key) {
-			unsigned long hashValue = hashFunc(key);
-			HashNode<K, V> *prev = NULL;
-			HashNode<K, V> *entry = table[hashValue];
+	void remove(const K &key) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *prev = NULL;
+	HashNode<K, V> *entry = table[hashValue];
 
-			while (entry != NULL && entry->getKey() != key) {
-				prev = entry;
-				entry = entry->getNext();
-			}
+	while (entry != NULL && entry->getKey() != key) {
+	prev = entry;
+	entry = entry->getNext();
+	}
 
-			if (entry == NULL) {
-				// key not found
-				return;
-			} else {
-				if (prev == NULL) {
-					// remove first bucket of the list
-					table[hashValue] = entry->getNext();
-				} else {
-					prev->setNext(entry->getNext());
-				}
-				delete entry;
-			}
-		}
+	if (entry == NULL) {
+	// key not found
+	return;
+	} else {
+	if (prev == NULL) {
+	// remove first bucket of the list
+	table[hashValue] = entry->getNext();
+	} else {
+	prev->setNext(entry->getNext());
+	}
+	delete entry;
+	}
+	}
 
 	private:
-		// hash table
-		HashNode<K, V> **table;
-		F hashFunc;
+	// hash table
+	HashNode<K, V> **table;
+	F hashFunc;
 	};
 
 
-	
+
 
 
 	private enum Accelerators {
-		Unspecified = 0, Home, Save, Print, Logout
+	Unspecified = 0, Home, Save, Print, Logout
 	};
 
 	HashMap _accelHash() = new HashMap();
 	public class AcceleratorKey {
-		private Keys key_ = Keys.None;
-		public AcceleratorKey() {
-		}
+	private Keys key_ = Keys.None;
+	public AcceleratorKey() {
+	}
 
-		public AcceleratorKey(Keys key) {
-			key_ = key;
-		}
+	public AcceleratorKey(Keys key) {
+	key_ = key;
+	}
 
-		public Keys Key
-		{
-			get{ return key_; }
-			set{ key_ = value; }
-		}
+	public Keys Key
+	{
+	get{ return key_; }
+	set{ key_ = value; }
+	}
 
-		public override Int32 GetHashCode() {
-				return (Int32)key_;
-			}
+	public override Int32 GetHashCode() {
+	return (Int32)key_;
+	}
 
-			public override bool Equals(Object obj) {
-				// It is unlikely that two hashcodes would
-				// be equal... :)
-				if (obj.GetHashCode() == (Int32)key_) return true;
+	public override bool Equals(Object obj) {
+	// It is unlikely that two hashcodes would
+	// be equal... :)
+	if (obj.GetHashCode() == (Int32)key_) return true;
 
-				return false;
-			}
+	return false;
+	}
 	}
 
 	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.H),
-		Accelerators.Home);
+	Accelerators.Home);
 	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.S),
-		Accelerators.Save);
+	Accelerators.Save);
 	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.P),
-		Accelerators.Print);
+	Accelerators.Print);
 	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.X),
-		Accelerators.Logout);
+	Accelerators.Logout);
 
 	protected override bool ProcessCmdKey(ref Message msg,
-		Keys keyData) {
-		// Check this key...
-		bool bHandled = false;
+	Keys keyData) {
+	// Check this key...
+	bool bHandled = false;
 
-		// Look up value
-		Accelerators accel = Accelerators.Unspecified;
-		if (_accelHash.ContainsKey(AcceleratorKey(keyData))) {
-			accel = (Accelerators)_accelHash[key];
+	// Look up value
+	Accelerators accel = Accelerators.Unspecified;
+	if (_accelHash.ContainsKey(AcceleratorKey(keyData))) {
+	accel = (Accelerators)_accelHash[key];
 
-			switch (accel) {
-			case Accelerators.Home:
-				DisplayHome();
-				bHandled = true;
-				break;
+	switch (accel) {
+	case Accelerators.Home:
+	DisplayHome();
+	bHandled = true;
+	break;
 
-			case Accelerators.Save:
-				Save();
-				bHandled = true;
-				break;
+	case Accelerators.Save:
+	Save();
+	bHandled = true;
+	break;
 
-			case Accelerators.Print:
-				Print();
-				bHandled = true;
-				break;
+	case Accelerators.Print:
+	Print();
+	bHandled = true;
+	break;
 
-			case Accelerators.Logout:
-				LogOut();
-				bHandled = true;
-				break;
+	case Accelerators.Logout:
+	LogOut();
+	bHandled = true;
+	break;
 
-			case Accelerators.Unspecified:
-			default:
-				break;
+	case Accelerators.Unspecified:
+	default:
+	break;
 
-			} // switch
-		} // if
+	} // switch
+	} // if
 
-		return bHandled;
+	return bHandled;
 	}
 	*/
 
-//HashTable ended
+	//HashTable ended
 
 	public ref class tasksotongGUI : public System::Windows::Forms::Form {
 	public:
@@ -263,6 +263,8 @@ namespace tasksotongUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  sortByPriorityToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  tOBEENTEREDBYANDYToolStripMenuItem;
 	private: System::Windows::Forms::RichTextBox^  Display_richTextBox;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::TextBox^  textBox1;
 
 			 /// </summary>
 			 System::ComponentModel::Container ^components;
@@ -295,6 +297,8 @@ namespace tasksotongUI {
 				 this->updateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->tOBEENTEREDBYANDYToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->Display_richTextBox = (gcnew System::Windows::Forms::RichTextBox());
+				 this->button1 = (gcnew System::Windows::Forms::Button());
+				 this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 				 this->Help->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
@@ -449,11 +453,25 @@ namespace tasksotongUI {
 				 this->Display_richTextBox->ReadOnly = true;
 				 this->Display_richTextBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::Display_richTextBox_TextChanged);
 				 // 
+				 // button1
+				 // 
+				 resources->ApplyResources(this->button1, L"button1");
+				 this->button1->Name = L"button1";
+				 this->button1->UseVisualStyleBackColor = true;
+				 this->button1->Click += gcnew System::EventHandler(this, &tasksotongGUI::button1_Click);
+				 // 
+				 // textBox1
+				 // 
+				 resources->ApplyResources(this->textBox1, L"textBox1");
+				 this->textBox1->Name = L"textBox1";
+				 // 
 				 // tasksotongGUI
 				 // 
 				 resources->ApplyResources(this, L"$this");
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				 this->BackColor = System::Drawing::Color::BurlyWood;
+				 this->Controls->Add(this->textBox1);
+				 this->Controls->Add(this->button1);
 				 this->Controls->Add(this->Help);
 				 this->Controls->Add(this->vScrollBar1);
 				 this->Controls->Add(this->Enter);
@@ -494,7 +512,7 @@ namespace tasksotongUI {
 			std::string feedbackmsg = TSLogic->executeCommand(*storageInput);
 			//DisplayTaskBox->Clear();
 			vector<string> textFileCopy_fromLogic = TSLogic->getReturnGUI();
-			
+
 			//String^ stringnewlala = gcnew String(userInput.c_str());
 			//DisplayTaskBox->Text = stringnewlala + "\r\n" + textFileCopy_fromLogic.size().ToString();
 
@@ -502,12 +520,12 @@ namespace tasksotongUI {
 
 			string itemString;
 			for (int i = 0; i < textFileCopy_fromLogic.size(); i++) {
-				itemString = itemString + to_string(i+1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
+				itemString = itemString + to_string(i + 1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
 			}
 			String^ displayList = gcnew String(itemString.c_str());
 			Display_richTextBox->Text = displayList;
-			
-			
+
+
 
 			//std::string feedbackmsg = TSLogic->getFeedbackMsg();
 			String^ feedback = gcnew String(feedbackmsg.c_str());
@@ -549,8 +567,24 @@ namespace tasksotongUI {
 
 	private: System::Void featuresToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
-private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-}
+	private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		int index = 0;
+		String^ temp = Display_richTextBox->Text;
+		Display_richTextBox->Text = "";
+		Display_richTextBox->Text = temp;
+
+		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text)){
+			//Searches the text in Display_richTextBox control for a string within a range of text within UserInputBox
+			Display_richTextBox->Find(textBox1->Text, index, Display_richTextBox->TextLength, RichTextBoxFinds::None);
+			//Selection Color. This is added automatically when a match is found.
+			Display_richTextBox->SelectionBackColor = Color::Gold;
+			//After a match is found the index is increased so the search won't stop at the same match
+			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index) + 1;
+		}
+	}
 };
 }
 
