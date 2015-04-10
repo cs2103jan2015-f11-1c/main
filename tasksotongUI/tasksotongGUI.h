@@ -574,20 +574,16 @@ namespace tasksotongUI {
 
 		int index = 0;
 		String^ temp = Display_richTextBox->Text;
-		//String^ temp2 = Display_richTextBox->Text->ToLower();
 		Display_richTextBox->Text = "";
 		Display_richTextBox->Text = temp;
-		//String^ temp2 = Display_richTextBox->Text;
-		//const string temp3 = msclr::interop::marshal_as<std::string>(temp);
-		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text)){
-			//Searches the text in Display_richTextBox control for a string within a range of text within UserInputBox
 		
-			//string::const_iterator pos = search(iter->begin(), iter->end(), temp3.begin(), temp3.end(), caseInsensitiveEqual);
+		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text, System::StringComparison::InvariantCultureIgnoreCase)){
+			//Searches the text in Display_richTextBox control for a string within a range of text within UserInputBox
 			Display_richTextBox->Find(textBox1->Text, index, Display_richTextBox->TextLength, RichTextBoxFinds::None);
 			//Selection Color. This is added automatically when a match is found.
 			Display_richTextBox->SelectionBackColor = Color::Gold;
 			//After a match is found the index is increased so the search won't stop at the same match
-			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index) + 1;
+			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index, System::StringComparison::InvariantCultureIgnoreCase) + 1;
 		}
 	}
 };
