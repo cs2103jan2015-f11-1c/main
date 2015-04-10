@@ -638,6 +638,9 @@ void parserProcess::processTimeNatExp(string& timeInput)
 	
 	processedtimeStore.hours = hours;
 	processedtimeStore.min = 0;
+
+
+
 }
 
 
