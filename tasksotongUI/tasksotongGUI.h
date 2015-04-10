@@ -22,6 +22,70 @@ namespace tasksotongUI {
 	/// <summary>
 	/// Summary for tasksotongGUI
 	/// </summary>
+
+
+
+//hashtable added
+	const int TABLE_SIZE = 128;
+
+	class HashEntry {
+	private:
+		int key;
+		int value;
+	public:
+		HashEntry(int key, int value) {
+			this->key = key;
+			this->value = value;
+		}
+
+		int getKey() {
+			return key;
+		}
+
+		int getValue() {
+			return value;
+		}
+	};
+
+	class HashMap {
+	private:
+		HashEntry **table;
+	public:
+		HashMap() {
+			table = new HashEntry*[TABLE_SIZE];
+			for (int i = 0; i < TABLE_SIZE; i++)
+				table[i] = NULL;
+		}
+
+		int get(int key) {
+			int hash = (key % TABLE_SIZE);
+			while (table[hash] != NULL && table[hash]->getKey() != key)
+				hash = (hash + 1) % TABLE_SIZE;
+			if (table[hash] == NULL)
+				return -1;
+			else
+				return table[hash]->getValue();
+		}
+
+		void put(int key, int value) {
+			int hash = (key % TABLE_SIZE);
+			while (table[hash] != NULL && table[hash]->getKey() != key)
+				hash = (hash + 1) % TABLE_SIZE;
+			if (table[hash] != NULL)
+				delete table[hash];
+			table[hash] = new HashEntry(key, value);
+		}
+
+		~HashMap() {
+			for (int i = 0; i < TABLE_SIZE; i++)
+				if (table[i] != NULL)
+					delete table[i];
+			delete[] table;
+		}
+	};
+
+//HashTable ended
+
 	public ref class tasksotongGUI : public System::Windows::Forms::Form {
 	public:
 		tasksotongGUI(void) {
@@ -333,8 +397,6 @@ namespace tasksotongUI {
 
 	}
 
-
-
 	private: System::Void Enter_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	}
@@ -359,6 +421,94 @@ namespace tasksotongUI {
 	private: System::Void tasksotongGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 
 		TSLogic->initialiseSetUp();
+
+
+
+
+
+		
+		private enum Accelerators 				{
+ Unspecified = 0, Home, Save, Print, Logout };
+		HashMap _accelHash() = new HashMap();
+		public class AcceleratorKey {
+			private Keys key_ = Keys.None;
+			public AcceleratorKey() {
+			}
+
+			public AcceleratorKey(Keys key) {
+				key_ = key;
+			}
+
+			public Keys Key
+			{
+				get{ return key_; }
+				set{ key_ = value; }
+			}
+
+			public override Int32 GetHashCode() {
+					return (Int32)key_;
+				}
+
+				public override bool Equals(Object obj) {
+					// It is unlikely that two hashcodes would
+					// be equal... :)
+					if (obj.GetHashCode() == (Int32)key_) return true;
+
+					return false;
+				}
+		}
+
+		_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.H),
+			Accelerators.Home);
+		_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.S),
+			Accelerators.Save);
+		_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.P),
+			Accelerators.Print);
+		_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.X),
+			Accelerators.Logout);
+
+		protected override bool ProcessCmdKey(ref Message msg,
+			Keys keyData) {
+			// Check this key...
+			bool bHandled = false;
+
+			// Look up value
+			Accelerators accel = Accelerators.Unspecified;
+			if (_accelHash.ContainsKey(AcceleratorKey(keyData))) {
+				accel = (Accelerators)_accelHash[key];
+
+				switch (accel) {
+				case Accelerators.Home:
+					DisplayHome();
+					bHandled = true;
+					break;
+
+				case Accelerators.Save:
+					Save();
+					bHandled = true;
+					break;
+
+				case Accelerators.Print:
+					Print();
+					bHandled = true;
+					break;
+
+				case Accelerators.Logout:
+					LogOut();
+					bHandled = true;
+					break;
+
+				case Accelerators.Unspecified:
+				default:
+					break;
+
+				} // switch
+			} // if
+
+			return bHandled;
+		}
+		*/
+
 	}
 
 
