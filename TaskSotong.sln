@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common_Testing", "Common_Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Storage_Testing", "Storage_Testing\Storage_Testing.vcxproj", "{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Parser_Testing", "Parser_Testing\Parser_Testing.vcxproj", "{5245ED3C-6173-40D1-A22A-691717073322}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -81,6 +83,10 @@ Global
 		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Debug|Win32.Build.0 = Debug|Win32
 		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Release|Win32.ActiveCfg = Release|Win32
 		{8E31E9B2-0A42-4ACF-81F2-859DDA3F26CF}.Release|Win32.Build.0 = Release|Win32
+		{5245ED3C-6173-40D1-A22A-691717073322}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5245ED3C-6173-40D1-A22A-691717073322}.Debug|Win32.Build.0 = Debug|Win32
+		{5245ED3C-6173-40D1-A22A-691717073322}.Release|Win32.ActiveCfg = Release|Win32
+		{5245ED3C-6173-40D1-A22A-691717073322}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
