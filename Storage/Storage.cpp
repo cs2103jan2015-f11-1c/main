@@ -382,7 +382,7 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
 }
 
-vector<string> Storage::searchTask(string fileName, const string& searchEntry){
+/*vector<string> Storage::searchTask(string fileName, const string& searchEntry){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
@@ -408,6 +408,7 @@ vector<string> Storage::searchTask(string fileName, const string& searchEntry){
 
 	return returnTextFileCopy;
 }
+
 
 struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	bool operator () (char x, char y) const {
@@ -525,3 +526,4 @@ vector<string> Storage::sortTaskByPriority(string fileName){
 
 	return sortByPriorityAfterStack.top();
 }
+*/
