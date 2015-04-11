@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 #include <cassert>
 #include <msclr\marshal_cppstd.h>
 
@@ -575,14 +576,14 @@ namespace tasksotongUI {
 		String^ temp = Display_richTextBox->Text;
 		Display_richTextBox->Text = "";
 		Display_richTextBox->Text = temp;
-
-		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text)){
+		
+		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text, System::StringComparison::InvariantCultureIgnoreCase)){
 			//Searches the text in Display_richTextBox control for a string within a range of text within UserInputBox
 			Display_richTextBox->Find(textBox1->Text, index, Display_richTextBox->TextLength, RichTextBoxFinds::None);
 			//Selection Color. This is added automatically when a match is found.
 			Display_richTextBox->SelectionBackColor = Color::Gold;
 			//After a match is found the index is increased so the search won't stop at the same match
-			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index) + 1;
+			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index, System::StringComparison::InvariantCultureIgnoreCase) + 1;
 		}
 	}
 };

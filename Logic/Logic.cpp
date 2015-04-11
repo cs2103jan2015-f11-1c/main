@@ -241,11 +241,7 @@ string Logic::executeCommand(paraList Input) {
 
 	string command = getLowerCaseCommand(Input);
 
-	if (command == "invalid") {
-
-		_feedbackMessage = ERROR_INVALID_USERINPUT;
-
-	} else if (command == "add") {
+		if (command == "add") {
 		Task oneTask = Input.getTask();
 		string taskdetails = oneTask.getTaskDetails();
 
@@ -377,12 +373,8 @@ string Logic::executeCommand(paraList Input) {
 		//_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 	} else {
-		if (command[0] == '\n') {
-			_feedbackMessage = "SHIT";
-		} else {
-			_feedbackMessage = "DUNG";
-		}
-		//_feedbackMessage = command[0];
+			_feedbackMessage = ERROR_INVALID_USERINPUT;
+		
 	}
 
 	return _feedbackMessage;
