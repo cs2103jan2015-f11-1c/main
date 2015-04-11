@@ -276,53 +276,44 @@ string Logic::executeCommand(paraList Input) {
 			if (detailToBeUpdated == ""){
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
-				string tempYear = detailToBeUpdated.substr(detailToBeUpdated.size() - 4, detailToBeUpdated.size());
-				string temp = detailToBeUpdated.substr(0, detailToBeUpdated.size() - 5);
-				string tempMonth = temp.substr(temp.find_last_of("/"), temp.size());
+				string tempYear = detailToBeUpdated.substr(detailToBeUpdated.length() - 4, detailToBeUpdated.length());
+				string temp = detailToBeUpdated.substr(0, detailToBeUpdated.length() - 5);
+				string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
 				string tempDay = temp.substr(0, temp.find_first_of("/"));
-				int year = stoi(tempYear);
-				int month = stoi(tempMonth);
-				int day = stoi(tempDay);
-				if (year / 1000 < 2){
-					_feedbackMessage = ERROR_INVALID_CONTENT;
+				int year = atoi(tempYear.c_str());
+				int month = atoi(tempMonth.c_str());
+				int day = atoi(tempDay.c_str());
+				if (year < 2015){
+					_feedbackMessage = tempYear;
+					return _feedbackMessage;
 				} else if ((month < 1) || (month>12)){
-					_feedbackMessage = ERROR_INVALID_CONTENT;
+					_feedbackMessage = "Month invalid";
+					return _feedbackMessage;
 				} else if (day < 1){
-					_feedbackMessage = ERROR_INVALID_CONTENT;
+					_feedbackMessage = "Day less than 1";
+					return _feedbackMessage;
 				} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)){
 					if (day>31){
-						_feedbackMessage = ERROR_INVALID_CONTENT;
+						_feedbackMessage = "Day greater than 31";
+						return _feedbackMessage;
 					}
 				} else if (month == 2){
 					if (day > 28){
-						_feedbackMessage = ERROR_INVALID_CONTENT;
+						_feedbackMessage = "Day greater than 28";
+						return _feedbackMessage;
 					}
-				} else {
-					if (day > 30){
-						_feedbackMessage = ERROR_INVALID_CONTENT;
-					}
-				}
-				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
-				_DataBase.updateTextFile(_filename);
-				setTaskList();
-				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+				} else if (day > 30){
+					_feedbackMessage = "Day greater than 30";
+					return _feedbackMessage;
+				} 
+					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+					_DataBase.setFeedbackMessage("updateeeee successful");
+					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+				
 			}
-					/*
-					(updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
-					_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
-
-					} else if (atoi(parameterToBeUpdated.c_str()) == updateInteger || (atoi(detailToBeUpdated.c_str()) == updateInteger)) {
-					_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
-					} */
-				} else {
-	
-			_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
-			_DataBase.updateTextFile(_filename);
-			setTaskList();
-			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-
 		}
-
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 
