@@ -27,8 +27,8 @@ private:
 
 	vector<string> _storageTextFileCopy;
 	vector<string> _fileLocation;
-	vector<string> _resultVector;
-
+	vector<Task> _resultVector;
+	vector<Task> _storageTaskListCopy;
 
 	string _userInput;
 	string _filename;
@@ -57,6 +57,10 @@ private:
 
 
 public:
+
+	void setTaskList();
+
+	vector<Task> getTaskList();
 
 	void initialiseSetUp();
 
@@ -96,9 +100,9 @@ public:
 
 	string getFeedbackMsg();
 	
-	void setReturnGUI(vector<string>);
+	//void setReturnGUI(vector<Task*>);
 
-	vector<string> getReturnGUI();
+	//vector<Task> getReturnGUI();
 
 	string executeCommand(paraList);
 

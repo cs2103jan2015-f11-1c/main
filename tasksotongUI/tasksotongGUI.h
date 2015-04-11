@@ -501,6 +501,9 @@ namespace tasksotongUI {
 	private: System::Void UserInputBox_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 		//DisplayTaskBox->Text = "debugging1: " + UserInputBox->Text + "testing1";
 		if (e->KeyChar == (char)13) {
+
+			Display_richTextBox->Text = "test test";
+
 			string tempUserInput = msclr::interop::marshal_as<std::string>(UserInputBox->Text);
 
 			int i = tempUserInput.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSUVWXYZ");
@@ -512,13 +515,44 @@ namespace tasksotongUI {
 
 			std::string feedbackmsg = TSLogic->executeCommand(*storageInput);
 			//DisplayTaskBox->Clear();
-			vector<string> textFileCopy_fromLogic = TSLogic->getReturnGUI();
+			vector<Task> taskListCopy_fromLogic = TSLogic->getTaskList();
 
 			//String^ stringnewlala = gcnew String(userInput.c_str());
 			//DisplayTaskBox->Text = stringnewlala + "\r\n" + textFileCopy_fromLogic.size().ToString();
 
 			//DisplayTaskBox->Text = textFileCopy_fromLogic.size().ToString();
 
+			string outputDisplay;
+
+			for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
+
+				string tempName = "\t\t\t" + to_string(i + 1) + ".\t"+taskListCopy_fromLogic[i].getTaskName()+"\r\n";
+				//String^ displayName = gcnew String(tempName.c_str());
+				//Display_richTextBox->Text = displayName;
+
+				string tempStartDnT ="\t\tSTART: \t" +taskListCopy_fromLogic[i].getTaskStartDate() + "\t"+ taskListCopy_fromLogic[i].getTaskStartTime()+"\r\n";
+				//String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+				//Display_richTextBox->Text = displayStartDnT + "over write";
+
+				string tempEndDnT = "\t\tEND: \t\t"+taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
+				//String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+				//Display_richTextBox->Text = displayEndDnT;
+
+				string tempDeadlineDnT = "\t\tDEADLINE: \t" + taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
+				//String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+				//Display_richTextBox->Text = displayDeadlineDnT;
+
+				string tempPnS ="\t\t\t\t"+ taskListCopy_fromLogic[i].getTaskPriority() + "\t" + taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
+				//String^ displayPnS = gcnew String(tempPnS.c_str());
+				
+				//Display_richTextBox->Text = displayPnS;
+				outputDisplay = outputDisplay+tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n";
+			}
+			String^ display = gcnew String(outputDisplay.c_str());
+			Display_richTextBox->Text = display;
+
+			//Original codes below:
+			/*
 			string itemString;
 			for (int i = 0; i < textFileCopy_fromLogic.size(); i++) {
 				itemString = itemString + to_string(i + 1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
@@ -526,9 +560,11 @@ namespace tasksotongUI {
 			String^ displayList = gcnew String(itemString.c_str());
 			Display_richTextBox->Text = displayList;
 
-
+			*/ //end of original code!!
 
 			//std::string feedbackmsg = TSLogic->getFeedbackMsg();
+
+
 			String^ feedback = gcnew String(feedbackmsg.c_str());
 			WelcomeBox->Text = feedback;
 

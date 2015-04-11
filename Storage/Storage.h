@@ -24,7 +24,7 @@ class Storage{
 
 private:
 
-	vector<Task*> taskList;
+	vector<Task> taskList;
 	vector<string> textFileCopy;
 	stack<string> commandStack;
 	stack<pair<string, unsigned int>> deleteTaskStack;
@@ -62,13 +62,18 @@ private:
 
 public:
 
+	vector<Task> returnTaskList();
+
+
+	void updateTaskList(Task);
+
 	void updateTextFile(string);
 
 	void initialiseTextFile(string);
 
 	vector<string> returnTextFileCopy();
 
-	void addTask(Task*);
+	void addTask(Task);
 
 	void deleteTask(string, unsigned int);
 
