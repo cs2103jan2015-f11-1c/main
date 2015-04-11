@@ -333,6 +333,7 @@ string Logic::executeCommand(paraList Input) {
 		} else {
 			_DataBase.clearAllTasks();
 			setTaskList();
+			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
 		}
 
