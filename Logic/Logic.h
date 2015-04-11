@@ -25,7 +25,7 @@ private:
 	Parser _ParserComponent;
 	Storage _DataBase;
 
-	vector<string> _storageTextFileCopy;
+
 	vector<string> _fileLocation;
 	vector<Task> _resultVector;
 	vector<Task> _storageTaskListCopy;
@@ -42,6 +42,7 @@ private:
 	static string ERROR_TASK_DELETED_UNSUCCESSFULLY;
 	static string ERROR_TASK_MARKED_UNSUCCESSFULLY;
 	static string ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
+	static string ERROR_EMPTY_LIST;
 
 	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 	static string FEEDBACK_DISPLAY_ALL_TASKS;
@@ -89,8 +90,6 @@ public:
 	string getLowerCaseCommand(paraList);
 
 	Task getTask(paraList);
-
-	void copyTestFilefromStorage();
 
 	vector<string> getTextFileCopy();
 

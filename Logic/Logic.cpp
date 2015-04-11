@@ -18,6 +18,7 @@ string Logic::ERROR_TASK_UPDATED_UNSUCCESSFULLY = "Failed To Update The Task!";
 string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
 string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
 string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
+string Logic::ERROR_EMPTY_LIST = "Task list is empty!";
 
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
@@ -205,10 +206,7 @@ Task Logic::getTask(paraList parameterList) {
 	return parameterList.getTask();
 }
 
-void Logic::copyTestFilefromStorage() {
-	_storageTextFileCopy = getTextFileCopy();
-	return;
-}
+
 
 vector<string> Logic::getTextFileCopy() {
 	return _DataBase.returnTextFileCopy();
@@ -219,14 +217,7 @@ void Logic::callInitialise(string outputFile) {
 }
 
 bool Logic::notExistingTask(Task* task) {
-	string taskDetail;
-	taskDetail = task->getTaskDetails();
-	copyTestFilefromStorage();
-	for (unsigned int i = 0; i < _storageTextFileCopy.size(); i++) {
-		if (taskDetail == _storageTextFileCopy[i]) {
-			return false;
-		}
-	}
+
 	return true;
 }
 
@@ -238,62 +229,56 @@ string Logic::getFeedbackMsg() {
 
 
 string Logic::executeCommand(paraList Input) {
-
+	
 	string command = getLowerCaseCommand(Input);
 
-		if (command == "add") {
+	if (command == "add") {
 		Task oneTask = Input.getTask();
 		string taskdetails = oneTask.getTaskDetails();
 
-		//if (notExistingTask(&oneTask) == true) {
-			_DataBase.addTask(oneTask);
-			_DataBase.updateTextFile(_filename); //this actually update TaskList
-			
-			//copyTestFilefromStorage();
-			
-			setTaskList(); //NEW!!!!!!!!!!!!
+		_DataBase.addTask(oneTask);
+		_DataBase.updateTextFile(_filename); //this actually update TaskList
 
-			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
-
-		//} else {
-		//	_feedbackMessage = ERROR_EXISTING_TASK;
-
-		//}
-	} else if (command == "display") {
-		_DataBase.updateTextFile(_filename);
 		setTaskList();
-		_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
 
+		_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+
+	} else if (command == "display") {
+		//setTaskList();
+		
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
+		}
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
-		string parameterToBeUpdated = Input.getKeyword();
-		string detailToBeUpdated = Input.getInput();
-		vector<string> myTextFileCopy = getTextFileCopy();
-		string input = myTextFileCopy[updateInteger - 1];
-		while (input.back() != ' ') {
-			input.pop_back();
-		}
 
-		paraList* pList = getParaList("add " + input);
-		Task taskToBeUpdated = pList->getTask();
-
-		copyTestFilefromStorage();
-		if (updateInteger >= _storageTextFileCopy.size() || updateInteger <= 0) {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
 
 		} else {
-			_DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
+
+			string parameterToBeUpdated = Input.getKeyword();
+			string detailToBeUpdated = Input.getInput();
+	
+			_DataBase.updateTask(_filename, updateInteger,parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
-			copyTestFilefromStorage();
-			//setReturnGUI(_storageTextFileCopy);
+			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 
 		}
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		setTaskList();
-		if (deleteInteger > _storageTaskListCopy.size() || deleteInteger <= 0) {
+
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (deleteInteger > _storageTaskListCopy.size() || deleteInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_DELETED_UNSUCCESSFULLY;
 
 		} else {
@@ -310,8 +295,8 @@ string Logic::executeCommand(paraList Input) {
 		_feedbackMessage = FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
 		updatefileLocation(userDirectory);
 		writeFileLocation(_fileLocation);
-		copyTestFilefromStorage();
-		//setReturnGUI(_storageTextFileCopy);
+
+		//setReturnGUI(_storageTaskListCopy);
 
 		//For parser to implement!!! remind jy!
 
@@ -323,41 +308,46 @@ string Logic::executeCommand(paraList Input) {
 
 	} else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
-		if (markIndex > _storageTextFileCopy.size() || markIndex <= 0) {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (markIndex > _storageTaskListCopy.size() || markIndex <= 0) {
 			_feedbackMessage = ERROR_TASK_MARKED_UNSUCCESSFULLY;
 
 		} else {
 			_DataBase.markTask(_filename, markIndex);
 			_DataBase.updateTextFile(_filename);
-			copyTestFilefromStorage();
-			//setReturnGUI(_storageTextFileCopy);
+			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "unmark") {
 		int unmarkIndex = Input.getmarkindex();
-		if (unmarkIndex > _storageTextFileCopy.size() || unmarkIndex <= 0) {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (unmarkIndex > _storageTaskListCopy.size() || unmarkIndex <= 0) {
 			_feedbackMessage = ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
 
 		} else {
 			_DataBase.unmarkTask(_filename, unmarkIndex);
 			_DataBase.updateTextFile(_filename);
-			copyTestFilefromStorage();
-			//setReturnGUI(_storageTextFileCopy);
+			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "clear") {
-		_DataBase.clearAllTasks();
-		copyTestFilefromStorage();
-		//setReturnGUI(_storageTextFileCopy);
-		_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.clearAllTasks();
+			setTaskList();
+			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
+		}
 
 	} else if (command == "undo") {
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
-		copyTestFilefromStorage();
-		//setReturnGUI(_storageTextFileCopy);
+
+		//setReturnGUI(_storageTaskListCopy);
 		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {
@@ -368,13 +358,13 @@ string Logic::executeCommand(paraList Input) {
 	} else if (command == "sort") {
 		//_DataBase.sortTaskByName(_filename);
 		//_DataBase.updateTextFile(_filename);
-		//copyTestFilefromStorage();
-		//setReturnGUI(_storageTextFileCopy);
+
+		//setReturnGUI(_storageTaskListCopy);
 		//_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
 
 	} else {
-			_feedbackMessage = ERROR_INVALID_USERINPUT;
-		
+		_feedbackMessage = ERROR_INVALID_USERINPUT;
+
 	}
 
 	return _feedbackMessage;
