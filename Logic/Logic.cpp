@@ -31,6 +31,17 @@ string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Completed! :D";
 string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 
+void Logic::setTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnTaskList();
+}
+
+vector<Task> Logic::getTaskList() {
+
+	return _storageTaskListCopy;
+
+}
+
 
 void Logic::initialiseSetUp() {
 
@@ -225,17 +236,6 @@ string Logic::getFeedbackMsg() {
 
 }
 
-void Logic::setReturnGUI(vector<string> resultVector) {
-
-	_resultVector = resultVector;
-
-}
-
-vector<string> Logic::getReturnGUI() {
-
-	return _resultVector;
-
-}
 
 string Logic::executeCommand(paraList Input) {
 
@@ -245,22 +245,23 @@ string Logic::executeCommand(paraList Input) {
 		Task oneTask = Input.getTask();
 		string taskdetails = oneTask.getTaskDetails();
 
-		if (notExistingTask(&oneTask) == true) {
-			_DataBase.addTask(&oneTask);
-			_DataBase.updateTextFile(_filename);
-			copyTestFilefromStorage();
-			setReturnGUI(_storageTextFileCopy);
+		//if (notExistingTask(&oneTask) == true) {
+			_DataBase.addTask(oneTask);
+			_DataBase.updateTextFile(_filename); //this actually update TaskList
+			
+			//copyTestFilefromStorage();
+			
+			setTaskList(); //NEW!!!!!!!!!!!!
+
 			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 
-		} else {
-			_feedbackMessage = ERROR_EXISTING_TASK;
+		//} else {
+		//	_feedbackMessage = ERROR_EXISTING_TASK;
 
-		}
+		//}
 	} else if (command == "display") {
-		_DataBase.displayAllTasks();
 		_DataBase.updateTextFile(_filename);
-		copyTestFilefromStorage();
-		setReturnGUI(_storageTextFileCopy);
+		setTaskList();
 		_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
 
 	} else if (command == "update") {
@@ -284,22 +285,21 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.updateTask(_filename, updateInteger, &taskToBeUpdated, parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
 			copyTestFilefromStorage();
-			setReturnGUI(_storageTextFileCopy);
+			//setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 
 		}
 
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
-		copyTestFilefromStorage();
-		if (deleteInteger > _storageTextFileCopy.size() || deleteInteger <= 0) {
+		setTaskList();
+		if (deleteInteger > _storageTaskListCopy.size() || deleteInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_DELETED_UNSUCCESSFULLY;
 
 		} else {
 			_DataBase.deleteTask(_filename, deleteInteger);
 			_DataBase.updateTextFile(_filename);
-			copyTestFilefromStorage();
-			setReturnGUI(_storageTextFileCopy);
+			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
 
 		}
@@ -311,7 +311,7 @@ string Logic::executeCommand(paraList Input) {
 		updatefileLocation(userDirectory);
 		writeFileLocation(_fileLocation);
 		copyTestFilefromStorage();
-		setReturnGUI(_storageTextFileCopy);
+		//setReturnGUI(_storageTextFileCopy);
 
 		//For parser to implement!!! remind jy!
 
@@ -330,7 +330,7 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.markTask(_filename, markIndex);
 			_DataBase.updateTextFile(_filename);
 			copyTestFilefromStorage();
-			setReturnGUI(_storageTextFileCopy);
+			//setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
 
@@ -343,21 +343,21 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.unmarkTask(_filename, unmarkIndex);
 			_DataBase.updateTextFile(_filename);
 			copyTestFilefromStorage();
-			setReturnGUI(_storageTextFileCopy);
+			//setReturnGUI(_storageTextFileCopy);
 			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
 
 	} else if (command == "clear") {
 		_DataBase.clearAllTasks();
 		copyTestFilefromStorage();
-		setReturnGUI(_storageTextFileCopy);
+		//setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
 
 	} else if (command == "undo") {
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
 		copyTestFilefromStorage();
-		setReturnGUI(_storageTextFileCopy);
+		//setReturnGUI(_storageTextFileCopy);
 		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
 
 	} else if (command == "search") {

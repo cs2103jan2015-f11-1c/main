@@ -83,12 +83,38 @@ void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
 	return;
 }
 
+vector<Task> Storage::returnTaskList() {
+
+	return taskList;
+
+}
+
+
+void Storage::updateTaskList(Task taskTobeEntered) {
+
+
+	taskList.push_back(taskTobeEntered);
+	return;
+}
+
+
 void Storage::updateTextFile(string fileName){
 
 	ofstream writeFile(fileName);
 
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
-		writeFile << textFileCopy[i] << endl;
+	for (unsigned int i = 0; i < taskList.size(); i++){
+		
+		writeFile << "\\s"<<endl;
+		writeFile << taskList[i].getTaskName() << endl;
+		writeFile << taskList[i].getTaskStartDate() << endl;
+		writeFile << taskList[i].getTaskStartTime() << endl;
+		writeFile << taskList[i].getTaskEndDate() << endl;
+		writeFile << taskList[i].getTaskEndTime() << endl;
+		writeFile << taskList[i].getTaskDeadlineDate() << endl;
+		writeFile << taskList[i].getTaskDeadlineTime() << endl;
+		writeFile << taskList[i].getTaskPriority() << endl;
+		writeFile << taskList[i].getTaskStatus()<<endl;
+
 	}
 
 	return;
@@ -97,9 +123,29 @@ void Storage::updateTextFile(string fileName){
 void Storage::initialiseTextFile(string fileName){
 	ifstream readFile(fileName);
 	string tempStorage;
-	while (getline(readFile, tempStorage)){
-		textFileCopy.push_back(tempStorage);
+	vector<string> taskParameters;
+	while (getline(readFile, tempStorage)) {
+
+		if (tempStorage == "\\s") {
+			
+			for (int i = 0; i < 9; i++) {
+				getline(readFile, tempStorage);
+				taskParameters.push_back(tempStorage);
+			}
+			string temp1 = taskParameters[0];
+			string temp2 = taskParameters[1];
+			string temp3 = taskParameters[2];
+			string temp4 = taskParameters[3];
+			string temp5 = taskParameters[4];
+			string temp6 = taskParameters[5];
+			string temp7 = taskParameters[6];
+			string temp8 = taskParameters[7];
+			string temp9 = taskParameters[8];
+			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
+			taskList.push_back(tempTask);
+		}
 	}
+	
 	readFile.close();
 
 	return;
@@ -109,8 +155,12 @@ vector<string> Storage::returnTextFileCopy(){
 	return textFileCopy;
 }
 
-void Storage::addTask(Task *individual_task){
-	textFileCopy.push_back(individual_task->getTaskDetails());
+//updated by GT
+void Storage::addTask(Task individual_task){
+	
+	taskList.push_back(individual_task);
+	//textFileCopy.push_back(individual_task.getTaskDetails());
+	
 	commandStack.push("add");
 
 	return;
@@ -120,14 +170,14 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
 
-	if (isEmptyTextFile() || isInvalidIndex(taskIndex)){
+	if (isEmptyTextFile()){
 		return;
 	}
 
-	deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex);
+	//deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex); What's this?
 	commandStack.push("delete");
 
-	textFileCopy.erase(textFileCopy.begin() + taskIndex - 1);
+	taskList.erase(taskList.begin() + taskIndex - 1);
 
 	return;
 }
@@ -366,12 +416,16 @@ void Storage::clearAllTasks(){
 		return;
 	}
 
+	
 	string backupText;
-	for (unsigned int i = 0; i < textFileCopy.size(); i++){
+	/*for (unsigned int i = 0; i < taskList.size(); i++){
 		backupText.append(textFileCopy[i] + '\n');
 	}
+	*/
 
-	textFileCopy.clear();
+	//textFileCopy.clear();
+	//added by GT
+	taskList.clear();
 	clearAllTasksStack.push(backupText);
 	commandStack.push("clear");
 
