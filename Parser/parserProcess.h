@@ -31,6 +31,7 @@ struct timeStore
 
 	int min;
 	int hours;
+	string nilstore;
 	string timeStatus;
 
 
@@ -99,7 +100,7 @@ public:
 	void processTimeNatExp(string&);
 	void processTimeShortAmPm(string&);
 	void covertTime(char&, int&);
-
+	void clearTimestore();
 };
 
 #endif

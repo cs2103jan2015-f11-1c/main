@@ -50,6 +50,9 @@ private:
 	static string ERROR_INVALID_NAME_SORT;
 	static string ERROR_INVALID_STATUS_SORT;
 	static string ERROR_INVALID_PRIORITY_SORT;
+	static string ERROR_INVALID_UPDATE_KEYWORD;
+	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
+	string feedbackMessage;
 
 	bool isEmptyTaskList();
 	bool isInvalidIndex(unsigned int);
@@ -82,6 +85,10 @@ public:
 	void viewCompletedTasks();
 
 	void viewIncompleteTasks();
+
+	void setFeedbackMessage(string);
+
+	string returnLogicFeedbackMessage();
 
 	void updateTask(string, unsigned int, string, string);
 

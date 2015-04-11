@@ -62,37 +62,37 @@ string Task::getTaskName(){
 }
 
 string Task::getTaskStartDate(){
-
+	
 	return _taskStart.date;
 }
 
 string Task::getTaskStartTime(){
-
+	
 	return _taskStart.time;
 }
 
 string Task::getTaskEndDate(){
-
+	
 	return _taskEnd.date;
 }
 
 string Task::getTaskEndTime(){
-
+	
 	return _taskEnd.time;
 }
 
 string Task::getTaskDeadlineDate(){
-
+	
 	return _taskDeadline.date;
 }
 
 string Task::getTaskDeadlineTime(){
-
+	
 	return _taskDeadline.time;
 }
 
 string Task::getTaskPriority(){
-
+	
 	return _taskPriority;
 }
 

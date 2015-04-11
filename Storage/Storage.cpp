@@ -12,6 +12,8 @@ string Storage::ERROR_ONLY_ONE_TASK = "There is no need to sort a single task!";
 string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
 string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
+string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
+string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
 
 bool Storage::isEmptyTaskList(){
 	if (taskList.empty()){
@@ -101,7 +103,7 @@ void Storage::updateTextFile(string fileName){
 
 	for (unsigned int i = 0; i < taskList.size(); i++){
 		
-		writeFile << "\\s"<<endl;
+		writeFile << "***************************************************************"<<endl;
 		writeFile << taskList[i].getTaskName() << endl;
 		writeFile << taskList[i].getTaskStartDate() << endl;
 		writeFile << taskList[i].getTaskStartTime() << endl;
@@ -123,7 +125,7 @@ void Storage::initialiseTextFile(string fileName){
 	vector<string> taskParameters;
 	while (getline(readFile, tempStorage)) {
 
-		if (tempStorage == "\\s") {
+		if (tempStorage == "***************************************************************") {
 			
 			for (int i = 0; i < 9; i++) {
 				getline(readFile, tempStorage);
@@ -138,8 +140,10 @@ void Storage::initialiseTextFile(string fileName){
 			string temp7 = taskParameters[6];
 			string temp8 = taskParameters[7];
 			string temp9 = taskParameters[8];
+
 			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
 			taskList.push_back(tempTask);
+			taskParameters.clear();
 		}
 	}
 	
@@ -216,28 +220,45 @@ void Storage::viewIncompleteTasks(){
 	return;
 }
 
+void Storage::setFeedbackMessage(string messageToBeSet){
+	feedbackMessage = messageToBeSet;
+}
+
+string Storage::returnLogicFeedbackMessage(){
+	return feedbackMessage;
+}
+
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
-
-
 
 	commandStack.push("update");
 
 	if (keyword == "name") {
 		taskList[taskIndex - 1].changeTaskName(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-date") {
 		taskList[taskIndex - 1].changeTaskStartDate(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-time") {
 		taskList[taskIndex - 1].changeTaskStartTime(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-date") {
 		taskList[taskIndex - 1].changeTaskEndDate(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-time") {
 		taskList[taskIndex - 1].changeTaskEndTime(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-date") {
 		taskList[taskIndex - 1].changeTaskDeadlineDate(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-time") {
 		taskList[taskIndex - 1].changeTaskDeadlineTime(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if(keyword == "priority") {
 		taskList[taskIndex-1].changeTaskPriority(newInput);
+		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
+	} else {
+		setFeedbackMessage(ERROR_INVALID_UPDATE_KEYWORD);
+
 	}
 
 	
