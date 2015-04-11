@@ -254,7 +254,7 @@ string Logic::executeCommand(paraList Input) {
 		} else if (updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
 
-		} else if (parameterToBeUpdated==""||detailToBeUpdated=="") {
+		} else if (parameterToBeUpdated==" "||detailToBeUpdated==" ") {
 			_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
 		}else{
 	
