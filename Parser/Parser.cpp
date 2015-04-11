@@ -107,8 +107,8 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskName(checkingKeywordX(userInput));
 
 	}
-	
-	
+
+
 	if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
 	{
 		parserProcess now;
@@ -116,8 +116,8 @@ void Parser::sortDetails(string &userInput)
 
 
 	}
-	
-	
+
+
 	return;
 
 
@@ -479,6 +479,9 @@ void Parser::processCommand(string &userInput)
 		userInput.erase(0, b + 1);
 		para.processInput(userInput);
 		para.processUpdateNumber(index);
+
+
+		processUpdateKeywords();
 	}
 	else if (regex_search(command, MARK_PATTERN))
 	{
@@ -689,9 +692,9 @@ string Parser::checkST(string userinput)
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
 
-	
+
 	time[0] = "";
-	
+
 	const sregex_token_iterator d;
 	for (sregex_token_iterator e(userinput.begin(), userinput.end(), TIME_PATTERN); e != d; ++e)
 	{
@@ -711,8 +714,8 @@ string Parser::checkSD(string userinput)
 
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
-	
-	
+
+
 	date[0] = "";
 
 	const sregex_token_iterator end;
@@ -1112,4 +1115,34 @@ void Parser::processBeforeKeywordFrom(string &userInput)
 	userInput.erase(0, index + 6);
 
 	return;
+}
+
+
+void Parser::processUpdateKeywords()
+{  
+
+	string updateint;
+	string input = para.getInput();
+	string keyword=para.getKeyword();
+	
+	ostringstream oss;
+	oss << para.getUpdateInteger();
+	updateint = oss.str();
+
+	if (updateint == input)
+	{
+		para.processInput("");
+		para.processKeyWord("");
+
+	}
+	else if (input == keyword)
+	{
+
+		para.processInput("");
+
+	}
+
+	return;
+
+
 }

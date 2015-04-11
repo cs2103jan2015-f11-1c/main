@@ -51,6 +51,7 @@ public:
 	void processDate();
 	void processTime();
 	void processBeforeKeywordFrom(string &);
+	void processUpdateKeywords();
 
 };
 
