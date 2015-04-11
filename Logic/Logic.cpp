@@ -19,6 +19,7 @@ string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
 string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
 string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
 string Logic::ERROR_EMPTY_LIST = "Task list is empty!";
+string Logic::ERROR_TASK_INSUFFICIENT_PARAMETERS="Insufficient Parameters Entered!";
 
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
@@ -245,16 +246,17 @@ string Logic::executeCommand(paraList Input) {
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
+		string parameterToBeUpdated = Input.getKeyword();
+		string detailToBeUpdated = Input.getInput();
 
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else if (updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
 
-		} else {
-
-			string parameterToBeUpdated = Input.getKeyword();
-			string detailToBeUpdated = Input.getInput();
+		} else if (parameterToBeUpdated==""||detailToBeUpdated=="") {
+			_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
+		}else{
 	
 			_DataBase.updateTask(_filename, updateInteger,parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
