@@ -94,10 +94,7 @@ string Task::getTaskEndTime(){
 string Task::getTaskDeadlineDate(){
 	if (_taskDeadline.date == "") {
 		_taskDeadline.date == "NO DEADLINE DATE";
-	} else if (_taskDeadline.date == "\n") {
-		_taskDeadline.date = "newline";
-	} else(
-		_taskDeadline.date = "something weird");
+	} 
 	return _taskDeadline.date;
 }
 
@@ -162,7 +159,6 @@ void Task::changeTaskPriority(string newTaskPriority){
 void Task::changeTaskStatus(string newTaskStatus){
 	if (newTaskStatus == "mark"){
 		_taskStatus = MESSAGE_COMPLETE_TASK;
-
 		return;
 	} else {
 		_taskStatus = MESSAGE_INCOMPLETE_TASK;

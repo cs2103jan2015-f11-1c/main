@@ -546,8 +546,10 @@ namespace tasksotongUI {
 				//String^ displayPnS = gcnew String(tempPnS.c_str());
 				
 				//Display_richTextBox->Text = displayPnS;
-				outputDisplay = outputDisplay+tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n";
+				outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n" + "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
 			}
+
+			
 			String^ display = gcnew String(outputDisplay.c_str());
 			Display_richTextBox->Text = display;
 
@@ -598,6 +600,48 @@ namespace tasksotongUI {
 	private: System::Void tasksotongGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 
 		TSLogic->initialiseSetUp();
+		TSLogic->setTaskList();
+		
+		
+		vector<Task> taskListCopy_fromLogic = TSLogic->getTaskList();
+		//string test = "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
+		//String^ display = gcnew String(test.c_str());
+		//Display_richTextBox->Text = display;
+		
+		string outputDisplay;
+		for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
+
+			string tempName = "\t\t\t" + to_string(i + 1) + ".\t" + taskListCopy_fromLogic[i].getTaskName() + "\r\n";
+			//String^ displayName = gcnew String(tempName.c_str());
+			//Display_richTextBox->Text = displayName;
+
+			string tempStartDnT = "\t\tSTART: \t" + taskListCopy_fromLogic[i].getTaskStartDate() + "\t" + taskListCopy_fromLogic[i].getTaskStartTime() + "\r\n";
+			//String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+			//Display_richTextBox->Text = displayStartDnT + "over write";
+
+			string tempEndDnT = "\t\tEND: \t\t" + taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
+			//String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+			//Display_richTextBox->Text = displayEndDnT;
+
+			string tempDeadlineDnT = "\t\tDEADLINE: \t" + taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
+			//String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+			//Display_richTextBox->Text = displayDeadlineDnT;
+
+			string tempPnS = "\t\t\t\t" + taskListCopy_fromLogic[i].getTaskPriority() + "\t" + taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
+			//String^ displayPnS = gcnew String(tempPnS.c_str());
+
+			//Display_richTextBox->Text = displayPnS;
+			outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n" + "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
+		}
+
+
+		String^ display = gcnew String(outputDisplay.c_str());
+		if (display == "") {}
+		else {
+			Display_richTextBox->Text = display;
+		}
+		
+
 
 	}
 

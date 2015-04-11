@@ -31,7 +31,7 @@ private:
 	stack<pair<string, unsigned int>> updateTaskStack;
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
-	stack<string> clearAllTasksStack;
+	stack<vector<Task>> clearAllTasksStack;
 	stack<vector<string>> sortByNameStack;
 	stack<vector<string>> sortByStatusBeforeStack;
 	stack<vector<string>> sortByStatusAfterStack;
@@ -51,7 +51,7 @@ private:
 	static string ERROR_INVALID_STATUS_SORT;
 	static string ERROR_INVALID_PRIORITY_SORT;
 
-	bool isEmptyTextFile();
+	bool isEmptyTaskList();
 	bool isInvalidIndex(unsigned int);
 	void performSearchForViewingTasks(string, int&);
 	bool isOnlyOneTask();
@@ -83,7 +83,7 @@ public:
 
 	void viewIncompleteTasks();
 
-	void updateTask(string, unsigned int, Task*, string, string);
+	void updateTask(string, unsigned int, string, string);
 
 	void markTask(string, unsigned int);
 
