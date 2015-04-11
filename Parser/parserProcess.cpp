@@ -37,7 +37,7 @@ const regex TMR_INPUT("(t(\\w+|)m(\\w+|)(w|r))", std::tr1::regex_constants::icas
 const regex YEST_INPUT("(y(\\w+|)(e|s)(\\w+|)(t|r|y))", std::tr1::regex_constants::icase);
 const regex AMPM_INPUT("(1[0-2]|[1-9])[:|\.]([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)", std::tr1::regex_constants::icase);
 const regex AMPM_SHORT_INPUT("(((1[0-2]|[1-9])(\\s)?(am|pm|noon)))", std::tr1::regex_constants::icase);
-const regex NIL_INPUT("((1[0-2]|0[1-9])((:|\.)[0-5][0-9]))|(((1[0-2]|[1-9])(\\s)))", std::tr1::regex_constants::icase);
+const regex NIL_INPUT("(2[0-4]|1[0-9]|[1-9])[:|\.]([0-5][0-9])", std::tr1::regex_constants::icase);
 const regex OCLOCK_INPUT("((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
@@ -519,6 +519,21 @@ string parserProcess::parserReturnDate()
 
 }
 
+
+string parserProcess::parserReturnNowTime()
+{
+	ostringstream oss;
+	setNowDT();
+	oss << nowDT.day << "/" <<nowDT.month << "/" << nowDT.year;
+
+	return oss.str();
+
+}
+
+
+
+
+
 void parserProcess::processTime(string timeInput)
 {
 
@@ -552,7 +567,7 @@ void parserProcess::processTime(string timeInput)
 	}
 	case(NIL) :
 	{
-
+		processTimeNil(timeInput);
 		return;
 
 	}
@@ -587,7 +602,12 @@ parserProcess::timeKeyWord  parserProcess::sortTimeKeyWord(string& timeInput)
 
 		return SHORT_AM_PM;
 	}
+	else if (regex_search(timeInput, NIL_INPUT))
+	{
 
+		return NIL;
+
+	}
 
 
 }

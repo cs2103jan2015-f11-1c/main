@@ -93,6 +93,7 @@ public:
 	void printNow();
 	string parserReturnDate();
 	string parserReturnTime();
+	string parserReturnNowTime();
 	void processTimeAmPm(string&);
 	void processTimeNil(string&);
 	void processTimeNatExp(string&);
