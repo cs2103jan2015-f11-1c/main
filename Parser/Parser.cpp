@@ -683,6 +683,9 @@ string Parser::checkST(string userinput)
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
 
+	
+	time[0] = "";
+	
 	const sregex_token_iterator d;
 	for (sregex_token_iterator e(userinput.begin(), userinput.end(), TIME_PATTERN); e != d; ++e)
 	{
@@ -702,6 +705,9 @@ string Parser::checkSD(string userinput)
 
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
+	
+	
+	date[0] = "";
 
 	const sregex_token_iterator end;
 	for (sregex_token_iterator i(userinput.begin(), userinput.end(), DATE_PATTERN); i != end; ++i)
