@@ -32,6 +32,7 @@ string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Completed! :D";
 string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 
+
 void Logic::setTaskList() {
 
 	_storageTaskListCopy = _DataBase.returnTaskList();
@@ -40,7 +41,6 @@ void Logic::setTaskList() {
 vector<Task> Logic::getTaskList() {
 
 	return _storageTaskListCopy;
-
 }
 
 
@@ -281,13 +281,14 @@ string Logic::executeCommand(paraList Input) {
 
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
+		
 		changeFileDirectory(userDirectory);
-		_feedbackMessage = FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
+
 		updatefileLocation(userDirectory);
+
 		writeFileLocation(_fileLocation);
-
-		//setReturnGUI(_storageTaskListCopy);
-
+		_feedbackMessage = userDirectory;
+	
 		//For parser to implement!!! remind jy!
 
 	} else if (command == "erasesavinghistory") {

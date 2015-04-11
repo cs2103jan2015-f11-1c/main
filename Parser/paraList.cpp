@@ -156,14 +156,9 @@ void paraList::processSearchWord(string keyWord)
 }
 
 
-
-
-
-
 string paraList::getuserdir()
 {
 	return userDir;
-
 
 }
 
