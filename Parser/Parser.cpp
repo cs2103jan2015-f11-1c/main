@@ -511,6 +511,12 @@ void Parser::processCommand(string &userInput)
 
 
 	}
+	else if (regex_search(command, SAVE_PATTERN))
+	{
+		para.processUserDir(userInput);
+
+
+	}
 	else
 	{
 		command == "invalid";
