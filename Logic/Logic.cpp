@@ -254,14 +254,14 @@ string Logic::executeCommand(paraList Input) {
 		} else if (updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
 			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
 
-		} else if (parameterToBeUpdated==" "||detailToBeUpdated==" ") {
+		} else if (atoi(parameterToBeUpdated.c_str()) == updateInteger || (atoi(detailToBeUpdated.c_str()) == updateInteger)) {
 			_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
-		}else{
+		} else {
 	
 			_DataBase.updateTask(_filename, updateInteger,parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
-			_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 
 		}
 
