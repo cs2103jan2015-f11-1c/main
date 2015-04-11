@@ -18,8 +18,14 @@ string Logic::ERROR_TASK_UPDATED_UNSUCCESSFULLY = "Failed To Update The Task!";
 string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
 string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
 string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
-string Logic::ERROR_EMPTY_LIST = "Task list is empty!";
+string Logic::ERROR_EMPTY_LIST = "Task List Is Empty!";
 string Logic::ERROR_TASK_INSUFFICIENT_PARAMETERS="Insufficient Parameters Entered!";
+string Logic::ERROR_NO_INDEX = "No Index! :<";
+string Logic::ERROR_INDEX_OUT_OF_RANGE="Index Out Of Range!";
+string Logic::ERROR_NO_COMPONENT="No Component!";
+string Logic::ERROR_COMPONENT_INVALID="Component Invalid!";
+string Logic::ERROR_NO_CONTENT="No Content!";
+string Logic::ERROR_INVALID_CONTENT="Content Invalid!";
 
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
@@ -251,14 +257,66 @@ string Logic::executeCommand(paraList Input) {
 
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
-		} else if (updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
-			_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
+		} else if (updateInteger <0){
+			_feedbackMessage = ERROR_NO_INDEX;
+		} else if (updateInteger > _storageTaskListCopy.size()) {
+			_feedbackMessage = ERROR_INDEX_OUT_OF_RANGE;
+		} else if (parameterToBeUpdated == "name"){
+			if (detailToBeUpdated == ""){
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			}
 
-		} else if (atoi(parameterToBeUpdated.c_str()) == updateInteger || (atoi(detailToBeUpdated.c_str()) == updateInteger)) {
-			_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
-		} else {
+		} else if (parameterToBeUpdated == "start-date"){
+			if (detailToBeUpdated == ""){
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+				string tempYear = detailToBeUpdated.substr(detailToBeUpdated.size() - 4, detailToBeUpdated.size());
+				string temp = detailToBeUpdated.substr(0, detailToBeUpdated.size() - 5);
+				string tempMonth = temp.substr(temp.find_last_of("/"), temp.size());
+				string tempDay = temp.substr(0, temp.find_first_of("/"));
+				int year = stoi(tempYear);
+				int month = stoi(tempMonth);
+				int day = stoi(tempDay);
+				if (year / 1000 < 2){
+					_feedbackMessage = ERROR_INVALID_CONTENT;
+				} else if ((month < 1) || (month>12)){
+					_feedbackMessage = ERROR_INVALID_CONTENT;
+				} else if (day < 1){
+					_feedbackMessage = ERROR_INVALID_CONTENT;
+				} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)){
+					if (day>31){
+						_feedbackMessage = ERROR_INVALID_CONTENT;
+					}
+				} else if (month == 2){
+					if (day > 28){
+						_feedbackMessage = ERROR_INVALID_CONTENT;
+					}
+				} else {
+					if (day > 30){
+						_feedbackMessage = ERROR_INVALID_CONTENT;
+					}
+				}
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			}
+					/*
+					(updateInteger > _storageTaskListCopy.size() || updateInteger <= 0) {
+					_feedbackMessage = ERROR_TASK_UPDATED_UNSUCCESSFULLY;
+
+					} else if (atoi(parameterToBeUpdated.c_str()) == updateInteger || (atoi(detailToBeUpdated.c_str()) == updateInteger)) {
+					_feedbackMessage = ERROR_TASK_INSUFFICIENT_PARAMETERS;
+					} */
+				} else {
 	
-			_DataBase.updateTask(_filename, updateInteger,parameterToBeUpdated, detailToBeUpdated);
+			_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();

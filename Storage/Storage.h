@@ -51,7 +51,9 @@ private:
 	static string ERROR_INVALID_STATUS_SORT;
 	static string ERROR_INVALID_PRIORITY_SORT;
 	static string ERROR_INVALID_UPDATE_KEYWORD;
+	static string ERROR_INVALID_UPDATE_PRIORITY_KEYWORD;
 	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
+
 	string feedbackMessage;
 
 	bool isEmptyTaskList();

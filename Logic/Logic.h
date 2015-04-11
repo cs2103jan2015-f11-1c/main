@@ -44,6 +44,12 @@ private:
 	static string ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_TASK_INSUFFICIENT_PARAMETERS;
+	static string ERROR_NO_INDEX;
+	static string ERROR_INDEX_OUT_OF_RANGE;
+	static string ERROR_NO_COMPONENT;
+	static string ERROR_COMPONENT_INVALID;
+	static string ERROR_NO_CONTENT;
+	static string ERROR_INVALID_CONTENT;
 
 	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 	static string FEEDBACK_DISPLAY_ALL_TASKS;

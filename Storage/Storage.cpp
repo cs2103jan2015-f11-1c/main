@@ -13,6 +13,7 @@ string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!"
 string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
 string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
+string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Update priority invalid!";
 string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
 
 bool Storage::isEmptyTaskList(){
@@ -228,6 +229,16 @@ string Storage::returnLogicFeedbackMessage(){
 	return feedbackMessage;
 }
 
+struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	bool operator () (char x, char y) const {
+		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
+	}
+};
+
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
+}
+
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
 
 	commandStack.push("update");
@@ -254,8 +265,13 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword
 		taskList[taskIndex - 1].changeTaskDeadlineTime(newInput);
 		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if(keyword == "priority") {
-		taskList[taskIndex-1].changeTaskPriority(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
+		transform(newInput.begin(), newInput.end(), newInput.begin(), toupper);
+		if ((newInput == "HIGH") || (newInput == "MEDIUM") || (newInput == "LOW") || (newInput == "!H") || (newInput == "!M") || (newInput == "!L")){
+			taskList[taskIndex - 1].changeTaskPriority(newInput);
+			setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
+		} else {
+			setFeedbackMessage(ERROR_INVALID_UPDATE_PRIORITY_KEYWORD);
+		}
 	} else {
 		setFeedbackMessage(ERROR_INVALID_UPDATE_KEYWORD);
 
