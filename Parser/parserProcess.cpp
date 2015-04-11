@@ -37,8 +37,9 @@ const regex TMR_INPUT("(t(\\w+|)m(\\w+|)(w|r))", std::tr1::regex_constants::icas
 const regex YEST_INPUT("(y(\\w+|)(e|s)(\\w+|)(t|r|y))", std::tr1::regex_constants::icase);
 const regex AMPM_INPUT("(1[0-2]|[1-9])[:|\.]([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)", std::tr1::regex_constants::icase);
 const regex AMPM_SHORT_INPUT("(((1[0-2]|[1-9])(\\s)?(am|pm|noon)))", std::tr1::regex_constants::icase);
-const regex NIL_INPUT("(2[0-4]|1[0-9]|[1-9])[:|\.]([0-5][0-9])", std::tr1::regex_constants::icase);
+const regex NIL_INPUT("((2[0-3]|1[0-9]|0[1-9]|[1-9])([:|\.])?([0-5][0-9]))", std::tr1::regex_constants::icase);
 const regex OCLOCK_INPUT("((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
+const regex SYM_INPUT("([:|\.])", std::tr1::regex_constants::icase);
 
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
 {
@@ -539,7 +540,9 @@ void parserProcess::processTime(string timeInput)
 
 	timeKeyWord time;
 	time = sortTimeKeyWord(timeInput);
-	cout << "m" << endl;
+	
+	clearTimestore();
+
 	switch (time)
 	{
 	case(AM_PM) :
@@ -631,7 +634,18 @@ void parserProcess::processTimeAmPm(string& timeInput)
 
 }
 void parserProcess::processTimeNil(string& timeInput)
-{
+{   
+
+
+	if (!regex_search(timeInput,SYM_INPUT))
+	{
+		processedtimeStore.nilstore = timeInput;
+		
+	}
+	else
+	{ 
+
+
 	istringstream iss(timeInput);
 	int hours, mins;
 	char sym, status;
@@ -642,6 +656,7 @@ void parserProcess::processTimeNil(string& timeInput)
 
 	processedtimeStore.min = mins;
 	processedtimeStore.hours = hours;
+    }
 
 	return;
 
@@ -695,24 +710,50 @@ void parserProcess::covertTime(char& status, int& hour)
 
 string parserProcess::parserReturnTime()
 {
-
-	ostringstream oss;
-	if (processedtimeStore.min<10)
+	if (processedtimeStore.nilstore!="")
 	{
-		oss << processedtimeStore.hours << ":0" << processedtimeStore.min;
+
+		return processedtimeStore.nilstore;
+
 	}
 	else
 	{
-		oss << processedtimeStore.hours << ":" << processedtimeStore.min;
 
+
+
+
+		ostringstream oss;
+
+		if (processedtimeStore.min < 10)
+		{
+			oss << processedtimeStore.hours << ":0" << processedtimeStore.min;
+		}
+		else
+		{
+			oss << processedtimeStore.hours << ":" << processedtimeStore.min;
+
+		}
+
+
+
+		return oss.str();
 	}
 
 
 
-	return oss.str();
+
+}
+
+void parserProcess::clearTimestore()
+{
+
+	processedtimeStore.hours = 0;
+	processedtimeStore.min = 0;
+	processedtimeStore.nilstore = "";
+	processedtimeStore.timeStatus = "";
 
 
-
+	return;
 
 
 }
