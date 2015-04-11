@@ -243,16 +243,6 @@ string Logic::executeCommand(paraList Input) {
 
 		_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 
-	} else if (command == "display") {
-		//setTaskList();
-		
-		if (_storageTaskListCopy.empty()) {
-			_feedbackMessage = ERROR_EMPTY_LIST;
-		} else {
-			_DataBase.updateTextFile(_filename);
-			setTaskList();
-			_feedbackMessage = FEEDBACK_DISPLAY_ALL_TASKS;
-		}
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
 
