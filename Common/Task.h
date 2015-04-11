@@ -36,6 +36,7 @@ public:
 	Task();
 	Task(string,string,string,string,string,string,string,string,string);
 
+
 	string getTaskDetails(){
 
 		string taskName = checkNull(_taskName);
@@ -48,16 +49,18 @@ public:
 		string priority = checkNull(_taskPriority);
 		string status = _taskStatus;
 //to be updated 
+
+
 		ostringstream oss;
-		oss <<setw(15)<<left<< taskName 
-			<<setw(7)<< date1
-			<<setw(5)<< time1
-			<<setw(7)<< date2
-			<<setw(5)<< time2
-			<<setw(7)<< date3
-			<<setw(5)<< time3
-			<<setw(4)<< priority
-			<< status;
+		oss << setw(15) << right << taskName
+		<<setw(7)<< left << date1
+			<< setw(5)<< left << time1
+			<< setw(7)<< left << date2
+			<< setw(5)<< left << time2
+			<< setw(7)<< left << date3
+			<< setw(5)<< left << time3
+			<< setw(4)<< left << priority
+			<< setw(5)<<left<<status;
 
 		return oss.str();		
 	}
