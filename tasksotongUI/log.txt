@@ -148,3 +148,63 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Undo Completed! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Year Entered Is Invalid!
+Year Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
