@@ -495,8 +495,6 @@ namespace tasksotongUI {
 		//DisplayTaskBox->Text = "debugging1: " + UserInputBox->Text + "testing1";
 		if (e->KeyChar == (char)13) {
 
-			Display_richTextBox->Text = "test test";
-
 			string tempUserInput = msclr::interop::marshal_as<std::string>(UserInputBox->Text);
 
 			int i = tempUserInput.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSUVWXYZ");
@@ -516,55 +514,74 @@ namespace tasksotongUI {
 			//DisplayTaskBox->Text = textFileCopy_fromLogic.size().ToString();
 
 			string outputDisplay;
+			Display_richTextBox->Clear();
 
 			for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
 
-				string tempName = "\t\t\t" + to_string(i + 1) + ".\t"+taskListCopy_fromLogic[i].getTaskName()+"\r\n";
-				//String^ displayName = gcnew String(tempName.c_str());
-				//Display_richTextBox->Text = displayName;
+				string tempName = "\t" + to_string(i + 1) + ".\t"+taskListCopy_fromLogic[i].getTaskName()+"\r\n";
+				String^ displayName = gcnew String(tempName.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Segoe UI", 15.75, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = displayName;
 
-				string tempStartDnT ="\t\tSTART: \t" +taskListCopy_fromLogic[i].getTaskStartDate() + "\t"+ taskListCopy_fromLogic[i].getTaskStartTime()+"\r\n";
-				//String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
-				//Display_richTextBox->Text = displayStartDnT + "over write";
+				string start = "START: \t";
+				String^ startLine = gcnew String(start.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = startLine;
 
-				string tempEndDnT = "\t\tEND: \t\t"+taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
-				//String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
-				//Display_richTextBox->Text = displayEndDnT;
-
-				string tempDeadlineDnT = "\t\tDEADLINE: \t" + taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
-				//String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
-				//Display_richTextBox->Text = displayDeadlineDnT;
-
-				string tempPnS ="\t\t\t\t"+ taskListCopy_fromLogic[i].getTaskPriority() + "\t" + taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
-				//String^ displayPnS = gcnew String(tempPnS.c_str());
 				
-				//Display_richTextBox->Text = displayPnS;
-				outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n";
+				string tempStartDnT =taskListCopy_fromLogic[i].getTaskStartDate() + "\t"+ taskListCopy_fromLogic[i].getTaskStartTime()+"\r\n";
+				String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayStartDnT;
+
+				string end = "END: \t\t";
+				String^ endLine = gcnew String(end.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = endLine;
+
+
+				string tempEndDnT = taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
+				String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayEndDnT;
+
+				string deadLine = "DEADLINE: \t";
+				String^ deadLineLine = gcnew String(deadLine.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = deadLineLine;
+
+				string tempDeadlineDnT = taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
+				String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayDeadlineDnT;
+
+				string tempPriority = "\t\t" + taskListCopy_fromLogic[i].getTaskPriority() + "\t";
+				String^ priority = gcnew String(tempPriority.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Italic);
+				Display_richTextBox->SelectionColor = Color::SeaGreen;
+				Display_richTextBox->SelectedText = priority;
+
+
+				string tempStatus =taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
+				String^ status = gcnew String(tempStatus.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Italic);
+				Display_richTextBox->SelectionColor = Color::DarkMagenta;
+				Display_richTextBox->SelectedText = status;
+				
 			}
-
-			
-			String^ display = gcnew String(outputDisplay.c_str());
-			Display_richTextBox->Text = display;
-
-			//Original codes below:
-			/*
-			string itemString;
-			for (int i = 0; i < textFileCopy_fromLogic.size(); i++) {
-				itemString = itemString + to_string(i + 1) + string(".  ") + textFileCopy_fromLogic[i] + "\r\n";
-			}
-			String^ displayList = gcnew String(itemString.c_str());
-			Display_richTextBox->Text = displayList;
-
-			*/ //end of original code!!
-
-			//std::string feedbackmsg = TSLogic->getFeedbackMsg();
 
 
 			String^ feedback = gcnew String(feedbackmsg.c_str());
 			WelcomeBox->Text = feedback;
 
 			UserInputBox->Clear();
-			//DisplayTaskBox->Text = "can work???";
 		}
 
 	}
@@ -599,41 +616,72 @@ namespace tasksotongUI {
 		vector<Task> taskListCopy_fromLogic = TSLogic->getTaskList();
 		//string test = "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
 		//String^ display = gcnew String(test.c_str());
-		//Display_richTextBox->Text = display;
 		
-		string outputDisplay;
-		for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
+		if (taskListCopy_fromLogic.size() == 0) {
+			
 
-			string tempName = "\t\t\t" + to_string(i + 1) + ".\t" + taskListCopy_fromLogic[i].getTaskName() + "\r\n";
-			//String^ displayName = gcnew String(tempName.c_str());
-			//Display_richTextBox->Text = displayName;
+		} else {
+			Display_richTextBox->Clear();
+			for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
 
-			string tempStartDnT = "\t\tSTART: \t" + taskListCopy_fromLogic[i].getTaskStartDate() + "\t" + taskListCopy_fromLogic[i].getTaskStartTime() + "\r\n";
-			//String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
-			//Display_richTextBox->Text = displayStartDnT + "over write";
+				string tempName = "\t" + to_string(i + 1) + ".\t" + taskListCopy_fromLogic[i].getTaskName() + "\r\n";
+				String^ displayName = gcnew String(tempName.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Segoe UI", 15.75, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = displayName;
 
-			string tempEndDnT = "\t\tEND: \t\t" + taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
-			//String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
-			//Display_richTextBox->Text = displayEndDnT;
+				string start = "START: \t";
+				String^ startLine = gcnew String(start.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = startLine;
 
-			string tempDeadlineDnT = "\t\tDEADLINE: \t" + taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
-			//String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
-			//Display_richTextBox->Text = displayDeadlineDnT;
 
-			string tempPnS = "\t\t\t\t" + taskListCopy_fromLogic[i].getTaskPriority() + "\t" + taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
-			//String^ displayPnS = gcnew String(tempPnS.c_str());
+				string tempStartDnT = taskListCopy_fromLogic[i].getTaskStartDate() + "\t" + taskListCopy_fromLogic[i].getTaskStartTime() + "\r\n";
+				String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayStartDnT;
 
-			//Display_richTextBox->Text = displayPnS;
-			outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n" + "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
+				string end = "END: \t\t";
+				String^ endLine = gcnew String(end.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = endLine;
+
+
+				string tempEndDnT = taskListCopy_fromLogic[i].getTaskEndDate() + "\t" + taskListCopy_fromLogic[i].getTaskEndTime() + "\r\n";
+				String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayEndDnT;
+
+				string deadLine = "DEADLINE: \t";
+				String^ deadLineLine = gcnew String(deadLine.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = deadLineLine;
+
+				string tempDeadlineDnT = taskListCopy_fromLogic[i].getTaskDeadlineDate() + "\t" + taskListCopy_fromLogic[i].getTaskDeadlineTime() + "\r\n";
+				String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayDeadlineDnT;
+
+				string tempPriority = "\t\t" + taskListCopy_fromLogic[i].getTaskPriority() + "\t";
+				String^ priority = gcnew String(tempPriority.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Italic);
+				Display_richTextBox->SelectionColor = Color::SeaGreen;
+				Display_richTextBox->SelectedText = priority;
+
+
+				string tempStatus = taskListCopy_fromLogic[i].getTaskStatus() + "\r\n";
+				String^ status = gcnew String(tempStatus.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Italic);
+				Display_richTextBox->SelectionColor = Color::DarkMagenta;
+				Display_richTextBox->SelectedText = status;
+			}
 		}
-
-
-		String^ display = gcnew String(outputDisplay.c_str());
-		if (display == "") {}
-		else {
-			Display_richTextBox->Text = display;
-		}
-		
 
 
 	}
