@@ -552,6 +552,28 @@ string Logic::executeCommand(paraList Input) {
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}
 
+	} else if (command == "view-c") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewCompletedTasks();
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		}
+
+	} else if (command == "view-i") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewIncompleteTasks();
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		}
+
 	} else {
 		_feedbackMessage = ERROR_INVALID_USERINPUT;
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
