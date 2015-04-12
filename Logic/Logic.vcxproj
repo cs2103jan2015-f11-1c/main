@@ -79,6 +79,9 @@
     <ProjectReference Include="..\Storage\Storage.vcxproj">
       <Project>{df169fb4-a944-48fc-849d-a09a016f9cef}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TaskSotong_Log\TaskSotong_Log.vcxproj">
+      <Project>{ac2147da-babc-44bf-831c-0803f3b514ab}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\UI\UI.vcxproj">
       <Project>{d71ce680-c037-4b84-b13b-dcbd922d0225}</Project>
     </ProjectReference>
