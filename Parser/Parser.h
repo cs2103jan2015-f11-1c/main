@@ -54,6 +54,9 @@ public:
 	void processUpdateKeywords();
 	void processupdateNone(string&, int&);
 	void convertKeywordTime(string&, string&);
+	void processStartKey(string&);
+	void processEndKey(string&);
+	int  findToIndex(string&);
 
 };
 
