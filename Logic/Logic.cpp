@@ -460,6 +460,15 @@ string Logic::executeCommand(paraList Input) {
 					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 				} else {}
 			}
+		} else if (parameterToBeUpdated == "priority"){
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			}
 		}
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "delete") {
