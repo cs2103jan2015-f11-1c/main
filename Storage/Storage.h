@@ -32,7 +32,7 @@ private:
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<vector<Task>> clearAllTasksStack;
-	stack<vector<string>> sortByNameStack;
+	stack<vector<Task>> sortByNameStack;
 	stack<vector<string>> sortByStatusBeforeStack;
 	stack<vector<string>> sortByStatusAfterStack;
 	stack<vector<string>> sortByPriorityBeforeStack;
@@ -61,7 +61,7 @@ private:
 	bool isInvalidIndex(unsigned int);
 	void performSearchForViewingTasks(string, int&);
 	bool isOnlyOneTask();
-	bool isSortedByName(vector<string>);
+	bool isSortedByName(vector<Task>);
 	bool isSortedByStatus();
 	bool isSortedByPriority();
 	void performSort(queue<string>&, string);
@@ -69,7 +69,6 @@ private:
 public:
 
 	vector<Task> returnTaskList();
-
 
 	void updateTaskList(Task);
 
@@ -93,6 +92,8 @@ public:
 
 	string returnLogicFeedbackMessage();
 
+	//bool noCaseLess(const Task&, const Task&);
+
 	void updateTask(string, unsigned int, string, string);
 
 	void markTask(string, unsigned int);
@@ -105,7 +106,7 @@ public:
 
 	vector<string> searchTask(string, const string&);
 
-	vector<string> sortTaskByName(string);
+	vector<Task> sortTaskByName(string);
 
 	vector<string> sortTaskByStatus(string);
 

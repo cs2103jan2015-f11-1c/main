@@ -51,16 +51,16 @@ void Storage::performSearchForViewingTasks(string keyword, int& count){
 
 bool Storage::isOnlyOneTask(){
 
-	return (textFileCopy.size() == 1);
+	return (taskList.size() == 1);
 }
+/*
+bool Storage::isSortedByName(vector<Task> taskListDuplicate){
+	//for (auto &words : taskListDuplicate)
+		//transform(words.getTaskName, words.getTaskName, words.getTaskName, toupper);
 
-bool Storage::isSortedByName(vector<string> textFileDuplicate){
-	for (auto &words : textFileDuplicate)
-		transform(words.begin(), words.end(), words.begin(), toupper);
-
-	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+	return (is_sorted(taskListDuplicate.begin()->getTaskName, taskListDuplicate.end()->getTaskName));
 }
-
+*/
 bool Storage::isSortedByStatus(){
 
 	return (textFileCopy == sortByStatusAfterStack.top());
@@ -227,8 +227,9 @@ struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	}
 };
 
-bool noCaseLess(const string &a, const string &b){
-	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
+bool noCaseLess(Task task1,Task task2){
+	//return lexicographical_compare(task1.begin(), task1.end(), task2.begin(), task2.end(), caseInsensitiveLess());
+	return lexicographical_compare((task1.getTaskName()).begin(), (task1.getTaskName()).end(), (task2.getTaskName()).begin(), (task2.getTaskName()).end(), caseInsensitiveLess());
 }
 
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
@@ -360,7 +361,7 @@ void Storage::undoAction(){
 	
 	if (previousCommand == "sort by name"){
 
-		textFileCopy = sortByNameStack.top();
+		taskList = sortByNameStack.top();
 		sortByNameStack.pop();
 
 		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
@@ -431,42 +432,56 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 	return returnTextFileCopy;
 }
 
+struct less_than_key
+{
+	inline bool operator() (Task struct1, Task struct2)
+	{
+		string task1name = struct1.getTaskName();
+		string task2name = struct2.getTaskName();
+		int task1 = stoi(task1name);
+		int task2 = stoi(task2name);
+		return (task1 < task2);
+		//return (transform(task1name.begin(), task1name.end(), task1name.begin(), tolower) < transform(task2name.begin(), task2name.end(), task2name.begin(), tolower));
 
-struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	}
+};
+
+struct less_than_key
+{
 	bool operator () (char x, char y) const {
 		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
 	}
 };
-
-bool noCaseLess(const string &a, const string &b){
-	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
-}
-
-vector<string> Storage::sortTaskByName(string fileName){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
-
-	if (isEmptyTaskList()){
-		return;
+*/
+struct less_than_key
+{
+	inline bool operator() (Task& struct1, Task& struct2)
+	{
+		return (struct1.getTaskName() < struct2.getTaskName());
 	}
+};
+
+vector<Task> Storage::sortTaskByName(string fileName){
 
 	if (isOnlyOneTask()){
-		cout << ERROR_ONLY_ONE_TASK << endl;
-		return;
+		setFeedbackMessage(ERROR_ONLY_ONE_TASK);
+		return taskList;
 	}
 
-	if (isSortedByName(textFileCopy)){
-		cout << ERROR_INVALID_NAME_SORT << endl;
-		return;
-	}
+	//if (isSortedByName(taskList)){
+	//	setFeedbackMessage(ERROR_INVALID_NAME_SORT);
+	//	return;
+	//}
 
 	commandStack.push("sort by name");
-	sortByNameStack.push(textFileCopy);
-	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	sortByNameStack.push(taskList);
+	sort(taskList.begin(), taskList.end(), less_than_key());
+	//sort((taskList.begin())->getTaskName(), (taskList.end())->getTaskName(), noCaseLess);
+	//sort(taskList.begin(), taskList.end(), noCaseLess);
 
-	return textFileCopy;
+	return taskList;
 }
-
+/*
 vector<string> Storage::sortTaskByStatus(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);
