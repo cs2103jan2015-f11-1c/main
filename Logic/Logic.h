@@ -5,7 +5,7 @@
 #include "..\Parser\Parser.h"
 #include "..\Storage\Storage.h"
 #include "..\Common\Task.h"
-
+#include "..\TaskSotong_Log\Log.h"
 
 #include <iostream> 
 #include <string> 
@@ -66,6 +66,9 @@ private:
 	static string FEEDBACK_UNDO_PREVIOUS_TASK;
 	static string FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 	static string FEEDBACK_SORT_TASK_BY_KEYWORD;
+
+	Log _Logic_LogFile;
+	
 
 
 public:

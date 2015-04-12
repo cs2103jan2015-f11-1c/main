@@ -241,7 +241,7 @@ namespace tasksotongUI {
 	private: System::Windows::Forms::Button^  IncompleteButton;
 	private: System::Windows::Forms::Button^  PriorityButton;
 	private: System::Windows::Forms::Button^  DeadlineButton;
-	private: System::Windows::Forms::VScrollBar^  vScrollBar1;
+
 
 
 	private:
@@ -283,7 +283,6 @@ namespace tasksotongUI {
 				 this->PriorityButton = (gcnew System::Windows::Forms::Button());
 				 this->DeadlineButton = (gcnew System::Windows::Forms::Button());
 				 this->Enter = (gcnew System::Windows::Forms::Button());
-				 this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
 				 this->CompleteButton = (gcnew System::Windows::Forms::Button());
 				 this->Help = (gcnew System::Windows::Forms::ToolStrip());
 				 this->toolStripDropDownButton1 = (gcnew System::Windows::Forms::ToolStripDropDownButton());
@@ -355,11 +354,6 @@ namespace tasksotongUI {
 				 this->Enter->Name = L"Enter";
 				 this->Enter->UseVisualStyleBackColor = false;
 				 this->Enter->Click += gcnew System::EventHandler(this, &tasksotongGUI::Enter_Click);
-				 // 
-				 // vScrollBar1
-				 // 
-				 resources->ApplyResources(this->vScrollBar1, L"vScrollBar1");
-				 this->vScrollBar1->Name = L"vScrollBar1";
 				 // 
 				 // CompleteButton
 				 // 
@@ -474,7 +468,6 @@ namespace tasksotongUI {
 				 this->Controls->Add(this->textBox1);
 				 this->Controls->Add(this->button1);
 				 this->Controls->Add(this->Help);
-				 this->Controls->Add(this->vScrollBar1);
 				 this->Controls->Add(this->Enter);
 				 this->Controls->Add(this->DeadlineButton);
 				 this->Controls->Add(this->PriorityButton);
@@ -546,7 +539,7 @@ namespace tasksotongUI {
 				//String^ displayPnS = gcnew String(tempPnS.c_str());
 				
 				//Display_richTextBox->Text = displayPnS;
-				outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n" + "Size of taskList: " + to_string(taskListCopy_fromLogic.size());
+				outputDisplay = outputDisplay + tempName + tempStartDnT + tempEndDnT + tempDeadlineDnT + tempPnS + "\r\n";
 			}
 
 			

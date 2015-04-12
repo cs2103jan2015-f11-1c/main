@@ -166,6 +166,24 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 
 }
 
+/*
+string Logic::compareTaskDateandTime(Task taskInput) {
+	string startDate = taskInput.getTaskStartDate();
+	string startTime = taskInput.getTaskStartTime();
+	string endDate = taskInput.getTaskStartTime();
+	string endTime = taskInput.getTaskStartTime();
+
+	string tempFeedback;
+	if (startDate == endDate) {
+
+
+
+	}
+
+}
+*/
+
+
 
 void Logic::setTaskList() {
 
@@ -363,10 +381,15 @@ string Logic::getFeedbackMsg() {
 
 
 string Logic::executeCommand(paraList Input) {
-	
-	string command = getLowerCaseCommand(Input);
 
-	if (command == "add") {
+	_Logic_LogFile.writeToLogFile("******************LOGIC_EXECUTECOMMAND_START*******************");
+
+	string command = getLowerCaseCommand(Input);
+	if (command == "exit"){
+		exit(0);
+	
+	}else if (command == "add") {
+		_Logic_LogFile.writeToLogFile(command);
 		Task oneTask = Input.getTask();
 		string tempFeedback;
 		tempFeedback=checkTaskDatenTimeValidity(oneTask);
@@ -379,8 +402,10 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 		}
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 
 	} else if (command == "update") {
+		_Logic_LogFile.writeToLogFile(command);
 		int updateInteger = Input.getUpdateInteger();
 		string parameterToBeUpdated = Input.getKeyword();
 		string detailToBeUpdated = Input.getInput();
@@ -395,7 +420,6 @@ string Logic::executeCommand(paraList Input) {
 			if (detailToBeUpdated == "") {
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
-
 				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 				_DataBase.updateTextFile(_filename);
 				setTaskList();
@@ -418,7 +442,7 @@ string Logic::executeCommand(paraList Input) {
 					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 				} else {}
 			}
-			
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		} else if ((parameterToBeUpdated == "start-time") || (parameterToBeUpdated == "end-time") || (parameterToBeUpdated == "deadline-time")) {
 
 			if (detailToBeUpdated == "") {
@@ -437,6 +461,7 @@ string Logic::executeCommand(paraList Input) {
 				} else {}
 			}
 		}
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 
@@ -451,7 +476,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
 		}
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "save") {
 		string userDirectory = Input.getuserdir();
 		
@@ -461,7 +486,7 @@ string Logic::executeCommand(paraList Input) {
 
 		writeFileLocation(_fileLocation);
 		_feedbackMessage = userDirectory;
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	}  else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		if (_storageTaskListCopy.empty()) {
@@ -475,7 +500,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "unmark") {
 		int unmarkIndex = Input.getmarkindex();
 		if (_storageTaskListCopy.empty()) {
@@ -489,7 +514,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "clear") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
@@ -499,15 +524,13 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
 		}
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "undo") {
-		
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
 		setTaskList();
-
 		_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "sort") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
@@ -515,14 +538,13 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.sortTaskByName(_filename);
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
-
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}
 
 	} else {
 		_feedbackMessage = ERROR_INVALID_USERINPUT;
-
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	}
 
 	return _feedbackMessage;
