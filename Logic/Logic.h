@@ -35,7 +35,6 @@ private:
 	string _feedbackMessage;
 
 	static string SAVING_LOCATON_HISTORY;
-
 	static string ERROR_INVALID_USERINPUT;
 	static string ERROR_EXISTING_TASK;
 	static string ERROR_TASK_UPDATED_UNSUCCESSFULLY;
@@ -50,6 +49,11 @@ private:
 	static string ERROR_COMPONENT_INVALID;
 	static string ERROR_NO_CONTENT;
 	static string ERROR_INVALID_CONTENT;
+	static string ERROR_INVALID_YEAR;
+	static string ERROR_INVALID_MONTH;
+	static string ERROR_INVALID_DAY;
+	static string ERROR_INVALID_HOUR;
+	static string ERROR_INVALID_MINUTE;
 
 	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 	static string FEEDBACK_DISPLAY_ALL_TASKS;
@@ -65,6 +69,10 @@ private:
 
 
 public:
+
+	string checkTimeValidity(string);
+
+	string checkDateValidity(string);
 
 	void setTaskList();
 

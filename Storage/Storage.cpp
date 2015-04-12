@@ -238,30 +238,22 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword
 
 	if (keyword == "name") {
 		taskList[taskIndex - 1].changeTaskName(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-date") {
 		taskList[taskIndex - 1].changeTaskStartDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-time") {
 		taskList[taskIndex - 1].changeTaskStartTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-date") {
 		taskList[taskIndex - 1].changeTaskEndDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-time") {
 		taskList[taskIndex - 1].changeTaskEndTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-date") {
 		taskList[taskIndex - 1].changeTaskDeadlineDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-time") {
 		taskList[taskIndex - 1].changeTaskDeadlineTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if(keyword == "priority") {
 		transform(newInput.begin(), newInput.end(), newInput.begin(), toupper);
 		if ((newInput == "HIGH") || (newInput == "MEDIUM") || (newInput == "LOW") || (newInput == "!H") || (newInput == "!M") || (newInput == "!L")){
 			taskList[taskIndex - 1].changeTaskPriority(newInput);
-			setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 		} else {
 			setFeedbackMessage(ERROR_INVALID_UPDATE_PRIORITY_KEYWORD);
 		}

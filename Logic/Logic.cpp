@@ -26,6 +26,12 @@ string Logic::ERROR_NO_COMPONENT="No Component!";
 string Logic::ERROR_COMPONENT_INVALID="Component Invalid!";
 string Logic::ERROR_NO_CONTENT="No Content!";
 string Logic::ERROR_INVALID_CONTENT="Content Invalid!";
+string Logic::ERROR_INVALID_YEAR="Year Entered Is Invalid!";
+string Logic::ERROR_INVALID_MONTH="Month Entered Is Invalid!";
+string Logic::ERROR_INVALID_DAY="Day Entered Is Invalid";
+string Logic::ERROR_INVALID_HOUR="Hour Entered Is Invalid";
+string Logic::ERROR_INVALID_MINUTE="Minute Entered Is Invalid";
+
 
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
@@ -39,6 +45,68 @@ string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Completed! :D";
 string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 
+string Logic::checkTimeValidity(string timeInput) {
+
+	string tempFeedback = "Pass Time Test";
+
+	if (timeInput == "") {
+		tempFeedback = ERROR_NO_CONTENT;
+	} else {
+		string tempMinute = timeInput.substr(timeInput.find_first_of(":") + 1, timeInput.length());
+		string tempHour = timeInput.substr(0, timeInput.find_first_of(":"));
+
+		int minute = atoi(tempMinute.c_str());
+		int hour = atoi(tempHour.c_str());
+
+		if ((hour < 0) || (hour>23)) {
+			tempFeedback = ERROR_INVALID_HOUR;
+		} else if (minute > 59) {
+			tempFeedback = ERROR_INVALID_MINUTE;
+		}
+	}
+		return tempFeedback;
+}
+
+string Logic::checkDateValidity(string dateInput) {
+
+	string tempFeedback = "Pass Date Test";
+
+	if (dateInput == "") {
+		tempFeedback = ERROR_NO_CONTENT;
+	} else {
+		string tempYear = dateInput.substr(dateInput.length() - 4, dateInput.length());
+		string temp = dateInput.substr(0, dateInput.length() - 5);
+		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
+		string tempDay = temp.substr(0, temp.find_first_of("/"));
+		
+		int year = atoi(tempYear.c_str());
+		int month = atoi(tempMonth.c_str());
+		int day = atoi(tempDay.c_str());
+		
+		if (year < 2015) {
+			tempFeedback = ERROR_INVALID_YEAR;
+		} else if ((month < 1) || (month>12)) {
+			tempFeedback = ERROR_INVALID_MONTH;
+		} else if (day < 1) {
+			tempFeedback = ERROR_INVALID_DAY;
+		} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)) {
+			if (day>31) {
+				tempFeedback = ERROR_INVALID_DAY;
+			}
+		} else if (month == 2) {
+			if (day > 28) {
+				tempFeedback = ERROR_INVALID_DAY;;
+			}
+		} else if (day > 30) {
+			tempFeedback = ERROR_INVALID_DAY;
+			
+		}
+
+	}
+
+	return tempFeedback;
+
+}
 
 void Logic::setTaskList() {
 
@@ -257,14 +325,15 @@ string Logic::executeCommand(paraList Input) {
 
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
-		} else if (updateInteger <0){
+		} else if (updateInteger < 0) {
 			_feedbackMessage = ERROR_NO_INDEX;
 		} else if (updateInteger > _storageTaskListCopy.size()) {
 			_feedbackMessage = ERROR_INDEX_OUT_OF_RANGE;
-		} else if (parameterToBeUpdated == "name"){
-			if (detailToBeUpdated == ""){
+		} else if (parameterToBeUpdated == "name") {
+			if (detailToBeUpdated == "") {
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
+
 				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 				_DataBase.updateTextFile(_filename);
 				setTaskList();
@@ -272,47 +341,30 @@ string Logic::executeCommand(paraList Input) {
 				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 			}
 
-		} else if (parameterToBeUpdated == "start-date"){
-			if (detailToBeUpdated == ""){
-				_feedbackMessage = ERROR_NO_CONTENT;
-			} else {
-				string tempYear = detailToBeUpdated.substr(detailToBeUpdated.length() - 4, detailToBeUpdated.length());
-				string temp = detailToBeUpdated.substr(0, detailToBeUpdated.length() - 5);
-				string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
-				string tempDay = temp.substr(0, temp.find_first_of("/"));
-				int year = atoi(tempYear.c_str());
-				int month = atoi(tempMonth.c_str());
-				int day = atoi(tempDay.c_str());
-				if (year < 2015){
-					_feedbackMessage = tempYear;
-					return _feedbackMessage;
-				} else if ((month < 1) || (month>12)){
-					_feedbackMessage = "Month invalid";
-					return _feedbackMessage;
-				} else if (day < 1){
-					_feedbackMessage = "Day less than 1";
-					return _feedbackMessage;
-				} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)){
-					if (day>31){
-						_feedbackMessage = "Day greater than 31";
-						return _feedbackMessage;
-					}
-				} else if (month == 2){
-					if (day > 28){
-						_feedbackMessage = "Day greater than 28";
-						return _feedbackMessage;
-					}
-				} else if (day > 30){
-					_feedbackMessage = "Day greater than 30";
-					return _feedbackMessage;
-				} 
-					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
-					_DataBase.updateTextFile(_filename);
-					setTaskList();
-					_DataBase.setFeedbackMessage("updateeeee successful");
-					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-				
-			}
+		} else if ((parameterToBeUpdated == "start-date") || (parameterToBeUpdated == "end-date") || (parameterToBeUpdated == "deadline-date")) {
+
+			_feedbackMessage = checkDateValidity(detailToBeUpdated);
+
+			if (_feedbackMessage == "Pass Date Test") {
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			} else {}			
+			
+		} else if ((parameterToBeUpdated == "start-time") || (parameterToBeUpdated == "end-time") || (parameterToBeUpdated == "deadline-time")) {
+
+			_feedbackMessage = checkTimeValidity(detailToBeUpdated);
+
+			if (_feedbackMessage == "Pass Time Test") {
+
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			} else {}
 		}
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
@@ -342,13 +394,7 @@ string Logic::executeCommand(paraList Input) {
 	
 		//For parser to implement!!! remind jy!
 
-	} else if (command == "erasesavinghistory") {
-		for (int i = 0; i < (_fileLocation.size() - 1); i++) {
-
-			//int j=remove(_fileLocation[i].c_str);
-		}
-
-	} else if (command == "mark") {
+	}  else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;

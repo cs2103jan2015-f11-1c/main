@@ -52,6 +52,8 @@ public:
 	void processTime();
 	void processBeforeKeywordFrom(string &);
 	void processUpdateKeywords();
+	void processupdateNone(string&, int&);
+	void convertKeywordTime(string&, string&);
 
 };
 
