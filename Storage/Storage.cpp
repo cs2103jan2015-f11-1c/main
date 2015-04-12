@@ -34,19 +34,19 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	return false;
 }
 
-void Storage::performSearchForViewingTasks(string keyword, int& count){
+vector<Task> Storage::performSearchForViewingTasks(string keyword){
 
-	vector<string>::iterator iter = textFileCopy.begin();
+	vector<Task> tempTaskList;
+	vector<Task>::iterator iter = taskList.begin();
 
-	while (iter != textFileCopy.end()){
-		if (iter->find(keyword) != string::npos){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
-			count++;
+	while (iter != taskList.end()){
+		if ((iter->getTaskStatus()) == keyword){
+			tempTaskList.push_back(*iter);
 		}
 		iter++;
 	}
 
-	return;
+	return tempTaskList;
 }
 
 bool Storage::isOnlyOneTask(){
@@ -183,34 +183,28 @@ void Storage::displayAllTasks(){
 	return;
 }
 
-void Storage::viewCompletedTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewCompletedTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Completed");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Completed", count);
-
-	if (count == 0){
-		cout << ERROR_NO_COMPLETED_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
-void Storage::viewIncompleteTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewIncompleteTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Incomplete");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Incomplete", count);
-
-	if (count == 0){
-		cout << ERROR_NO_INCOMPLETE_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
 void Storage::setFeedbackMessage(string messageToBeSet){
