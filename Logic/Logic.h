@@ -74,6 +74,8 @@ public:
 
 	string checkDateValidity(string);
 
+	string checkTaskDatenTimeValidity(Task);
+
 	void setTaskList();
 
 	vector<Task> getTaskList();

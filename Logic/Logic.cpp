@@ -49,9 +49,6 @@ string Logic::checkTimeValidity(string timeInput) {
 
 	string tempFeedback = "Pass Time Test";
 
-	if (timeInput == "") {
-		tempFeedback = ERROR_NO_CONTENT;
-	} else {
 		string tempMinute = timeInput.substr(timeInput.find_first_of(":") + 1, timeInput.length());
 		string tempHour = timeInput.substr(0, timeInput.find_first_of(":"));
 
@@ -63,7 +60,7 @@ string Logic::checkTimeValidity(string timeInput) {
 		} else if (minute > 59) {
 			tempFeedback = ERROR_INVALID_MINUTE;
 		}
-	}
+
 		return tempFeedback;
 }
 
@@ -71,9 +68,6 @@ string Logic::checkDateValidity(string dateInput) {
 
 	string tempFeedback = "Pass Date Test";
 
-	if (dateInput == "") {
-		tempFeedback = ERROR_NO_CONTENT;
-	} else {
 		string tempYear = dateInput.substr(dateInput.length() - 4, dateInput.length());
 		string temp = dateInput.substr(0, dateInput.length() - 5);
 		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
@@ -102,11 +96,76 @@ string Logic::checkDateValidity(string dateInput) {
 			
 		}
 
+	return tempFeedback;
+
+}
+
+string Logic::checkTaskDatenTimeValidity(Task taskInput) {
+
+	string tempFeedback;
+	tempFeedback = "Pass Test";
+
+	string taskStartDate = taskInput.getTaskStartDate();
+	string taskStartTime = taskInput.getTaskStartTime();
+	string taskEndDate = taskInput.getTaskEndDate();
+	string taskEndTime = taskInput.getTaskEndTime();
+	string taskDeadlineDate = taskInput.getTaskDeadlineDate();
+	string taskDeadlineTime = taskInput.getTaskDeadlineTime();
+
+	vector<string> dateVector;
+	dateVector.push_back(taskStartDate);
+	dateVector.push_back(taskEndDate);
+	dateVector.push_back(taskDeadlineDate);
+
+	vector<string> timeVector;
+	timeVector.push_back(taskStartTime);
+	timeVector.push_back(taskEndTime);
+	timeVector.push_back(taskDeadlineTime);
+
+	vector<string> componentVector;
+	componentVector.push_back("Start Date: "); //0
+	componentVector.push_back("End Date: ");
+	componentVector.push_back("Deadline Date: ");
+	componentVector.push_back("Start Time: ");
+	componentVector.push_back("End Time: ");
+	componentVector.push_back("Deadline Time: ");
+
+	string feedbackMsg_Date = "";
+	for (int i = 0; i < dateVector.size(); i++) {
+
+		if (dateVector[i] == "") {
+
+		} else {
+			feedbackMsg_Date = checkDateValidity(dateVector[i]);
+			if (feedbackMsg_Date != "Pass Date Test") {
+				tempFeedback = componentVector[i] + feedbackMsg_Date;	
+				break;
+			}
+		}
+	}
+
+	if (tempFeedback == "Pass Test") {
+
+		string feedbackMsg_Time="";
+		for (int j = 0; j < timeVector.size(); j++) {
+
+			if (timeVector[j] == "") {
+
+			} else {
+				feedbackMsg_Time = checkTimeValidity(timeVector[j]);
+				if (feedbackMsg_Time != "Pass Time Test") {
+					tempFeedback = componentVector[j % 3] + feedbackMsg_Time;
+					break;
+				} else {}
+			}
+		}
+
 	}
 
 	return tempFeedback;
 
 }
+
 
 void Logic::setTaskList() {
 
@@ -309,14 +368,17 @@ string Logic::executeCommand(paraList Input) {
 
 	if (command == "add") {
 		Task oneTask = Input.getTask();
-		string taskdetails = oneTask.getTaskDetails();
-
-		_DataBase.addTask(oneTask);
-		_DataBase.updateTextFile(_filename); //this actually update TaskList
-
-		setTaskList();
-
-		_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+		string tempFeedback;
+		tempFeedback=checkTaskDatenTimeValidity(oneTask);
+		if (tempFeedback != "Pass Test") {
+			_feedbackMessage = tempFeedback;
+			
+		} else {
+			_DataBase.addTask(oneTask);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+		}
 
 	} else if (command == "update") {
 		int updateInteger = Input.getUpdateInteger();
@@ -342,29 +404,38 @@ string Logic::executeCommand(paraList Input) {
 			}
 
 		} else if ((parameterToBeUpdated == "start-date") || (parameterToBeUpdated == "end-date") || (parameterToBeUpdated == "deadline-date")) {
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
 
-			_feedbackMessage = checkDateValidity(detailToBeUpdated);
+				_feedbackMessage = checkDateValidity(detailToBeUpdated);
 
-			if (_feedbackMessage == "Pass Date Test") {
-				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
-				_DataBase.updateTextFile(_filename);
-				setTaskList();
-				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
-				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-			} else {}			
+				if (_feedbackMessage == "Pass Date Test") {
+					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+					_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
+					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+				} else {}
+			}
 			
 		} else if ((parameterToBeUpdated == "start-time") || (parameterToBeUpdated == "end-time") || (parameterToBeUpdated == "deadline-time")) {
 
-			_feedbackMessage = checkTimeValidity(detailToBeUpdated);
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
 
-			if (_feedbackMessage == "Pass Time Test") {
+				_feedbackMessage = checkTimeValidity(detailToBeUpdated);
 
-				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
-				_DataBase.updateTextFile(_filename);
-				setTaskList();
-				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
-				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-			} else {}
+				if (_feedbackMessage == "Pass Time Test") {
+
+					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+					_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
+					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+				} else {}
+			}
 		}
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
@@ -379,7 +450,6 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
-
 		}
 
 	} else if (command == "save") {
@@ -391,8 +461,6 @@ string Logic::executeCommand(paraList Input) {
 
 		writeFileLocation(_fileLocation);
 		_feedbackMessage = userDirectory;
-	
-		//For parser to implement!!! remind jy!
 
 	}  else if (command == "mark") {
 		int markIndex = Input.getmarkindex();
