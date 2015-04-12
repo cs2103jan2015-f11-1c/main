@@ -27,12 +27,12 @@ private:
 	vector<Task> taskList;
 	vector<string> textFileCopy;
 	stack<string> commandStack;
-	stack<pair<string, unsigned int>> deleteTaskStack;
-	stack<pair<string, unsigned int>> updateTaskStack;
+	stack<pair<Task, unsigned int>> deleteTaskStack;
+	stack<pair<Task, unsigned int>> updateTaskStack;
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<vector<Task>> clearAllTasksStack;
-	stack<vector<string>> sortByNameStack;
+	stack<vector<Task>> sortByNameStack;
 	stack<vector<string>> sortByStatusBeforeStack;
 	stack<vector<string>> sortByStatusAfterStack;
 	stack<vector<string>> sortByPriorityBeforeStack;
@@ -51,14 +51,17 @@ private:
 	static string ERROR_INVALID_STATUS_SORT;
 	static string ERROR_INVALID_PRIORITY_SORT;
 	static string ERROR_INVALID_UPDATE_KEYWORD;
+	static string ERROR_INVALID_UPDATE_PRIORITY_KEYWORD;
 	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY;
+
 	string feedbackMessage;
 
 	bool isEmptyTaskList();
 	bool isInvalidIndex(unsigned int);
-	void performSearchForViewingTasks(string, int&);
+	vector<Task> performSearchForViewingTasks(string);
 	bool isOnlyOneTask();
-	bool isSortedByName(vector<string>);
+	bool isSortedByName(vector<Task>);
 	bool isSortedByStatus();
 	bool isSortedByPriority();
 	void performSort(queue<string>&, string);
@@ -66,7 +69,6 @@ private:
 public:
 
 	vector<Task> returnTaskList();
-
 
 	void updateTaskList(Task);
 
@@ -82,13 +84,15 @@ public:
 
 	void displayAllTasks();
 
-	void viewCompletedTasks();
+	vector<Task> viewCompletedTasks();
 
-	void viewIncompleteTasks();
+	vector<Task> viewIncompleteTasks();
 
 	void setFeedbackMessage(string);
 
 	string returnLogicFeedbackMessage();
+
+	//bool noCaseLess(const Task&, const Task&);
 
 	void updateTask(string, unsigned int, string, string);
 
@@ -102,7 +106,7 @@ public:
 
 	vector<string> searchTask(string, const string&);
 
-	vector<string> sortTaskByName(string);
+	vector<Task> sortTaskByName(string);
 
 	vector<string> sortTaskByStatus(string);
 

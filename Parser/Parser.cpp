@@ -13,7 +13,7 @@ using namespace std;
 
 const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
 const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
-const regex TIME_PATTERN("((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
+const regex TIME_PATTERN("(^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 const regex EXP_PATTERN("(:)(f|F)\\b|(:)(t|T)\\b|(:)(b|B)\\b|\\b(from)\\b|\\b(to)\\b|\\b(by)\\b|\\b(on)\\b|\\b(at)\\b|\\b(before)\\b|\\b(after)\\b", std::tr1::regex_constants::icase);
 const regex F_PATTERN("(:)(f|F)\\b", std::tr1::regex_constants::icase);
 const regex T_PATTERN("(:)(t|T)\\b", std::tr1::regex_constants::icase);
@@ -28,19 +28,14 @@ const regex UNMARK_PATTERN("\\b(unmark)\\b", std::tr1::regex_constants::icase);
 const regex SAVE_PATTERN("\\b(save)\\b", std::tr1::regex_constants::icase);
 const regex SEARCH_PATTERN("\\b(search)\\b", std::tr1::regex_constants::icase);
 const regex UPDATE_PATTERN("\\b(update)\\b", std::tr1::regex_constants::icase);
-const regex NTRL_FROM_PATTERN("((from)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((from)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(from)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-
-const regex NTRL_BY_PATTERN("((by)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((by)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(by)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-const regex NTRL_TO_PATTERN("((to)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((to)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(to)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-
-const regex NTRL_ON_PATTERN("((on)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((on)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(on)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-
-const regex NTRL_AT_PATTERN("((at)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((at)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(at)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-
-const regex NTRL_AFTER_PATTERN("((after)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((after)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(after)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
-
-const regex NTRL_BEFORE_PATTERN("((before)([\\s]+)(((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((before)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(before)([\\s]+)((!high)|(!low))");
-
+const regex NTRL_FROM_PATTERN("((from)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((from)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(from)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_BY_PATTERN("((by)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((by)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(by)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_TO_PATTERN("((to)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((to)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(to)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_ON_PATTERN("((on)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((on)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(on)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_AT_PATTERN("((at)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((at)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(at)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_AFTER_PATTERN("((after)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((after)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(after)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
+const regex NTRL_BEFORE_PATTERN("((before)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((before)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(before)([\\s]+)((!high)|(!low))");
+const int PROCESS_INITIAL = 1000;
 
 Parser::Parser()
 {}
@@ -62,8 +57,8 @@ void Parser::sortCommand(string &userInput)
 void Parser::sortDetails(string &userInput)
 {
 	int index;
-	string _eventstartdetails;
-	string _eventenddetails;
+	string eventStartDetails;
+	string eventEndDetails;
 	keywordType Keyword;
 	Keyword = determineKeywords(userInput);
 
@@ -73,7 +68,6 @@ void Parser::sortDetails(string &userInput)
 	case ABST_NIL:
 	{
 
-
 		para._task.changeTaskName(userInput);
 
 
@@ -81,55 +75,41 @@ void Parser::sortDetails(string &userInput)
 		return;
 	}
 	case NONE:
-	{	int a = 1000, b = 1000, c = 1000, process = 0;
+	{	
+		
+		int firstToken = PROCESS_INITIAL;
+		int secondToken = PROCESS_INITIAL; 
+		int thirdToken = PROCESS_INITIAL; 
+		int process = 0;
 
-	string dltime, dldate;
-	getNoneToken(userInput, a, b, c);
-	cout << a << endl << b << endl << c << endl;
-	processNum(a, b, c, process);
-	cout << "min" << process << endl;
-
-
-
-	if (process != 1000)
-	{
-		para._task.changeTaskName(userInput.substr(0, process - 1));
-		cout << "this is taskname:" << userInput.substr(0, process - 1) << endl;
-		userInput.erase(0, process - 1);
-		cout << "after erase:" << userInput << endl;
-		checkStart(dldate, dltime, userInput);
-		para._task.changeTaskDeadlineDate(dldate);
-		para._task.changeTaskDeadlineTime(dltime);
-		processX(userInput);
-	}
-	else
-	{
-		para._task.changeTaskName(checkingKeywordX(userInput));
-
-	}
 	
+		getNoneToken(userInput, firstToken, secondToken, thirdToken);
+		processNum(firstToken, secondToken, thirdToken, process);
 	
-	if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
-	{
-		parserProcess now;
-		para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
+
+		processupdateNone(userInput,process);
 
 
-	}
-	
-	
+		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
+		{
+			parserProcess now;
+			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
+		}
+
+
 	return;
-
-
 	}
 	case STARTONLY:
 	{
-		string st, sd;
+		string startTime; 
+		string startDate;
+
+
 		processX(userInput);
 		processBeforeKeywordf(userInput);
-		checkStart(sd, st, userInput);
-		para._task.changeTaskStartDate(sd);
-		para._task.changeTaskStartTime(st);
+		checkStart(startDate, startTime, userInput);
+		para._task.changeTaskStartDate(startDate);
+		para._task.changeTaskStartTime(startTime);
 
 		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
 		{
@@ -142,80 +122,71 @@ void Parser::sortDetails(string &userInput)
 		return;
 	}
 	case ENDONLY:
-	{   string et, ed;
-	processX(userInput);
-	processBeforeKeywordt(userInput);
-	checkEnd(ed, et, userInput);
-	para._task.changeTaskEndDate(ed);
-	para._task.changeTaskEndTime(et);
+	{   string endTime;
+	    string endDate;
+	
+	
+		processX(userInput);
+		processBeforeKeywordt(userInput);
+		checkEnd(endDate, endTime, userInput);
+		para._task.changeTaskEndDate(endDate);
+		para._task.changeTaskEndTime(endTime);
 
-	if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != "")
-	{
-		parserProcess now;
-		para._task.changeTaskEndDate(now.parserReturnNowTime());
+		if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != "")
+		{
+			parserProcess now;
+			para._task.changeTaskEndDate(now.parserReturnNowTime());
+
+		}
 
 
-	}
-
-
-	return;
+		return;
 	}
 	case DEADLINE:
 	{
-		string dt, dd;
+		string deadTime; 
+		string deadDate;
+
+
 		processX(userInput);
 		processBeforeKeywordb(userInput);
-		checkEnd(dd, dt, userInput);
-		cout << "dldate:" << dd << endl;
-		cout << "dddate:" << dt << endl;
-		para._task.changeTaskDeadlineDate(dd);
-		para._task.changeTaskDeadlineTime(dt);
-		cout << "GET NAME:" << para._task.getTaskDeadlineDate() << endl;
+		checkEnd(deadDate, deadTime, userInput);
+		para._task.changeTaskDeadlineDate(deadDate);
+		para._task.changeTaskDeadlineTime(deadTime);
+	
 
 		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
 		{
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
-
-
 		}
 
 		return;
 	}
 	case START_END:
-	{   cout << "STARTEND";
-	index = userInput.find(":f") - 1;
-	string tempName = userInput.substr(0, index);
+	{   
+		index = userInput.find(":f") - 1;
+		string tempName = userInput.substr(0, index);
 
-	para._task.changeTaskName(userInput.substr(0, index));
+		para._task.changeTaskName(userInput.substr(0, index));
 
-	processBeforeKeywordf(userInput);
-	index = userInput.find(":t") - 1;
-	_eventstartdetails = userInput.substr(0, index);
-	userInput.erase(0, index + 4);
-
-
-
-	_eventenddetails = userInput;
-	cout << "eventstart" << _eventstartdetails << endl;
-	cout << "eventend" << _eventenddetails << endl;
+		processBeforeKeywordf(userInput);
+		index = userInput.find(":t") - 1;
+		eventStartDetails = userInput.substr(0, index);
+		userInput.erase(0, index + 4);
 
 
-	string a, b;
-	checkStart(a, b, _eventstartdetails);
-	para._task.changeTaskStartDate(a);
-	para._task.changeTaskStartTime(b);
-	processX(_eventstartdetails);
+
+		eventEndDetails = userInput;
 
 
-	string c, d;
-	checkEnd(c, d, _eventenddetails);
-	para._task.changeTaskEndDate(c);
-	para._task.changeTaskEndTime(d);
-	processX(_eventenddetails);
+		processStartKey(eventStartDetails);
+		processEndKey(eventEndDetails);
+
+	
 
 
-	return;
+		return;
 	}
 	case FROM:
 	{    cout << "from " << endl;
@@ -380,29 +351,20 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskName(userInput.substr(0, index));
 
 		processBeforeKeywordFrom(userInput);
-		index = userInput.find("to") - 1;
-		_eventstartdetails = userInput.substr(0, index);
+		index = findToIndex(userInput)-1;
+		eventStartDetails = userInput.substr(0, index);
 		userInput.erase(0, index + 4);
 
 
 
-		_eventenddetails = userInput;
-		cout << "eventstart" << _eventstartdetails << endl;
-		cout << "eventend" << _eventenddetails << endl;
+		eventEndDetails = userInput;
+		cout << "eventstart" << eventStartDetails << endl;
+		cout << "eventend" << eventEndDetails << endl;
 
+		processStartKey(eventStartDetails);
+		processEndKey(eventEndDetails);
+		
 
-		string a, b;
-		checkStart(a, b, _eventstartdetails);
-		para._task.changeTaskStartDate(a);
-		para._task.changeTaskStartTime(b);
-		processX(_eventstartdetails);
-
-
-		string c, d;
-		checkEnd(c, d, _eventenddetails);
-		para._task.changeTaskEndDate(c);
-		para._task.changeTaskEndTime(d);
-		processX(_eventenddetails);
 		return;
 
 
@@ -425,19 +387,7 @@ paraList* Parser::parseCommand(string userInput)
 	return &para;
 }
 
-void Parser::splitstring(string &first, string &second, string &input)
-{
-	int index;
 
-
-
-	/*index=input.find_first_of(" ");
-	first=input.substr(0,index);
-	input.erase(0,index+1);
-	second=input;
-	*/
-	return;
-}
 
 void Parser::processCommand(string &userInput)
 {
@@ -479,6 +429,11 @@ void Parser::processCommand(string &userInput)
 		userInput.erase(0, b + 1);
 		para.processInput(userInput);
 		para.processUpdateNumber(index);
+
+
+		processUpdateKeywords();
+		convertKeywordTime(para.getInput(),para.getKeyword());
+
 	}
 	else if (regex_search(command, MARK_PATTERN))
 	{
@@ -689,9 +644,9 @@ string Parser::checkST(string userinput)
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
 
-	
+
 	time[0] = "";
-	
+
 	const sregex_token_iterator d;
 	for (sregex_token_iterator e(userinput.begin(), userinput.end(), TIME_PATTERN); e != d; ++e)
 	{
@@ -711,8 +666,8 @@ string Parser::checkSD(string userinput)
 
 	string  date[50], time[50];
 	int count1 = 0, count2 = 0;
-	
-	
+
+
 	date[0] = "";
 
 	const sregex_token_iterator end;
@@ -1112,4 +1067,133 @@ void Parser::processBeforeKeywordFrom(string &userInput)
 	userInput.erase(0, index + 6);
 
 	return;
+}
+
+
+void Parser::processUpdateKeywords()
+{  
+
+	string updateint;
+	string input = para.getInput();
+	string keyword=para.getKeyword();
+	
+	ostringstream oss;
+	oss << para.getUpdateInteger();
+	updateint = oss.str();
+
+	if (updateint == input)
+	{
+		para.processInput("");
+		para.processKeyWord("");
+
+	}
+	else if (input == keyword)
+	{
+
+		para.processInput("");
+
+	}
+
+	return;
+
+
+}
+
+void  Parser::processupdateNone (string& userInput, int& process)
+{
+	string dldate, dltime;
+	
+	
+	if (process != 1000)
+	{
+		para._task.changeTaskName(userInput.substr(0, process - 1));
+		userInput.erase(0, process - 1);
+		checkStart(dldate, dltime, userInput);
+		para._task.changeTaskDeadlineDate(dldate);
+		para._task.changeTaskDeadlineTime(dltime);
+		processX(userInput);
+	}
+	else
+	{
+		para._task.changeTaskName(checkingKeywordX(userInput));
+
+	}
+
+
+}
+
+
+void Parser::convertKeywordTime(string& input,string& type)
+{
+	if (input != ""&& (para.getKeyword() == "start-date" | para.getKeyword() == "end-date" | para.getKeyword() == "endline-date"))
+	{
+		parserProcess end;
+
+		end.setNowDT();
+		end.processDate(input);
+		para.processInput(end.parserReturnDate());
+
+	}
+	else if (input != "" && (para.getKeyword() == "start-time" | para.getKeyword() == "end-time" | para.getKeyword() == "endline-time"))
+	{
+		parserProcess end;
+
+		end.setNowDT();
+		end.processTime(input);
+		para.processInput(end.parserReturnTime());
+
+
+
+	}
+
+
+
+	return;	
+
+}
+
+
+void Parser::processStartKey(string& eventStartDetails)
+{
+
+	string startDate, startime;
+	checkStart(startDate, startime, eventStartDetails);
+	para._task.changeTaskStartDate(startDate);
+	para._task.changeTaskStartTime(startime);
+	processX(eventStartDetails);
+
+	return;
+
+
+
+
+}
+
+void Parser::processEndKey(string&  eventEndDetails)
+{
+	string endDate, endTime;
+	checkEnd(endDate, endTime, eventEndDetails);
+	para._task.changeTaskEndDate(endDate);
+	para._task.changeTaskEndTime(endTime);
+	processX(eventEndDetails);
+
+	return;
+
+}
+
+int  Parser::findToIndex(string& input)
+{
+
+	smatch matchX;
+	int match=0;
+
+
+	if (regex_search(input, matchX, TO_PATTERN))
+	{
+		match = matchX.position(0);
+	}
+	return match;
+
+
+
 }

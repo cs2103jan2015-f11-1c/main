@@ -36,11 +36,8 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 
 	_taskPriority = taskPriority;
 
-	if (taskStatus.empty()){
-		_taskStatus = MESSAGE_INCOMPLETE_TASK;
-	} else {
-		_taskStatus = taskStatus;
-	}
+	_taskStatus = taskStatus;
+	
 }
 
 string Task::checkNull(string input){
@@ -137,7 +134,15 @@ void Task::changeTaskDeadlineTime(string newDeadlineTime){
 }
 
 void Task::changeTaskPriority(string newTaskPriority){
+	if (newTaskPriority == "!H"){
+		newTaskPriority = "HIGH";
+	} else if (newTaskPriority == "!M"){
+		newTaskPriority = "MEDIUM";
+	} else if (newTaskPriority == "!L"){
+		newTaskPriority = "LOW";
+	}
 	_taskPriority = newTaskPriority;
+
 	return;
 }
 

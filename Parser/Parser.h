@@ -51,6 +51,12 @@ public:
 	void processDate();
 	void processTime();
 	void processBeforeKeywordFrom(string &);
+	void processUpdateKeywords();
+	void processupdateNone(string&, int&);
+	void convertKeywordTime(string&, string&);
+	void processStartKey(string&);
+	void processEndKey(string&);
+	int  findToIndex(string&);
 
 };
 

@@ -18,21 +18,23 @@ using namespace std;
 
 struct dateStore{
 
-	int day;
-	int month;
-	int year;
+	
 	string dayName;
 	int dayNameRef;
-
+	int additionDay;
+    int day;
+	int month;
+	int year;
 };
 
 struct timeStore
 {
 
-	int min;
-	int hours;
 	string nilstore;
 	string timeStatus;
+	int min;
+	int hours;
+	
 
 
 
@@ -101,6 +103,7 @@ public:
 	void processTimeShortAmPm(string&);
 	void covertTime(char&, int&);
 	void clearTimestore();
+	
 };
 
 #endif

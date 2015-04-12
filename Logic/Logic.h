@@ -5,7 +5,7 @@
 #include "..\Parser\Parser.h"
 #include "..\Storage\Storage.h"
 #include "..\Common\Task.h"
-
+#include "..\TaskSotong_Log\Log.h"
 
 #include <iostream> 
 #include <string> 
@@ -35,7 +35,6 @@ private:
 	string _feedbackMessage;
 
 	static string SAVING_LOCATON_HISTORY;
-
 	static string ERROR_INVALID_USERINPUT;
 	static string ERROR_EXISTING_TASK;
 	static string ERROR_TASK_UPDATED_UNSUCCESSFULLY;
@@ -44,6 +43,17 @@ private:
 	static string ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_TASK_INSUFFICIENT_PARAMETERS;
+	static string ERROR_NO_INDEX;
+	static string ERROR_INDEX_OUT_OF_RANGE;
+	static string ERROR_NO_COMPONENT;
+	static string ERROR_COMPONENT_INVALID;
+	static string ERROR_NO_CONTENT;
+	static string ERROR_INVALID_CONTENT;
+	static string ERROR_INVALID_YEAR;
+	static string ERROR_INVALID_MONTH;
+	static string ERROR_INVALID_DAY;
+	static string ERROR_INVALID_HOUR;
+	static string ERROR_INVALID_MINUTE;
 
 	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 	static string FEEDBACK_DISPLAY_ALL_TASKS;
@@ -57,8 +67,17 @@ private:
 	static string FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 	static string FEEDBACK_SORT_TASK_BY_KEYWORD;
 
+	Log _Logic_LogFile;
+	
+
 
 public:
+
+	string checkTimeValidity(string);
+
+	string checkDateValidity(string);
+
+	string checkTaskDatenTimeValidity(Task);
 
 	void setTaskList();
 

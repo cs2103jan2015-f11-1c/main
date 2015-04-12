@@ -13,7 +13,9 @@ string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!"
 string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
 string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
+string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Priority must be High, Medium or Low!";
 string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
+string Storage::FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY = "Undo Completed! :D";
 
 bool Storage::isEmptyTaskList(){
 	if (taskList.empty()){
@@ -32,33 +34,33 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	return false;
 }
 
-void Storage::performSearchForViewingTasks(string keyword, int& count){
+vector<Task> Storage::performSearchForViewingTasks(string keyword){
 
-	vector<string>::iterator iter = textFileCopy.begin();
+	vector<Task> tempTaskList;
+	vector<Task>::iterator iter = taskList.begin();
 
-	while (iter != textFileCopy.end()){
-		if (iter->find(keyword) != string::npos){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
-			count++;
+	while (iter != taskList.end()){
+		if ((iter->getTaskStatus()) == keyword){
+			tempTaskList.push_back(*iter);
 		}
 		iter++;
 	}
 
-	return;
+	return tempTaskList;
 }
 
 bool Storage::isOnlyOneTask(){
 
-	return (textFileCopy.size() == 1);
+	return (taskList.size() == 1);
 }
+/*
+bool Storage::isSortedByName(vector<Task> taskListDuplicate){
+	//for (auto &words : taskListDuplicate)
+		//transform(words.getTaskName, words.getTaskName, words.getTaskName, toupper);
 
-bool Storage::isSortedByName(vector<string> textFileDuplicate){
-	for (auto &words : textFileDuplicate)
-		transform(words.begin(), words.end(), words.begin(), toupper);
-
-	return (is_sorted(textFileDuplicate.begin(), textFileDuplicate.end()));
+	return (is_sorted(taskListDuplicate.begin()->getTaskName, taskListDuplicate.end()->getTaskName));
 }
-
+*/
 bool Storage::isSortedByStatus(){
 
 	return (textFileCopy == sortByStatusAfterStack.top());
@@ -167,21 +169,12 @@ void Storage::addTask(Task individual_task){
 }
 
 void Storage::deleteTask(string fileName, unsigned int taskIndex){
-	//textFileCopy.clear();
-	//initialiseTextFile(fileName);
-	
-	if (isEmptyTaskList()){
-		return;
-	}
-	
 
-	//deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex); What's this?
+	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
 
-	taskList.erase(taskList.begin()+taskIndex-1);
+	taskList.erase(taskList.begin() + taskIndex - 1);
 	
-	
-
 	return;
 }
 //need to be deleted-GT
@@ -190,34 +183,28 @@ void Storage::displayAllTasks(){
 	return;
 }
 
-void Storage::viewCompletedTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewCompletedTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Completed");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Completed", count);
-
-	if (count == 0){
-		cout << ERROR_NO_COMPLETED_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
-void Storage::viewIncompleteTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewIncompleteTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Incomplete");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Incomplete", count);
-
-	if (count == 0){
-		cout << ERROR_NO_INCOMPLETE_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
 void Storage::setFeedbackMessage(string messageToBeSet){
@@ -228,34 +215,43 @@ string Storage::returnLogicFeedbackMessage(){
 	return feedbackMessage;
 }
 
+struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	bool operator () (char x, char y) const {
+		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
+	}
+};
+
+bool noCaseLess(Task task1,Task task2){
+	//return lexicographical_compare(task1.begin(), task1.end(), task2.begin(), task2.end(), caseInsensitiveLess());
+	return lexicographical_compare((task1.getTaskName()).begin(), (task1.getTaskName()).end(), (task2.getTaskName()).begin(), (task2.getTaskName()).end(), caseInsensitiveLess());
+}
+
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
 
+	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("update");
 
 	if (keyword == "name") {
 		taskList[taskIndex - 1].changeTaskName(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-date") {
 		taskList[taskIndex - 1].changeTaskStartDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "start-time") {
 		taskList[taskIndex - 1].changeTaskStartTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-date") {
 		taskList[taskIndex - 1].changeTaskEndDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "end-time") {
 		taskList[taskIndex - 1].changeTaskEndTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-date") {
 		taskList[taskIndex - 1].changeTaskDeadlineDate(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if (keyword == "deadline-time") {
 		taskList[taskIndex - 1].changeTaskDeadlineTime(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
 	} else if(keyword == "priority") {
-		taskList[taskIndex-1].changeTaskPriority(newInput);
-		setFeedbackMessage(FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY);
+		transform(newInput.begin(), newInput.end(), newInput.begin(), toupper);
+		if ((newInput == "HIGH") || (newInput == "MEDIUM") || (newInput == "LOW") || (newInput == "!H") || (newInput == "!M") || (newInput == "!L")){
+			taskList[taskIndex - 1].changeTaskPriority(newInput);
+		} else {
+			setFeedbackMessage(ERROR_INVALID_UPDATE_PRIORITY_KEYWORD);
+		}
 	} else {
 		setFeedbackMessage(ERROR_INVALID_UPDATE_KEYWORD);
 
@@ -270,20 +266,23 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 	taskList[taskIndex - 1].changeTaskStatus("mark");
 	markTaskIndexStack.push(taskIndex);
 	commandStack.push("mark");
+
 	return;
 }
 
 void Storage::unmarkTask(string fileName, unsigned int taskIndex){
+
 	taskList[taskIndex - 1].changeTaskStatus("unmark");
-	markTaskIndexStack.push(taskIndex);
+	unmarkTaskIndexStack.push(taskIndex);
 	commandStack.push("unmark");
+
 	return;
 }
 
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
-		cout << ERROR_CANNOT_UNDO << endl;
+		setFeedbackMessage(ERROR_CANNOT_UNDO);
 
 		return;
 	}
@@ -292,28 +291,34 @@ void Storage::undoAction(){
 	commandStack.pop();
 
 	if (previousCommand == "add"){
-		textFileCopy.erase(textFileCopy.end() - 1);
+		taskList.erase(taskList.end() - 1);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
 
 	if (previousCommand == "delete"){
-		string deletedTask = get<0>(deleteTaskStack.top());
+		Task deletedTask = get<0>(deleteTaskStack.top());
 		unsigned int formerIndex = get<1>(deleteTaskStack.top());
 		deleteTaskStack.pop();
 
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), deletedTask);
+		taskList.insert(taskList.begin() + (formerIndex - 1), deletedTask);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 	
 		return;
 	}
-
+	
 	if (previousCommand == "update"){
-		string originalTask = get<0>(updateTaskStack.top());
+		Task originalTask = get<0>(updateTaskStack.top());
 		unsigned int formerIndex = get<1>(updateTaskStack.top());
 		updateTaskStack.pop();
 
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), originalTask);
-		textFileCopy.erase(textFileCopy.begin() + formerIndex);
+		taskList.insert(taskList.begin() + (formerIndex - 1), originalTask);
+		taskList.erase(taskList.begin() + formerIndex);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -322,11 +327,9 @@ void Storage::undoAction(){
 		unsigned int formerIndex = markTaskIndexStack.top();
 		markTaskIndexStack.pop();
 
-		size_t index = 0;
-		unsigned int lengthOfCompleted = 9;
+		taskList[formerIndex - 1].changeTaskStatus("unmark");
 
-		index = textFileCopy[formerIndex - 1].find("Completed", index);
-		textFileCopy[formerIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -335,32 +338,28 @@ void Storage::undoAction(){
 		unsigned int formerIndex = unmarkTaskIndexStack.top();
 		unmarkTaskIndexStack.pop();
 
-		size_t index = 0;
-		unsigned int lengthOfIncomplete = 10;
+		taskList[formerIndex - 1].changeTaskStatus("mark");
 
-		index = textFileCopy[formerIndex - 1].find("Incomplete", index);
-		textFileCopy[formerIndex - 1].replace(index, lengthOfIncomplete, "Completed");
-	
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
 		return;
 	}
 
-	/*if (previousCommand == "clear"){
-		vector<Task> formerTextFileCopy = clearAllTasksStack.top();
+	if (previousCommand == "clear"){
+		taskList = clearAllTasksStack.top();
 		clearAllTasksStack.pop();
 
-		istringstream iss(formerTextFileCopy);
-		string line;
-		while (getline(iss, line)){
-			textFileCopy.push_back(line);
-		}
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
-	*/
+	
 	if (previousCommand == "sort by name"){
 
-		textFileCopy = sortByNameStack.top();
+		taskList = sortByNameStack.top();
 		sortByNameStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -370,6 +369,8 @@ void Storage::undoAction(){
 		textFileCopy = sortByStatusBeforeStack.top();
 		sortByStatusBeforeStack.pop();
 
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
 		return;
 	}
 
@@ -377,6 +378,8 @@ void Storage::undoAction(){
 
 		textFileCopy = sortByPriorityBeforeStack.top();
 		sortByPriorityBeforeStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -424,42 +427,56 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 	return returnTextFileCopy;
 }
 
+struct less_than_key
+{
+	inline bool operator() (Task struct1, Task struct2)
+	{
+		string task1name = struct1.getTaskName();
+		string task2name = struct2.getTaskName();
+		int task1 = stoi(task1name);
+		int task2 = stoi(task2name);
+		return (task1 < task2);
+		//return (transform(task1name.begin(), task1name.end(), task1name.begin(), tolower) < transform(task2name.begin(), task2name.end(), task2name.begin(), tolower));
 
-struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	}
+};
+
+struct less_than_key
+{
 	bool operator () (char x, char y) const {
 		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
 	}
 };
-
-bool noCaseLess(const string &a, const string &b){
-	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
-}
-
-vector<string> Storage::sortTaskByName(string fileName){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
-
-	if (isEmptyTaskList()){
-		return;
+*/
+struct less_than_key
+{
+	inline bool operator() (Task& struct1, Task& struct2)
+	{
+		return (struct1.getTaskName() < struct2.getTaskName());
 	}
+};
+
+vector<Task> Storage::sortTaskByName(string fileName){
 
 	if (isOnlyOneTask()){
-		cout << ERROR_ONLY_ONE_TASK << endl;
-		return;
+		setFeedbackMessage(ERROR_ONLY_ONE_TASK);
+		return taskList;
 	}
 
-	if (isSortedByName(textFileCopy)){
-		cout << ERROR_INVALID_NAME_SORT << endl;
-		return;
-	}
+	//if (isSortedByName(taskList)){
+	//	setFeedbackMessage(ERROR_INVALID_NAME_SORT);
+	//	return;
+	//}
 
 	commandStack.push("sort by name");
-	sortByNameStack.push(textFileCopy);
-	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
+	sortByNameStack.push(taskList);
+	sort(taskList.begin(), taskList.end(), less_than_key());
+	//sort((taskList.begin())->getTaskName(), (taskList.end())->getTaskName(), noCaseLess);
+	//sort(taskList.begin(), taskList.end(), noCaseLess);
 
-	return textFileCopy;
+	return taskList;
 }
-
+/*
 vector<string> Storage::sortTaskByStatus(string fileName){
 	textFileCopy.clear();
 	initialiseTextFile(fileName);

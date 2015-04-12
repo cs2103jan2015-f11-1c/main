@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Storage_Testing", "Storage_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Parser_Testing", "Parser_Testing\Parser_Testing.vcxproj", "{5245ED3C-6173-40D1-A22A-691717073322}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TaskSotong_Log", "TaskSotong_Log\TaskSotong_Log.vcxproj", "{AC2147DA-BABC-44BF-831C-0803F3B514AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -87,6 +89,10 @@ Global
 		{5245ED3C-6173-40D1-A22A-691717073322}.Debug|Win32.Build.0 = Debug|Win32
 		{5245ED3C-6173-40D1-A22A-691717073322}.Release|Win32.ActiveCfg = Release|Win32
 		{5245ED3C-6173-40D1-A22A-691717073322}.Release|Win32.Build.0 = Release|Win32
+		{AC2147DA-BABC-44BF-831C-0803F3B514AB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AC2147DA-BABC-44BF-831C-0803F3B514AB}.Debug|Win32.Build.0 = Debug|Win32
+		{AC2147DA-BABC-44BF-831C-0803F3B514AB}.Release|Win32.ActiveCfg = Release|Win32
+		{AC2147DA-BABC-44BF-831C-0803F3B514AB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
