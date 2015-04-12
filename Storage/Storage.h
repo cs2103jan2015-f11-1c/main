@@ -59,7 +59,7 @@ private:
 
 	bool isEmptyTaskList();
 	bool isInvalidIndex(unsigned int);
-	void performSearchForViewingTasks(string, int&);
+	vector<Task> performSearchForViewingTasks(string);
 	bool isOnlyOneTask();
 	bool isSortedByName(vector<Task>);
 	bool isSortedByStatus();
@@ -84,9 +84,9 @@ public:
 
 	void displayAllTasks();
 
-	void viewCompletedTasks();
+	vector<Task> viewCompletedTasks();
 
-	void viewIncompleteTasks();
+	vector<Task> viewIncompleteTasks();
 
 	void setFeedbackMessage(string);
 

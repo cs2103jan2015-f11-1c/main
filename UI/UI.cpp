@@ -1,11 +1,11 @@
 #include "UI.h"
+#include <assert.h>
 
 void UI::displayWelcomeMessage() {
 
 	cout << _welcomeMessage << endl;
 	return;
 }
-
 
 void UI::displayExitMessage() {
 
@@ -78,10 +78,13 @@ void UI::displayTaskList(vector<string> taskList) {
 	return;
 }
 
-
+//gets user input and stores it as a string
 string UI::acceptUserInput() {
 
 	string userInput;
 	getline(cin, userInput);
+
+	assert(userInput.size() > 0);
+
 	return userInput;
-}
+ }

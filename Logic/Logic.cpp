@@ -615,6 +615,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 		}
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "undo") {
@@ -628,6 +629,28 @@ string Logic::executeCommand(paraList Input) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
 			_DataBase.sortTaskByName(_filename);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		}
+
+	} else if (command == "view-c") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewCompletedTasks();
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		}
+
+	} else if (command == "view-i") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewIncompleteTasks();
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
