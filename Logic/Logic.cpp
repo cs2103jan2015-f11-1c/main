@@ -393,18 +393,18 @@ string Logic::executeCommand(paraList Input) {
 		setTaskList();
 
 		_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-		
-	} else if (command == "search") {
-		//string searchKeyWord = Input.getSearchKey();
-		//_DataBase.searchTask(searchKeyWord);
-		//_feedbackMessage = FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 
 	} else if (command == "sort") {
-		//_DataBase.sortTaskByName(_filename);
-		//_DataBase.updateTextFile(_filename);
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.sortTaskByName(_filename);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
 
-		//setReturnGUI(_storageTaskListCopy);
-		//_feedbackMessage = FEEDBACK_SORT_TASK_BY_KEYWORD;
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
+		}
 
 	} else {
 		_feedbackMessage = ERROR_INVALID_USERINPUT;
