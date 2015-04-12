@@ -27,8 +27,8 @@ private:
 	vector<Task> taskList;
 	vector<string> textFileCopy;
 	stack<string> commandStack;
-	stack<pair<string, unsigned int>> deleteTaskStack;
-	stack<pair<string, unsigned int>> updateTaskStack;
+	stack<pair<Task, unsigned int>> deleteTaskStack;
+	stack<pair<Task, unsigned int>> updateTaskStack;
 	stack<int> markTaskIndexStack;
 	stack<int> unmarkTaskIndexStack;
 	stack<vector<Task>> clearAllTasksStack;
@@ -53,6 +53,7 @@ private:
 	static string ERROR_INVALID_UPDATE_KEYWORD;
 	static string ERROR_INVALID_UPDATE_PRIORITY_KEYWORD;
 	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY;
 
 	string feedbackMessage;
 

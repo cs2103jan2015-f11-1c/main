@@ -15,6 +15,7 @@ string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by pr
 string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
 string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Update priority invalid!";
 string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
+string Storage::FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY = "Undo Completed! :D";
 
 bool Storage::isEmptyTaskList(){
 	if (taskList.empty()){
@@ -168,21 +169,12 @@ void Storage::addTask(Task individual_task){
 }
 
 void Storage::deleteTask(string fileName, unsigned int taskIndex){
-	//textFileCopy.clear();
-	//initialiseTextFile(fileName);
-	
-	if (isEmptyTaskList()){
-		return;
-	}
-	
 
-	//deleteTaskStack.emplace(textFileCopy[taskIndex - 1], taskIndex); What's this?
+	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
 
-	taskList.erase(taskList.begin()+taskIndex-1);
+	taskList.erase(taskList.begin() + taskIndex - 1);
 	
-	
-
 	return;
 }
 //need to be deleted-GT
@@ -286,20 +278,23 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 	taskList[taskIndex - 1].changeTaskStatus("mark");
 	markTaskIndexStack.push(taskIndex);
 	commandStack.push("mark");
+
 	return;
 }
 
 void Storage::unmarkTask(string fileName, unsigned int taskIndex){
+
 	taskList[taskIndex - 1].changeTaskStatus("unmark");
-	markTaskIndexStack.push(taskIndex);
+	unmarkTaskIndexStack.push(taskIndex);
 	commandStack.push("unmark");
+
 	return;
 }
 
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
-		cout << ERROR_CANNOT_UNDO << endl;
+		setFeedbackMessage(ERROR_CANNOT_UNDO);
 
 		return;
 	}
@@ -308,21 +303,25 @@ void Storage::undoAction(){
 	commandStack.pop();
 
 	if (previousCommand == "add"){
-		textFileCopy.erase(textFileCopy.end() - 1);
+		taskList.erase(taskList.end() - 1);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
 
 	if (previousCommand == "delete"){
-		string deletedTask = get<0>(deleteTaskStack.top());
+		Task deletedTask = get<0>(deleteTaskStack.top());
 		unsigned int formerIndex = get<1>(deleteTaskStack.top());
 		deleteTaskStack.pop();
 
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), deletedTask);
+		taskList.insert(taskList.begin() + (formerIndex - 1), deletedTask);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 	
 		return;
 	}
-
+	/*
 	if (previousCommand == "update"){
 		string originalTask = get<0>(updateTaskStack.top());
 		unsigned int formerIndex = get<1>(updateTaskStack.top());
@@ -331,18 +330,18 @@ void Storage::undoAction(){
 		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), originalTask);
 		textFileCopy.erase(textFileCopy.begin() + formerIndex);
 
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
 		return;
 	}
-	
+	*/
 	if (previousCommand == "mark"){
 		unsigned int formerIndex = markTaskIndexStack.top();
 		markTaskIndexStack.pop();
 
-		size_t index = 0;
-		unsigned int lengthOfCompleted = 9;
+		taskList[formerIndex - 1].changeTaskStatus("unmark");
 
-		index = textFileCopy[formerIndex - 1].find("Completed", index);
-		textFileCopy[formerIndex - 1].replace(index, lengthOfCompleted, "Incomplete");
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -351,32 +350,28 @@ void Storage::undoAction(){
 		unsigned int formerIndex = unmarkTaskIndexStack.top();
 		unmarkTaskIndexStack.pop();
 
-		size_t index = 0;
-		unsigned int lengthOfIncomplete = 10;
+		taskList[formerIndex - 1].changeTaskStatus("mark");
 
-		index = textFileCopy[formerIndex - 1].find("Incomplete", index);
-		textFileCopy[formerIndex - 1].replace(index, lengthOfIncomplete, "Completed");
-	
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
 		return;
 	}
 
-	/*if (previousCommand == "clear"){
-		vector<Task> formerTextFileCopy = clearAllTasksStack.top();
+	if (previousCommand == "clear"){
+		taskList = clearAllTasksStack.top();
 		clearAllTasksStack.pop();
 
-		istringstream iss(formerTextFileCopy);
-		string line;
-		while (getline(iss, line)){
-			textFileCopy.push_back(line);
-		}
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
-	*/
+	
 	if (previousCommand == "sort by name"){
 
 		textFileCopy = sortByNameStack.top();
 		sortByNameStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
@@ -386,6 +381,8 @@ void Storage::undoAction(){
 		textFileCopy = sortByStatusBeforeStack.top();
 		sortByStatusBeforeStack.pop();
 
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
 		return;
 	}
 
@@ -393,6 +390,8 @@ void Storage::undoAction(){
 
 		textFileCopy = sortByPriorityBeforeStack.top();
 		sortByPriorityBeforeStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}

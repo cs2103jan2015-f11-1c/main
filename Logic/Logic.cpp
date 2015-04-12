@@ -387,12 +387,13 @@ string Logic::executeCommand(paraList Input) {
 		}
 
 	} else if (command == "undo") {
+		
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
+		setTaskList();
 
-		//setReturnGUI(_storageTaskListCopy);
-		_feedbackMessage = FEEDBACK_UNDO_PREVIOUS_TASK;
-
+		_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+		
 	} else if (command == "search") {
 		//string searchKeyWord = Input.getSearchKey();
 		//_DataBase.searchTask(searchKeyWord);
