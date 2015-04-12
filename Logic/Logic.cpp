@@ -123,7 +123,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 	timeVector.push_back(taskDeadlineTime);
 
 	vector<string> componentVector;
-	componentVector.push_back("Start Date: "); //0
+	componentVector.push_back("Start Date: "); 
 	componentVector.push_back("End Date: ");
 	componentVector.push_back("Deadline Date: ");
 	componentVector.push_back("Start Time: ");
@@ -166,24 +166,60 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 
 }
 
-/*
-string Logic::compareTaskDateandTime(Task taskInput) {
-	string startDate = taskInput.getTaskStartDate();
-	string startTime = taskInput.getTaskStartTime();
-	string endDate = taskInput.getTaskStartTime();
-	string endTime = taskInput.getTaskStartTime();
+string Logic::convertYearToCorrectForm(string input) {
+	string output;
+	if (input == "") {
+		output = "";
+	}
+	else {
+		string tempYear = input.substr(input.length() - 4, input.length());
+		string temp = input.substr(0, input.length() - 5);
+		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
+		string tempDay = temp.substr(0, temp.find_first_of("/"));
 
-	string tempFeedback;
-	if (startDate == endDate) {
-
-
-
+		output = tempYear + tempMonth + tempDay;
 	}
 
+	return output;
+
 }
-*/
+
+string Logic::convertTimeToCorrectForm(string input) {
+
+	string tempMinute = input.substr(input.find_first_of(":") + 1, input.length());
+	string tempHour = input.substr(0, input.find_first_of(":"));
+	string output = tempHour + tempMinute;
+
+	return output;
+
+}
+
+string Logic::compareTaskDateandTime(Task taskInput) {
+	string tempStartDate = taskInput.getTaskStartDate();
+	string tempStartTime = taskInput.getTaskStartTime();
+	string tempEndDate = taskInput.getTaskEndDate();
+	string tempEndTime = taskInput.getTaskEndTime();
+
+	string startDate = convertYearToCorrectForm(tempStartDate);
 
 
+	string startTime = convertTimeToCorrectForm(tempStartTime);
+	string endDate = convertYearToCorrectForm(tempEndDate);
+	string endTime = convertTimeToCorrectForm(tempEndTime);
+
+	
+	string tempFeedback="";
+	if (startDate == endDate) {
+		if (startTime > endTime) {
+			tempFeedback = "Start Time After End Time :<";
+		} else {
+		}
+	} else if (startDate > endDate) {
+		tempFeedback = "Start Date After End Date :<";
+	} else {
+	}
+	return tempFeedback;
+}
 
 void Logic::setTaskList() {
 
@@ -358,8 +394,6 @@ Task Logic::getTask(paraList parameterList) {
 	return parameterList.getTask();
 }
 
-
-
 vector<string> Logic::getTextFileCopy() {
 	return _DataBase.returnTextFileCopy();
 }
@@ -373,12 +407,10 @@ bool Logic::notExistingTask(Task* task) {
 	return true;
 }
 
-
 string Logic::getFeedbackMsg() {
 	return _feedbackMessage;
 
 }
-
 
 string Logic::executeCommand(paraList Input) {
 
@@ -393,14 +425,21 @@ string Logic::executeCommand(paraList Input) {
 		Task oneTask = Input.getTask();
 		string tempFeedback;
 		tempFeedback=checkTaskDatenTimeValidity(oneTask);
+
 		if (tempFeedback != "Pass Test") {
-			_feedbackMessage = tempFeedback;
-			
+			_feedbackMessage = tempFeedback;			
 		} else {
-			_DataBase.addTask(oneTask);
-			_DataBase.updateTextFile(_filename);
-			setTaskList();
-			_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+
+			tempFeedback = compareTaskDateandTime(oneTask);
+
+			if (tempFeedback != "") {
+				_feedbackMessage = tempFeedback;
+			} else {
+				_DataBase.addTask(oneTask);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_feedbackMessage =FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+			}
 		}
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 
@@ -420,11 +459,12 @@ string Logic::executeCommand(paraList Input) {
 			if (detailToBeUpdated == "") {
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
+				
 				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 				_DataBase.updateTextFile(_filename);
 				setTaskList();
-				_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
-				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+				_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+				
 			}
 
 		} else if ((parameterToBeUpdated == "start-date") || (parameterToBeUpdated == "end-date") || (parameterToBeUpdated == "deadline-date")) {
@@ -435,12 +475,34 @@ string Logic::executeCommand(paraList Input) {
 				_feedbackMessage = checkDateValidity(detailToBeUpdated);
 
 				if (_feedbackMessage == "Pass Date Test") {
+
+					string copyofParameterToBeUpdated = parameterToBeUpdated;
+					string copyofOriginalDetail;
+
+					if (copyofParameterToBeUpdated == "start-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartDate();
+					} else if (copyofParameterToBeUpdated == "start-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartTime();
+					} else if (copyofParameterToBeUpdated == "end-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndDate();
+					} else if (copyofParameterToBeUpdated == "end-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndTime();
+					}
+
 					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 					_DataBase.updateTextFile(_filename);
 					setTaskList();
-					_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
-					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-				} else {}
+
+					_feedbackMessage = compareTaskDateandTime(_storageTaskListCopy[updateInteger - 1]);
+					if (_feedbackMessage != "") {
+						_DataBase.updateTask(_filename, updateInteger, copyofParameterToBeUpdated, copyofOriginalDetail);
+						_DataBase.updateTextFile(_filename);
+						setTaskList();
+					
+					} else {
+						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+					}
+				}
 			}
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		} else if ((parameterToBeUpdated == "start-time") || (parameterToBeUpdated == "end-time") || (parameterToBeUpdated == "deadline-time")) {
@@ -453,12 +515,33 @@ string Logic::executeCommand(paraList Input) {
 
 				if (_feedbackMessage == "Pass Time Test") {
 
+					string copyofParameterToBeUpdated = parameterToBeUpdated;
+					string copyofOriginalDetail;
+
+					if (copyofParameterToBeUpdated == "start-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartDate();
+					} else if (copyofParameterToBeUpdated == "start-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartTime();
+					} else if (copyofParameterToBeUpdated == "end-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndDate();
+					} else if (copyofParameterToBeUpdated == "end-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndTime();
+					}
+
 					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 					_DataBase.updateTextFile(_filename);
 					setTaskList();
-					_DataBase.setFeedbackMessage(FEEDBACK_TASK_UPDATED_SUCCESSFULLY);
-					_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-				} else {}
+
+					_feedbackMessage = compareTaskDateandTime(_storageTaskListCopy[updateInteger - 1]);
+					if (_feedbackMessage != "") {
+						_DataBase.updateTask(_filename, updateInteger, copyofParameterToBeUpdated, copyofOriginalDetail);
+						_DataBase.updateTextFile(_filename);
+						setTaskList();
+
+					} else {
+						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+					}
+				} 
 			}
 		} else if (parameterToBeUpdated == "priority"){
 			if (detailToBeUpdated == "") {
