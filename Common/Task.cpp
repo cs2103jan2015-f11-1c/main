@@ -135,11 +135,11 @@ void Task::changeTaskDeadlineTime(string newDeadlineTime){
 
 void Task::changeTaskPriority(string newTaskPriority){
 	if (newTaskPriority == "!H"){
-		newTaskPriority == "HIGH";
+		newTaskPriority = "HIGH";
 	} else if (newTaskPriority == "!M"){
-		newTaskPriority == "MEDIUM";
+		newTaskPriority = "MEDIUM";
 	} else if (newTaskPriority == "!L"){
-		newTaskPriority == "LOW";
+		newTaskPriority = "LOW";
 	}
 	_taskPriority = newTaskPriority;
 

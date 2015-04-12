@@ -13,7 +13,7 @@ string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!"
 string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
 string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
 string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
-string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Update priority invalid!";
+string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Priority must be High, Medium or Low!";
 string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
 string Storage::FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY = "Undo Completed! :D";
 
@@ -234,6 +234,7 @@ bool noCaseLess(Task task1,Task task2){
 
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
 
+	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("update");
 
 	if (keyword == "name") {
@@ -314,20 +315,20 @@ void Storage::undoAction(){
 	
 		return;
 	}
-	/*
+	
 	if (previousCommand == "update"){
-		string originalTask = get<0>(updateTaskStack.top());
+		Task originalTask = get<0>(updateTaskStack.top());
 		unsigned int formerIndex = get<1>(updateTaskStack.top());
 		updateTaskStack.pop();
 
-		textFileCopy.insert(textFileCopy.begin() + (formerIndex - 1), originalTask);
-		textFileCopy.erase(textFileCopy.begin() + formerIndex);
+		taskList.insert(taskList.begin() + (formerIndex - 1), originalTask);
+		taskList.erase(taskList.begin() + formerIndex);
 
 		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
 
 		return;
 	}
-	*/
+	
 	if (previousCommand == "mark"){
 		unsigned int formerIndex = markTaskIndexStack.top();
 		markTaskIndexStack.pop();
