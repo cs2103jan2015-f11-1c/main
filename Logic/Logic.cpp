@@ -13,7 +13,7 @@ string Logic::SAVING_LOCATON_HISTORY = "taskSotong_saving_Location_history.txt";
 
 
 string Logic::ERROR_INVALID_USERINPUT = "Invalid User Input. Please Enter Again! :<";
-string Logic::ERROR_EXISTING_TASK = "That Task Has Already Existed~! Please Enter A New Task~";
+string Logic::ERROR_EXISTING_TASK = "That Task Has Already Existed~! ";
 string Logic::ERROR_TASK_UPDATED_UNSUCCESSFULLY = "Failed To Update The Task!";
 string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
 string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
@@ -139,7 +139,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 		} else {
 			feedbackMsg_Date = checkDateValidity(dateVector[i]);
 			if (feedbackMsg_Date != "Pass Date Test") {
-				tempFeedback = componentVector[i] + taskStartDate;// feedbackMsg_Date;
+				tempFeedback = componentVector[i]+ feedbackMsg_Date;
 				break;
 			}
 		}
@@ -424,9 +424,52 @@ void Logic::callInitialise(string outputFile) {
 	_DataBase.initialiseTextFile(outputFile);
 }
 
-bool Logic::notExistingTask(Task* task) {
+bool Logic::ExistingTask(Task task) {
 
-	return true;
+	setTaskList();
+	bool existing = false;
+	string name = task.getTaskName();
+	string startDate = task.getTaskStartDate();
+	string startTime = task.getTaskStartTime();
+	string endDate = task.getTaskEndDate();
+	string endTime = task.getTaskEndTime();
+	string deadlineDate = task.getTaskDeadlineDate();
+	string deadlineTime = task.getTaskDeadlineTime();
+	string priority = task.getTaskPriority();
+	string status = task.getTaskStatus();
+
+	if (_storageTaskListCopy.size() == 0) {
+		
+	} else {
+
+
+		Task checkItem;
+		for (int i = 0; i < _storageTaskListCopy.size(); i++) {
+			checkItem = _storageTaskListCopy[i];
+			if (name == checkItem.getTaskName()) {
+				if (startDate == checkItem.getTaskStartDate()) {
+					if (startTime == checkItem.getTaskStartTime()) {
+						if (endDate == checkItem.getTaskEndDate()) {
+							if (endTime == checkItem.getTaskEndDate()) {
+								if (deadlineDate == checkItem.getTaskDeadlineDate()) {
+									if (deadlineTime == checkItem.getTaskDeadlineTime()) {
+										if (priority == checkItem.getTaskPriority()) {
+											if (status == checkItem.getTaskStatus()) {
+												existing = true;
+											}
+										}
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+	return existing;
 }
 
 string Logic::getFeedbackMsg() {
@@ -445,24 +488,31 @@ string Logic::executeCommand(paraList Input) {
 	}else if (command == "add") {
 		_Logic_LogFile.writeToLogFile(command);
 		Task oneTask = Input.getTask();
-		string tempFeedback;
-		tempFeedback=checkTaskDatenTimeValidity(oneTask);
+		if (ExistingTask(oneTask) == true) {
+			_feedbackMessage = ERROR_EXISTING_TASK;
+		}else{
 
-		if (tempFeedback != "Pass Test") {
-			_feedbackMessage = tempFeedback;			
-		} else {
+			string tempFeedback;
+			tempFeedback = checkTaskDatenTimeValidity(oneTask);
 
-			tempFeedback = compareTaskDateandTime(oneTask);
-
-			if (tempFeedback != "") {
+			if (tempFeedback != "Pass Test") {
 				_feedbackMessage = tempFeedback;
 			} else {
-				_DataBase.addTask(oneTask);
-				_DataBase.updateTextFile(_filename);
-				setTaskList();
-				_feedbackMessage =FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+
+				tempFeedback = compareTaskDateandTime(oneTask);
+
+				if (tempFeedback != "") {
+					_feedbackMessage = tempFeedback;
+				} else {
+					_DataBase.addTask(oneTask);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+					_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+				}
 			}
-		}
+		} 
+			
+		
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 
 	} else if (command == "update") {

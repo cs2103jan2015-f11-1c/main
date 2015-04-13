@@ -36,6 +36,40 @@ public:
 	Task();
 	Task(string,string,string,string,string,string,string,string,string);
 
+<<<<<<< HEAD
+=======
+
+	string getTaskDetails(){
+
+		string taskName = checkNull(_taskName);
+		string date1 = checkNull(_taskStart.date);
+		string time1 = checkNull(_taskStart.time);
+		string date2 = checkNull(_taskEnd.date);
+		string time2 = checkNull(_taskEnd.time);
+		string date3 = checkNull(_taskDeadline.date);
+		string time3 = checkNull(_taskDeadline.time);
+		string priority = checkNull(_taskPriority);
+		string status = _taskStatus;
+//to be updated 
+
+
+		ostringstream oss;
+		oss << right << taskName
+		<< date1
+		<< time1
+		<< date2
+		<< time2
+		<< date3
+		<< time3
+		<< priority
+		<< status;
+
+		return oss.str();		
+	}
+
+	string checkNull(string);
+
+>>>>>>> 1418d037c87e104825c66de8a6b1bad569ab494a
 	string getTaskName(); 
 
 	string getTaskStartDate();
