@@ -1187,3 +1187,22 @@ add
 Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+13/4/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>

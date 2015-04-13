@@ -1,4 +1,5 @@
- #include "stdafx.h"
+// @author A0111642W
+#include "stdafx.h"
 #include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -68,7 +69,7 @@ namespace Parser_Testing
 			output = a.para._task.getTaskEndTime();
 			Assert::AreEqual(output, expectedOutput2);
 		}
-
+		//@author A0110469J
 		TEST_METHOD(nullStringNametest)
 		{
 			string userInput = "add ";

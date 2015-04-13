@@ -1,6 +1,7 @@
 #include "UI.h"
 #include <assert.h>
 
+//@author A0110469J-unused
 void UI::displayWelcomeMessage() {
 
 	cout << _welcomeMessage << endl;

@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿// @author A0113555L
+#pragma once
 
 #include "..\Logic\Logic.h"
 #include <string>
@@ -693,6 +694,7 @@ namespace tasksotongUI {
 	}
 	private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 	}
+// @author A0114484H
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		int index = 0;
