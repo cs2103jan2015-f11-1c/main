@@ -181,3 +181,30 @@ string paraList::getSearchKey()
 
 	return searchKeyword;
 }
+
+
+void paraList::processViewInc()
+{
+
+	viewIncompleted = true;
+
+}
+void paraList::processViewComp()
+{
+	viewCompleted = true;
+
+}
+bool paraList::getprocessViewInc()
+{
+	return viewIncompleted;
+
+
+}
+bool paraList::getprocessViewComp()
+{
+
+
+	return viewCompleted;
+
+
+}

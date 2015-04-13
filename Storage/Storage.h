@@ -25,6 +25,8 @@ class Storage{
 private:
 
 	vector<Task> taskList;
+	vector<Task> completedTaskList;
+	vector<Task> incompleteTaskList;
 	vector<string> textFileCopy;
 	stack<string> commandStack;
 	stack<pair<Task, unsigned int>> deleteTaskStack;
@@ -54,6 +56,8 @@ private:
 	static string ERROR_INVALID_UPDATE_PRIORITY_KEYWORD;
 	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
 	static string FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY;
 
 	string feedbackMessage;
 
@@ -69,6 +73,10 @@ private:
 public:
 
 	vector<Task> returnTaskList();
+
+	vector<Task> returnCompletedTaskList();
+
+	vector<Task> returnIncompleteTaskList();
 
 	void updateTaskList(Task);
 

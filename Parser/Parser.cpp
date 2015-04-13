@@ -29,6 +29,9 @@ const regex UNMARK_PATTERN("\\b(unmark)\\b", std::tr1::regex_constants::icase);
 const regex SAVE_PATTERN("\\b(save)\\b", std::tr1::regex_constants::icase);
 const regex SEARCH_PATTERN("\\b(search)\\b", std::tr1::regex_constants::icase);
 const regex UPDATE_PATTERN("\\b(update)\\b", std::tr1::regex_constants::icase);
+const regex VIEW_C_PATTERN("\\b(view-c)\\b",std::tr1::regex_constants::icase);
+const regex VIEW_I_PATTERN("\\b(view-i)\\b", std::tr1::regex_constants::icase);
+const regex VIEW_PATTERN("\\b(view)\\b", std::tr1::regex_constants::icase);
 const regex NTRL_FROM_PATTERN("((from)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((from)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(from)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
 const regex NTRL_BY_PATTERN("((by)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((by)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(by)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
 const regex NTRL_TO_PATTERN("((to)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((to)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(to)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
@@ -41,7 +44,7 @@ const int PROCESS_INITIAL = 1000;
 Parser::Parser()
 {}
 
-//extracts the command from user Input
+//extracts the command from userInput
 void Parser::sortCommand(string &userInput)
 {
 
@@ -176,7 +179,6 @@ void Parser::sortDetails(string &userInput)
 		userInput.erase(0, index + 4);
 
 
-
 		eventEndDetails = userInput;
 
 
@@ -189,13 +191,15 @@ void Parser::sortDetails(string &userInput)
 		return;
 	}
 	case FROM:
-	{    cout << "from " << endl;
-	string fromtime, fromdate;
-	processX(userInput);
-	processKeywordFrom(userInput);
-	checkStart(fromdate, fromtime, userInput);
-	para._task.changeTaskStartDate(fromdate);
-	para._task.changeTaskStartTime(fromtime);
+	{    
+		string fromtime;
+		string fromdate;
+
+		processX(userInput);
+		processKeywordFrom(userInput);
+		checkStart(fromdate, fromtime, userInput);
+		para._task.changeTaskStartDate(fromdate);
+		para._task.changeTaskStartTime(fromtime);
 
 	if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
 	{
@@ -210,7 +214,9 @@ void Parser::sortDetails(string &userInput)
 	}
 	case TO:
 	{
-		string endtime, enddate;
+		string endtime;
+		string enddate;
+
 		processX(userInput);
 		processKeywordTo(userInput);
 		checkStart(enddate, endtime, userInput);
@@ -221,8 +227,6 @@ void Parser::sortDetails(string &userInput)
 		{
 			parserProcess now;
 			para._task.changeTaskEndDate(now.parserReturnNowTime());
-
-
 		}
 
 
@@ -230,7 +234,9 @@ void Parser::sortDetails(string &userInput)
 	}
 	case ON:
 	{
-		string ontime, ondate;
+		string ontime;
+		string ondate;
+
 		processX(userInput);
 		processKeywordOn(userInput);
 		checkStart(ondate, ontime, userInput);
@@ -241,8 +247,6 @@ void Parser::sortDetails(string &userInput)
 		{
 			parserProcess now;
 			para._task.changeTaskStartDate(now.parserReturnNowTime());
-
-
 		}
 
 
@@ -252,7 +256,9 @@ void Parser::sortDetails(string &userInput)
 	}
 	case AT:
 	{
-		string attime, atdate;
+		string attime;
+		string atdate;
+
 		processX(userInput);
 		processKeywordAt(userInput);
 		checkStart(atdate, attime, userInput);
@@ -276,7 +282,9 @@ void Parser::sortDetails(string &userInput)
 	case BY:
 	{
 
-		string bytime, bydate;
+		string bytime;
+		string bydate;
+
 		processX(userInput);
 		processKeywordBy(userInput);
 		checkStart(bydate, bytime, userInput);
@@ -287,8 +295,6 @@ void Parser::sortDetails(string &userInput)
 		{
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
-
-
 		}
 
 
@@ -298,9 +304,10 @@ void Parser::sortDetails(string &userInput)
 	}
 	case AFTER:
 	{
-		cout << "j";
+		
 
-		string afttime, aftdate;
+		string afttime;
+		string aftdate;
 		processX(userInput);
 		processKeywordAfter(userInput);
 
@@ -324,7 +331,9 @@ void Parser::sortDetails(string &userInput)
 	}
 	case BEFORE:
 	{
-		string beftime, befdate;
+		string beftime;
+		string befdate;
+
 		processX(userInput);
 		processKeywordBefore(userInput);
 		checkStart(befdate, beftime, userInput);
@@ -345,6 +354,8 @@ void Parser::sortDetails(string &userInput)
 	}
 	case FROM_TO:
 	{
+		
+		
 		index = userInput.find("from") - 1;
 		string tempName = userInput.substr(0, index);
 
@@ -358,9 +369,7 @@ void Parser::sortDetails(string &userInput)
 
 
 		eventEndDetails = userInput;
-		cout << "eventstart" << eventStartDetails << endl;
-		cout << "eventend" << eventEndDetails << endl;
-
+		
 		processStartKey(eventStartDetails);
 		processEndKey(eventEndDetails);
 		
@@ -470,6 +479,24 @@ void Parser::processCommand(string &userInput)
 	else if (regex_search(command, SAVE_PATTERN))
 	{
 		para.processUserDir(userInput);
+
+
+	}
+	else if (regex_search(command, VIEW_C_PATTERN))
+	{
+
+
+
+	}
+	else if (regex_search(command, VIEW_I_PATTERN))
+	{
+
+
+
+	}
+	else if (regex_search(command,VIEW_PATTERN))
+	{
+
 
 
 	}

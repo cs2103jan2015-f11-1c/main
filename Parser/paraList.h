@@ -21,6 +21,8 @@ private:
 	string markStatus;
 	string userDir;
 	string searchKeyword;
+	bool viewIncompleted;
+	bool viewCompleted;
 
 
 
@@ -60,7 +62,10 @@ public:
 	void processMarkStatus(string);
 	void processUserDir(string);
 	void processSearchWord(string);
-
+	void processViewInc();
+	void processViewComp();
+	bool getprocessViewInc();
+	bool getprocessViewComp();
 
 };
 

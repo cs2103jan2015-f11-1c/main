@@ -66,6 +66,7 @@ private:
 	static string FEEDBACK_UNDO_PREVIOUS_TASK;
 	static string FEEDBACK_SEARCH_TASK_BY_KEYWORD;
 	static string FEEDBACK_SORT_TASK_BY_KEYWORD;
+	static string FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 
 	Log _Logic_LogFile;
 	
@@ -88,6 +89,14 @@ public:
 	void setTaskList();
 
 	vector<Task> getTaskList();
+
+	void setCompletedTaskList();
+
+	vector<Task> getCompletedTaskList();
+
+	void setIncompleteTaskList();
+
+	vector<Task> getIncompleteTaskList();
 
 	void initialiseSetUp();
 
