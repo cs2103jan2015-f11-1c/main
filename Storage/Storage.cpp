@@ -1,5 +1,4 @@
 #include "Storage.h"
-#include <assert.h>
 
 string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
 string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
@@ -29,6 +28,7 @@ bool Storage::isEmptyTaskList(){
 
 //checks if index is out of range
 bool Storage::isInvalidIndex(unsigned int taskIndex){
+	assert(taskIndex != NULL);
 	if (taskIndex < 1 || taskIndex > textFileCopy.size()){
 		cout << ERROR_INVALID_NUMBER << endl;
 
@@ -39,6 +39,8 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 }
 
 vector<Task> Storage::performSearchForViewingTasks(string keyword){
+
+	assert(keyword != "");
 
 	vector<Task> tempTaskList;
 	vector<Task>::iterator iter = taskList.begin();
@@ -91,24 +93,28 @@ void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
 	return;
 }
 
+//Returns the original task list
 vector<Task> Storage::returnTaskList() {
 
 	return taskList;
 
 }
 
+//Returns the task list containing only completed tasks
 vector<Task> Storage::returnCompletedTaskList() {
 
 	return completedTaskList;
 
 }
 
+//Returns the task list containing only incompleted tasks
 vector<Task> Storage::returnIncompleteTaskList() {
 
 	return incompleteTaskList;
 
 }
 
+//Converts vector<Task> taskList to vector<string> taskListStringVector 
 void Storage::toString(){
 	for (unsigned int i = 0; i < taskList.size(); i++){
 		ostringstream oss;
@@ -129,6 +135,7 @@ void Storage::toString(){
 	return;
 }
 
+//Converts vector<string> taskListStringVector back to vector<Task> taskList 
 void Storage::toTaskList(){
 	ostringstream oss;
 	for (int i = 0; i < taskListStringVector.size(); i++){
@@ -136,6 +143,7 @@ void Storage::toTaskList(){
 	}
 
 	string line;
+	assert(line == "");
 	vector<string> taskParameters;
 	istringstream iss(oss.str());
 	while (getline(iss, line)) {
@@ -159,8 +167,6 @@ void Storage::toTaskList(){
 			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
 			taskList.push_back(tempTask);
 			taskParameters.clear();
-
-
 		}
 	}
 
@@ -169,15 +175,16 @@ void Storage::toTaskList(){
 
 void Storage::updateTaskList(Task taskTobeEntered) {
 
-
 	taskList.push_back(taskTobeEntered);
+
 	return;
 }
 
-//updates the text file with the current tasklist vector
+//Updates the text file with the current tasklist vector
 void Storage::updateTextFile(string fileName){
 
 	assert(fileName != "");
+
 	ofstream writeFile(fileName);
 
 	for (unsigned int i = 0; i < taskList.size(); i++){
@@ -198,7 +205,11 @@ void Storage::updateTextFile(string fileName){
 	return;
 }
 
+//Updates the task list vector with the contents in text file
 void Storage::initialiseTextFile(string fileName){
+
+	assert(fileName != "");
+
 	ifstream readFile(fileName);
 	string tempStorage;
 	vector<string> taskParameters;
@@ -235,17 +246,22 @@ vector<string> Storage::returnTextFileCopy(){
 	return textFileCopy;
 }
 
-//updated by GT
+//Pushes the task added into task list vector
 void Storage::addTask(Task individual_task){
 	
 	taskList.push_back(individual_task);
+
+	assert(!taskList.empty());
 	
 	commandStack.push("add");
 
 	return;
 }
 
+//Removes the task from the task list vector
 void Storage::deleteTask(string fileName, unsigned int taskIndex){
+
+	assert(taskIndex != NULL);
 
 	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
@@ -254,12 +270,8 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 	
 	return;
 }
-//need to be deleted-GT
-void Storage::displayAllTasks(){
 
-	return;
-}
-
+//Returns a task list containing only completed tasks
 vector<Task> Storage::viewCompletedTasks(){
 
 	completedTaskList = performSearchForViewingTasks("Completed");
@@ -273,6 +285,7 @@ vector<Task> Storage::viewCompletedTasks(){
 	return completedTaskList;
 }
 
+//Returns a task list containing only incomplete tasks
 vector<Task> Storage::viewIncompleteTasks(){
 
 	incompleteTaskList = performSearchForViewingTasks("Incomplete");
@@ -287,23 +300,32 @@ vector<Task> Storage::viewIncompleteTasks(){
 }
 
 void Storage::setFeedbackMessage(string messageToBeSet){
+	
+	assert(messageToBeSet != "");
+
 	feedbackMessage = messageToBeSet;
+
+	return;
 }
 
 string Storage::returnLogicFeedbackMessage(){
+
 	return feedbackMessage;
 }
 
+//Checking whether a character is smaller than another character in the ASCII code
 struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	bool operator () (char x, char y) const {
 		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
 	}
 };
 
+//To compare each character in both strings using a predicate
 bool noCaseLess(const string &a, const string &b){
 	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
 }
 
+//To update a task in the task list by identifying the keyword and then replacing the old input
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
 
 	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
@@ -332,15 +354,15 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword
 		}
 	} else {
 		setFeedbackMessage(ERROR_INVALID_UPDATE_KEYWORD);
+	}	
 
-	}
-
-	
 	return;
 }
 
-//changes status from "incomplete" to "completed"
+//Changes status from "Incomplete" to "Completed"
 void Storage::markTask(string fileName, unsigned int taskIndex){
+
+	assert(taskIndex != NULL);
 
 	taskList[taskIndex - 1].changeTaskStatus("mark");
 	markTaskIndexStack.push(taskIndex);
@@ -349,8 +371,10 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
-//changes status from "completed" to "incomplete"
+//Changes status from "Completed" to "Incomplete"
 void Storage::unmarkTask(string fileName, unsigned int taskIndex){
+
+	assert(taskIndex != NULL);
 
 	taskList[taskIndex - 1].changeTaskStatus("unmark");
 	unmarkTaskIndexStack.push(taskIndex);
@@ -359,7 +383,7 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
-//undo user's previous action, based on the last command entered
+//Undo previous action based on the last command entered
 void Storage::undoAction(){
 
 	if (commandStack.empty()){
@@ -370,6 +394,8 @@ void Storage::undoAction(){
 
 	string previousCommand = commandStack.top();
 	commandStack.pop();
+
+	assert(previousCommand != "");
 
 	if (previousCommand == "add"){
 		taskList.erase(taskList.end() - 1);
@@ -445,34 +471,17 @@ void Storage::undoAction(){
 		return;
 	}
 
-	if (previousCommand == "sort by status"){
-
-		textFileCopy = sortByStatusBeforeStack.top();
-		sortByStatusBeforeStack.pop();
-
-		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
-
-		return;
-	}
-
-	if (previousCommand == "sort by priority"){
-
-		textFileCopy = sortByPriorityBeforeStack.top();
-		sortByPriorityBeforeStack.pop();
-
-		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
-
-		return;
-	}
-
 	return;
 }
 
+//Clear all tasks currently in task list vector
 void Storage::clearAllTasks(){
 	clearAllTasksStack.push(taskList);
 	commandStack.push("clear");
 
 	taskList.clear();
+
+	assert(taskList.empty());
 
 	return;
 }
@@ -488,11 +497,6 @@ vector<Task> Storage::sortTaskByName(string fileName){
 		return taskList;
 	}
 
-	//if (isSortedByName(taskList)){
-	//	setFeedbackMessage(ERROR_INVALID_NAME_SORT);
-	//	return;
-	//}
-
 	commandStack.push("sort by name");
 	sortByNameStack.push(taskList);
 
@@ -504,6 +508,7 @@ vector<Task> Storage::sortTaskByName(string fileName){
 
 	return taskList;
 }
+
 /*
 vector<string> Storage::sortTaskByStatus(string fileName){
 	textFileCopy.clear();
