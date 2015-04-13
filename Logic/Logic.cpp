@@ -44,6 +44,7 @@ string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
 string Logic::FEEDBACK_VIEW_ALL_SUCCESSFULLY = "Viewing All Tasks!";
 
+//this function checks if the start time or end time or deadline time is of the correct 23:59 format
 string Logic::checkTimeValidity(string timeInput) {
 
 	assert(timeInput != "");
@@ -65,6 +66,7 @@ string Logic::checkTimeValidity(string timeInput) {
 	return tempFeedback;
 }
 
+//this function checks if the start date or end date or deadline date is of the correct  day/month/year format
 string Logic::checkDateValidity(string dateInput) {
 
 	assert(dateInput != "");
@@ -102,6 +104,8 @@ string Logic::checkDateValidity(string dateInput) {
 
 }
 
+//within a certain task, check if the start date and end date make sense
+//e.g. It is impossible to have a start date that is after the end date
 string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 
 	string tempFeedback;
@@ -185,6 +189,7 @@ string Logic::convertYearToCorrectForm(string input) {
 
 }
 
+//this function converts the input string to a standard form of 23:59
 string Logic::convertTimeToCorrectForm(string input) {
 
 	string tempMinute = input.substr(input.find_first_of(":") + 1, input.length());
