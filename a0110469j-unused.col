@@ -1,0 +1,223 @@
+//@author: a0110469j-unused
+
+
+
+	/**
+	 * origin: C:\Users\Leon Yip\Desktop\TaskSotong\main\UI\UI.cpp
+	 */
+
+void UI::displayWelcomeMessage() {
+
+	cout << _welcomeMessage << endl;
+	return;
+}
+
+void UI::displayExitMessage() {
+
+	cout << _exitMessage << endl;
+	return;
+}
+
+void UI::displayPromptInputMessage() {
+
+	cout << _promptInputMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulAddMessage() {
+
+	cout << _successfulAddMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulUpdateMessage() {
+
+	cout << _successfulUpdateMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulDeleteMessage() {
+
+	cout << _successfulDeleteMessage << endl;
+	return;
+}
+
+void UI::displaySuccessfulSortMessage() {
+
+	cout << _successfulSortMessage << endl;
+	return;
+}
+
+void UI::displayInvalidCommandMessage() {
+
+	cout << _invalidCommandMessage << endl;
+	return;
+}
+
+void UI::displayDeleteErrorMessage() {
+
+	cout << _deleteErrorMessage << endl;
+	return;
+}
+
+void UI::displayUpdateCompletedStatusErrorMessage() {
+
+	cout << _updateCompletedStatusErrorMessage << endl;
+	return;
+}
+
+void UI::displayUpdateNotCompletedStatusErrorMessage() {
+
+	cout << _updateNotCompletedStatusErrorMessage << endl;
+	return;
+}
+
+void UI::displayTaskList(vector<string> taskList) {
+
+	vector<string>::iterator iter;
+
+	for(iter = taskList.begin(); iter != taskList.end(); ++iter) {
+		cout << *iter << endl;
+	}
+
+	return;
+}
+
+//gets user input and stores it as a string
+string UI::acceptUserInput() {
+
+	string userInput;
+	getline(cin, userInput);
+
+	assert(userInput.size() > 0);
+
+	return userInput;
+ }
+	// End of segment: C:\Users\Leon Yip\Desktop\TaskSotong\main\UI\UI.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Leon Yip\Desktop\TaskSotong\main\UI\UI.h
+	 */
+
+class UI {
+private:
+
+	string _welcomeMessage = "Welcome to TaskSotong!"; 
+	string _exitMessage = "Goodbye!";
+
+	string _promptInputMessage = "What would you like to do?";
+
+	string _successfulAddMessage = "Task was added successfully!";
+	string _successfulUpdateMessage = "Task was updated successfully!";
+	string _successfulDeleteMessage = "Task was deleted successfully!";
+	string _successfulSortMessage = "Sorted!";
+
+	string _invalidCommandMessage = "Error, command not recognized. Please enter a valid command! (add, update, delete, sort, exit)";
+	string _deleteErrorMessage = "Error. Please enter a valid index!";
+	string _updateCompletedStatusErrorMessage = "Error. Task already marked as \"completed\"";
+	string _updateNotCompletedStatusErrorMessage = "Error. Task already marked as \"not completed\"";
+
+
+public:
+
+	void displayWelcomeMessage();
+	void displayExitMessage();
+	void displayPromptInputMessage();
+
+	void displaySuccessfulAddMessage();
+	void displaySuccessfulUpdateMessage();
+	void displaySuccessfulDeleteMessage();
+	void displaySuccessfulSortMessage();
+
+	void displayInvalidCommandMessage();
+	void displayDeleteErrorMessage();
+	void displayUpdateCompletedStatusErrorMessage();
+	void displayUpdateNotCompletedStatusErrorMessage();
+
+	void displayTaskList(vector<string> taskList);
+
+	string acceptUserInput();
+};
+
+#endif
+	// End of segment: C:\Users\Leon Yip\Desktop\TaskSotong\main\UI\UI.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Leon Yip\Desktop\TaskSotong\main\GUI\TSGUI.h
+	 */
+
+	private: System::Void commandline_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+		
+		Logic TSlogic;
+		
+		TSlogic.setFileName("taskSotong.txt");
+		ifstream readFile("taskSotong.txt");
+		std::string filename = TSlogic.getFileName();
+		assert(filename != "");
+		
+		TSlogic.callInitialise(filename);
+
+		//if the Enter key is pressed
+		if (e->KeyChar == (char)13){
+			
+			
+			String^ input = commandline->Text;
+			std::string userInput = msclr::interop::marshal_as< std::string >(input);
+
+			if (userInput != "exit") {
+
+				//pass userInput to Logic to process
+				paraList* storageInput = TSlogic.getParaList(userInput);
+				std::string command = storageInput->getCommand();
+				Task task = storageInput->getTask();
+				TSlogic.executeCommand(*storageInput);
+		 
+				std::string tempString;
+				queue<string> taskVector;
+				std::string entireList;
+				entireList = "";
+
+				while (getline(readFile, tempString)) {
+					taskVector.push(tempString);
+				}
+				
+				while (!taskVector.empty()) {
+					
+					std::string taskLine = taskVector.front();
+					entireList = entireList + taskLine + "\r\n";
+					taskVector.pop();
+				}
+
+				//display contents of .txt file
+				assert(taskVector.empty());
+				String^ displayList = gcnew String(entireList.c_str());
+				displaybox->Text = displayList;
+
+				//display feedback message
+				std::string feedbackmsg = TSlogic.getFeedbackMsg();
+				assert(feedbackmsg != "");
+				String^ feedback = gcnew String(feedbackmsg.c_str());
+				feedbackbox->Text = feedback;
+			}
+			
+			std::string restoreCommandLine = "";
+			String^ restoreCmdLine = gcnew String(restoreCommandLine.c_str());
+			commandline->Text = restoreCmdLine;
+			
+		}
+	}
+
+	// End of segment: C:\Users\Leon Yip\Desktop\TaskSotong\main\GUI\TSGUI.h
+
+
+
+
+

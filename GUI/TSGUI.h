@@ -174,7 +174,7 @@ namespace GUI {
 #pragma endregion
 	
 		
-	//
+	//@author A0110469J-unused
 	private: System::Void commandline_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 		
 		Logic TSlogic;
@@ -236,7 +236,7 @@ namespace GUI {
 		}
 	}
 
-
+//@author generated
 private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 }
 
