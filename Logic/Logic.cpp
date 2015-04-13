@@ -16,18 +16,20 @@ string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
 string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
 string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
 string Logic::ERROR_EMPTY_LIST = "Task List Is Empty!";
-string Logic::ERROR_TASK_INSUFFICIENT_PARAMETERS="Insufficient Parameters Entered!";
+string Logic::ERROR_TASK_INSUFFICIENT_PARAMETERS = "Insufficient Parameters Entered!";
 string Logic::ERROR_NO_INDEX = "No Index! :<";
-string Logic::ERROR_INDEX_OUT_OF_RANGE="Index Out Of Range!";
-string Logic::ERROR_NO_COMPONENT="No Component!";
-string Logic::ERROR_COMPONENT_INVALID="Component Invalid!";
-string Logic::ERROR_NO_CONTENT="No Content!";
-string Logic::ERROR_INVALID_CONTENT="Content Invalid!";
-string Logic::ERROR_INVALID_YEAR="Year Entered Is Invalid!";
-string Logic::ERROR_INVALID_MONTH="Month Entered Is Invalid!";
-string Logic::ERROR_INVALID_DAY="Day Entered Is Invalid";
-string Logic::ERROR_INVALID_HOUR="Hour Entered Is Invalid";
-string Logic::ERROR_INVALID_MINUTE="Minute Entered Is Invalid";
+string Logic::ERROR_INDEX_OUT_OF_RANGE = "Index Out Of Range!";
+string Logic::ERROR_NO_COMPONENT = "No Component!";
+string Logic::ERROR_COMPONENT_INVALID = "Component Invalid!";
+string Logic::ERROR_NO_CONTENT = "No Content!";
+string Logic::ERROR_INVALID_CONTENT = "Content Invalid!";
+string Logic::ERROR_INVALID_YEAR = "Year Entered Is Invalid!";
+string Logic::ERROR_INVALID_MONTH = "Month Entered Is Invalid!";
+string Logic::ERROR_INVALID_DAY = "Day Entered Is Invalid";
+string Logic::ERROR_INVALID_HOUR = "Hour Entered Is Invalid";
+string Logic::ERROR_INVALID_MINUTE = "Minute Entered Is Invalid";
+string Logic::ERROR_START_TIME_AFTER_END_TIME = "Start Time After End Time!";
+string Logic::ERROR_START_DATE_AFTER_END_DATE = "Start Date After End Date :<";
 
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
@@ -73,11 +75,11 @@ string Logic::checkDateValidity(string dateInput) {
 	string temp = dateInput.substr(0, dateInput.length() - 5);
 	string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
 	string tempDay = temp.substr(0, temp.find_first_of("/"));
-		
+
 	int year = atoi(tempYear.c_str());
 	int month = atoi(tempMonth.c_str());
 	int day = atoi(tempDay.c_str());
-		
+
 	if (year < 2015) {
 		tempFeedback = ERROR_INVALID_YEAR;
 	} else if ((month < 1) || (month>12)) {
@@ -93,7 +95,7 @@ string Logic::checkDateValidity(string dateInput) {
 			tempFeedback = ERROR_INVALID_DAY;;
 		}
 	} else if (day > 30) {
-		tempFeedback = ERROR_INVALID_DAY;		
+		tempFeedback = ERROR_INVALID_DAY;
 	}
 
 	return tempFeedback;
@@ -123,7 +125,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 	timeVector.push_back(taskDeadlineTime);
 
 	vector<string> componentVector;
-	componentVector.push_back("Start Date: "); 
+	componentVector.push_back("Start Date: ");
 	componentVector.push_back("End Date: ");
 	componentVector.push_back("Deadline Date: ");
 	componentVector.push_back("Start Time: ");
@@ -150,14 +152,12 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 		for (int j = 0; j < timeVector.size(); j++) {
 
 			if (timeVector[j] == "") {
-
 			} else {
 				feedbackMsg_Time = checkTimeValidity(timeVector[j]);
 				if (feedbackMsg_Time != "Pass Time Test") {
 					tempFeedback = componentVector[j % 3] + feedbackMsg_Time;
 					break;
 				} else {
-				
 				}
 			}
 		}
@@ -196,27 +196,27 @@ string Logic::convertTimeToCorrectForm(string input) {
 }
 
 string Logic::compareTaskDateandTime(Task taskInput) {
+
 	string tempStartDate = taskInput.getTaskStartDate();
 	string tempStartTime = taskInput.getTaskStartTime();
 	string tempEndDate = taskInput.getTaskEndDate();
 	string tempEndTime = taskInput.getTaskEndTime();
 
 	string startDate = convertYearToCorrectForm(tempStartDate);
-
 	string startTime = convertTimeToCorrectForm(tempStartTime);
 	string endDate = convertYearToCorrectForm(tempEndDate);
 	string endTime = convertTimeToCorrectForm(tempEndTime);
-	
+
 	string tempFeedback = "";
 	if (startDate == "" || endDate == "") {
 
 	} else if (startDate == endDate) {
 		if (startTime > endTime) {
-			tempFeedback = "Start Time After End Time :<";
+			tempFeedback = ERROR_START_TIME_AFTER_END_TIME;
 		} else {
 		}
 	} else if (startDate > endDate) {
-		tempFeedback = "Start Date After End Date :<";
+		tempFeedback = ERROR_START_DATE_AFTER_END_DATE;
 	} else {
 	}
 	return tempFeedback;
@@ -284,7 +284,6 @@ void Logic::initialiseFileLocationFile() {
 	readFile.close();
 
 	return;
-
 }
 
 void Logic::writeFileLocation(vector<string> fileLocation) {
@@ -296,7 +295,6 @@ void Logic::writeFileLocation(vector<string> fileLocation) {
 	}
 
 	return;
-
 }
 
 bool Logic::checkIfFileIsAtExeLocation() {
@@ -342,7 +340,6 @@ string Logic::getExePath() {
 	string::size_type pos = string(buffer).find_last_of("\\/");
 
 	return string(buffer).substr(0, pos);
-
 }
 
 void Logic::createNewDirectory(string userFileDirectory) {
@@ -361,7 +358,6 @@ void Logic::createNewDirectory(string userFileDirectory) {
 		string temp = inputDirectory.substr(firstIndex, inputDirectory.size() - 1);
 
 		if (temp == "\\") {
-
 		} else {
 			directoryParts.push(temp);
 		}
@@ -372,7 +368,6 @@ void Logic::createNewDirectory(string userFileDirectory) {
 	}
 
 	directoryParts.push(inputDirectory);
-
 	string directory = directoryParts.top();
 	directoryParts.pop();
 
@@ -458,7 +453,7 @@ bool Logic::ExistingTask(Task task) {
 	string status = task.getTaskStatus();
 
 	if (_storageTaskListCopy.size() == 0) {
-		
+
 	} else {
 
 		Task checkItem;
@@ -494,7 +489,6 @@ bool Logic::ExistingTask(Task task) {
 string Logic::getFeedbackMsg() {
 
 	return _feedbackMessage;
-
 }
 
 string Logic::executeCommand(paraList Input) {
@@ -502,15 +496,15 @@ string Logic::executeCommand(paraList Input) {
 	_Logic_LogFile.writeToLogFile("******************LOGIC_EXECUTECOMMAND_START*******************");
 
 	string command = getLowerCaseCommand(Input);
-	if (command == "exit"){
+	if (command == "exit") {
 		exit(0);
-	
-	}else if (command == "add") {
+
+	} else if (command == "add") {
 		_Logic_LogFile.writeToLogFile(command);
 		Task oneTask = Input.getTask();
 		if (ExistingTask(oneTask) == true) {
 			_feedbackMessage = ERROR_EXISTING_TASK;
-		}else{
+		} else {
 
 			string tempFeedback;
 			tempFeedback = checkTaskDatenTimeValidity(oneTask);
@@ -530,9 +524,8 @@ string Logic::executeCommand(paraList Input) {
 					_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 				}
 			}
-		} 
-			
-		
+		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 
 	} else if (command == "update") {
@@ -551,12 +544,12 @@ string Logic::executeCommand(paraList Input) {
 			if (detailToBeUpdated == "") {
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
-				
+
 				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
 				_DataBase.updateTextFile(_filename);
 				setTaskList();
 				_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
-				
+
 			}
 
 		} else if ((parameterToBeUpdated == "start-date") || (parameterToBeUpdated == "end-date") || (parameterToBeUpdated == "deadline-date")) {
@@ -590,7 +583,7 @@ string Logic::executeCommand(paraList Input) {
 						_DataBase.updateTask(_filename, updateInteger, copyofParameterToBeUpdated, copyofOriginalDetail);
 						_DataBase.updateTextFile(_filename);
 						setTaskList();
-					
+
 					} else {
 						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 					}
@@ -633,9 +626,9 @@ string Logic::executeCommand(paraList Input) {
 					} else {
 						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
 					}
-				} 
+				}
 			}
-		} else if (parameterToBeUpdated == "priority"){
+		} else if (parameterToBeUpdated == "priority") {
 			if (detailToBeUpdated == "") {
 				_feedbackMessage = ERROR_NO_CONTENT;
 			} else {
@@ -645,7 +638,9 @@ string Logic::executeCommand(paraList Input) {
 				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 			}
 		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "delete") {
 		int deleteInteger = Input.getDeleteInteger();
 
@@ -660,45 +655,53 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
 		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "save") {
+
 		string userDirectory = Input.getuserdir();
-		
+
 		changeFileDirectory(userDirectory);
-
 		updatefileLocation(userDirectory);
-
 		writeFileLocation(_fileLocation);
 		_feedbackMessage = userDirectory;
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
-	}  else if (command == "mark") {
+
+	} else if (command == "mark") {
+
 		int markIndex = Input.getmarkindex();
+
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else if (markIndex > _storageTaskListCopy.size() || markIndex <= 0) {
 			_feedbackMessage = ERROR_TASK_MARKED_UNSUCCESSFULLY;
-
 		} else {
 			_DataBase.markTask(_filename, markIndex);
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
 		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "unmark") {
+
 		int unmarkIndex = Input.getmarkindex();
+
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else if (unmarkIndex > _storageTaskListCopy.size() || unmarkIndex <= 0) {
 			_feedbackMessage = ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
-
 		} else {
 			_DataBase.unmarkTask(_filename, unmarkIndex);
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
 		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "clear") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
@@ -707,15 +710,18 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
-	
 		}
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "undo") {
 		_DataBase.undoAction();
 		_DataBase.updateTextFile(_filename);
 		setTaskList();
 		_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	} else if (command == "sort") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
@@ -724,26 +730,26 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-			_Logic_LogFile.writeToLogFile(_feedbackMessage);
-		}
 
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
 	} else if (command == "view-c") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
 			_DataBase.viewCompletedTasks();
 			vector<Task> tempTaskList = getCompletedTaskList();
-			if (tempTaskList.empty()){
-				
+			if (tempTaskList.empty()) {
 				setTaskList();
 			} else {
 				setCompletedTaskList();
 			}
-
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-			_Logic_LogFile.writeToLogFile(_feedbackMessage);
-		}
 
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
 	} else if (command == "view-i") {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
@@ -751,9 +757,10 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.viewIncompleteTasks();
 			setIncompleteTaskList();
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
-			_Logic_LogFile.writeToLogFile(_feedbackMessage);
-		}
 
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
 	} else if (command == "view") {
 
 		setTaskList();
@@ -761,12 +768,15 @@ string Logic::executeCommand(paraList Input) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
 			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
-			_Logic_LogFile.writeToLogFile(_feedbackMessage);
-		}
 
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
 	} else {
 		_feedbackMessage = ERROR_INVALID_USERINPUT;
+
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
 	}
 
 	return _feedbackMessage;

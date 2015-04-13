@@ -457,6 +457,7 @@ namespace tasksotongUI {
 				 // 
 				 // textBox1
 				 // 
+				 this->textBox1->BackColor = System::Drawing::SystemColors::ScrollBar;
 				 resources->ApplyResources(this->textBox1, L"textBox1");
 				 this->textBox1->Name = L"textBox1";
 				 // 

@@ -1131,3 +1131,38 @@ Viewing All Tasks!
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+C:\\1\2\3\4.txt
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!

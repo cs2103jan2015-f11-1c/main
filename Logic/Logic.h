@@ -20,14 +20,13 @@
 
 using namespace std;
 
-class Logic{
+class Logic {
 
 private:
 
 	UI _UserInterface;
 	Parser _ParserComponent;
 	Storage _DataBase;
-
 
 	vector<string> _fileLocation;
 	vector<Task> _resultVector;
@@ -57,6 +56,8 @@ private:
 	static string ERROR_INVALID_DAY;
 	static string ERROR_INVALID_HOUR;
 	static string ERROR_INVALID_MINUTE;
+	static string ERROR_START_TIME_AFTER_END_TIME;
+	static string ERROR_START_DATE_AFTER_END_DATE; 
 
 	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
 	static string FEEDBACK_DISPLAY_ALL_TASKS;
@@ -72,7 +73,7 @@ private:
 	static string FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 
 	Log _Logic_LogFile;
-	
+
 public:
 
 	string checkTimeValidity(string);
@@ -116,7 +117,7 @@ public:
 	void createNewDirectory(string);
 
 	void changeFileDirectory(string);
-	
+
 	void setFileName(string);
 
 	string getFileName();
