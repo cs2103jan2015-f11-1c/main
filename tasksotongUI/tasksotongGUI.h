@@ -251,18 +251,18 @@ namespace tasksotongUI {
 
 
 	private: System::Windows::Forms::Button^  CompleteButton;
-	private: System::Windows::Forms::ToolStrip^  Help;
-	private: System::Windows::Forms::ToolStripDropDownButton^  toolStripDropDownButton1;
-	private: System::Windows::Forms::ToolStripMenuItem^  featuresToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  flexibleCommandToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  tOBEENTEREDBYJIEYANGToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  sortToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  updateToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  sortByNameToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  sortByDateToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  sortByDeadlineToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  sortByPriorityToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  tOBEENTEREDBYANDYToolStripMenuItem;
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::RichTextBox^  Display_richTextBox;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::TextBox^  textBox1;
@@ -284,22 +284,9 @@ namespace tasksotongUI {
 				 this->DeadlineButton = (gcnew System::Windows::Forms::Button());
 				 this->Enter = (gcnew System::Windows::Forms::Button());
 				 this->CompleteButton = (gcnew System::Windows::Forms::Button());
-				 this->Help = (gcnew System::Windows::Forms::ToolStrip());
-				 this->toolStripDropDownButton1 = (gcnew System::Windows::Forms::ToolStripDropDownButton());
-				 this->featuresToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->flexibleCommandToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->tOBEENTEREDBYJIEYANGToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortByNameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortByDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortByDeadlineToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->sortByPriorityToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->updateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->tOBEENTEREDBYANDYToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->Display_richTextBox = (gcnew System::Windows::Forms::RichTextBox());
 				 this->button1 = (gcnew System::Windows::Forms::Button());
 				 this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-				 this->Help->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
 				 // UserInputBox
@@ -364,81 +351,6 @@ namespace tasksotongUI {
 				 this->CompleteButton->UseVisualStyleBackColor = false;
 				 this->CompleteButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::Complete_click);
 				 // 
-				 // Help
-				 // 
-				 this->Help->BackColor = System::Drawing::Color::Transparent;
-				 this->Help->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripDropDownButton1 });
-				 resources->ApplyResources(this->Help, L"Help");
-				 this->Help->Name = L"Help";
-				 // 
-				 // toolStripDropDownButton1
-				 // 
-				 this->toolStripDropDownButton1->BackColor = System::Drawing::Color::PaleGreen;
-				 this->toolStripDropDownButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-				 this->toolStripDropDownButton1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-					 this->featuresToolStripMenuItem,
-						 this->flexibleCommandToolStripMenuItem, this->sortToolStripMenuItem, this->updateToolStripMenuItem
-				 });
-				 resources->ApplyResources(this->toolStripDropDownButton1, L"toolStripDropDownButton1");
-				 this->toolStripDropDownButton1->Name = L"toolStripDropDownButton1";
-				 // 
-				 // featuresToolStripMenuItem
-				 // 
-				 this->featuresToolStripMenuItem->Name = L"featuresToolStripMenuItem";
-				 resources->ApplyResources(this->featuresToolStripMenuItem, L"featuresToolStripMenuItem");
-				 this->featuresToolStripMenuItem->Click += gcnew System::EventHandler(this, &tasksotongGUI::featuresToolStripMenuItem_Click);
-				 // 
-				 // flexibleCommandToolStripMenuItem
-				 // 
-				 this->flexibleCommandToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tOBEENTEREDBYJIEYANGToolStripMenuItem });
-				 this->flexibleCommandToolStripMenuItem->Name = L"flexibleCommandToolStripMenuItem";
-				 resources->ApplyResources(this->flexibleCommandToolStripMenuItem, L"flexibleCommandToolStripMenuItem");
-				 // 
-				 // tOBEENTEREDBYJIEYANGToolStripMenuItem
-				 // 
-				 this->tOBEENTEREDBYJIEYANGToolStripMenuItem->Name = L"tOBEENTEREDBYJIEYANGToolStripMenuItem";
-				 resources->ApplyResources(this->tOBEENTEREDBYJIEYANGToolStripMenuItem, L"tOBEENTEREDBYJIEYANGToolStripMenuItem");
-				 // 
-				 // sortToolStripMenuItem
-				 // 
-				 this->sortToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-					 this->sortByNameToolStripMenuItem,
-						 this->sortByDateToolStripMenuItem, this->sortByDeadlineToolStripMenuItem, this->sortByPriorityToolStripMenuItem
-				 });
-				 this->sortToolStripMenuItem->Name = L"sortToolStripMenuItem";
-				 resources->ApplyResources(this->sortToolStripMenuItem, L"sortToolStripMenuItem");
-				 // 
-				 // sortByNameToolStripMenuItem
-				 // 
-				 this->sortByNameToolStripMenuItem->Name = L"sortByNameToolStripMenuItem";
-				 resources->ApplyResources(this->sortByNameToolStripMenuItem, L"sortByNameToolStripMenuItem");
-				 // 
-				 // sortByDateToolStripMenuItem
-				 // 
-				 this->sortByDateToolStripMenuItem->Name = L"sortByDateToolStripMenuItem";
-				 resources->ApplyResources(this->sortByDateToolStripMenuItem, L"sortByDateToolStripMenuItem");
-				 // 
-				 // sortByDeadlineToolStripMenuItem
-				 // 
-				 this->sortByDeadlineToolStripMenuItem->Name = L"sortByDeadlineToolStripMenuItem";
-				 resources->ApplyResources(this->sortByDeadlineToolStripMenuItem, L"sortByDeadlineToolStripMenuItem");
-				 // 
-				 // sortByPriorityToolStripMenuItem
-				 // 
-				 this->sortByPriorityToolStripMenuItem->Name = L"sortByPriorityToolStripMenuItem";
-				 resources->ApplyResources(this->sortByPriorityToolStripMenuItem, L"sortByPriorityToolStripMenuItem");
-				 // 
-				 // updateToolStripMenuItem
-				 // 
-				 this->updateToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tOBEENTEREDBYANDYToolStripMenuItem });
-				 this->updateToolStripMenuItem->Name = L"updateToolStripMenuItem";
-				 resources->ApplyResources(this->updateToolStripMenuItem, L"updateToolStripMenuItem");
-				 // 
-				 // tOBEENTEREDBYANDYToolStripMenuItem
-				 // 
-				 this->tOBEENTEREDBYANDYToolStripMenuItem->Name = L"tOBEENTEREDBYANDYToolStripMenuItem";
-				 resources->ApplyResources(this->tOBEENTEREDBYANDYToolStripMenuItem, L"tOBEENTEREDBYANDYToolStripMenuItem");
-				 // 
 				 // Display_richTextBox
 				 // 
 				 this->Display_richTextBox->BackColor = System::Drawing::Color::RosyBrown;
@@ -450,9 +362,11 @@ namespace tasksotongUI {
 				 // 
 				 // button1
 				 // 
+				 this->button1->BackColor = System::Drawing::Color::SaddleBrown;
+				 this->button1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 				 resources->ApplyResources(this->button1, L"button1");
 				 this->button1->Name = L"button1";
-				 this->button1->UseVisualStyleBackColor = true;
+				 this->button1->UseVisualStyleBackColor = false;
 				 this->button1->Click += gcnew System::EventHandler(this, &tasksotongGUI::button1_Click);
 				 // 
 				 // textBox1
@@ -468,7 +382,6 @@ namespace tasksotongUI {
 				 this->BackColor = System::Drawing::Color::BurlyWood;
 				 this->Controls->Add(this->textBox1);
 				 this->Controls->Add(this->button1);
-				 this->Controls->Add(this->Help);
 				 this->Controls->Add(this->Enter);
 				 this->Controls->Add(this->DeadlineButton);
 				 this->Controls->Add(this->PriorityButton);
@@ -481,8 +394,6 @@ namespace tasksotongUI {
 				 this->MaximizeBox = false;
 				 this->Name = L"tasksotongGUI";
 				 this->Load += gcnew System::EventHandler(this, &tasksotongGUI::tasksotongGUI_Load);
-				 this->Help->ResumeLayout(false);
-				 this->Help->PerformLayout();
 				 this->ResumeLayout(false);
 				 this->PerformLayout();
 

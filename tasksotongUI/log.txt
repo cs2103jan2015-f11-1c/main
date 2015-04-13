@@ -1180,3 +1180,10 @@ Task List Is Empty!
 >>>>>>> 45c6661fbc1646517a09945438208e43526e8053
 >>>>>>> 9ae7d20b5abdc81f43cb932f433207ec1da85f1c
 ***********LOGGING _STORAGE_START***********
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
