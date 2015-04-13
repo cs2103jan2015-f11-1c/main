@@ -109,6 +109,63 @@ vector<Task> Storage::returnIncompleteTaskList() {
 
 }
 
+void Storage::toString(){
+	for (unsigned int i = 0; i < taskList.size(); i++){
+		ostringstream oss;
+
+		oss << taskList[i].getTaskName() << endl;
+		oss << taskList[i].getTaskStartDate() << endl;
+		oss << taskList[i].getTaskStartTime() << endl;
+		oss << taskList[i].getTaskEndDate() << endl;
+		oss << taskList[i].getTaskEndTime() << endl;
+		oss << taskList[i].getTaskDeadlineDate() << endl;
+		oss << taskList[i].getTaskDeadlineTime() << endl;
+		oss << taskList[i].getTaskPriority() << endl;
+		oss << taskList[i].getTaskStatus() << endl;
+
+		taskListStringVector.push_back(oss.str());
+	}
+
+	return;
+}
+
+void Storage::toTaskList(){
+	ostringstream oss;
+	for (int i = 0; i < taskListStringVector.size(); i++){
+		oss << taskListStringVector[i];
+	}
+
+	string line;
+	vector<string> taskParameters;
+	istringstream iss(oss.str());
+	while (getline(iss, line)) {
+
+		if (isalnum(line[0])) {
+			taskParameters.push_back(line);
+			for (int i = 0; i < 8; i++) {
+				getline(iss, line);
+				taskParameters.push_back(line);
+			}
+			string temp1 = taskParameters[0];
+			string temp2 = taskParameters[1];
+			string temp3 = taskParameters[2];
+			string temp4 = taskParameters[3];
+			string temp5 = taskParameters[4];
+			string temp6 = taskParameters[5];
+			string temp7 = taskParameters[6];
+			string temp8 = taskParameters[7];
+			string temp9 = taskParameters[8];
+
+			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
+			taskList.push_back(tempTask);
+			taskParameters.clear();
+
+
+		}
+	}
+
+	return;
+};
 
 void Storage::updateTaskList(Task taskTobeEntered) {
 
@@ -243,9 +300,8 @@ struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	}
 };
 
-bool noCaseLess(Task task1,Task task2){
-	//return lexicographical_compare(task1.begin(), task1.end(), task2.begin(), task2.end(), caseInsensitiveLess());
-	return lexicographical_compare((task1.getTaskName()).begin(), (task1.getTaskName()).end(), (task2.getTaskName()).begin(), (task2.getTaskName()).end(), caseInsensitiveLess());
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
 }
 
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
@@ -481,6 +537,16 @@ struct less_than_key
 	}
 };
 
+bool ciCharLess(char c1, char c2)
+{
+	return (tolower(static_cast<unsigned char>(c1)) < tolower(static_cast<unsigned char>(c1)));
+}
+
+bool CompareNoCase(const string& s1, const string& s2)
+{
+	return lexicographical_compare(s1.begin(), s1.end(), s2.begin(), s2.end(), ciCharLess);
+}
+
 vector<Task> Storage::sortTaskByName(string fileName){
 
 	if (isOnlyOneTask()){
@@ -495,9 +561,12 @@ vector<Task> Storage::sortTaskByName(string fileName){
 
 	commandStack.push("sort by name");
 	sortByNameStack.push(taskList);
-	sort(taskList.begin(), taskList.end(), less_than_key());
-	//sort((taskList.begin())->getTaskName(), (taskList.end())->getTaskName(), noCaseLess);
-	//sort(taskList.begin(), taskList.end(), noCaseLess);
+
+	taskListStringVector.clear();
+	toString();
+	sort(taskListStringVector.begin(), taskListStringVector.end(), noCaseLess);
+	taskList.clear();
+	toTaskList();
 
 	return taskList;
 }
