@@ -675,7 +675,8 @@ string Logic::executeCommand(paraList Input) {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
-
+			_DataBase.viewIncompleteTasks();
+			setIncompleteTaskList();
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}
@@ -685,6 +686,7 @@ string Logic::executeCommand(paraList Input) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
 			_DataBase.updateTextFile(_filename);
+			_DataBase.initialiseTextFile(_filename);
 			setTaskList();
 			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
