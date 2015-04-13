@@ -42,6 +42,7 @@ const regex SYM_INPUT("([:|\.])", std::tr1::regex_constants::icase);
 
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
 {
+	_ParserProcess_LogFile.writeToLogFile(rawDate);
 	rawDateStore = rawDate;
 	rawTimeStore = rawTime;
 }
@@ -181,7 +182,7 @@ void parserProcess::processDate(string rawDate)
 
 parserProcess::datekeyWord parserProcess::sortDateType(string& rawInput)
 {
-
+	_ParserProcess_LogFile.writeToLogFile(rawInput);
 	if (regex_search(rawInput, DATE_NATURALIZED))
 	{
 		return DAY_NATURALISED;
@@ -358,6 +359,7 @@ dateStore parserProcess::dateNumCalculator(int& dateNum, int& nowDateNum)
 void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& storage)
 {   
 	string error;
+	_ParserProcess_LogFile.writeToLogFile(error);
 	int diff;
 
 	if (nowDay > givenDay)

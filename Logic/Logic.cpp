@@ -169,8 +169,6 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 
 string Logic::convertYearToCorrectForm(string input) {
 
-	assert(input != "");
-
 	string output;
 	if (input == "") {
 		output = "";
@@ -188,8 +186,6 @@ string Logic::convertYearToCorrectForm(string input) {
 }
 
 string Logic::convertTimeToCorrectForm(string input) {
-
-	assert(input != "");
 
 	string tempMinute = input.substr(input.find_first_of(":") + 1, input.length());
 	string tempHour = input.substr(0, input.find_first_of(":"));
@@ -306,8 +302,6 @@ void Logic::writeFileLocation(vector<string> fileLocation) {
 bool Logic::checkIfFileIsAtExeLocation() {
 
 	int lastIndex = _fileLocation.size();
-
-	assert(lastIndex != NULL);
 
 	if (lastIndex == 0) {
 		return true;
