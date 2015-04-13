@@ -18,7 +18,6 @@ using namespace std;
 
 struct dateStore{
 
-	
 	string dayName;
 	int dayNameRef;
 	int additionDay;
@@ -34,24 +33,21 @@ struct timeStore
 	string timeStatus;
 	int min;
 	int hours;
-	
-
-
 
 };
 
 
 struct nowDTstore{
 
-
+	string dayName;
+	bool isLongMonth;
 	int day;
 	int month;
 	int year;
-	string dayName;
 	int dayNameRef;
 	int min;
 	int hour;
-	bool isLongMonth;
+	
 };
 
 
@@ -67,42 +63,42 @@ private:
 	nowDTstore nowDT;
 
 public:
+
 	enum dayName { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY };
 	enum Time { JAN, FEB, MAR, APR, JUN, JUL, AUG, SEPT, OCT, NOV, DEC };
 	enum datekeyWord { DAY_NAME, DAY_NUM, DAY_NATURALISED };
 	enum timeKeyWord { SHORT_AM_PM, AM_PM, NIL, OCLOCK };
 	enum natExp{ TODAY, YEST, TMR };
-	void processDate(string);
-	void processTime(string);
 	bool addition(string);
 	bool subtraction(string);
-	void processCommandType();
-	void processDateNatExp(string&);
+	void processDate(string);
+	void processTime(string);
+	void processCommandType();	
 	void processDateName(string&);
 	void processDateNum(string&);
+	void processTimeAmPm(string&);
+	void processTimeNil(string&);
+	void processTimeNatExp(string&);
+	void processTimeShortAmPm(string&);
+	void processMonthMoreDays(int&, int&, dateStore&);
+	void processMonthLessDays(int&, int&, dateStore&);
 	void setNowDT();
 	void setRawDT(string&, string&);
 	bool monthDayIndicator(int&); //true for 31 days, false for 30 days 
-	void processMonthMoreDays(int&, int&, dateStore&);
-	void processMonthLessDays(int&, int&, dateStore&);
 	void addDayCalc(int, int);
 	void addMonthCalc(int&, int&);
+	void printProcessed();
+	void printNow();
+	void covertTime(char&, int&);
+	void clearTimestore();
 	datekeyWord sortDateType(string&);
 	dayName sortDayName(string&);
 	dateStore dateNumCalculator(int&, int&);
 	timeKeyWord sortTimeKeyWord(string&);
 	natExp sortNatExp(string&);
-	void printProcessed();
-	void printNow();
 	string parserReturnDate();
 	string parserReturnTime();
 	string parserReturnNowTime();
-	void processTimeAmPm(string&);
-	void processTimeNil(string&);
-	void processTimeNatExp(string&);
-	void processTimeShortAmPm(string&);
-	void covertTime(char&, int&);
-	void clearTimestore();
 	
 };
 

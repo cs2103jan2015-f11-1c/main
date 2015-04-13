@@ -139,7 +139,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 		} else {
 			feedbackMsg_Date = checkDateValidity(dateVector[i]);
 			if (feedbackMsg_Date != "Pass Date Test") {
-				tempFeedback = componentVector[i] + feedbackMsg_Date;	
+				tempFeedback = componentVector[i] + taskStartDate;// feedbackMsg_Date;
 				break;
 			}
 		}
@@ -210,7 +210,9 @@ string Logic::compareTaskDateandTime(Task taskInput) {
 
 	
 	string tempFeedback="";
-	if (startDate == endDate) {
+	if (startDate == "" || endDate == "") {
+
+	}else if (startDate == endDate) {
 		if (startTime > endTime) {
 			tempFeedback = "Start Time After End Time :<";
 		} else {
@@ -635,7 +637,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
-			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+	
 		}
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "undo") {
@@ -662,6 +664,7 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.viewCompletedTasks();
 			vector<Task> tempTaskList = getCompletedTaskList();
 			if (tempTaskList.empty()){
+				
 				setTaskList();
 			} else {
 				setCompletedTaskList();
@@ -682,12 +685,11 @@ string Logic::executeCommand(paraList Input) {
 		}
 
 	} else if (command == "view") {
+
+		setTaskList();
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
-			_DataBase.updateTextFile(_filename);
-			_DataBase.initialiseTextFile(_filename);
-			setTaskList();
 			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}

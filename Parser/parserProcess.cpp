@@ -3,14 +3,12 @@
 #include <ctime>
 #include <atltime.h>
 #include <sstream>
+#define NDEBUG
 #include <assert.h>
 
 
 
-const regex MONTH_INPUT();
 const regex DAY_INPUT("(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b", std::tr1::regex_constants::icase);
-const regex TIME_INPUT("");
-const regex KEYWORD_INPUT("");
 const regex DATE_NATURALIZED("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(y(\\w+|)(e|s)(\\w+|)(t|r|y))", std::tr1::regex_constants::icase);
 const regex DATE_NAME("(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b", std::tr1::regex_constants::icase);
 const regex DATE_NUM("(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
@@ -44,7 +42,6 @@ const regex SYM_INPUT("([:|\.])", std::tr1::regex_constants::icase);
 
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
 {
-
 	rawDateStore = rawDate;
 	rawTimeStore = rawTime;
 }
@@ -147,16 +144,11 @@ void parserProcess::processDate(string rawDate)
 		}
 	}
 	case DAY_NAME:
-	{   cout << "daynane";
-	processDateName(rawDate);
+	{   
+		processDateName(rawDate);
+		dateNumCalculator(processedDateStore.dayNameRef, nowDT.dayNameRef);
 
-	cout << endl;
-	cout << "pds dnf:" << processedDateStore.dayNameRef << endl;
-	cout << "nowdt dnf:" << nowDT.dayNameRef << endl;
-
-	dateNumCalculator(processedDateStore.dayNameRef, nowDT.dayNameRef);
-
-	return;
+		return;
 	}
 	case DAY_NUM:
 	{
@@ -197,26 +189,13 @@ parserProcess::datekeyWord parserProcess::sortDateType(string& rawInput)
 	}
 	else if (regex_search(rawInput, DATE_NAME))
 	{
-
 		return DAY_NAME;
 
 	}
 	else if (regex_search(rawInput, DATE_NUM))
 	{
-
-
 		return DAY_NUM;
 	}
-
-
-
-}
-
-
-void parserProcess::processDateNatExp(string&)
-{
-
-
 
 
 
@@ -233,39 +212,38 @@ void parserProcess::processDateName(string& input)
 	switch (day)
 	{
 	case(MONDAY) :
-	{   cout << "ok!";
+	{ 
 		processedDateStore.dayNameRef = 0;
 		return;
 	}
 	case(TUESDAY) :
-	{   cout << "ok!";
+	{   
 		processedDateStore.dayNameRef = 1;
 		return;
 	}
 	case(WEDNESDAY) :
-	{   cout << "ok!";
+	{ 
 		processedDateStore.dayNameRef = 2;
 		return;
 
 	}
 	case(THURSDAY) :
-	{   cout << "ok!";
+	{  
 		processedDateStore.dayNameRef = 3;
 		return;
 	}
 	case(FRIDAY) :
-	{   cout << "ok!";
+	{ 
 		processedDateStore.dayNameRef = 4;
 		return;
 	}
 	case(SATURDAY) :
-	{   cout << "ok!";
+	{   
 		processedDateStore.dayNameRef = 5;
 		return;
 	}
 	case(SUNDAY) :
 	{
-		cout << "ok!";
 		processedDateStore.dayNameRef = 6;
 		return;
 	}
@@ -278,13 +256,7 @@ void parserProcess::processDateName(string& input)
 	}
 }
 
-void parserProcess::processDateNum(string&)
-{
 
-
-
-
-}
 
 
 //returns the day if strInput corresponds to any of the expressions of said day
@@ -310,27 +282,24 @@ parserProcess::dayName  parserProcess::sortDayName(string& strInput)
 	}
 	else if (regex_search(strInput, THURSDAY_INPUT))
 	{
-		cout << "thurs!";
+	
 		return THURSDAY;
 
 	}
 	else if (regex_search(strInput, FRIDAY_INPUT))
 	{
-		cout << "fri";
+
 		return FRIDAY;
 
 	}
 	else if (regex_search(strInput, SATURDAY_INPUT))
 	{
-
 		return SATURDAY;
 
 	}
 	else if (regex_search(strInput, SUN_INPUT))
 	{
 		return SUNDAY;
-
-
 	}
 
 
@@ -357,13 +326,7 @@ dateStore parserProcess::dateNumCalculator(int& dateNum, int& nowDateNum)
 	}
 	else //30th 
 	{
-
-
 		processMonthLessDays(dateNum, nowDateNum, processedDateStore);
-
-
-
-
 
 	}
 
@@ -379,10 +342,8 @@ void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& 
 
 	if (nowDay > givenDay)
 	{
-
 		diff = (givenDay - nowDay) + 7;
 		addDayCalc(31, diff);
-
 	}
 	else if (nowDay < givenDay)
 	{
@@ -563,7 +524,6 @@ void parserProcess::processTime(string timeInput)
 	case(SHORT_AM_PM) :
 	{
 
-
 		processTimeShortAmPm(timeInput);
 		return;
 
@@ -585,8 +545,6 @@ void parserProcess::processTime(string timeInput)
 
 parserProcess::timeKeyWord  parserProcess::sortTimeKeyWord(string& timeInput)
 {
-
-
 
 
 
@@ -718,9 +676,6 @@ string parserProcess::parserReturnTime()
 	}
 	else
 	{
-
-
-
 
 		ostringstream oss;
 

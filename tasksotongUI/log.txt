@@ -412,6 +412,12 @@ update
 ******************LOGIC_EXECUTECOMMAND_START*******************
 update
 ******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+=======
 
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
@@ -550,3 +556,374 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Deadline Date: Month Entered Is Invalid!
+<<<<<<< HEAD
+=======
+>>>>>>> 236ce38d8d7949137f33973882c420775194c6a1
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+=======
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+=======
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Completed Tasks! :D
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+=======
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have completed all outstanding tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+=======
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+=======
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+End Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+=======
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: -858993460/-858993460/-858993460
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+=======
+Start Date: -858993460/-858993460/-858993460
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+=======
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: -858993460/-858993460/-858993460
+<<<<<<< HEAD
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+=======
+>>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+<<<<<<< HEAD
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+=======
+>>>>>>> 653261a86bdef472ba9920b8a6ec179f392f74e9
+>>>>>>> 6d47d20e39a311c489a7c938a3c0c8db618de498

@@ -1,7 +1,7 @@
 #include "Parser.h"
 #include "paraList.h"
 #include "parserProcess.h"
-
+#define NDEBUG
 #include <assert.h>
 #include <iostream>
 #include <string>
@@ -308,6 +308,7 @@ void Parser::sortDetails(string &userInput)
 
 		string afttime;
 		string aftdate;
+
 		processX(userInput);
 		processKeywordAfter(userInput);
 
@@ -354,10 +355,10 @@ void Parser::sortDetails(string &userInput)
 	}
 	case FROM_TO:
 	{
-		
+		string tempName;
 		
 		index = userInput.find("from") - 1;
-		string tempName = userInput.substr(0, index);
+		tempName = userInput.substr(0, index);
 
 		para._task.changeTaskName(userInput.substr(0, index));
 
@@ -375,12 +376,9 @@ void Parser::sortDetails(string &userInput)
 		
 
 		return;
-
-
-
-
-
 	}
+
+
 	}
 	return;
 }
@@ -390,7 +388,7 @@ void Parser::sortDetails(string &userInput)
 paraList* Parser::parseCommand(string userInput)
 {
 	para.clearTask();
-	assert(userInput != "");
+	assertCommand(userInput);
 	sortCommand(userInput);
 	processCommand(userInput);
 
@@ -402,8 +400,11 @@ paraList* Parser::parseCommand(string userInput)
 void Parser::processCommand(string &userInput)
 {
 	string command = para.getCommand();
-	int index;
 	parserProcess a;
+	int index;
+
+	assertCommand(command);
+
 
 	if (regex_search(command, ADD_PATTERN))
 	{
@@ -577,89 +578,75 @@ Parser::keywordType Parser::determineKeywords(string userInput)
 
 	string command = para.getCommand();
 
-	cout << "command:" << command << endl;
+	
 
-	if (command.find("#") != string::npos)
-	{
+	if (command.find("#") != string::npos){
 
 		para.processCommand(command.substr(0, 3));
-		cout << "b" << endl;
+		
 		return ABST_NIL;
 	}
-	else if (!regex_search(userInput, EXP_PATTERN))
-	{
-		cout << "a" << endl;
+	else if (!regex_search(userInput, EXP_PATTERN)){
+		
 		return NONE;
 	}
-	else if (regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN))
-	{
-		cout << "from to";
+	else if (regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN)){
+		
 		return FROM_TO;
 
 	}
-	else if (regex_search(userInput, F_PATTERN) && !regex_search(userInput, T_PATTERN))
-	{
+	else if (regex_search(userInput, F_PATTERN) && !regex_search(userInput, T_PATTERN)){
 
-		cout << "b";
+		
 		return STARTONLY;
 	}
-	else if (!regex_search(userInput, F_PATTERN) && regex_search(userInput, T_PATTERN))
-	{
-		cout << "c";
+	else if (!regex_search(userInput, F_PATTERN) && regex_search(userInput, T_PATTERN)){
+		
 		return ENDONLY;
 	}
-	else if (regex_search(userInput, BY_PATTERN))
-	{
+	else if (regex_search(userInput, BY_PATTERN)){
 
-		cout << "deadline";
+		
 		return DEADLINE;
 	}
-	else if (regex_search(userInput, NTRL_FROM_PATTERN))
-	{
-		cout << "from" << endl;
+	else if (regex_search(userInput, NTRL_FROM_PATTERN)){
+		
 		return FROM;
 	}
-	else if (regex_search(userInput, NTRL_BEFORE_PATTERN))
-	{
-		cout << "before" << endl;
+	else if (regex_search(userInput, NTRL_BEFORE_PATTERN)){
+		
 		return BEFORE;
 	}
-	else if (regex_search(userInput, NTRL_AFTER_PATTERN))
-	{
-		cout << "after" << endl;
+	else if (regex_search(userInput, NTRL_AFTER_PATTERN)){
+		
 		return AFTER;
 
 	}
-	else if (regex_search(userInput, NTRL_TO_PATTERN))
-	{
-		cout << "to" << endl;
+	else if (regex_search(userInput, NTRL_TO_PATTERN)){
+		
 		return TO;
 	}
-	else if (regex_search(userInput, NTRL_BY_PATTERN))
-	{
-		cout << "by" << endl;
+	else if (regex_search(userInput, NTRL_BY_PATTERN)){
+		
 		return BY;
 	}
-	else if (regex_search(userInput, NTRL_ON_PATTERN))
-	{
-		cout << "on" << endl;
+	else if (regex_search(userInput, NTRL_ON_PATTERN)){
+		
 		return ON;
 	}
-	else if (regex_search(userInput, NTRL_AT_PATTERN))
-	{
-		cout << "at" << endl;
+	else if (regex_search(userInput, NTRL_AT_PATTERN)){
+		
 		return AT;
 	}
-	else
-	{
-		cout << "startend" << endl;
+	else{
+		
 		return  START_END;
 	}
 }
 
 void Parser::checkStart(string&startdate, string &starttime, string userinput)
 {
-	cout << "userinput:" << userinput << endl;
+	
 	startdate = checkSD(userinput);
 	starttime = checkST(userinput);
 	return;
@@ -724,15 +711,6 @@ void Parser::checkEnd(string&enddate, string &endtime, string userinput)
 }
 
 
-void Parser::empty(string&startdate, string &starttime, string&enddate, string &endtime, string userinput)
-{
-
-
-
-	return;
-
-
-}
 
 
 void Parser::processX(string userinput)
@@ -764,7 +742,9 @@ void Parser::getNoneToken(string userinput, int& xtoken, int& timetoken, int& da
 
 
 
-	smatch matchX, matchdate, matchtime;
+	smatch matchX;
+	smatch matchdate;
+	smatch matchtime;
 
 
 	if (regex_search(userinput, matchX, X_PATTERN))
@@ -790,7 +770,6 @@ void Parser::processNum(int& a, int& b, int& c, int& answer)
 	{
 		if (c < a)
 		{
-
 			answer = c;
 		}
 		else
@@ -802,7 +781,6 @@ void Parser::processNum(int& a, int& b, int& c, int& answer)
 	{
 		if (c < b)
 		{
-
 			answer = c;
 		}
 		else
@@ -819,15 +797,18 @@ void Parser::processNum(int& a, int& b, int& c, int& answer)
 
 void Parser::processDate()
 {
-	parserProcess end, start, deadline;
+	parserProcess end;
+	parserProcess start;
+	parserProcess deadline;
+
 	string startStr = para._task.getTaskStartDate();
 	string endStr = para._task.getTaskEndDate();
 	string deadlineStr = para._task.getTaskDeadlineDate();
-	cout << "DLdate: " << deadlineStr << endl;
+	
 
 	if (startStr != "")
 	{
-		cout << "SS" << endl;
+		
 		start.setNowDT();
 		start.processDate(startStr);
 		para._task.changeTaskStartDate(start.parserReturnDate());
@@ -835,20 +816,18 @@ void Parser::processDate()
 	}
 	if (endStr != "")
 	{
-		cout << "ES" << endl;
+		
 		end.setNowDT();
 		end.processDate(endStr);
 		para._task.changeTaskEndDate(end.parserReturnDate());
 	}
 	if (deadlineStr != "")
 	{
-		cout << "DL" << endl;
+		
 		deadline.setNowDT();
 		deadline.processDate(deadlineStr);
 		para._task.changeTaskDeadlineDate(deadline.parserReturnDate());
 	}
-
-
 
 
 
@@ -867,9 +846,6 @@ void Parser::processKeywordFrom(string &userInput)
 	regex_search(userInput, matchx, NTRL_FROM_PATTERN);
 
 	token = matchx.position(0);
-	cout << "token: " << token << endl;
-
-
 
 	para._task.changeTaskName(userInput.substr(0, token));
 	userInput.erase(0, token + 5);
@@ -892,20 +868,11 @@ void Parser::processKeywordTo(string &userInput)
 	regex_search(userInput, matchx, NTRL_TO_PATTERN);
 
 	token = matchx.position(0);
-	cout << "token: " << token << endl;
-
-
 
 	para._task.changeTaskName(userInput.substr(0, token));
 	userInput.erase(0, token + 3);
 
 	return;
-
-
-
-
-
-
 
 
 
@@ -949,29 +916,19 @@ void Parser::processKeywordAt(string &userInput)
 	regex_search(userInput, matchx, NTRL_AT_PATTERN);
 
 	token = matchx.position(0);
-	cout << "token: " << token << endl;
-
 
 
 	para._task.changeTaskName(userInput.substr(0, token));
 	userInput.erase(0, token + 3);
 
 	return;
-
-
-
-
-
-
-
-
 }
+
 
 void Parser::processKeywordBefore(string &userInput)
 {
 	int token;
 	smatch matchx;
-
 
 
 	regex_search(userInput, matchx, NTRL_BEFORE_PATTERN);
@@ -987,8 +944,6 @@ void Parser::processKeywordBefore(string &userInput)
 	return;
 
 
-
-
 }
 
 void Parser::processKeywordOn(string &userInput)
@@ -1001,16 +956,12 @@ void Parser::processKeywordOn(string &userInput)
 	regex_search(userInput, matchx, NTRL_ON_PATTERN);
 
 	token = matchx.position(0);
-	cout << "token: " << token << endl;
-
 
 
 	para._task.changeTaskName(userInput.substr(0, token));
 	userInput.erase(0, token + 3);
 
 	return;
-
-
 
 }
 
@@ -1024,7 +975,6 @@ void Parser::processKeywordAfter(string &userInput)
 	regex_search(userInput, matchx, NTRL_AFTER_PATTERN);
 
 	token = matchx.position(0);
-	cout << "token: " << token << endl;
 
 
 
@@ -1032,14 +982,6 @@ void Parser::processKeywordAfter(string &userInput)
 	userInput.erase(0, token + 6);
 
 	return;
-
-
-
-
-
-
-
-
 
 }
 
@@ -1056,7 +998,6 @@ void Parser::processTime()
 
 	if (startStr != "")
 	{
-		cout << "SS" << endl;
 		start.setNowDT();
 		start.processTime(startStr);
 		para._task.changeTaskStartTime(start.parserReturnTime());
@@ -1064,18 +1005,17 @@ void Parser::processTime()
 	}
 	if (endStr != "")
 	{
-		cout << "ES" << endl;
 		end.setNowDT();
 		end.processTime(endStr);
 		para._task.changeTaskEndTime(end.parserReturnTime());
 	}
 	if (deadlineStr != "")
 	{
-		cout << "DL" << endl;
 		deadline.setNowDT();
 		cout << deadlineStr << endl;
 		deadline.processTime(deadlineStr);
 		para._task.changeTaskDeadlineTime(deadline.parserReturnTime());
+
 	}
 
 
@@ -1184,7 +1124,8 @@ void Parser::convertKeywordTime(string& input,string& type)
 void Parser::processStartKey(string& eventStartDetails)
 {
 
-	string startDate, startime;
+	string startDate;
+	string startime;
 	checkStart(startDate, startime, eventStartDetails);
 	para._task.changeTaskStartDate(startDate);
 	para._task.changeTaskStartTime(startime);
@@ -1199,7 +1140,8 @@ void Parser::processStartKey(string& eventStartDetails)
 
 void Parser::processEndKey(string&  eventEndDetails)
 {
-	string endDate, endTime;
+	string endDate;
+	string endTime;
 	checkEnd(endDate, endTime, eventEndDetails);
 	para._task.changeTaskEndDate(endDate);
 	para._task.changeTaskEndTime(endTime);
@@ -1224,4 +1166,15 @@ int  Parser::findToIndex(string& input)
 
 
 
+}
+
+
+void Parser::assertCommand(string command)
+{
+
+	assert(command != " ");
+	assert(command != "");
+//  assert( command.size()<0);
+
+	return;
 }
