@@ -68,7 +68,7 @@ namespace Parser_Testing
 			output = a.para._task.getTaskEndTime();
 			Assert::AreEqual(output, expectedOutput2);
 		}
-
+		//@author A0110469J
 		TEST_METHOD(nullStringNametest)
 		{
 			string userInput = "add ";
