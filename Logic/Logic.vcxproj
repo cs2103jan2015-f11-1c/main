@@ -82,9 +82,6 @@
     <ProjectReference Include="..\TaskSotong_Log\TaskSotong_Log.vcxproj">
       <Project>{ac2147da-babc-44bf-831c-0803f3b514ab}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\UI\UI.vcxproj">
-      <Project>{d71ce680-c037-4b84-b13b-dcbd922d0225}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

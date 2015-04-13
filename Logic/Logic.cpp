@@ -637,7 +637,7 @@ string Logic::executeCommand(paraList Input) {
 			setTaskList();
 			_DataBase.updateTextFile(_filename);
 			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
-			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+	
 		}
 		_Logic_LogFile.writeToLogFile(_feedbackMessage);
 	} else if (command == "undo") {

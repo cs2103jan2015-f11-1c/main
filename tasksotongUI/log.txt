@@ -858,7 +858,19 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Start Date: -858993460/-858993460/-858993460
+<<<<<<< HEAD
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+=======
 >>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+<<<<<<< HEAD
 ******************LOGIC_EXECUTECOMMAND_START*******************
 
 ******************LOGIC_EXECUTECOMMAND_START*******************
@@ -912,3 +924,6 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Task Added Successfully! :>
+=======
+>>>>>>> 653261a86bdef472ba9920b8a6ec179f392f74e9
+>>>>>>> 6d47d20e39a311c489a7c938a3c0c8db618de498
