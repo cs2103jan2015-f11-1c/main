@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <assert.h>
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -173,7 +174,7 @@ namespace GUI {
 #pragma endregion
 	
 		
-
+	//
 	private: System::Void commandline_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 		
 		Logic TSlogic;
@@ -181,17 +182,20 @@ namespace GUI {
 		TSlogic.setFileName("taskSotong.txt");
 		ifstream readFile("taskSotong.txt");
 		std::string filename = TSlogic.getFileName();
+		assert(filename != "");
 		
 		TSlogic.callInitialise(filename);
 
 		//if the Enter key is pressed
 		if (e->KeyChar == (char)13){
 			
+			
 			String^ input = commandline->Text;
 			std::string userInput = msclr::interop::marshal_as< std::string >(input);
 
 			if (userInput != "exit") {
 
+				//pass userInput to Logic to process
 				paraList* storageInput = TSlogic.getParaList(userInput);
 				std::string command = storageInput->getCommand();
 				Task task = storageInput->getTask();
@@ -213,11 +217,14 @@ namespace GUI {
 					taskVector.pop();
 				}
 
+				//display contents of .txt file
+				assert(taskVector.empty());
 				String^ displayList = gcnew String(entireList.c_str());
 				displaybox->Text = displayList;
 
-
+				//display feedback message
 				std::string feedbackmsg = TSlogic.getFeedbackMsg();
+				assert(feedbackmsg != "");
 				String^ feedback = gcnew String(feedbackmsg.c_str());
 				feedbackbox->Text = feedback;
 			}

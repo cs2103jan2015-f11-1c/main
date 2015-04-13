@@ -2,6 +2,7 @@
 #include "paraList.h"
 #include "parserProcess.h"
 
+#include <assert.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -40,6 +41,7 @@ const int PROCESS_INITIAL = 1000;
 Parser::Parser()
 {}
 
+//extracts the command from user Input
 void Parser::sortCommand(string &userInput)
 {
 
@@ -51,9 +53,7 @@ void Parser::sortCommand(string &userInput)
 	return;
 }
 
-
-
-
+//extracts the command parameters from userInput
 void Parser::sortDetails(string &userInput)
 {
 	int index;
@@ -381,6 +381,7 @@ void Parser::sortDetails(string &userInput)
 paraList* Parser::parseCommand(string userInput)
 {
 	para.clearTask();
+	assert(userInput != "");
 	sortCommand(userInput);
 	processCommand(userInput);
 

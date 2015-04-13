@@ -371,3 +371,43 @@ Year Entered Is Invalid!
 ******************LOGIC_EXECUTECOMMAND_START*******************
 update
 >>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Index Out Of Range!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
