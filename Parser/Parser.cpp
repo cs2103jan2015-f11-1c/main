@@ -28,6 +28,8 @@ const regex UNMARK_PATTERN("\\b(unmark)\\b", std::tr1::regex_constants::icase);
 const regex SAVE_PATTERN("\\b(save)\\b", std::tr1::regex_constants::icase);
 const regex SEARCH_PATTERN("\\b(search)\\b", std::tr1::regex_constants::icase);
 const regex UPDATE_PATTERN("\\b(update)\\b", std::tr1::regex_constants::icase);
+const regex VIEW_C_PATTERN("\\b(view-c)\\b",std::tr1::regex_constants::icase);
+const regex VIEW_I_PATTERN("\\b(view-i)\\b", std::tr1::regex_constants::icase);
 const regex NTRL_FROM_PATTERN("((from)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((from)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(from)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
 const regex NTRL_BY_PATTERN("((by)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((by)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(by)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
 const regex NTRL_TO_PATTERN("((to)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((to)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(to)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
@@ -469,6 +471,18 @@ void Parser::processCommand(string &userInput)
 	else if (regex_search(command, SAVE_PATTERN))
 	{
 		para.processUserDir(userInput);
+
+
+	}
+	else if (regex_search(command, VIEW_C_PATTERN))
+	{
+
+
+
+	}
+	else if (regex_search(command, VIEW_I_PATTERN))
+	{
+
 
 
 	}
