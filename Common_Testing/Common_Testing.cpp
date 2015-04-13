@@ -137,7 +137,7 @@ namespace Task_Testing
 			string actual;
 			actual = test->getTaskDetails();
 
-			string expected = "Name           StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
+			string expected = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
 
 			Assert::AreEqual(expected, actual);
 

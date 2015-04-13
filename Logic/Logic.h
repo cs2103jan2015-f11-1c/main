@@ -70,8 +70,6 @@ private:
 
 	Log _Logic_LogFile;
 	
-
-
 public:
 
 	string checkTimeValidity(string);
@@ -130,13 +128,9 @@ public:
 
 	void callInitialise(string);
 
-	bool notExistingTask(Task*);
+	bool ExistingTask(Task);
 
 	string getFeedbackMsg();
-	
-	//void setReturnGUI(vector<Task*>);
-
-	//vector<Task> getReturnGUI();
 
 	string executeCommand(paraList);
 

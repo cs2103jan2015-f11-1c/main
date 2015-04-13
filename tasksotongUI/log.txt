@@ -928,6 +928,26 @@ Task Added Successfully! :>
 >>>>>>> 653261a86bdef472ba9920b8a6ec179f392f74e9
 >>>>>>> 6d47d20e39a311c489a7c938a3c0c8db618de498
 ******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+=======
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
@@ -966,6 +986,47 @@ Deadline Date:
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Task Added Successfully! :>
+>>>>>>> f109459231ed6a0e135580082053494e89cd6ff7
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+That Task Has Already Existed~! Please Enter A New Task~
+=======
+Task Added Successfully! :>
+<<<<<<< HEAD
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+=======
+>>>>>>> f109459231ed6a0e135580082053494e89cd6ff7
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+>>>>>>> a78cf7f78d8996997f15b4fd3aa8ff54d5dc03c7
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Task Added Successfully! :>
@@ -974,14 +1035,7 @@ add
 Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
+<<<<<<< HEAD
+=======
 ******************LOGIC_EXECUTECOMMAND_START*******************
-add
-Task Added Successfully! :>
-******************LOGIC_EXECUTECOMMAND_START*******************
-add
-Task Added Successfully! :>
-******************LOGIC_EXECUTECOMMAND_START*******************
-add
-Task Added Successfully! :>
-******************LOGIC_EXECUTECOMMAND_START*******************
-All Tasks Cleared!
+>>>>>>> a78cf7f78d8996997f15b4fd3aa8ff54d5dc03c7
