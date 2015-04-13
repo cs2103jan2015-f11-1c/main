@@ -22,7 +22,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parserProcess.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -122,7 +122,6 @@ void paraList::clearTask()
 void paraList::processMarkIndex(int index)
 {
 
-
 	markIndex = index;
 
 
@@ -164,7 +163,7 @@ string paraList::getuserdir()
 
 string  paraList::getmarkstatus()
 {
-	assert(markStatus != "");
+	
 	return markStatus;
 
 }
@@ -177,8 +176,6 @@ int paraList::getmarkindex()
 
 string paraList::getSearchKey()
 {
-
-
 	return searchKeyword;
 }
 
@@ -198,12 +195,9 @@ bool paraList::getprocessViewInc()
 {
 	return viewIncompleted;
 
-
 }
 bool paraList::getprocessViewComp()
 {
-
-
 	return viewCompleted;
 
 

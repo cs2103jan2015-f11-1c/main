@@ -21,12 +21,15 @@ public:
 
 
 	Parser();
+	paraList *parseCommand(string);
 	paraList para;
+	string checkST(string);
+	string checkSD(string);
+	string checkingKeywordX(string &);
+	keywordType determineKeywords(string);
 	void sortCommand(string &);
 	void sortDetails(string &);
-	paraList *parseCommand(string);
 	void processCommand(string &);
-	void splitstring(string &, string &, string &);
 	void processKeywordFrom(string &);
 	void processKeywordTo(string &);
 	void processKeywordBy(string &);
@@ -37,27 +40,22 @@ public:
 	void processBeforeKeywordf(string &);
 	void processBeforeKeywordt(string &);
 	void processBeforeKeywordb(string &);
-	string checkingKeywordX(string &);
-	keywordType determineKeywords(string);
-	void checkStart(string&, string &, string);
-	void checkEnd(string&, string &, string);
-	void empty(string&, string &, string&, string &, string);
-	string checkST(string);
-	string checkSD(string);
 	void processX(string);
-	void getNoneToken(string, int&, int&, int&);
 	void processNum(int&, int&, int&, int&);
-	void getLocalTime();
 	void processDate();
 	void processTime();
 	void processBeforeKeywordFrom(string &);
 	void processUpdateKeywords();
 	void processupdateNone(string&, int&);
-	void convertKeywordTime(string&, string&);
 	void processStartKey(string&);
 	void processEndKey(string&);
+	void checkStart(string&, string &, string);
+	void checkEnd(string&, string &, string);
+    void getNoneToken(string, int&, int&, int&);
+	void getLocalTime();
+	void convertKeywordTime(string&, string&);
+	void assertCommand(string);
 	int  findToIndex(string&);
-
 };
 
 #endif
