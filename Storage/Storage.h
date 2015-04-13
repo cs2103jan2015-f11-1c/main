@@ -1,6 +1,8 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 
+//#define NDEBUG
+
 #include <iostream>
 #include <utility>
 #include <string>
@@ -13,6 +15,7 @@
 #include <queue>
 #include <cctype>
 #include <functional>
+#include <assert.h>
 #include "..\Common\Task.h"
 
 using namespace std;
@@ -95,8 +98,6 @@ public:
 
 	void deleteTask(string, unsigned int);
 
-	void displayAllTasks();
-
 	vector<Task> viewCompletedTasks();
 
 	vector<Task> viewIncompleteTasks();
@@ -104,8 +105,6 @@ public:
 	void setFeedbackMessage(string);
 
 	string returnLogicFeedbackMessage();
-
-	//bool noCaseLess(const Task&, const Task&);
 
 	void updateTask(string, unsigned int, string, string);
 

@@ -36,6 +36,8 @@ public:
 	Task();
 	Task(string,string,string,string,string,string,string,string,string);
 
+<<<<<<< HEAD
+=======
 
 	string getTaskDetails(){
 
@@ -67,6 +69,7 @@ public:
 
 	string checkNull(string);
 
+>>>>>>> 1418d037c87e104825c66de8a6b1bad569ab494a
 	string getTaskName(); 
 
 	string getTaskStartDate();

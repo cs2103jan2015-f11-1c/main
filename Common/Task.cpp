@@ -40,19 +40,6 @@ Task::Task (string taskName, string taskStartDate, string taskStartTime, string 
 	
 }
 
-string Task::checkNull(string input){
-
-	if (input.empty()){
-
-		input = "N/A";
-		return input;
-	} else {
-		string space = " ";
-		input = input.append(space);
-		return input;
-	}
-}
-
 string Task::getTaskName(){
 
 	return _taskName;
