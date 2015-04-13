@@ -109,6 +109,63 @@ vector<Task> Storage::returnIncompleteTaskList() {
 
 }
 
+void Storage::toString(){
+	for (unsigned int i = 0; i < taskList.size(); i++){
+		ostringstream oss;
+
+		oss << taskList[i].getTaskName() << endl;
+		oss << taskList[i].getTaskStartDate() << endl;
+		oss << taskList[i].getTaskStartTime() << endl;
+		oss << taskList[i].getTaskEndDate() << endl;
+		oss << taskList[i].getTaskEndTime() << endl;
+		oss << taskList[i].getTaskDeadlineDate() << endl;
+		oss << taskList[i].getTaskDeadlineTime() << endl;
+		oss << taskList[i].getTaskPriority() << endl;
+		oss << taskList[i].getTaskStatus() << endl;
+
+		taskListStringVector.push_back(oss.str());
+	}
+
+	return;
+}
+
+void Storage::toTaskList(){
+	ostringstream oss;
+	for (int i = 0; i < taskListStringVector.size(); i++){
+		oss << taskListStringVector[i];
+	}
+
+	string line;
+	vector<string> taskParameters;
+	istringstream iss(oss.str());
+	while (getline(iss, line)) {
+
+		if (isalnum(line[0])) {
+			taskParameters.push_back(line);
+			for (int i = 0; i < 8; i++) {
+				getline(iss, line);
+				taskParameters.push_back(line);
+			}
+			string temp1 = taskParameters[0];
+			string temp2 = taskParameters[1];
+			string temp3 = taskParameters[2];
+			string temp4 = taskParameters[3];
+			string temp5 = taskParameters[4];
+			string temp6 = taskParameters[5];
+			string temp7 = taskParameters[6];
+			string temp8 = taskParameters[7];
+			string temp9 = taskParameters[8];
+
+			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
+			taskList.push_back(tempTask);
+			taskParameters.clear();
+
+
+		}
+	}
+
+	return;
+};
 
 void Storage::updateTaskList(Task taskTobeEntered) {
 
@@ -243,9 +300,8 @@ struct caseInsensitiveLess : public binary_function < char, char, bool > {
 	}
 };
 
-bool noCaseLess(Task task1,Task task2){
-	//return lexicographical_compare(task1.begin(), task1.end(), task2.begin(), task2.end(), caseInsensitiveLess());
-	return lexicographical_compare((task1.getTaskName()).begin(), (task1.getTaskName()).end(), (task2.getTaskName()).begin(), (task2.getTaskName()).end(), caseInsensitiveLess());
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
 }
 
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
@@ -425,62 +481,6 @@ bool caseInsensitiveEqual(char ch1, char ch2){
 	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
 }
 
-/*vector<string> Storage::searchTask(string fileName, const string& searchEntry){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
-
-	if (isEmptyTaskList()){
-		return;
-	}
-
-	vector<string>::iterator iter = textFileCopy.begin();
-	vector<string> returnTextFileCopy;
-	int count = 0;
-
-	while (iter != textFileCopy.end()){
-		string::const_iterator pos = search(iter->begin(), iter->end(), searchEntry.begin(), searchEntry.end(), caseInsensitiveEqual);
-		if (pos != iter->end()){
-			returnTextFileCopy.push_back(*iter);
-			count++;
-		}
-		iter++;
-	}
-	if (count == 0){
-		cout << ERROR_INVALID_SEARCH_TERM << endl;
-	}
-
-	return returnTextFileCopy;
-}
-
-struct less_than_key
-{
-	inline bool operator() (Task struct1, Task struct2)
-	{
-		string task1name = struct1.getTaskName();
-		string task2name = struct2.getTaskName();
-		int task1 = stoi(task1name);
-		int task2 = stoi(task2name);
-		return (task1 < task2);
-		//return (transform(task1name.begin(), task1name.end(), task1name.begin(), tolower) < transform(task2name.begin(), task2name.end(), task2name.begin(), tolower));
-
-	}
-};
-
-struct less_than_key
-{
-	bool operator () (char x, char y) const {
-		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
-	}
-};
-*/
-struct less_than_key
-{
-	inline bool operator() (Task& struct1, Task& struct2)
-	{
-		return (struct1.getTaskName() < struct2.getTaskName());
-	}
-};
-
 vector<Task> Storage::sortTaskByName(string fileName){
 
 	if (isOnlyOneTask()){
@@ -495,9 +495,12 @@ vector<Task> Storage::sortTaskByName(string fileName){
 
 	commandStack.push("sort by name");
 	sortByNameStack.push(taskList);
-	sort(taskList.begin(), taskList.end(), less_than_key());
-	//sort((taskList.begin())->getTaskName(), (taskList.end())->getTaskName(), noCaseLess);
-	//sort(taskList.begin(), taskList.end(), noCaseLess);
+
+	taskListStringVector.clear();
+	toString();
+	sort(taskListStringVector.begin(), taskListStringVector.end(), noCaseLess);
+	taskList.clear();
+	toTaskList();
 
 	return taskList;
 }
