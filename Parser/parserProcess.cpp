@@ -3,6 +3,7 @@
 #include <ctime>
 #include <atltime.h>
 #include <sstream>
+#define NDEBUG
 #include <assert.h>
 
 

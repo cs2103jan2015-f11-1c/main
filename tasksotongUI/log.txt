@@ -859,3 +859,56 @@ Task Added Successfully! :>
 add
 Start Date: -858993460/-858993460/-858993460
 >>>>>>> 14f2b83a9d7f377ab442bdac3663f682398ef8bc
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>

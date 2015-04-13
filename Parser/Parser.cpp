@@ -1,7 +1,7 @@
 #include "Parser.h"
 #include "paraList.h"
 #include "parserProcess.h"
-//#define NDEBUG
+#define NDEBUG
 #include <assert.h>
 #include <iostream>
 #include <string>
