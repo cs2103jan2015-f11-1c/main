@@ -1,6 +1,6 @@
 #ifndef STORAGE_H
 #define STORAGE_H
-// @author A0114484H
+//@author A0114484H
 //#define NDEBUG
 
 #include <iostream>
