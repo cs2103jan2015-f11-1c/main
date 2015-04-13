@@ -1,6 +1,8 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
+//#define NDEBUG
+
 #include "..\UI\UI.h"
 #include "..\Parser\Parser.h"
 #include "..\Storage\Storage.h"
@@ -14,6 +16,7 @@
 #include <fstream>
 #include <cctype>
 #include <algorithm>
+#include <assert.h>
 
 using namespace std;
 

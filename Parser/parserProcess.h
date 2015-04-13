@@ -9,6 +9,7 @@
 #include <atltime.h>
 #include <sstream> 
 #include "..\Common\Task.h"
+#include "..\TaskSotong_Log\Log.h"
 
 
 using namespace std;
@@ -98,6 +99,8 @@ public:
 	string parserReturnDate();
 	string parserReturnTime();
 	string parserReturnNowTime();
+
+	Log _ParserProcess_LogFile;
 	
 };
 

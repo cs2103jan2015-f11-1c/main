@@ -5,12 +5,9 @@
 #include <stack>
 #include <stdio.h>
 
-
-
 using namespace std;
 
 string Logic::SAVING_LOCATON_HISTORY = "taskSotong_saving_Location_history.txt";
-
 
 string Logic::ERROR_INVALID_USERINPUT = "Invalid User Input. Please Enter Again! :<";
 string Logic::ERROR_EXISTING_TASK = "That Task Has Already Existed~! ";
@@ -32,7 +29,6 @@ string Logic::ERROR_INVALID_DAY="Day Entered Is Invalid";
 string Logic::ERROR_INVALID_HOUR="Hour Entered Is Invalid";
 string Logic::ERROR_INVALID_MINUTE="Minute Entered Is Invalid";
 
-
 string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
 string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
 string Logic::FEEDBACK_TASK_UPDATED_SUCCESSFULLY = "Task Updated Successfully!";
@@ -48,54 +44,57 @@ string Logic::FEEDBACK_VIEW_ALL_SUCCESSFULLY = "Viewing All Tasks!";
 
 string Logic::checkTimeValidity(string timeInput) {
 
+	assert(timeInput != "");
+
 	string tempFeedback = "Pass Time Test";
 
-		string tempMinute = timeInput.substr(timeInput.find_first_of(":") + 1, timeInput.length());
-		string tempHour = timeInput.substr(0, timeInput.find_first_of(":"));
+	string tempMinute = timeInput.substr(timeInput.find_first_of(":") + 1, timeInput.length());
+	string tempHour = timeInput.substr(0, timeInput.find_first_of(":"));
 
-		int minute = atoi(tempMinute.c_str());
-		int hour = atoi(tempHour.c_str());
+	int minute = atoi(tempMinute.c_str());
+	int hour = atoi(tempHour.c_str());
 
-		if ((hour < 0) || (hour>23)) {
-			tempFeedback = ERROR_INVALID_HOUR;
-		} else if (minute > 59) {
-			tempFeedback = ERROR_INVALID_MINUTE;
-		}
+	if ((hour < 0) || (hour>23)) {
+		tempFeedback = ERROR_INVALID_HOUR;
+	} else if (minute > 59) {
+		tempFeedback = ERROR_INVALID_MINUTE;
+	}
 
-		return tempFeedback;
+	return tempFeedback;
 }
 
 string Logic::checkDateValidity(string dateInput) {
 
+	assert(dateInput != "");
+
 	string tempFeedback = "Pass Date Test";
 
-		string tempYear = dateInput.substr(dateInput.length() - 4, dateInput.length());
-		string temp = dateInput.substr(0, dateInput.length() - 5);
-		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
-		string tempDay = temp.substr(0, temp.find_first_of("/"));
+	string tempYear = dateInput.substr(dateInput.length() - 4, dateInput.length());
+	string temp = dateInput.substr(0, dateInput.length() - 5);
+	string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
+	string tempDay = temp.substr(0, temp.find_first_of("/"));
 		
-		int year = atoi(tempYear.c_str());
-		int month = atoi(tempMonth.c_str());
-		int day = atoi(tempDay.c_str());
+	int year = atoi(tempYear.c_str());
+	int month = atoi(tempMonth.c_str());
+	int day = atoi(tempDay.c_str());
 		
-		if (year < 2015) {
-			tempFeedback = ERROR_INVALID_YEAR;
-		} else if ((month < 1) || (month>12)) {
-			tempFeedback = ERROR_INVALID_MONTH;
-		} else if (day < 1) {
+	if (year < 2015) {
+		tempFeedback = ERROR_INVALID_YEAR;
+	} else if ((month < 1) || (month>12)) {
+		tempFeedback = ERROR_INVALID_MONTH;
+	} else if (day < 1) {
+		tempFeedback = ERROR_INVALID_DAY;
+	} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)) {
+		if (day>31) {
 			tempFeedback = ERROR_INVALID_DAY;
-		} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)) {
-			if (day>31) {
-				tempFeedback = ERROR_INVALID_DAY;
-			}
-		} else if (month == 2) {
-			if (day > 28) {
-				tempFeedback = ERROR_INVALID_DAY;;
-			}
-		} else if (day > 30) {
-			tempFeedback = ERROR_INVALID_DAY;
-			
 		}
+	} else if (month == 2) {
+		if (day > 28) {
+			tempFeedback = ERROR_INVALID_DAY;;
+		}
+	} else if (day > 30) {
+		tempFeedback = ERROR_INVALID_DAY;		
+	}
 
 	return tempFeedback;
 
@@ -139,7 +138,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 		} else {
 			feedbackMsg_Date = checkDateValidity(dateVector[i]);
 			if (feedbackMsg_Date != "Pass Date Test") {
-				tempFeedback = componentVector[i]+ feedbackMsg_Date;
+				tempFeedback = componentVector[i] + feedbackMsg_Date;
 				break;
 			}
 		}
@@ -147,7 +146,7 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 
 	if (tempFeedback == "Pass Test") {
 
-		string feedbackMsg_Time="";
+		string feedbackMsg_Time = "";
 		for (int j = 0; j < timeVector.size(); j++) {
 
 			if (timeVector[j] == "") {
@@ -157,10 +156,11 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 				if (feedbackMsg_Time != "Pass Time Test") {
 					tempFeedback = componentVector[j % 3] + feedbackMsg_Time;
 					break;
-				} else {}
+				} else {
+				
+				}
 			}
 		}
-
 	}
 
 	return tempFeedback;
@@ -168,11 +168,11 @@ string Logic::checkTaskDatenTimeValidity(Task taskInput) {
 }
 
 string Logic::convertYearToCorrectForm(string input) {
+
 	string output;
 	if (input == "") {
 		output = "";
-	}
-	else {
+	} else {
 		string tempYear = input.substr(input.length() - 4, input.length());
 		string temp = input.substr(0, input.length() - 5);
 		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
@@ -203,16 +203,14 @@ string Logic::compareTaskDateandTime(Task taskInput) {
 
 	string startDate = convertYearToCorrectForm(tempStartDate);
 
-
 	string startTime = convertTimeToCorrectForm(tempStartTime);
 	string endDate = convertYearToCorrectForm(tempEndDate);
 	string endTime = convertTimeToCorrectForm(tempEndTime);
-
 	
-	string tempFeedback="";
+	string tempFeedback = "";
 	if (startDate == "" || endDate == "") {
 
-	}else if (startDate == endDate) {
+	} else if (startDate == endDate) {
 		if (startTime > endTime) {
 			tempFeedback = "Start Time After End Time :<";
 		} else {
@@ -276,14 +274,13 @@ void Logic::initialiseSetUp() {
 
 void Logic::initialiseFileLocationFile() {
 
-
 	ifstream readFile(SAVING_LOCATON_HISTORY);
 	string tempStorage;
 
 	while (getline(readFile, tempStorage)) {
 		_fileLocation.push_back(tempStorage);
-
 	}
+
 	readFile.close();
 
 	return;
@@ -305,6 +302,7 @@ void Logic::writeFileLocation(vector<string> fileLocation) {
 bool Logic::checkIfFileIsAtExeLocation() {
 
 	int lastIndex = _fileLocation.size();
+
 	if (lastIndex == 0) {
 		return true;
 	} else {
@@ -323,12 +321,16 @@ bool Logic::checkIfFileIsAtExeLocation() {
 string Logic::getLastFileLocation() {
 
 	int lastIndex = _fileLocation.size();
+
 	return _fileLocation[lastIndex - 1];
 }
 
 void Logic::updatefileLocation(string userDirectory) {
 
+	assert(userDirectory != "");
+
 	_fileLocation.push_back(userDirectory);
+
 	return;
 }
 
@@ -338,11 +340,14 @@ string Logic::getExePath() {
 	char buffer[MAX_PATH];
 	GetModuleFileName(NULL, buffer, MAX_PATH);
 	string::size_type pos = string(buffer).find_last_of("\\/");
+
 	return string(buffer).substr(0, pos);
 
 }
 
 void Logic::createNewDirectory(string userFileDirectory) {
+
+	assert(userFileDirectory != "");
 
 	int index = userFileDirectory.find_last_of('\\');
 	int index2 = userFileDirectory.find_first_of('\\');
@@ -384,18 +389,26 @@ void Logic::createNewDirectory(string userFileDirectory) {
 //new location should be saved in this format: "C:\ts\ts1\gt.txt";
 void Logic::changeFileDirectory(string userFileDirectory) {
 
+	assert(userFileDirectory != "");
+
 	createNewDirectory(userFileDirectory);
 	setFileName(userFileDirectory);
+
 	return;
 }
 
 
 void Logic::setFileName(string updatedFileName) {
+
+	assert(updatedFileName != "");
+
 	_filename = updatedFileName;
+
 	return;
 }
 
 string Logic::getFileName() {
+
 	return _filename;
 }
 
@@ -408,20 +421,26 @@ paraList* Logic::getParaList(string userInput) {
 string Logic::getLowerCaseCommand(paraList parameterList) {
 	string command = parameterList.getCommand();
 	transform(command.begin(), command.end(), command.begin(), tolower);
+
 	return command;
 
 }
 
 Task Logic::getTask(paraList parameterList) {
+
 	return parameterList.getTask();
 }
 
 vector<string> Logic::getTextFileCopy() {
+
 	return _DataBase.returnTextFileCopy();
 }
 
 void Logic::callInitialise(string outputFile) {
+
 	_DataBase.initialiseTextFile(outputFile);
+
+	return;
 }
 
 bool Logic::ExistingTask(Task task) {
@@ -441,7 +460,6 @@ bool Logic::ExistingTask(Task task) {
 	if (_storageTaskListCopy.size() == 0) {
 		
 	} else {
-
 
 		Task checkItem;
 		for (int i = 0; i < _storageTaskListCopy.size(); i++) {
@@ -469,10 +487,12 @@ bool Logic::ExistingTask(Task task) {
 		}
 
 	}
+
 	return existing;
 }
 
 string Logic::getFeedbackMsg() {
+
 	return _feedbackMessage;
 
 }
