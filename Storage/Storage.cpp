@@ -17,6 +17,8 @@ string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is inval
 string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Priority must be High, Medium or Low!";
 string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
 string Storage::FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY = "Undo Completed! :D";
+string Storage::FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY = "Your Completed Tasks! :D";
+string Storage::FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY = "Your Incomplete Tasks! :/";
 
 bool Storage::isEmptyTaskList(){
 	if (taskList.empty()){
@@ -92,6 +94,18 @@ void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
 vector<Task> Storage::returnTaskList() {
 
 	return taskList;
+
+}
+
+vector<Task> Storage::returnCompletedTaskList() {
+
+	return completedTaskList;
+
+}
+
+vector<Task> Storage::returnIncompleteTaskList() {
+
+	return incompleteTaskList;
 
 }
 
@@ -191,26 +205,28 @@ void Storage::displayAllTasks(){
 
 vector<Task> Storage::viewCompletedTasks(){
 
-	vector<Task> subTaskList = performSearchForViewingTasks("Completed");
+	completedTaskList = performSearchForViewingTasks("Completed");
 
-	if (subTaskList.empty()){
+	if (completedTaskList.empty()){
 		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
 		return taskList;
 	}
 
-	return subTaskList;
+	setFeedbackMessage(FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY);
+	return completedTaskList;
 }
 
 vector<Task> Storage::viewIncompleteTasks(){
 
-	vector<Task> subTaskList = performSearchForViewingTasks("Incomplete");
+	incompleteTaskList = performSearchForViewingTasks("Incomplete");
 
-	if (subTaskList.empty()){
+	if (incompleteTaskList.empty()){
 		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
 		return taskList;
 	}
 
-	return subTaskList;
+	setFeedbackMessage(FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY);
+	return incompleteTaskList;
 }
 
 void Storage::setFeedbackMessage(string messageToBeSet){
