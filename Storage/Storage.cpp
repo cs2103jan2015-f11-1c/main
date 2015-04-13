@@ -208,6 +208,8 @@ void Storage::updateTextFile(string fileName){
 //Updates the task list vector with the contents in text file
 void Storage::initialiseTextFile(string fileName){
 
+	_Storage_LogFile.writeToLogFile("***********LOGGING _STORAGE_START***********");
+
 	assert(fileName != "");
 
 	ifstream readFile(fileName);
@@ -230,6 +232,16 @@ void Storage::initialiseTextFile(string fileName){
 			string temp7 = taskParameters[6];
 			string temp8 = taskParameters[7];
 			string temp9 = taskParameters[8];
+
+			_Storage_LogFile.writeToLogFile(temp1);
+			_Storage_LogFile.writeToLogFile(temp2);
+			_Storage_LogFile.writeToLogFile(temp3);
+			_Storage_LogFile.writeToLogFile(temp4);
+			_Storage_LogFile.writeToLogFile(temp5);
+			_Storage_LogFile.writeToLogFile(temp6);
+			_Storage_LogFile.writeToLogFile(temp7);
+			_Storage_LogFile.writeToLogFile(temp8);
+			_Storage_LogFile.writeToLogFile(temp9);
 
 			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
 			taskList.push_back(tempTask);
@@ -255,6 +267,8 @@ void Storage::addTask(Task individual_task){
 	
 	commandStack.push("add");
 
+	_Storage_LogFile.writeToLogFile("add");
+
 	return;
 }
 
@@ -266,6 +280,8 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("delete");
 
+	_Storage_LogFile.writeToLogFile("delete");
+
 	taskList.erase(taskList.begin() + taskIndex - 1);
 	
 	return;
@@ -275,6 +291,7 @@ void Storage::deleteTask(string fileName, unsigned int taskIndex){
 vector<Task> Storage::viewCompletedTasks(){
 
 	completedTaskList = performSearchForViewingTasks("Completed");
+	_Storage_LogFile.writeToLogFile("Completed");
 
 	if (completedTaskList.empty()){
 		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
@@ -289,6 +306,7 @@ vector<Task> Storage::viewCompletedTasks(){
 vector<Task> Storage::viewIncompleteTasks(){
 
 	incompleteTaskList = performSearchForViewingTasks("Incomplete");
+	_Storage_LogFile.writeToLogFile("Incomplete");
 
 	if (incompleteTaskList.empty()){
 		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
@@ -327,6 +345,8 @@ bool noCaseLess(const string &a, const string &b){
 
 //To update a task in the task list by identifying the keyword and then replacing the old input
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
+
+	_Storage_LogFile.writeToLogFile(keyword);
 
 	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
 	commandStack.push("update");

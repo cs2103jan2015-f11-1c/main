@@ -1031,3 +1031,62 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
+***********LOGGING _STORAGE_START***********
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+***********LOGGING _STORAGE_START***********
+andy
+
+
+
+
+
+
+
+Incomplete
+jieyang
+
+
+
+
+
+
+
+Incomplete
+gt
+
+
+
+
+
+
+
+Incomplete
+asdf
+13/4/2015
+
+14/4/2015
+
+
+
+
+Incomplete
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
