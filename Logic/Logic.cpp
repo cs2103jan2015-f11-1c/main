@@ -1,3 +1,4 @@
+// @author A0113555L
 #include "Logic.h"
 #include "Shlwapi.h"
 #include <windows.h>
@@ -306,6 +307,21 @@ bool Logic::checkIfFileIsAtExeLocation() {
 
 	int lastIndex = _fileLocation.size();
 
+	try{
+		if (lastIndex < 0)
+		{
+			throw;
+
+		}
+
+
+	}
+	catch (...) {
+
+		cout << "Exception case: Last index is not a positive integer";
+
+	}
+
 	if (lastIndex == 0) {
 		return true;
 	} else {
@@ -357,8 +373,25 @@ void Logic::createNewDirectory(string userFileDirectory) {
 
 	stack<string> directoryParts;
 	int firstIndex = inputDirectory.find_last_of('\\');
-	while (firstIndex != -1) {
+	
+	try{
 
+		if (firstIndex < 0)
+		{
+
+			throw;
+		}
+
+	}
+	catch (...)
+	{
+		cout << "Exceptional case:firstIndex is not positive";
+
+	}
+	
+	
+	while (firstIndex != -1) {
+    
 		firstIndex = inputDirectory.find_last_of('\\');
 		string temp = inputDirectory.substr(firstIndex, inputDirectory.size() - 1);
 

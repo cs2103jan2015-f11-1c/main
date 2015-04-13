@@ -1,4 +1,5 @@
- #include "stdafx.h"
+// @author A0111642W
+#include "stdafx.h"
 #include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

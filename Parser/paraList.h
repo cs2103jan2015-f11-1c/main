@@ -1,3 +1,4 @@
+// @author A0111642W
 #ifndef PARALIST_H
 #define PARALIST_H
 
