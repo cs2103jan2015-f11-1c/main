@@ -1,7 +1,7 @@
 #include "Parser.h"
 #include "paraList.h"
 #include "parserProcess.h"
-#define NDEBUG
+//#define NDEBUG
 #include <assert.h>
 #include <iostream>
 #include <string>
@@ -45,14 +45,14 @@ Parser::Parser()
 {}
 
 //extracts the command from userInput
-void Parser::sortCommand(string &userInput)
-{
+void Parser::sortCommand(string &userInput){
 
 	int index;
 	index = userInput.find_first_of(" ");
 	string temp = userInput.substr(0, index);
 	para.processCommand(temp);
 	userInput.erase(0, index + 1);
+
 	return;
 }
 
@@ -65,15 +65,11 @@ void Parser::sortDetails(string &userInput)
 	keywordType Keyword;
 	Keyword = determineKeywords(userInput);
 
+	switch (Keyword){
 
-	switch (Keyword)
-	{
 	case ABST_NIL:
 	{
-
 		para._task.changeTaskName(userInput);
-
-
 
 		return;
 	}
@@ -85,22 +81,17 @@ void Parser::sortDetails(string &userInput)
 		int thirdToken = PROCESS_INITIAL; 
 		int process = 0;
 
-	
 		getNoneToken(userInput, firstToken, secondToken, thirdToken);
 		processNum(firstToken, secondToken, thirdToken, process);
 	
-
 		processupdateNone(userInput,process);
 
-
-		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
-		{
+		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != ""){
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
 		}
 
-
-	return;
+		return;
 	}
 	case STARTONLY:
 	{
@@ -118,8 +109,6 @@ void Parser::sortDetails(string &userInput)
 		{
 			parserProcess now;
 			para._task.changeTaskStartDate(now.parserReturnNowTime());
-
-
 		}
 
 		return;
@@ -128,20 +117,17 @@ void Parser::sortDetails(string &userInput)
 	{   string endTime;
 	    string endDate;
 	
-	
 		processX(userInput);
 		processBeforeKeywordt(userInput);
 		checkEnd(endDate, endTime, userInput);
 		para._task.changeTaskEndDate(endDate);
 		para._task.changeTaskEndTime(endTime);
 
-		if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != "")
-		{
+		if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != ""){
 			parserProcess now;
 			para._task.changeTaskEndDate(now.parserReturnNowTime());
 
 		}
-
 
 		return;
 	}
@@ -158,8 +144,7 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskDeadlineTime(deadTime);
 	
 
-		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
-		{
+		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != ""){
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
 		}
@@ -178,15 +163,10 @@ void Parser::sortDetails(string &userInput)
 		eventStartDetails = userInput.substr(0, index);
 		userInput.erase(0, index + 4);
 
-
 		eventEndDetails = userInput;
-
 
 		processStartKey(eventStartDetails);
 		processEndKey(eventEndDetails);
-
-	
-
 
 		return;
 	}
@@ -201,14 +181,12 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskStartDate(fromdate);
 		para._task.changeTaskStartTime(fromtime);
 
-	if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
-	{
+	if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != ""){
+		
 		parserProcess now;
 		para._task.changeTaskStartDate(now.parserReturnNowTime());
 
-
 	}
-
 
 	return;
 	}
@@ -223,12 +201,10 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskEndDate(enddate);
 		para._task.changeTaskEndTime(endtime);
 
-		if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != "")
-		{
+		if (para._task.getTaskEndDate() == "" && para._task.getTaskEndTime() != ""){
 			parserProcess now;
 			para._task.changeTaskEndDate(now.parserReturnNowTime());
 		}
-
 
 		return;
 	}
@@ -243,15 +219,12 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskStartDate(ondate);
 		para._task.changeTaskStartTime(ontime);
 
-		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
-		{
+		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != ""){
 			parserProcess now;
 			para._task.changeTaskStartDate(now.parserReturnNowTime());
 		}
 
-
 		return;
-
 
 	}
 	case AT:
@@ -265,23 +238,16 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskStartDate(atdate);
 		para._task.changeTaskStartTime(attime);
 
-
-		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
-		{
+		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != ""){
 			parserProcess now;
 			para._task.changeTaskStartDate(now.parserReturnNowTime());
-
-
 		}
 
-
 		return;
-
 
 	}
 	case BY:
 	{
-
 		string bytime;
 		string bydate;
 
@@ -291,41 +257,31 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskDeadlineDate(bydate);
 		para._task.changeTaskDeadlineTime(bytime);
 
-		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
-		{
+		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != ""){
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
 		}
 
-
 		return;
-
 
 	}
 	case AFTER:
 	{
 		
-
 		string afttime;
 		string aftdate;
 
 		processX(userInput);
 		processKeywordAfter(userInput);
 
-
 		checkStart(aftdate, afttime, userInput);
 		para._task.changeTaskStartDate(aftdate);
 		para._task.changeTaskStartTime(afttime);
 
-
-		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != "")
-		{
+		if (para._task.getTaskStartDate() == "" && para._task.getTaskStartTime() != ""){
 			parserProcess now;
 			para._task.changeTaskStartDate(now.parserReturnNowTime());
-
-
 		}
-
 
 		return;
 
@@ -341,15 +297,10 @@ void Parser::sortDetails(string &userInput)
 		para._task.changeTaskDeadlineDate(befdate);
 		para._task.changeTaskDeadlineTime(beftime);
 
-		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != "")
-		{
+		if (para._task.getTaskDeadlineDate() == "" && para._task.getTaskDeadlineTime() != ""){
 			parserProcess now;
 			para._task.changeTaskDeadlineDate(now.parserReturnNowTime());
-
-
 		}
-
-
 
 		return;
 	}
@@ -367,26 +318,21 @@ void Parser::sortDetails(string &userInput)
 		eventStartDetails = userInput.substr(0, index);
 		userInput.erase(0, index + 4);
 
-
-
 		eventEndDetails = userInput;
 		
 		processStartKey(eventStartDetails);
 		processEndKey(eventEndDetails);
 		
-
 		return;
 	}
-
-
 	}
 	return;
 }
 
+paraList* Parser::parseCommand(string userInput){
 
+	assert(userInput != "");
 
-paraList* Parser::parseCommand(string userInput)
-{
 	para.clearTask();
 	assertCommand(userInput);
 	sortCommand(userInput);
@@ -395,10 +341,7 @@ paraList* Parser::parseCommand(string userInput)
 	return &para;
 }
 
-
-
-void Parser::processCommand(string &userInput)
-{
+void Parser::processCommand(string &userInput){
 	string command = para.getCommand();
 	parserProcess a;
 	int index;
@@ -406,27 +349,20 @@ void Parser::processCommand(string &userInput)
 	assertCommand(command);
 
 
-	if (regex_search(command, ADD_PATTERN))
-	{
+	if (regex_search(command, ADD_PATTERN)){
 		sortDetails(userInput);
 		processDate();
 		processTime();
-	}
-	else if (regex_search(command, DELETE_PATTERN))
-	{
+	} else if (regex_search(command, DELETE_PATTERN)){
 		istringstream iss(userInput);
 		iss >> index;
 		para.processDeleteNumber(index);
-	}
-	else if (regex_search(command, DISPLAY_PATTERN))
-	{
+	} else if (regex_search(command, DISPLAY_PATTERN)){
 		istringstream iss(userInput);
 		iss >> index;
 		para.processDisplayNumber(index);
 
-	}
-	else if (regex_search(command, UPDATE_PATTERN))
-	{
+	} else if (regex_search(command, UPDATE_PATTERN)){
 		int b, index;
 		string a;
 
@@ -441,80 +377,46 @@ void Parser::processCommand(string &userInput)
 		para.processInput(userInput);
 		para.processUpdateNumber(index);
 
-
 		processUpdateKeywords();
 		convertKeywordTime(para.getInput(),para.getKeyword());
 
-	}
-	else if (regex_search(command, MARK_PATTERN))
-	{
+	} else if (regex_search(command, MARK_PATTERN)){
 		istringstream iss(userInput);
 		iss >> index;
 		para.processMarkIndex(index);
-
 		para.processMarkStatus("mark");
 
-
-	}
-	else if (regex_search(command, UNMARK_PATTERN))
-	{
+	} else if (regex_search(command, UNMARK_PATTERN)){
 		istringstream iss(userInput);
 		iss >> index;
 		para.processMarkIndex(index);
 		para.processMarkStatus("unmark");
 
-
-	}
-	else if (regex_search(command, UNMARK_PATTERN))
-	{
+	} else if (regex_search(command, UNMARK_PATTERN)){
 		para.processUserDir(userInput);
 
-	}
-	else if (regex_search(command, SEARCH_PATTERN))
-	{
-
+	} else if (regex_search(command, SEARCH_PATTERN)){
 		para.processSearchWord(userInput);
 
-
-	}
-	else if (regex_search(command, SAVE_PATTERN))
-	{
+	} else if (regex_search(command, SAVE_PATTERN)){
 		para.processUserDir(userInput);
 
+	} else if (regex_search(command, VIEW_C_PATTERN)){
 
-	}
-	else if (regex_search(command, VIEW_C_PATTERN))
-	{
+	} else if (regex_search(command, VIEW_I_PATTERN)){
 
+	} else if (regex_search(command, VIEW_PATTERN))	{
 
-
-	}
-	else if (regex_search(command, VIEW_I_PATTERN))
-	{
-
-
-
-	}
-	else if (regex_search(command,VIEW_PATTERN))
-	{
-
-
-
-	}
-	else
-	{
+	} else {
 		command == "invalid";
 
 	}
 
-
 	return;
 }
 
-void Parser::processBeforeKeywordf(string &userInput)
-{
+void Parser::processBeforeKeywordf(string &userInput){
 	int index;
-
 
 	index = userInput.find(":f") - 1;
 	para._task.changeTaskName(userInput.substr(0, index));
@@ -523,122 +425,96 @@ void Parser::processBeforeKeywordf(string &userInput)
 	return;
 }
 
-
-void Parser::processBeforeKeywordt(string &userInput)
-{
+void Parser::processBeforeKeywordt(string &userInput){
 	int index;
 	index = userInput.find(":t") - 1;
 	para._task.changeTaskName(userInput.substr(0, index));
 	userInput.erase(0, index + 4);
 
-
 	return;
 }
 
-
-void Parser::processBeforeKeywordb(string &userInput)
-{
+void Parser::processBeforeKeywordb(string &userInput){
 	int index;
 	index = userInput.find(":b") - 1;
 	para._task.changeTaskName(userInput.substr(0, index));
 	userInput.erase(0, index + 4);
 
-
 	return;
 }
 
-
-
-
-
-
-string Parser::checkingKeywordX(string &userInput)
-{
+string Parser::checkingKeywordX(string &userInput){
 	string details;
-
-
 
 	if (userInput.find("!") != string::npos){
 		int index = userInput.find("!") - 1;
 		details = userInput.substr(0, index);
 		userInput.erase(0, index + 2);
 		para._task.changeTaskPriority(userInput);
-	}
-	else{
-
+	} else {
 		details = userInput;
-
 	}
 
 	return details;
 }
 
-Parser::keywordType Parser::determineKeywords(string userInput)
-{
+Parser::keywordType Parser::determineKeywords(string userInput){
 
 	string command = para.getCommand();
 
-	
-
 	if (command.find("#") != string::npos){
-
 		para.processCommand(command.substr(0, 3));
 		
 		return ABST_NIL;
-	}
-	else if (!regex_search(userInput, EXP_PATTERN)){
-		
+	} else if (!regex_search(userInput, EXP_PATTERN)){
+
 		return NONE;
-	}
-	else if (regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN)){
+
+	} else if (regex_search(userInput, FROM_PATTERN) && regex_search(userInput, TO_PATTERN)){
 		
 		return FROM_TO;
 
-	}
-	else if (regex_search(userInput, F_PATTERN) && !regex_search(userInput, T_PATTERN)){
-
+	} else if (regex_search(userInput, F_PATTERN) && !regex_search(userInput, T_PATTERN)){
 		
 		return STARTONLY;
-	}
-	else if (!regex_search(userInput, F_PATTERN) && regex_search(userInput, T_PATTERN)){
+
+	} else if (!regex_search(userInput, F_PATTERN) && regex_search(userInput, T_PATTERN)){
 		
 		return ENDONLY;
-	}
-	else if (regex_search(userInput, BY_PATTERN)){
 
-		
+	} else if (regex_search(userInput, BY_PATTERN)){
+
 		return DEADLINE;
-	}
-	else if (regex_search(userInput, NTRL_FROM_PATTERN)){
+	
+	} else if (regex_search(userInput, NTRL_FROM_PATTERN)){
 		
 		return FROM;
-	}
-	else if (regex_search(userInput, NTRL_BEFORE_PATTERN)){
+
+	} else if (regex_search(userInput, NTRL_BEFORE_PATTERN)){
 		
 		return BEFORE;
-	}
-	else if (regex_search(userInput, NTRL_AFTER_PATTERN)){
+
+	} else if (regex_search(userInput, NTRL_AFTER_PATTERN)){
 		
 		return AFTER;
 
-	}
-	else if (regex_search(userInput, NTRL_TO_PATTERN)){
+	} else if (regex_search(userInput, NTRL_TO_PATTERN)){
 		
 		return TO;
-	}
-	else if (regex_search(userInput, NTRL_BY_PATTERN)){
+
+	} else if (regex_search(userInput, NTRL_BY_PATTERN)){
 		
 		return BY;
-	}
-	else if (regex_search(userInput, NTRL_ON_PATTERN)){
+
+	} else if (regex_search(userInput, NTRL_ON_PATTERN)){
 		
 		return ON;
-	}
-	else if (regex_search(userInput, NTRL_AT_PATTERN)){
+
+	} else if (regex_search(userInput, NTRL_AT_PATTERN)){
 		
 		return AT;
-	}
-	else{
+
+	} else {
 		
 		return  START_END;
 	}
@@ -652,7 +528,6 @@ void Parser::checkStart(string&startdate, string &starttime, string userinput)
 	return;
 
 }
-
 
 string Parser::checkST(string userinput)
 {
