@@ -275,6 +275,30 @@ void Storage::addTask(Task individual_task){
 //Removes the task from the task list vector
 void Storage::deleteTask(string fileName, unsigned int taskIndex){
 
+	try{
+
+		if (taskIndex < 0)
+		{
+
+			throw;
+
+		}
+
+
+
+
+	}
+	catch (...){
+
+		cout << "exception case:task index is a negative number";
+
+
+
+	}
+
+
+
+
 	assert(taskIndex != NULL);
 
 	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
@@ -346,6 +370,25 @@ bool noCaseLess(const string &a, const string &b){
 //To update a task in the task list by identifying the keyword and then replacing the old input
 void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
 
+
+
+	try{
+
+		if (taskIndex < 0)
+		{
+
+			throw;
+		}
+
+	}
+	catch(...){
+
+
+		cout << "Taskindex less than 0";
+
+
+	}
+
 	_Storage_LogFile.writeToLogFile(keyword);
 
 	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
@@ -384,6 +427,25 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 
 	assert(taskIndex != NULL);
 
+	try{
+
+		if (taskIndex < 0)
+		{
+
+			throw;
+		}
+
+	}
+	catch (...){
+
+
+		cout << "Taskindex less than 0";
+
+
+	}
+
+
+
 	taskList[taskIndex - 1].changeTaskStatus("mark");
 	markTaskIndexStack.push(taskIndex);
 	commandStack.push("mark");
@@ -395,6 +457,25 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 
 	assert(taskIndex != NULL);
+	try{
+
+		if (taskIndex < 0)
+		{
+
+			throw;
+		}
+
+	}
+	catch (...){
+
+
+		cout << "Taskindex less than 0";
+
+
+	}
+
+
+
 
 	taskList[taskIndex - 1].changeTaskStatus("unmark");
 	unmarkTaskIndexStack.push(taskIndex);
@@ -529,86 +610,3 @@ vector<Task> Storage::sortTaskByName(string fileName){
 	return taskList;
 }
 
-/*
-vector<string> Storage::sortTaskByStatus(string fileName){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
-
-	if (isEmptyTaskList()){
-		return;
-	}
-
-	if (isOnlyOneTask()){
-		cout << ERROR_ONLY_ONE_TASK << endl;
-		return;
-	}
-
-	if (sortByStatusAfterStack.size() > 0 && isSortedByStatus()){
-		cout << ERROR_INVALID_STATUS_SORT << endl;
-		sortByStatusAfterStack.pop();
-		return;
-	}
-
-	commandStack.push("sort by status");
-	sortByStatusBeforeStack.push(textFileCopy);
-
-	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
-	queue<string> sortedTextFileCopy;
-	string keyword1 = "Completed";
-	string keyword2 = "Incomplete";
-
-	performSort(sortedTextFileCopy, keyword1);
-	performSort(sortedTextFileCopy, keyword2);
-
-	textFileCopy.clear();
-	while (!sortedTextFileCopy.empty()){
-		textFileCopy.push_back(sortedTextFileCopy.front());
-		sortedTextFileCopy.pop();
-	}
-	sortByStatusAfterStack.push(textFileCopy);
-
-	return sortByStatusAfterStack.top();
-}
-
-vector<string> Storage::sortTaskByPriority(string fileName){
-	textFileCopy.clear();
-	initialiseTextFile(fileName);
-
-	if (isEmptyTaskList()){
-		return;
-	}
-
-	if (isOnlyOneTask()){
-		cout << ERROR_ONLY_ONE_TASK << endl;
-		return;
-	}
-
-	if (sortByPriorityAfterStack.size() > 0 && isSortedByPriority()){
-		cout << ERROR_INVALID_PRIORITY_SORT << endl;
-		sortByPriorityAfterStack.pop();
-		return;
-	}
-
-	commandStack.push("sort by priority");
-	sortByPriorityBeforeStack.push(textFileCopy);
-
-	sort(textFileCopy.begin(), textFileCopy.end(), noCaseLess);
-	queue<string> sortedTextFileCopy;
-	string keyword1 = "high";
-	string keyword2 = "medium";
-	string keyword3 = "low";
-
-	performSort(sortedTextFileCopy, keyword1);
-	performSort(sortedTextFileCopy, keyword2);
-	performSort(sortedTextFileCopy, keyword3);
-
-	textFileCopy.clear();
-	while (!sortedTextFileCopy.empty()){
-		textFileCopy.push_back(sortedTextFileCopy.front());
-		sortedTextFileCopy.pop();
-	}
-	sortByPriorityAfterStack.push(textFileCopy);
-
-	return sortByPriorityAfterStack.top();
-}
-*/

@@ -1101,3 +1101,43 @@ All Tasks Cleared!
 =======
 >>>>>>> a78cf7f78d8996997f15b4fd3aa8ff54d5dc03c7
 >>>>>>> fa1c20b598f960a8f813efcbdb7a75f4b69ba637
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+=======
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+>>>>>>> 45c6661fbc1646517a09945438208e43526e8053
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+<<<<<<< HEAD
+Start Date After End Date :<
+=======
+add
+Task Added Successfully! :>
+today
+tmrw
+>>>>>>> 45c6661fbc1646517a09945438208e43526e8053
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+<<<<<<< HEAD
+=======
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+>>>>>>> 45c6661fbc1646517a09945438208e43526e8053
