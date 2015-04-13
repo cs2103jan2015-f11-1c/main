@@ -10,7 +10,7 @@ namespace Storage_Testing
 	{
 	public:
 
-		//@author A0110469J
+		
 		TEST_METHOD(addTaskTest){
 
 			Storage myStorage;
@@ -33,7 +33,7 @@ namespace Storage_Testing
 			string expectedOutput3 = "09:00";
 			Assert::AreEqual(output, expectedOutput3);
 		}
-
+		//@author A0110469J
 		TEST_METHOD(deleteTaskTest){
 
 			Storage myStorage;
@@ -59,7 +59,7 @@ namespace Storage_Testing
 			string expectedOutput3 = "19:00";
 			Assert::AreEqual(output, expectedOutput3);
 		}
-
+		// @author A0114484H
 		TEST_METHOD(updateTaskTest){
 
 			Storage myStorage;
@@ -148,7 +148,7 @@ namespace Storage_Testing
 
 			Assert::IsTrue(testVector.empty());
 		}
-
+		//@author A0110469J
 		TEST_METHOD(sortTaskByNameTest){
 
 			Storage myStorage;

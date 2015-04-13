@@ -69,7 +69,7 @@ namespace Parser_Testing
 			output = a.para._task.getTaskEndTime();
 			Assert::AreEqual(output, expectedOutput2);
 		}
-		//@author A0110469J
+		
 		TEST_METHOD(nullStringNametest)
 		{
 			string userInput = "add ";
@@ -83,7 +83,7 @@ namespace Parser_Testing
 			output = testParser.para._task.getTaskName();
 			Assert::AreEqual(output, expectedOutput);
 		}
-
+        //@author A0110469J
 		TEST_METHOD(taskNameStartEndTimetest2)
 		{
 			string userInput = "add Try Muthu's Curry :f today 11am :t 23:59";

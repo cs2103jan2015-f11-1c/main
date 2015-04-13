@@ -1,6 +1,6 @@
 #ifndef STORAGE_H
 #define STORAGE_H
-
+// @author A0114484H
 //#define NDEBUG
 
 #include <iostream>
@@ -13,7 +13,6 @@
 #include <vector>
 #include <stack>
 #include <queue>
-// @author A0114484H
 #include <cctype>
 #include <functional>
 #include <assert.h>

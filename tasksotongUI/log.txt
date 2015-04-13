@@ -1206,3 +1206,14 @@ Task Added Successfully! :>
 add
 add
 Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+14/4/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>

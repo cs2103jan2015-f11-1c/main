@@ -1,0 +1,1079 @@
+//@author: a0114484h
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Common\Task.cpp
+	 */
+
+#include "Task.h"
+
+string Task::MESSAGE_COMPLETE_TASK = "Completed";
+string Task::MESSAGE_INCOMPLETE_TASK = "Incomplete";
+
+Task::Task () {
+	
+	_taskName = "";
+
+	_taskStart.date = "";
+	_taskStart.time = "";
+
+	_taskEnd.date = "";
+	_taskEnd.time = "";
+
+	_taskDeadline.date = "";
+	_taskDeadline.time = "";
+
+	_taskPriority = "";
+
+	_taskStatus = MESSAGE_INCOMPLETE_TASK;
+}
+
+Task::Task (string taskName, string taskStartDate, string taskStartTime, string taskEndDate, string taskEndTime, string taskDeadlineDate, string taskDeadlineTime, string taskPriority, string taskStatus) {
+	
+	_taskName = taskName;
+
+	_taskStart.date = taskStartDate;
+	_taskStart.time = taskStartTime;
+
+	_taskEnd.date = taskEndDate;
+	_taskEnd.time = taskEndTime;
+
+	_taskDeadline.date = taskDeadlineDate;
+	_taskDeadline.time = taskDeadlineTime;
+
+	_taskPriority = taskPriority;
+
+	_taskStatus = taskStatus;
+	
+}
+
+string Task::getTaskName(){
+
+	return _taskName;
+}
+
+string Task::getTaskStartDate(){
+	
+	return _taskStart.date;
+}
+
+string Task::getTaskStartTime(){
+	
+	return _taskStart.time;
+}
+
+string Task::getTaskEndDate(){
+	
+	return _taskEnd.date;
+}
+
+string Task::getTaskEndTime(){
+	
+	return _taskEnd.time;
+}
+
+string Task::getTaskDeadlineDate(){
+	
+	return _taskDeadline.date;
+}
+
+string Task::getTaskDeadlineTime(){
+	
+	return _taskDeadline.time;
+}
+
+string Task::getTaskPriority(){
+	
+	return _taskPriority;
+}
+
+string Task::getTaskStatus(){
+
+	return _taskStatus;
+}
+
+void Task::changeTaskName(string newTaskName){
+	_taskName = newTaskName;
+	return;
+}
+
+void Task::changeTaskStartDate(string newStartDate){
+	_taskStart.date = newStartDate;
+	return;
+}
+
+void Task::changeTaskStartTime(string newStartTime){
+	_taskStart.time = newStartTime;
+	return;
+}
+
+void Task::changeTaskEndDate(string newEndDate){
+	_taskEnd.date = newEndDate;
+	return;
+}
+
+void Task::changeTaskEndTime(string newEndTime){
+	_taskEnd.time = newEndTime;
+	return;
+}
+
+void Task::changeTaskDeadlineDate(string newDeadlineDate){
+	_taskDeadline.date = newDeadlineDate;
+	return;
+}
+
+void Task::changeTaskDeadlineTime(string newDeadlineTime){
+	_taskDeadline.time = newDeadlineTime;
+	return;
+}
+
+void Task::changeTaskPriority(string newTaskPriority){
+	if (newTaskPriority == "!H"){
+		newTaskPriority = "HIGH";
+	} else if (newTaskPriority == "!M"){
+		newTaskPriority = "MEDIUM";
+	} else if (newTaskPriority == "!L"){
+		newTaskPriority = "LOW";
+	}
+	_taskPriority = newTaskPriority;
+
+	return;
+}
+
+void Task::changeTaskStatus(string newTaskStatus){
+	if (newTaskStatus == "mark"){
+		_taskStatus = MESSAGE_COMPLETE_TASK;
+		return;
+	} else {
+		_taskStatus = MESSAGE_INCOMPLETE_TASK;
+	}
+
+	return;
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Common\Task.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+	 */
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace Task_Testing
+{
+	TEST_CLASS(Task_Testing)
+	{
+	public:
+		TEST_METHOD(getTaskName_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actualName;
+			actualName = test->getTaskName();
+
+			string expectedName = "Name";
+
+			Assert::AreEqual(expectedName, actualName);
+
+		}
+
+		TEST_METHOD(getTaskStartDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskStartDate();
+
+			string expected = "StartDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskStartTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskStartTime();
+
+			string expected = "StartTime";
+
+			Assert::AreEqual(expected, actual);
+
+
+		}
+
+		TEST_METHOD(getTaskEndDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskEndDate();
+
+			string expected = "EndDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskEndTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskEndTime();
+
+			string expected = "EndTime";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskDeadlineDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskDeadlineDate();
+
+			string expected = "DeadlineDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskDeadlineTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskDeadlineTime();
+
+			string expected = "DeadlineTime";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskPriority_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskPriority();
+
+			string expected = "Priority";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskStatus_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
+			string actual;
+			actual = test->getTaskStatus();
+
+			string expected = "Incomplete";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		TEST_METHOD(changeTaskName_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskName("Name1");
+			actual = test->getTaskName();
+
+			string expected = "Name1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStartDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskStartDate("StartDate1");
+			actual = test->getTaskStartDate();
+
+			string expected = "StartDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStartTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskStartTime("StartTime1");
+			actual = test->getTaskStartTime();
+
+			string expected = "StartTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskEndDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskEndDate("EndDate1");
+			actual = test->getTaskEndDate();
+
+			string expected = "EndDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskEndTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskEndTime("EndTime1");
+			actual = test->getTaskEndTime();
+
+			string expected = "EndTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskDeadlineDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskDeadlineDate("DeadlineDate1");
+			actual = test->getTaskDeadlineDate();
+
+			string expected = "DeadlineDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskDeadlineTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskDeadlineTime("DeadlineTime1");
+			actual = test->getTaskDeadlineTime();
+
+			string expected = "DeadlineTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskPriority_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskPriority("Priority1");
+			actual = test->getTaskPriority();
+
+			string expected = "Priority1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStatus_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
+			string actual;
+			test->changeTaskStatus("mark");
+			actual = test->getTaskStatus();
+
+			string expected = "Completed";
+
+			Assert::AreEqual(expected, actual);
+
+			Task* test2 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test2->changeTaskStatus("abcd");
+			string actual2 = test2->getTaskStatus();
+			string expected2 = "Incomplete";
+
+			Assert::AreEqual(expected2, actual2);
+
+
+		}
+	};
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage\Storage.cpp
+	 */
+
+#include "Storage.h"
+
+string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
+string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
+string Storage::ERROR_NO_COMPLETED_TASKS = "You have not completed any tasks!";
+string Storage::ERROR_NO_INCOMPLETE_TASKS = "You have completed all outstanding tasks!";
+string Storage::ERROR_TASK_PREVIOUSLY_COMPLETED = "Task already marked as completed!";
+string Storage::ERROR_TASK_PREVIOUSLY_INCOMPLETE = "Task already marked as incomplete!";
+string Storage::ERROR_CANNOT_UNDO = "Nothing to undo!";
+string Storage::ERROR_INVALID_SEARCH_TERM = "No matching results";
+string Storage::ERROR_ONLY_ONE_TASK = "There is no need to sort a single task!";
+string Storage::ERROR_INVALID_NAME_SORT = "Task list is already sorted by name!";
+string Storage::ERROR_INVALID_STATUS_SORT = "Task list is already sorted by status!";
+string Storage::ERROR_INVALID_PRIORITY_SORT = "Task list is already sorted by priority!";
+string Storage::ERROR_INVALID_UPDATE_KEYWORD = "Component to be updated is invalid!";
+string Storage::ERROR_INVALID_UPDATE_PRIORITY_KEYWORD = "Priority must be High, Medium or Low!";
+string Storage::FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY = "Update Successful!";
+string Storage::FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY = "Undo Completed! :D";
+string Storage::FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY = "Your Completed Tasks! :D";
+string Storage::FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY = "Your Incomplete Tasks! :/";
+
+vector<Task> Storage::performSearchForViewingTasks(string keyword){
+
+	assert(keyword != "");
+
+	vector<Task> tempTaskList;
+	vector<Task>::iterator iter = taskList.begin();
+
+	while (iter != taskList.end()){
+		if ((iter->getTaskStatus()) == keyword){
+			tempTaskList.push_back(*iter);
+		}
+		iter++;
+	}
+
+	return tempTaskList;
+}
+
+bool Storage::isOnlyOneTask(){
+
+	return (taskList.size() == 1);
+}
+
+//Returns the original task list
+vector<Task> Storage::returnTaskList() {
+
+	return taskList;
+
+}
+
+//Returns the task list containing only completed tasks
+vector<Task> Storage::returnCompletedTaskList() {
+
+	return completedTaskList;
+
+}
+
+//Returns the task list containing only incompleted tasks
+vector<Task> Storage::returnIncompleteTaskList() {
+
+	return incompleteTaskList;
+
+}
+
+//Converts vector<Task> taskList to vector<string> taskListStringVector 
+void Storage::toString(){
+	for (unsigned int i = 0; i < taskList.size(); i++){
+		ostringstream oss;
+
+		oss << taskList[i].getTaskName() << endl;
+		oss << taskList[i].getTaskStartDate() << endl;
+		oss << taskList[i].getTaskStartTime() << endl;
+		oss << taskList[i].getTaskEndDate() << endl;
+		oss << taskList[i].getTaskEndTime() << endl;
+		oss << taskList[i].getTaskDeadlineDate() << endl;
+		oss << taskList[i].getTaskDeadlineTime() << endl;
+		oss << taskList[i].getTaskPriority() << endl;
+		oss << taskList[i].getTaskStatus() << endl;
+
+		taskListStringVector.push_back(oss.str());
+	}
+
+	return;
+}
+
+//Converts vector<string> taskListStringVector back to vector<Task> taskList 
+void Storage::toTaskList(){
+	ostringstream oss;
+	for (int i = 0; i < taskListStringVector.size(); i++){
+		oss << taskListStringVector[i];
+	}
+
+	string line;
+	assert(line == "");
+	vector<string> taskParameters;
+	istringstream iss(oss.str());
+	while (getline(iss, line)) {
+
+		if (isalnum(line[0])) {
+			taskParameters.push_back(line);
+			for (int i = 0; i < 8; i++) {
+				getline(iss, line);
+				taskParameters.push_back(line);
+			}
+			string temp1 = taskParameters[0];
+			string temp2 = taskParameters[1];
+			string temp3 = taskParameters[2];
+			string temp4 = taskParameters[3];
+			string temp5 = taskParameters[4];
+			string temp6 = taskParameters[5];
+			string temp7 = taskParameters[6];
+			string temp8 = taskParameters[7];
+			string temp9 = taskParameters[8];
+
+			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
+			taskList.push_back(tempTask);
+			taskParameters.clear();
+		}
+	}
+
+	return;
+};
+
+void Storage::updateTaskList(Task taskTobeEntered) {
+
+	taskList.push_back(taskTobeEntered);
+
+	return;
+}
+
+//Updates the text file with the current tasklist vector
+void Storage::updateTextFile(string fileName){
+
+	assert(fileName != "");
+
+	ofstream writeFile(fileName);
+
+	for (unsigned int i = 0; i < taskList.size(); i++){
+		
+		writeFile << "***************************************************************"<<endl;
+		writeFile << taskList[i].getTaskName() << endl;
+		writeFile << taskList[i].getTaskStartDate() << endl;
+		writeFile << taskList[i].getTaskStartTime() << endl;
+		writeFile << taskList[i].getTaskEndDate() << endl;
+		writeFile << taskList[i].getTaskEndTime() << endl;
+		writeFile << taskList[i].getTaskDeadlineDate() << endl;
+		writeFile << taskList[i].getTaskDeadlineTime() << endl;
+		writeFile << taskList[i].getTaskPriority() << endl;
+		writeFile << taskList[i].getTaskStatus()<<endl;
+
+	}
+
+	return;
+}
+
+//Updates the task list vector with the contents in text file
+void Storage::initialiseTextFile(string fileName){
+
+	_Storage_LogFile.writeToLogFile("***********LOGGING _STORAGE_START***********");
+
+	assert(fileName != "");
+
+	ifstream readFile(fileName);
+	string tempStorage;
+	vector<string> taskParameters;
+	while (getline(readFile, tempStorage)) {
+
+		if (tempStorage == "***************************************************************") {
+			
+			for (int i = 0; i < 9; i++) {
+				getline(readFile, tempStorage);
+				taskParameters.push_back(tempStorage);
+			}
+			string temp1 = taskParameters[0];
+			string temp2 = taskParameters[1];
+			string temp3 = taskParameters[2];
+			string temp4 = taskParameters[3];
+			string temp5 = taskParameters[4];
+			string temp6 = taskParameters[5];
+			string temp7 = taskParameters[6];
+			string temp8 = taskParameters[7];
+			string temp9 = taskParameters[8];
+
+			_Storage_LogFile.writeToLogFile(temp1);
+			_Storage_LogFile.writeToLogFile(temp2);
+			_Storage_LogFile.writeToLogFile(temp3);
+			_Storage_LogFile.writeToLogFile(temp4);
+			_Storage_LogFile.writeToLogFile(temp5);
+			_Storage_LogFile.writeToLogFile(temp6);
+			_Storage_LogFile.writeToLogFile(temp7);
+			_Storage_LogFile.writeToLogFile(temp8);
+			_Storage_LogFile.writeToLogFile(temp9);
+
+			Task tempTask(temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9);
+			taskList.push_back(tempTask);
+			taskParameters.clear();
+		}
+	}
+	
+	readFile.close();
+
+	return;
+};
+
+//Pushes the task added into task list vector
+void Storage::addTask(Task individual_task){
+	
+	taskList.push_back(individual_task);
+
+	assert(!taskList.empty());
+	
+	commandStack.push("add");
+
+	_Storage_LogFile.writeToLogFile("add");
+
+	return;
+}
+
+//Removes the task from the task list vector
+void Storage::deleteTask(string fileName, unsigned int taskIndex){
+
+	try {
+		if (taskIndex < 0){
+			throw;
+		}
+	}
+	catch (...){
+		cout << "exception case:task index is a negative number";
+	}
+
+	assert(taskIndex != NULL);
+
+	deleteTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
+	commandStack.push("delete");
+
+	_Storage_LogFile.writeToLogFile("delete");
+
+	taskList.erase(taskList.begin() + taskIndex - 1);
+	
+	return;
+}
+
+//Returns a task list containing only completed tasks
+vector<Task> Storage::viewCompletedTasks(){
+
+	completedTaskList = performSearchForViewingTasks("Completed");
+	_Storage_LogFile.writeToLogFile("Completed");
+
+	if (completedTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
+		return taskList;
+	}
+
+	setFeedbackMessage(FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY);
+	return completedTaskList;
+}
+
+//Returns a task list containing only incomplete tasks
+vector<Task> Storage::viewIncompleteTasks(){
+
+	incompleteTaskList = performSearchForViewingTasks("Incomplete");
+	_Storage_LogFile.writeToLogFile("Incomplete");
+
+	if (incompleteTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
+		return taskList;
+	}
+
+	setFeedbackMessage(FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY);
+	return incompleteTaskList;
+}
+
+void Storage::setFeedbackMessage(string messageToBeSet){
+	
+	assert(messageToBeSet != "");
+
+	feedbackMessage = messageToBeSet;
+
+	return;
+}
+
+string Storage::returnLogicFeedbackMessage(){
+
+	return feedbackMessage;
+}
+
+//Checking whether a character is smaller than another character in the ASCII code
+struct caseInsensitiveLess : public binary_function < char, char, bool > {
+	bool operator () (char x, char y) const {
+		return toupper(static_cast<unsigned char>(x)) < toupper(static_cast<unsigned char>(y));
+	}
+};
+
+//To compare each character in both strings using a predicate
+bool noCaseLess(const string &a, const string &b){
+	return lexicographical_compare(a.begin(), a.end(), b.begin(), b.end(), caseInsensitiveLess());
+}
+
+//To update a task in the task list by identifying the keyword and then replacing the old input
+void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword, string newInput) {
+
+	try {
+		if (taskIndex < 0){
+			throw;
+		}
+	}
+	catch(...){
+		cout << "Taskindex less than 0";
+	}
+
+	_Storage_LogFile.writeToLogFile(keyword);
+
+	updateTaskStack.emplace(taskList[taskIndex - 1], taskIndex);
+	commandStack.push("update");
+
+	if (keyword == "name") {
+		taskList[taskIndex - 1].changeTaskName(newInput);
+	} else if (keyword == "start-date") {
+		taskList[taskIndex - 1].changeTaskStartDate(newInput);
+	} else if (keyword == "start-time") {
+		taskList[taskIndex - 1].changeTaskStartTime(newInput);
+	} else if (keyword == "end-date") {
+		taskList[taskIndex - 1].changeTaskEndDate(newInput);
+	} else if (keyword == "end-time") {
+		taskList[taskIndex - 1].changeTaskEndTime(newInput);
+	} else if (keyword == "deadline-date") {
+		taskList[taskIndex - 1].changeTaskDeadlineDate(newInput);
+	} else if (keyword == "deadline-time") {
+		taskList[taskIndex - 1].changeTaskDeadlineTime(newInput);
+	} else if(keyword == "priority") {
+		transform(newInput.begin(), newInput.end(), newInput.begin(), toupper);
+		if ((newInput == "HIGH") || (newInput == "MEDIUM") || (newInput == "LOW") || (newInput == "!H") || (newInput == "!M") || (newInput == "!L")){
+			taskList[taskIndex - 1].changeTaskPriority(newInput);
+		} else {
+			setFeedbackMessage(ERROR_INVALID_UPDATE_PRIORITY_KEYWORD);
+		}
+	} else {
+		setFeedbackMessage(ERROR_INVALID_UPDATE_KEYWORD);
+	}	
+
+	return;
+}
+
+//Changes status from "Incomplete" to "Completed"
+void Storage::markTask(string fileName, unsigned int taskIndex){
+
+	assert(taskIndex != NULL);
+
+	try {
+		if (taskIndex < 0){
+			throw;
+		}
+	}
+	catch (...){
+		cout << "Taskindex less than 0";
+	}
+
+	taskList[taskIndex - 1].changeTaskStatus("mark");
+	markTaskIndexStack.push(taskIndex);
+	commandStack.push("mark");
+
+	return;
+}
+
+//Changes status from "Completed" to "Incomplete"
+void Storage::unmarkTask(string fileName, unsigned int taskIndex){
+
+	assert(taskIndex != NULL);
+
+	try {
+		if (taskIndex < 0){
+			throw;
+		}
+	}
+	catch (...){
+		cout << "Taskindex less than 0";
+	}
+
+	taskList[taskIndex - 1].changeTaskStatus("unmark");
+	unmarkTaskIndexStack.push(taskIndex);
+	commandStack.push("unmark");
+
+	return;
+}
+
+//Undo previous action based on the last command entered
+void Storage::undoAction(){
+
+	if (commandStack.empty()){
+		setFeedbackMessage(ERROR_CANNOT_UNDO);
+
+		return;
+	}
+
+	string previousCommand = commandStack.top();
+	commandStack.pop();
+
+	assert(previousCommand != "");
+
+	if (previousCommand == "add"){
+		taskList.erase(taskList.end() - 1);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+
+	if (previousCommand == "delete"){
+		Task deletedTask = get<0>(deleteTaskStack.top());
+		unsigned int formerIndex = get<1>(deleteTaskStack.top());
+		deleteTaskStack.pop();
+
+		taskList.insert(taskList.begin() + (formerIndex - 1), deletedTask);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+	
+		return;
+	}
+	
+	if (previousCommand == "update"){
+		Task originalTask = get<0>(updateTaskStack.top());
+		unsigned int formerIndex = get<1>(updateTaskStack.top());
+		updateTaskStack.pop();
+
+		taskList.insert(taskList.begin() + (formerIndex - 1), originalTask);
+		taskList.erase(taskList.begin() + formerIndex);
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+	
+	if (previousCommand == "mark"){
+		unsigned int formerIndex = markTaskIndexStack.top();
+		markTaskIndexStack.pop();
+
+		taskList[formerIndex - 1].changeTaskStatus("unmark");
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+
+	if (previousCommand == "unmark"){
+		unsigned int formerIndex = unmarkTaskIndexStack.top();
+		unmarkTaskIndexStack.pop();
+
+		taskList[formerIndex - 1].changeTaskStatus("mark");
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+
+	if (previousCommand == "clear"){
+		taskList = clearAllTasksStack.top();
+		clearAllTasksStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+	
+	if (previousCommand == "sort by name"){
+
+		taskList = sortByNameStack.top();
+		sortByNameStack.pop();
+
+		setFeedbackMessage(FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY);
+
+		return;
+	}
+
+	return;
+}
+
+//Clear all tasks currently in task list vector
+void Storage::clearAllTasks(){
+	clearAllTasksStack.push(taskList);
+	commandStack.push("clear");
+
+	taskList.clear();
+
+	assert(taskList.empty());
+
+	return;
+}
+
+bool caseInsensitiveEqual(char ch1, char ch2){
+	return toupper((unsigned char)ch1) == toupper((unsigned char)ch2);
+}
+
+vector<Task> Storage::sortTaskByName(string fileName){
+
+	if (isOnlyOneTask()){
+		setFeedbackMessage(ERROR_ONLY_ONE_TASK);
+		return taskList;
+	}
+
+	commandStack.push("sort by name");
+	sortByNameStack.push(taskList);
+
+	taskListStringVector.clear();
+	toString();
+	sort(taskListStringVector.begin(), taskListStringVector.end(), noCaseLess);
+	taskList.clear();
+	toTaskList();
+
+	return taskList;
+}
+
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage\Storage.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+	 */
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace Storage_Testing
+{
+	TEST_CLASS(StorageTest)
+	{
+	public:
+
+		
+		TEST_METHOD(addTaskTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask("Homework", "03/05/15", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask);
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskName();
+			string expectedOutput1 = "Homework";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[0].getTaskStartDate();
+			string expectedOutput2 = "03/05/15";
+			Assert::AreEqual(output, expectedOutput2);
+
+			output = testVector[0].getTaskStartTime();
+			string expectedOutput3 = "09:00";
+			Assert::AreEqual(output, expectedOutput3);
+		}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+	 */
+
+		TEST_METHOD(updateTaskTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Homework", "03/05/2015", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			Task myTask2("Hello", "03/06/2015", "19:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.updateTask("tasksotong.txt", 1, "name", "Hullabaloo");
+			myStorage.updateTask("tasksotong.txt", 1, "end-date", "21/12/2016");
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskName();
+			string expectedOutput1 = "Hullabaloo";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[0].getTaskEndDate();
+			string expectedOutput2 = "21/12/2016";
+			Assert::AreEqual(output, expectedOutput2);
+		}
+
+
+		TEST_METHOD(markTaskTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Homework", "03/05/15", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			Task myTask2("Hello", "03/06/15", "19:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.markTask("tasksotong.txt", 1);
+			myStorage.markTask("tasksotong.txt", 2);
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskStatus();
+			string expectedOutput1 = "Completed";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[1].getTaskStatus();
+			string expectedOutput2 = "Completed";
+			Assert::AreEqual(output, expectedOutput2);
+		}
+
+
+		TEST_METHOD(unmarkTastTest){
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Homework", "03/05/15", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			Task myTask2("Hello", "03/06/15", "19:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.markTask("tasksotong.txt", 1);
+			myStorage.markTask("tasksotong.txt", 2);
+			myStorage.unmarkTask("tasksotong.txt", 1);
+			myStorage.unmarkTask("tasksotong.txt", 2);
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskStatus();
+			string expectedOutput1 = "Incomplete";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[1].getTaskStatus();
+			string expectedOutput2 = "Incomplete";
+			Assert::AreEqual(output, expectedOutput2);
+		}
+
+		TEST_METHOD(clearAllTasksTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Andy Soh's drinking party", "10 May", "8pm", "11 May", "2am", "today", "night", "low", "");
+			Task myTask2("Jie Yang cut hair", "13 Mar", "1pm", "15 Apr", "2pm", "tomorrow", "evening", "medium", "");
+			Task myTask3("Gan Tian's dinner date", "21 Mar", "7pm", "21 Mar", "8pm", "saturday", "night", "high", "");
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.addTask(myTask3);
+			myStorage.clearAllTasks();
+			testVector = myStorage.returnTaskList();
+
+			Assert::IsTrue(testVector.empty());
+		}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+
+
+
+
+

@@ -1,0 +1,165 @@
+//@author: a0110469j
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser_Testing\Parser_Testing.cpp
+	 */
+
+		TEST_METHOD(taskNameStartEndTimetest2)
+		{
+			string userInput = "add Try Muthu's Curry :f today 11am :t 23:59";
+			string output;
+			string expectedOutput1 = "Try Muthu's Curry";
+			string expectedOutput2 = "11:00";
+			string expectedOutput3 = "23:59";
+
+			Parser testParser;
+
+			testParser.parseCommand(userInput);
+
+			output = testParser.para._task.getTaskName();
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testParser.para._task.getTaskStartTime();
+			Assert::AreEqual(output, expectedOutput2);
+
+			output = testParser.para._task.getTaskEndTime();
+			Assert::AreEqual(output, expectedOutput3);
+		}
+
+		TEST_METHOD(taskNameStartEndDateTest)
+		{
+			string userInput = "add Finish V0.5 :f 24/11/2015 2pm :t 31/12/2015 2pm";
+			string output;
+			string expectedOutput1 = "24/11/2015";
+			string expectedOutput2 = "31/12/2015";
+
+			Parser testParser;
+
+			testParser.parseCommand(userInput);
+
+			output = testParser.para._task.getTaskStartDate();
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testParser.para._task.getTaskEndDate();
+			Assert::AreEqual(output, expectedOutput2);
+		}
+
+		TEST_METHOD(taskPriorityTest)
+		{
+			string userInput = "add Bobby's party !high";
+			string output;
+			string expectedOutput = "high";
+
+
+			Parser testParser;
+
+			testParser.parseCommand(userInput);
+
+			output = testParser.para._task.getTaskPriority();
+			Assert::AreEqual(output, expectedOutput);
+		}
+		 
+		TEST_METHOD(testparserProcessToday) {
+
+			parserProcess testPP;
+
+			testPP.setNowDT(); 
+
+		}
+	
+	};
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Parser_Testing\Parser_Testing.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+	 */
+
+		TEST_METHOD(deleteTaskTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Homework", "03/05/15", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			Task myTask2("Hello", "03/06/15", "19:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.deleteTask("tasksotong.txt", 1);
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskName();
+			string expectedOutput1 = "Hello";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[0].getTaskStartDate();
+			string expectedOutput2 = "03/06/15";
+			Assert::AreEqual(output, expectedOutput2);
+
+			output = testVector[0].getTaskStartTime();
+			string expectedOutput3 = "19:00";
+			Assert::AreEqual(output, expectedOutput3);
+		}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+	 */
+
+		TEST_METHOD(sortTaskByNameTest){
+
+			Storage myStorage;
+			vector<Task> testVector;
+			Task myTask1("Andy Soh's drinking party", "10 May", "8pm", "11 May", "2am", "today", "night", "low", "");
+			Task myTask2("Jie Yang cut hair", "13 Mar", "1pm", "15 Apr", "2pm", "tomorrow", "evening", "medium", "");
+			Task myTask3("Gan Tian's dinner date", "21 Mar", "7pm", "21 Mar", "8pm", "saturday", "night", "high", "");
+			Task myTask4("Homework", "03/05/15", "09:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			Task myTask5("Hello", "03/06/15", "19:00", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "");
+			string output;
+
+			myStorage.addTask(myTask1);
+			myStorage.addTask(myTask2);
+			myStorage.addTask(myTask3);
+			myStorage.addTask(myTask4);
+			myStorage.addTask(myTask5);
+			myStorage.sortTaskByName("tasksotong.txt");
+			testVector = myStorage.returnTaskList();
+
+			output = testVector[0].getTaskName();
+			string expectedOutput1 = "Andy Soh's drinking party";
+			Assert::AreEqual(output, expectedOutput1);
+
+			output = testVector[1].getTaskName();
+			string expectedOutput2 = "Gan Tian's dinner date";
+			Assert::AreEqual(output, expectedOutput2);
+
+			output = testVector[2].getTaskName();
+			string expectedOutput3 = "Hello";
+			Assert::AreEqual(output, expectedOutput3);
+
+			output = testVector[3].getTaskName();
+			string expectedOutput4 = "Homework";
+			Assert::AreEqual(output, expectedOutput4);
+
+			output = testVector[4].getTaskName();
+			string expectedOutput5 = "Hello";
+			Assert::AreNotEqual(output, expectedOutput5);
+		}
+	};
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+
+
+
+
+

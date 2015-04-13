@@ -1,0 +1,1158 @@
+//@author: a0113555l
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\addTaskTest\unittest1.cpp
+	 */
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace Logic_Test {
+	TEST_CLASS(Logic_Test) {
+public:
+
+	TEST_METHOD(executeCommand_add) {
+		Logic testLogic;
+
+		Task* test = new Task("Andy's bday", "14/4/2015", "13:00", "14/4/2015", "14:00", "", "", "!h", "");
+		Task* test1 = new Task("Andy's bday1", "14/4/2015", "13:00", "14/4/2015", "14:00", "", "", "!h", "");
+		Task* test1_copy = new Task("Andy's bday1", "14/4/2015", "13:00", "14/4/2015", "14:00", "", "", "!h", "");
+
+		paraList testParaList;
+		paraList testParaList1;
+		paraList testParaList1_copy;
+
+		testParaList.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test);
+		testParaList1.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test1);
+		testParaList1_copy.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test1_copy);
+
+		string feedBack = testLogic.executeCommand(testParaList);
+		string feedBack1 = testLogic.executeCommand(testParaList1);
+		string feedBack1_copy = testLogic.executeCommand(testParaList1_copy);
+
+		string actualOutputString = feedBack;
+		string actualOutputString1 = feedBack1;
+		string expectedOutputString = "Task Added Successfully! :>";
+
+		Assert::AreEqual(expectedOutputString, actualOutputString);
+		Assert::AreEqual(expectedOutputString, actualOutputString1);
+
+	}
+
+	TEST_METHOD(executeCommand_delete) {
+
+		Logic testLogic;
+
+		Task* test = new Task("Andy's bday", "10/4/2015", "13:00", "10/4/2015", "14:00", "11/4/2015", "00:00", "high", "Incompleted");
+		Task* test1 = new Task("Andy's bday1", "10/4/2015", "13:00", "10/4/2015", "14:00", "11/4/2015", "00:00", "high", "Incompleted");
+
+		paraList testParaList;
+		paraList testParaList1;
+		paraList testParaList2;
+
+		testParaList.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test);
+		testParaList1.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *test1);
+		testParaList2.setparaList("delete", 1, 1, 1, "KEYWORD", "INPUT", *test1);
+
+		testLogic.setTaskList();
+		string feedBack1 = testLogic.executeCommand(testParaList);
+		testLogic.setTaskList();
+		string feedBack2 = testLogic.executeCommand(testParaList1);
+		testLogic.setTaskList();
+		string feedBack = testLogic.executeCommand(testParaList2);
+
+		string expectedOutputString = feedBack;
+		string actualOutputString = "Task Deleted Successfully!";
+
+		Assert::AreEqual(expectedOutputString, actualOutputString);
+	}
+	};
+}
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\addTaskTest\unittest1.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.cpp
+	 */
+
+#include "Logic.h"
+#include "Shlwapi.h"
+#include <windows.h>
+#include <direct.h>
+#include <stack>
+#include <stdio.h>
+
+using namespace std;
+
+string Logic::SAVING_LOCATON_HISTORY = "taskSotong_saving_Location_history.txt";
+
+string Logic::ERROR_INVALID_USERINPUT = "Invalid User Input. Please Enter Again! :<";
+string Logic::ERROR_EXISTING_TASK = "That Task Has Already Existed~! ";
+string Logic::ERROR_TASK_UPDATED_UNSUCCESSFULLY = "Failed To Update The Task!";
+string Logic::ERROR_TASK_DELETED_UNSUCCESSFULLY = "Failed To Delete The Task!";
+string Logic::ERROR_TASK_MARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Mark!";
+string Logic::ERROR_TASK_UNMARKED_UNSUCCESSFULLY = "Nah.. Index Out Of Range! Cannot Unmark!";
+string Logic::ERROR_EMPTY_LIST = "Task List Is Empty!";
+string Logic::ERROR_TASK_INSUFFICIENT_PARAMETERS = "Insufficient Parameters Entered!";
+string Logic::ERROR_NO_INDEX = "No Index! :<";
+string Logic::ERROR_INDEX_OUT_OF_RANGE = "Index Out Of Range!";
+string Logic::ERROR_NO_COMPONENT = "No Component!";
+string Logic::ERROR_COMPONENT_INVALID = "Component Invalid!";
+string Logic::ERROR_NO_CONTENT = "No Content!";
+string Logic::ERROR_INVALID_CONTENT = "Content Invalid!";
+string Logic::ERROR_INVALID_YEAR = "Year Entered Is Invalid!";
+string Logic::ERROR_INVALID_MONTH = "Month Entered Is Invalid!";
+string Logic::ERROR_INVALID_DAY = "Day Entered Is Invalid";
+string Logic::ERROR_INVALID_HOUR = "Hour Entered Is Invalid";
+string Logic::ERROR_INVALID_MINUTE = "Minute Entered Is Invalid";
+string Logic::ERROR_START_TIME_AFTER_END_TIME = "Start Time After End Time!";
+string Logic::ERROR_START_DATE_AFTER_END_DATE = "Start Date After End Date :<";
+
+string Logic::FEEDBACK_TASK_ADDED_SUCCESSFULLY = "Task Added Successfully! :>";
+string Logic::FEEDBACK_DISPLAY_ALL_TASKS = "All Tasks Are Displayed!";
+string Logic::FEEDBACK_TASK_UPDATED_SUCCESSFULLY = "Task Updated Successfully!";
+string Logic::FEEDBACK_TASK_DELETED_SUCCESSFULLY = "Task Deleted Successfully!";
+string Logic::FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED = "Saving directory changed! :D";
+string Logic::FEEDBACK_TASK_MARKED_SUCCESSFULLY = "Task Marked Completed! ";
+string Logic::FEEDBACK_TASK_UNMARKED_SUCCESSFULLY = "Unmarked The Task!";
+string Logic::FEEDBACK_CLEAR_ALL_TASKS = "All Tasks Cleared!";
+string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Completed! :D";
+string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
+string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
+string Logic::FEEDBACK_VIEW_ALL_SUCCESSFULLY = "Viewing All Tasks!";
+
+//this function checks if the start time or end time or deadline time is of the correct 23:59 format
+string Logic::checkTimeValidity(string timeInput) {
+
+	assert(timeInput != "");
+
+	string tempFeedback = "Pass Time Test";
+
+	string tempMinute = timeInput.substr(timeInput.find_first_of(":") + 1, timeInput.length());
+	string tempHour = timeInput.substr(0, timeInput.find_first_of(":"));
+
+	int minute = atoi(tempMinute.c_str());
+	int hour = atoi(tempHour.c_str());
+
+	if ((hour < 0) || (hour>23)) {
+		tempFeedback = ERROR_INVALID_HOUR;
+	} else if (minute > 59) {
+		tempFeedback = ERROR_INVALID_MINUTE;
+	}
+
+	return tempFeedback;
+}
+
+//this function checks if the start date or end date or deadline date is of the correct  day/month/year format
+string Logic::checkDateValidity(string dateInput) {
+
+	assert(dateInput != "");
+
+	string tempFeedback = "Pass Date Test";
+
+	string tempYear = dateInput.substr(dateInput.length() - 4, dateInput.length());
+	string temp = dateInput.substr(0, dateInput.length() - 5);
+	string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
+	string tempDay = temp.substr(0, temp.find_first_of("/"));
+
+	int year = atoi(tempYear.c_str());
+	int month = atoi(tempMonth.c_str());
+	int day = atoi(tempDay.c_str());
+
+	if (year < 2015) {
+		tempFeedback = ERROR_INVALID_YEAR;
+	} else if ((month < 1) || (month>12)) {
+		tempFeedback = ERROR_INVALID_MONTH;
+	} else if (day < 1) {
+		tempFeedback = ERROR_INVALID_DAY;
+	} else if ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12)) {
+		if (day>31) {
+			tempFeedback = ERROR_INVALID_DAY;
+		}
+	} else if (month == 2) {
+		if (day > 28) {
+			tempFeedback = ERROR_INVALID_DAY;;
+		}
+	} else if (day > 30) {
+		tempFeedback = ERROR_INVALID_DAY;
+	}
+
+	return tempFeedback;
+
+}
+
+//within a certain task, check if the start date and end date make sense
+//e.g. It is impossible to have a start date that is after the end date
+string Logic::checkTaskDatenTimeValidity(Task taskInput) {
+
+	string tempFeedback;
+	tempFeedback = "Pass Test";
+
+	string taskStartDate = taskInput.getTaskStartDate();
+	string taskStartTime = taskInput.getTaskStartTime();
+	string taskEndDate = taskInput.getTaskEndDate();
+	string taskEndTime = taskInput.getTaskEndTime();
+	string taskDeadlineDate = taskInput.getTaskDeadlineDate();
+	string taskDeadlineTime = taskInput.getTaskDeadlineTime();
+
+	vector<string> dateVector;
+	dateVector.push_back(taskStartDate);
+	dateVector.push_back(taskEndDate);
+	dateVector.push_back(taskDeadlineDate);
+
+	vector<string> timeVector;
+	timeVector.push_back(taskStartTime);
+	timeVector.push_back(taskEndTime);
+	timeVector.push_back(taskDeadlineTime);
+
+	vector<string> componentVector;
+	componentVector.push_back("Start Date: ");
+	componentVector.push_back("End Date: ");
+	componentVector.push_back("Deadline Date: ");
+	componentVector.push_back("Start Time: ");
+	componentVector.push_back("End Time: ");
+	componentVector.push_back("Deadline Time: ");
+
+	string feedbackMsg_Date = "";
+	for (int i = 0; i < dateVector.size(); i++) {
+
+		if (dateVector[i] == "") {
+
+		} else {
+			feedbackMsg_Date = checkDateValidity(dateVector[i]);
+			if (feedbackMsg_Date != "Pass Date Test") {
+				tempFeedback = componentVector[i] + feedbackMsg_Date;
+				break;
+			}
+		}
+	}
+
+	if (tempFeedback == "Pass Test") {
+
+		string feedbackMsg_Time = "";
+		for (int j = 0; j < timeVector.size(); j++) {
+
+			if (timeVector[j] == "") {
+			} else {
+				feedbackMsg_Time = checkTimeValidity(timeVector[j]);
+				if (feedbackMsg_Time != "Pass Time Test") {
+					tempFeedback = componentVector[j % 3] + feedbackMsg_Time;
+					break;
+				} else {
+				}
+			}
+		}
+	}
+
+	return tempFeedback;
+
+}
+
+string Logic::convertYearToCorrectForm(string input) {
+
+	string output;
+	if (input == "") {
+		output = "";
+	} else {
+		string tempYear = input.substr(input.length() - 4, input.length());
+		string temp = input.substr(0, input.length() - 5);
+		string tempMonth = temp.substr(temp.find_last_of("/") + 1, temp.length());
+		string tempDay = temp.substr(0, temp.find_first_of("/"));
+
+		output = tempYear + tempMonth + tempDay;
+	}
+
+	return output;
+
+}
+
+//this function converts the input string to a standard form of 23:59
+string Logic::convertTimeToCorrectForm(string input) {
+
+	string tempMinute = input.substr(input.find_first_of(":") + 1, input.length());
+	string tempHour = input.substr(0, input.find_first_of(":"));
+	string output = tempHour + tempMinute;
+
+	return output;
+
+}
+
+string Logic::compareTaskDateandTime(Task taskInput) {
+
+	string tempStartDate = taskInput.getTaskStartDate();
+	string tempStartTime = taskInput.getTaskStartTime();
+	string tempEndDate = taskInput.getTaskEndDate();
+	string tempEndTime = taskInput.getTaskEndTime();
+
+	string startDate = convertYearToCorrectForm(tempStartDate);
+	string startTime = convertTimeToCorrectForm(tempStartTime);
+	string endDate = convertYearToCorrectForm(tempEndDate);
+	string endTime = convertTimeToCorrectForm(tempEndTime);
+
+	string tempFeedback = "";
+	if (startDate == "" || endDate == "") {
+
+	} else if (startDate == endDate) {
+		if (startTime > endTime) {
+			tempFeedback = ERROR_START_TIME_AFTER_END_TIME;
+		} else {
+		}
+	} else if (startDate > endDate) {
+		tempFeedback = ERROR_START_DATE_AFTER_END_DATE;
+	} else {
+	}
+	return tempFeedback;
+}
+
+void Logic::setTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnTaskList();
+}
+
+vector<Task> Logic::getTaskList() {
+
+	return _storageTaskListCopy;
+}
+
+void Logic::setCompletedTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnCompletedTaskList();
+}
+
+vector<Task> Logic::getCompletedTaskList() {
+
+	return _storageTaskListCopy;
+}
+
+void Logic::setIncompleteTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnIncompleteTaskList();
+}
+
+vector<Task> Logic::getIncompleteTaskList() {
+
+	return _storageTaskListCopy;
+}
+
+void Logic::initialiseSetUp() {
+
+	initialiseFileLocationFile();
+	bool areInTheSameLocation = checkIfFileIsAtExeLocation();
+	string filename;
+	if (areInTheSameLocation == false) {
+
+		string lastFileLocation = getLastFileLocation();
+		setFileName(lastFileLocation);
+	} else {
+
+		string exePath = getExePath() + "\\taskSotong.txt";
+		setFileName(exePath);
+
+	}
+	filename = getFileName();
+	callInitialise(filename);
+
+}
+
+void Logic::initialiseFileLocationFile() {
+
+	ifstream readFile(SAVING_LOCATON_HISTORY);
+	string tempStorage;
+
+	while (getline(readFile, tempStorage)) {
+		_fileLocation.push_back(tempStorage);
+	}
+
+	readFile.close();
+
+	return;
+}
+
+void Logic::writeFileLocation(vector<string> fileLocation) {
+
+	ofstream writeFile(SAVING_LOCATON_HISTORY);
+
+	for (unsigned int i = 0; i < fileLocation.size(); i++) {
+		writeFile << fileLocation[i] << endl;
+	}
+
+	return;
+}
+
+bool Logic::checkIfFileIsAtExeLocation() {
+
+	int lastIndex = _fileLocation.size();
+
+	try{
+		if (lastIndex < 0)
+		{
+			throw;
+
+		}
+
+
+	}
+	catch (...) {
+
+		cout << "Exception case: Last index is not a positive integer";
+
+	}
+
+	if (lastIndex == 0) {
+		return true;
+	} else {
+
+		string lastLocation = _fileLocation[lastIndex - 1];
+		string exeLocation = getExePath();
+
+		if (lastLocation == exeLocation) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+
+string Logic::getLastFileLocation() {
+
+	int lastIndex = _fileLocation.size();
+
+	return _fileLocation[lastIndex - 1];
+}
+
+void Logic::updatefileLocation(string userDirectory) {
+
+	assert(userDirectory != "");
+
+	_fileLocation.push_back(userDirectory);
+
+	return;
+}
+
+//this function only gets the directory of the .exe file, not where the .txt file is. 
+string Logic::getExePath() {
+
+	char buffer[MAX_PATH];
+	GetModuleFileName(NULL, buffer, MAX_PATH);
+	string::size_type pos = string(buffer).find_last_of("\\/");
+
+	return string(buffer).substr(0, pos);
+}
+
+void Logic::createNewDirectory(string userFileDirectory) {
+
+	assert(userFileDirectory != "");
+
+	int index = userFileDirectory.find_last_of('\\');
+	int index2 = userFileDirectory.find_first_of('\\');
+	string inputDirectory = userFileDirectory.substr(0, index);
+
+	stack<string> directoryParts;
+	int firstIndex = inputDirectory.find_last_of('\\');
+	
+	try{
+
+		if (firstIndex < 0)
+		{
+
+			throw;
+		}
+
+	}
+	catch (...)
+	{
+		cout << "Exceptional case:firstIndex is not positive";
+
+	}
+	
+	
+	while (firstIndex != -1) {
+    
+		firstIndex = inputDirectory.find_last_of('\\');
+		string temp = inputDirectory.substr(firstIndex, inputDirectory.size() - 1);
+
+		if (temp == "\\") {
+		} else {
+			directoryParts.push(temp);
+		}
+
+		inputDirectory = inputDirectory.substr(0, firstIndex);
+
+		firstIndex = inputDirectory.find_last_of('\\');
+	}
+
+	directoryParts.push(inputDirectory);
+	string directory = directoryParts.top();
+	directoryParts.pop();
+
+	while (!directoryParts.empty()) {
+
+		directory = directory + directoryParts.top();
+		_mkdir(directory.c_str());
+		directoryParts.pop();
+	}
+
+	return;
+}
+
+//new location should be saved in this format: "C:\ts\ts1\gt.txt";
+void Logic::changeFileDirectory(string userFileDirectory) {
+
+	assert(userFileDirectory != "");
+
+	createNewDirectory(userFileDirectory);
+	setFileName(userFileDirectory);
+
+	return;
+}
+
+
+void Logic::setFileName(string updatedFileName) {
+
+	assert(updatedFileName != "");
+
+	_filename = updatedFileName;
+
+	return;
+}
+
+string Logic::getFileName() {
+
+	return _filename;
+}
+
+paraList* Logic::getParaList(string userInput) {
+
+	return _ParserComponent.parseCommand(userInput);
+}
+
+
+string Logic::getLowerCaseCommand(paraList parameterList) {
+	string command = parameterList.getCommand();
+	transform(command.begin(), command.end(), command.begin(), tolower);
+
+	return command;
+
+}
+
+Task Logic::getTask(paraList parameterList) {
+
+	return parameterList.getTask();
+}
+
+void Logic::callInitialise(string outputFile) {
+
+	_DataBase.initialiseTextFile(outputFile);
+
+	return;
+}
+
+bool Logic::ExistingTask(Task task) {
+
+	setTaskList();
+	bool existing = false;
+	string name = task.getTaskName();
+	string startDate = task.getTaskStartDate();
+	string startTime = task.getTaskStartTime();
+	string endDate = task.getTaskEndDate();
+	string endTime = task.getTaskEndTime();
+	string deadlineDate = task.getTaskDeadlineDate();
+	string deadlineTime = task.getTaskDeadlineTime();
+	string priority = task.getTaskPriority();
+	string status = task.getTaskStatus();
+
+	if (_storageTaskListCopy.size() == 0) {
+
+	} else {
+
+		Task checkItem;
+		for (int i = 0; i < _storageTaskListCopy.size(); i++) {
+			checkItem = _storageTaskListCopy[i];
+			if (name == checkItem.getTaskName()) {
+				if (startDate == checkItem.getTaskStartDate()) {
+					if (startTime == checkItem.getTaskStartTime()) {
+						if (endDate == checkItem.getTaskEndDate()) {
+							if (endTime == checkItem.getTaskEndDate()) {
+								if (deadlineDate == checkItem.getTaskDeadlineDate()) {
+									if (deadlineTime == checkItem.getTaskDeadlineTime()) {
+										if (priority == checkItem.getTaskPriority()) {
+											if (status == checkItem.getTaskStatus()) {
+												existing = true;
+											}
+										}
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	return existing;
+}
+
+string Logic::getFeedbackMsg() {
+
+	return _feedbackMessage;
+}
+
+string Logic::executeCommand(paraList Input) {
+
+	_Logic_LogFile.writeToLogFile("******************LOGIC_EXECUTECOMMAND_START*******************");
+
+	string command = getLowerCaseCommand(Input);
+	if (command == "exit") {
+		exit(0);
+
+	} else if (command == "add") {
+		_Logic_LogFile.writeToLogFile(command);
+		Task oneTask = Input.getTask();
+		if (ExistingTask(oneTask) == true) {
+			_feedbackMessage = ERROR_EXISTING_TASK;
+		} else {
+
+			string tempFeedback;
+			tempFeedback = checkTaskDatenTimeValidity(oneTask);
+
+			if (tempFeedback != "Pass Test") {
+				_feedbackMessage = tempFeedback;
+			} else {
+
+				tempFeedback = compareTaskDateandTime(oneTask);
+
+				if (tempFeedback != "") {
+					_feedbackMessage = tempFeedback;
+				} else {
+					_DataBase.addTask(oneTask);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+					_feedbackMessage = FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+				}
+			}
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "update") {
+		_Logic_LogFile.writeToLogFile(command);
+		int updateInteger = Input.getUpdateInteger();
+		string parameterToBeUpdated = Input.getKeyword();
+		string detailToBeUpdated = Input.getInput();
+
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (updateInteger < 0) {
+			_feedbackMessage = ERROR_NO_INDEX;
+		} else if (updateInteger > _storageTaskListCopy.size()) {
+			_feedbackMessage = ERROR_INDEX_OUT_OF_RANGE;
+		} else if (parameterToBeUpdated == "name") {
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+
+			}
+
+		} else if ((parameterToBeUpdated == "start-date") || (parameterToBeUpdated == "end-date") || (parameterToBeUpdated == "deadline-date")) {
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+
+				_feedbackMessage = checkDateValidity(detailToBeUpdated);
+
+				if (_feedbackMessage == "Pass Date Test") {
+
+					string copyofParameterToBeUpdated = parameterToBeUpdated;
+					string copyofOriginalDetail;
+
+					if (copyofParameterToBeUpdated == "start-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartDate();
+					} else if (copyofParameterToBeUpdated == "start-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartTime();
+					} else if (copyofParameterToBeUpdated == "end-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndDate();
+					} else if (copyofParameterToBeUpdated == "end-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndTime();
+					}
+
+					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+
+					_feedbackMessage = compareTaskDateandTime(_storageTaskListCopy[updateInteger - 1]);
+					if (_feedbackMessage != "") {
+						_DataBase.updateTask(_filename, updateInteger, copyofParameterToBeUpdated, copyofOriginalDetail);
+						_DataBase.updateTextFile(_filename);
+						setTaskList();
+
+					} else {
+						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+					}
+				}
+			}
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		} else if ((parameterToBeUpdated == "start-time") || (parameterToBeUpdated == "end-time") || (parameterToBeUpdated == "deadline-time")) {
+
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+
+				_feedbackMessage = checkTimeValidity(detailToBeUpdated);
+
+				if (_feedbackMessage == "Pass Time Test") {
+
+					string copyofParameterToBeUpdated = parameterToBeUpdated;
+					string copyofOriginalDetail;
+
+					if (copyofParameterToBeUpdated == "start-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartDate();
+					} else if (copyofParameterToBeUpdated == "start-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskStartTime();
+					} else if (copyofParameterToBeUpdated == "end-date") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndDate();
+					} else if (copyofParameterToBeUpdated == "end-time") {
+						copyofOriginalDetail = _storageTaskListCopy[updateInteger - 1].getTaskEndTime();
+					}
+
+					_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+					_DataBase.updateTextFile(_filename);
+					setTaskList();
+
+					_feedbackMessage = compareTaskDateandTime(_storageTaskListCopy[updateInteger - 1]);
+					if (_feedbackMessage != "") {
+						_DataBase.updateTask(_filename, updateInteger, copyofParameterToBeUpdated, copyofOriginalDetail);
+						_DataBase.updateTextFile(_filename);
+						setTaskList();
+
+					} else {
+						_feedbackMessage = FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+					}
+				}
+			}
+		} else if (parameterToBeUpdated == "priority") {
+			if (detailToBeUpdated == "") {
+				_feedbackMessage = ERROR_NO_CONTENT;
+			} else {
+				_DataBase.updateTask(_filename, updateInteger, parameterToBeUpdated, detailToBeUpdated);
+				_DataBase.updateTextFile(_filename);
+				setTaskList();
+				_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			}
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "delete") {
+		int deleteInteger = Input.getDeleteInteger();
+
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (deleteInteger > _storageTaskListCopy.size() || deleteInteger <= 0) {
+			_feedbackMessage = ERROR_TASK_DELETED_UNSUCCESSFULLY;
+
+		} else {
+			_DataBase.deleteTask(_filename, deleteInteger);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = FEEDBACK_TASK_DELETED_SUCCESSFULLY;
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "save") {
+
+		string userDirectory = Input.getuserdir();
+
+		changeFileDirectory(userDirectory);
+		updatefileLocation(userDirectory);
+		writeFileLocation(_fileLocation);
+		_feedbackMessage = userDirectory;
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "mark") {
+
+		int markIndex = Input.getmarkindex();
+
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (markIndex > _storageTaskListCopy.size() || markIndex <= 0) {
+			_feedbackMessage = ERROR_TASK_MARKED_UNSUCCESSFULLY;
+		} else {
+			_DataBase.markTask(_filename, markIndex);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = FEEDBACK_TASK_MARKED_SUCCESSFULLY;
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "unmark") {
+
+		int unmarkIndex = Input.getmarkindex();
+
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else if (unmarkIndex > _storageTaskListCopy.size() || unmarkIndex <= 0) {
+			_feedbackMessage = ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
+		} else {
+			_DataBase.unmarkTask(_filename, unmarkIndex);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "clear") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.clearAllTasks();
+			setTaskList();
+			_DataBase.updateTextFile(_filename);
+			_feedbackMessage = FEEDBACK_CLEAR_ALL_TASKS;
+		}
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "undo") {
+		_DataBase.undoAction();
+		_DataBase.updateTextFile(_filename);
+		setTaskList();
+		_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	} else if (command == "sort") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.sortTaskByName(_filename);
+			_DataBase.updateTextFile(_filename);
+			setTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
+	} else if (command == "view-c") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewCompletedTasks();
+			vector<Task> tempTaskList = getCompletedTaskList();
+			if (tempTaskList.empty()) {
+				setTaskList();
+			} else {
+				setCompletedTaskList();
+			}
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
+	} else if (command == "view-i") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_DataBase.viewIncompleteTasks();
+			setIncompleteTaskList();
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
+	} else if (command == "view") {
+
+		setTaskList();
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
+			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
+
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+		}
+	} else {
+		_feedbackMessage = ERROR_INVALID_USERINPUT;
+
+		_Logic_LogFile.writeToLogFile(_feedbackMessage);
+
+	}
+
+	return _feedbackMessage;
+}
+
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\ParaList_Testing\unittest1.cpp
+	 */
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace ParaList_Testing {
+	TEST_CLASS(ParaList_Testing) {
+public:
+
+	TEST_METHOD(getTask_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		Task actual = test.getTask();
+		Task* testTask = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		Task expected = *testTask;
+
+		string actual1 = actual.getTaskDetails();
+		string expected1 = expected.getTaskDetails();
+
+		Assert::AreEqual(actual1, expected1);
+	}
+
+	TEST_METHOD(getCommand_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		string actual = test.getCommand();
+		string expected = "add";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(getDeleteInteger_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		int actual = test.getDeleteInteger();
+		int expected = 1;
+
+		Assert::AreEqual(actual, expected);
+
+		//This is a boundary testing for getDeleteInteger. 
+		//when the user key in delete 0, it is an invalid index, just outside the boundary
+		paraList test1;
+		Task* taskTest1 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test1.setparaList("add", 0, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		int actual1 = test.getDeleteInteger();
+		int expected1 = 0;
+
+		Assert::AreEqual(actual, expected);
+
+	}
+
+	TEST_METHOD(getDisplayInteger_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		int actual = test.getDisplayInteger();
+		int expected = 2;
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(getUpdateInteger_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		int actual = test.getUpdateInteger();
+		int expected = 3;
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(processCommand_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processCommand("delete");
+		string actual = test.getCommand();
+		string expected = "delete";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	//void processTask(string inputTask);
+
+	TEST_METHOD(processDeleteNumber_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processDeleteNumber(2);
+		int actual = test.getDeleteInteger();
+		int expected = 2;
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(processDisplayNumber_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processDisplayNumber(3);
+		int actual = test.getDisplayInteger();
+		int expected = 3;
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(processUpdateNumber_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processUpdateNumber(1);
+		int actual = test.getUpdateInteger();
+		int expected = 1;
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(clearAllNumber_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.clearAllNumber();
+
+		int actual = test.getDeleteInteger();
+		int expected = NULL;
+
+		int actual1 = test.getDisplayInteger();
+		int expected1 = NULL;
+
+		int actual2 = test.getUpdateInteger();
+		int expected2 = NULL;
+
+		Assert::AreEqual(actual, expected);
+		Assert::AreEqual(actual1, expected1);
+		Assert::AreEqual(actual2, expected2);
+	}
+
+	TEST_METHOD(getKeyword_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		string actual = test.getKeyword();
+		string expected = "KEYWORD";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+
+	TEST_METHOD(getInput_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+
+		string actual = test.getInput();
+		string expected = "INPUT";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(processKeyWord_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processKeyWord("KEYWORD!");
+		string actual = test.getKeyword();
+		string expected = "KEYWORD!";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+	TEST_METHOD(processInput_test) {
+		paraList test;
+		Task* taskTest = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+		test.setparaList("add", 1, 2, 3, "KEYWORD", "INPUT", *taskTest);
+
+		test.processInput("INPUT!");
+		string actual = test.getInput();
+		string expected = "INPUT!";
+
+		Assert::AreEqual(actual, expected);
+	}
+
+
+	};
+}
+
+/*
+paraList();
+//for unit testing purpose.
+
+void clearTask();
+
+*/
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\ParaList_Testing\unittest1.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.cpp
+	 */
+
+#include "tasksotongGUI.h"
+
+using namespace System;
+using namespace System::Windows::Forms;
+
+[STAThread]
+int main(array<String^>^ args) {
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+
+	tasksotongUI::tasksotongGUI mainWindow;
+	Application::Run(%mainWindow);
+	
+}
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.cpp
+
+
+
+
+
