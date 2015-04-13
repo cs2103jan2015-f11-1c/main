@@ -1,4 +1,5 @@
 #include "paraList.h"
+#include <assert.h>
 #include <iostream>
 using namespace std;
 
@@ -25,20 +26,19 @@ Task paraList::getTask()
 
 int paraList::getDeleteInteger()
 {
-	if (deleteNumber <= 0){
-		cout << "error deteced! " << endl;
-		return 0;
-	}
-	else{
-		return deleteNumber;
-	}
+
+	return deleteNumber;
+
 }
+
 int paraList::getDisplayInteger()
 {
 	return displayNumber;
 }
+
 int paraList::getUpdateInteger()
 {
+
 	return updateNumber;
 }
 
@@ -104,7 +104,7 @@ string paraList::getInput()
 
 }
 
-
+//changes all task parameters to empty string
 void paraList::clearTask()
 {
 	_task.changeTaskDeadlineDate("");
@@ -149,8 +149,8 @@ void paraList::processUserDir(string directory)
 
 void paraList::processSearchWord(string keyWord)
 {
+	assert(keyWord != "");
 	searchKeyword = keyWord;
-
 
 	return;
 }
@@ -164,9 +164,8 @@ string paraList::getuserdir()
 
 string  paraList::getmarkstatus()
 {
-
+	assert(markStatus != "");
 	return markStatus;
-
 
 }
 

@@ -1,4 +1,5 @@
 #include "Storage.h"
+#include <assert.h>
 
 string Storage::ERROR_EMPTY_LIST = "Task list is empty!";
 string Storage::ERROR_INVALID_NUMBER = "Invalid number!";
@@ -24,6 +25,7 @@ bool Storage::isEmptyTaskList(){
 	return false;
 }
 
+//checks if index is out of range
 bool Storage::isInvalidIndex(unsigned int taskIndex){
 	if (taskIndex < 1 || taskIndex > textFileCopy.size()){
 		cout << ERROR_INVALID_NUMBER << endl;
@@ -34,19 +36,19 @@ bool Storage::isInvalidIndex(unsigned int taskIndex){
 	return false;
 }
 
-void Storage::performSearchForViewingTasks(string keyword, int& count){
+vector<Task> Storage::performSearchForViewingTasks(string keyword){
 
-	vector<string>::iterator iter = textFileCopy.begin();
+	vector<Task> tempTaskList;
+	vector<Task>::iterator iter = taskList.begin();
 
-	while (iter != textFileCopy.end()){
-		if (iter->find(keyword) != string::npos){
-			cout << (iter - textFileCopy.begin() + 1) << ". " << *iter << endl;
-			count++;
+	while (iter != taskList.end()){
+		if ((iter->getTaskStatus()) == keyword){
+			tempTaskList.push_back(*iter);
 		}
 		iter++;
 	}
 
-	return;
+	return tempTaskList;
 }
 
 bool Storage::isOnlyOneTask(){
@@ -71,7 +73,10 @@ bool Storage::isSortedByPriority(){
 	return (textFileCopy == sortByPriorityAfterStack.top());
 }
 
+//sorts the tasklist based on the keyword given by Logic
 void Storage::performSort(queue<string>& sortedTextFileCopy, string keyword){
+
+	assert(keyword != "");
 	vector<string>::iterator iter = textFileCopy.begin();
 	while (iter != textFileCopy.end()){
 		string::const_iterator pos = search(iter->begin(), iter->end(), keyword.begin(), keyword.end(), caseInsensitiveEqual);
@@ -98,9 +103,10 @@ void Storage::updateTaskList(Task taskTobeEntered) {
 	return;
 }
 
-
+//updates the text file with the current tasklist vector
 void Storage::updateTextFile(string fileName){
 
+	assert(fileName != "");
 	ofstream writeFile(fileName);
 
 	for (unsigned int i = 0; i < taskList.size(); i++){
@@ -183,34 +189,28 @@ void Storage::displayAllTasks(){
 	return;
 }
 
-void Storage::viewCompletedTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewCompletedTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Completed");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_COMPLETED_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Completed", count);
-
-	if (count == 0){
-		cout << ERROR_NO_COMPLETED_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
-void Storage::viewIncompleteTasks(){
-	if (isEmptyTaskList()){
-		return;
+vector<Task> Storage::viewIncompleteTasks(){
+
+	vector<Task> subTaskList = performSearchForViewingTasks("Incomplete");
+
+	if (subTaskList.empty()){
+		setFeedbackMessage(ERROR_NO_INCOMPLETE_TASKS);
+		return taskList;
 	}
 
-	int count = 0;
-	performSearchForViewingTasks("Incomplete", count);
-
-	if (count == 0){
-		cout << ERROR_NO_INCOMPLETE_TASKS << endl;
-	}
-
-	return;
+	return subTaskList;
 }
 
 void Storage::setFeedbackMessage(string messageToBeSet){
@@ -267,6 +267,7 @@ void Storage::updateTask(string fileName, unsigned int taskIndex, string keyword
 	return;
 }
 
+//changes status from "incomplete" to "completed"
 void Storage::markTask(string fileName, unsigned int taskIndex){
 
 	taskList[taskIndex - 1].changeTaskStatus("mark");
@@ -276,6 +277,7 @@ void Storage::markTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
+//changes status from "completed" to "incomplete"
 void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 
 	taskList[taskIndex - 1].changeTaskStatus("unmark");
@@ -285,6 +287,7 @@ void Storage::unmarkTask(string fileName, unsigned int taskIndex){
 	return;
 }
 
+//undo user's previous action, based on the last command entered
 void Storage::undoAction(){
 
 	if (commandStack.empty()){

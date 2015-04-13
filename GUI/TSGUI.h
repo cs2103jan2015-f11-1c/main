@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <assert.h>
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -90,6 +91,7 @@ namespace GUI {
 			this->commandline->Name = L"commandline";
 			this->commandline->Size = System::Drawing::Size(634, 20);
 			this->commandline->TabIndex = 0;
+			this->commandline->TextChanged += gcnew System::EventHandler(this, &TSGUI::commandline_TextChanged);
 			this->commandline->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &TSGUI::commandline_KeyPress);
 			// 
 			// displaybox
@@ -172,35 +174,40 @@ namespace GUI {
 #pragma endregion
 	
 		
-
+	//
 	private: System::Void commandline_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 		
 		Logic TSlogic;
+		
 		TSlogic.setFileName("taskSotong.txt");
 		ifstream readFile("taskSotong.txt");
 		std::string filename = TSlogic.getFileName();
+		assert(filename != "");
+		
 		TSlogic.callInitialise(filename);
 
+		//if the Enter key is pressed
 		if (e->KeyChar == (char)13){
+			
 			
 			String^ input = commandline->Text;
 			std::string userInput = msclr::interop::marshal_as< std::string >(input);
 
-
 			if (userInput != "exit") {
 
+				//pass userInput to Logic to process
 				paraList* storageInput = TSlogic.getParaList(userInput);
 				std::string command = storageInput->getCommand();
 				Task task = storageInput->getTask();
 				TSlogic.executeCommand(*storageInput);
-			
-				std::string x;
+		 
+				std::string tempString;
 				queue<string> taskVector;
 				std::string entireList;
 				entireList = "";
 
-				while (getline(readFile, x)) {
-					taskVector.push(x);
+				while (getline(readFile, tempString)) {
+					taskVector.push(tempString);
 				}
 				
 				while (!taskVector.empty()) {
@@ -210,11 +217,14 @@ namespace GUI {
 					taskVector.pop();
 				}
 
+				//display contents of .txt file
+				assert(taskVector.empty());
 				String^ displayList = gcnew String(entireList.c_str());
 				displaybox->Text = displayList;
 
-
+				//display feedback message
 				std::string feedbackmsg = TSlogic.getFeedbackMsg();
+				assert(feedbackmsg != "");
 				String^ feedback = gcnew String(feedbackmsg.c_str());
 				feedbackbox->Text = feedback;
 			}
@@ -229,11 +239,17 @@ namespace GUI {
 
 private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 }
+
 private: System::Void tasksotonglabel_Click(System::Object^  sender, System::EventArgs^  e) {
 }
+
 private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
 }
+
 private: System::Void pictureBox1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void commandline_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }

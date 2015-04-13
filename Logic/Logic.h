@@ -79,6 +79,12 @@ public:
 
 	string checkTaskDatenTimeValidity(Task);
 
+	string convertYearToCorrectForm(string);
+
+	string convertTimeToCorrectForm(string);
+
+	string compareTaskDateandTime(Task);
+
 	void setTaskList();
 
 	vector<Task> getTaskList();

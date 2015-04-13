@@ -148,3 +148,266 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+20154132015413
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+20154132015413
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+20154132015413
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+20154132015413
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Time After End Time :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+=======
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+>>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+=======
+add
+Task Added Successfully! :>
+>>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Hour Entered Is Invalid
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+=======
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+>>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+=======
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Undo Completed! :D
+>>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+<<<<<<< HEAD
+aStart Date After End Date :<
+aStart Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Start Date After End Date :<
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Start Date After End Date :<
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Start Date After End Date :<
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Start Time After End Time :<
+=======
+Year Entered Is Invalid!
+Year Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+>>>>>>> 7f24e3b11f140a31529504596fa467ceeb2fe1bb
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Index Out Of Range!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update

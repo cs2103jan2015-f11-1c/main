@@ -2,7 +2,8 @@
 #include <iostream>
 #include <ctime>
 #include <atltime.h>
-#include <sstream> 
+#include <sstream>
+#include <assert.h>
 
 
 
@@ -286,11 +287,10 @@ void parserProcess::processDateNum(string&)
 }
 
 
-
+//returns the day if strInput corresponds to any of the expressions of said day
 parserProcess::dayName  parserProcess::sortDayName(string& strInput)
 {
-	cout << "sorting:" << strInput;
-
+	assert(strInput != "");
 
 	if (regex_search(strInput, MONDAY_INPUT))
 	{
@@ -372,7 +372,7 @@ dateStore parserProcess::dateNumCalculator(int& dateNum, int& nowDateNum)
 
 }
 
-
+//process the date for months that have 31 days
 void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& storage)
 {
 	int diff;
@@ -405,7 +405,7 @@ void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& 
 
 
 
-
+//process the date for months that have 30 days
 void parserProcess::processMonthLessDays(int& givenDay, int& nowDay, dateStore& storage)
 {
 
