@@ -623,3 +623,68 @@ Task Marked Completed!
 You have completed all outstanding tasks!
 ******************LOGIC_EXECUTECOMMAND_START*******************
 Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: Month Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: -858993460/-858993460/-858993460
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: -858993460/-858993460/-858993460
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Deadline Date: 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date: -858993460/-858993460/-858993460
