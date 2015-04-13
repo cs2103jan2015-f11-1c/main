@@ -61,17 +61,82 @@ void paraList::processTask(string inputTask)
 }
 void paraList::processDeleteNumber(int index)
 {
-	deleteNumber = index;
+	try
+	{
+		deleteNumber = index;
+		if (deleteNumber < 0)
+		{
+			throw;
+		}
+
+	}
+	catch (...)
+	{
+
+		cout << "Exceptation Case:Delete Number <0";
+
+
+	}
+
+
+
+
+
+	
 }
 
 void paraList::processDisplayNumber(int index)
 {
-	displayNumber = index;
+	
+
+
+	try
+	{
+		displayNumber = index;
+		if (displayNumber < 0)
+		{
+			throw;
+		}
+
+	}
+	catch (...)
+	{
+
+		cout << "Exceptation Case:Display Number <0";
+
+
+	}
+
+
 }
 
 void paraList::processUpdateNumber(int index)
 {
-	updateNumber = index;
+
+	try
+	{
+		updateNumber = index;
+		if (updateNumber < 0)
+		{
+			throw;
+		}
+
+	}
+	catch (...)
+	{
+
+		cout << "Exceptation Case:update Number <0";
+
+
+	}
+
+
+
+
+
+
+
+	
 }
 
 void paraList::clearAllNumber()
@@ -122,7 +187,25 @@ void paraList::clearTask()
 void paraList::processMarkIndex(int index)
 {
 
+	try
+	{
+	
 	markIndex = index;
+	if (markIndex < 0)
+	{
+		throw;
+	}
+	
+	}
+	catch (...)
+	{
+
+		cout << "Exceptation Case:Mark index<0";
+
+
+	}
+	
+	
 
 
 	return;
