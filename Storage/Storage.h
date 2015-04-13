@@ -25,6 +25,7 @@ class Storage{
 private:
 
 	vector<Task> taskList;
+	vector<string> taskListStringVector;
 	vector<Task> completedTaskList;
 	vector<Task> incompleteTaskList;
 	vector<string> textFileCopy;
@@ -77,6 +78,10 @@ public:
 	vector<Task> returnCompletedTaskList();
 
 	vector<Task> returnIncompleteTaskList();
+
+	void toString();
+
+	void toTaskList();
 
 	void updateTaskList(Task);
 

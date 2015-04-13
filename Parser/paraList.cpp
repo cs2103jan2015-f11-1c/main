@@ -148,7 +148,7 @@ void paraList::processUserDir(string directory)
 
 void paraList::processSearchWord(string keyWord)
 {
-	assert(keyWord != "");
+	//assert(keyWord != "");
 	searchKeyword = keyWord;
 
 	return;
