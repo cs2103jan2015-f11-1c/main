@@ -262,7 +262,7 @@ void parserProcess::processDateName(string& input)
 //returns the day if strInput corresponds to any of the expressions of said day
 parserProcess::dayName  parserProcess::sortDayName(string& strInput)
 {
-	assert(strInput != "");
+	//assert(strInput != "");
 
 	if (regex_search(strInput, MONDAY_INPUT))
 	{
@@ -384,7 +384,7 @@ void parserProcess::processMonthLessDays(int& givenDay, int& nowDay, dateStore& 
 		addDayCalc(30, diff);
 
 	}
-	else if (nowDay = givenDay)
+	else if(nowDay == givenDay)
 	{
 		processedDateStore.day = nowDT.day;
 		processedDateStore.month = nowDT.month;
