@@ -662,6 +662,7 @@ string Logic::executeCommand(paraList Input) {
 			_DataBase.viewCompletedTasks();
 			vector<Task> tempTaskList = getCompletedTaskList();
 			if (tempTaskList.empty()){
+				
 				setTaskList();
 			} else {
 				setCompletedTaskList();
@@ -682,12 +683,14 @@ string Logic::executeCommand(paraList Input) {
 		}
 
 	} else if (command == "view") {
+		//_DataBase.initialiseTextFile(_filename);
+		setTaskList();
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
-			_DataBase.updateTextFile(_filename);
-			_DataBase.initialiseTextFile(_filename);
-			setTaskList();
+			//_DataBase.updateTextFile(_filename);
+			//_DataBase.initialiseTextFile(_filename);
+			//setTaskList();
 			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}

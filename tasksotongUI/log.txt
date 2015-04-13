@@ -557,3 +557,69 @@ Task Added Successfully! :>
 add
 Deadline Date: Month Entered Is Invalid!
 >>>>>>> 236ce38d8d7949137f33973882c420775194c6a1
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have not completed any tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+You have completed all outstanding tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
