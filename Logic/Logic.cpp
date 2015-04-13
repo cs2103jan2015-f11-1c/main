@@ -44,6 +44,7 @@ string Logic::FEEDBACK_CLEAR_ALL_TASKS = "All Tasks Cleared!";
 string Logic::FEEDBACK_UNDO_PREVIOUS_TASK = "Undo Completed! :D";
 string Logic::FEEDBACK_SEARCH_TASK_BY_KEYWORD = "Search Result Displayed! :D";
 string Logic::FEEDBACK_SORT_TASK_BY_KEYWORD = "Tasks Sorted Accordingly!";
+string Logic::FEEDBACK_VIEW_ALL_SUCCESSFULLY = "Viewing All Tasks!";
 
 string Logic::checkTimeValidity(string timeInput) {
 
@@ -231,6 +232,25 @@ vector<Task> Logic::getTaskList() {
 	return _storageTaskListCopy;
 }
 
+void Logic::setCompletedTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnCompletedTaskList();
+}
+
+vector<Task> Logic::getCompletedTaskList() {
+
+	return _storageTaskListCopy;
+}
+
+void Logic::setIncompleteTaskList() {
+
+	_storageTaskListCopy = _DataBase.returnIncompleteTaskList();
+}
+
+vector<Task> Logic::getIncompleteTaskList() {
+
+	return _storageTaskListCopy;
+}
 
 void Logic::initialiseSetUp() {
 
@@ -640,8 +660,13 @@ string Logic::executeCommand(paraList Input) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
 			_DataBase.viewCompletedTasks();
-			_DataBase.updateTextFile(_filename);
-			setTaskList();
+			vector<Task> tempTaskList = getCompletedTaskList();
+			if (tempTaskList.empty()){
+				setTaskList();
+			} else {
+				setCompletedTaskList();
+			}
+
 			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}
@@ -650,10 +675,18 @@ string Logic::executeCommand(paraList Input) {
 		if (_storageTaskListCopy.empty()) {
 			_feedbackMessage = ERROR_EMPTY_LIST;
 		} else {
-			_DataBase.viewIncompleteTasks();
+
+			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_Logic_LogFile.writeToLogFile(_feedbackMessage);
+		}
+
+	} else if (command == "view") {
+		if (_storageTaskListCopy.empty()) {
+			_feedbackMessage = ERROR_EMPTY_LIST;
+		} else {
 			_DataBase.updateTextFile(_filename);
 			setTaskList();
-			_feedbackMessage = _DataBase.returnLogicFeedbackMessage();
+			_feedbackMessage = FEEDBACK_VIEW_ALL_SUCCESSFULLY;
 			_Logic_LogFile.writeToLogFile(_feedbackMessage);
 		}
 
