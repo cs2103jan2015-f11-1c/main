@@ -8,20 +8,6 @@ namespace Task_Testing
 	TEST_CLASS(Task_Testing)
 	{
 	public:
-
-		TEST_METHOD(checkNull_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-
-			actual = test->checkNull("Name");
-
-			string expected = "Name ";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
 		TEST_METHOD(getTaskName_test)
 		{
 			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
@@ -131,17 +117,6 @@ namespace Task_Testing
 
 		}
 
-		TEST_METHOD(getTaskDetails_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
-			string actual;
-			actual = test->getTaskDetails();
-
-			string expected = "Name StartDate StartTime EndDate EndTime DeadlineDate DeadlineTime Priority Incomplete";
-
-			Assert::AreEqual(expected, actual);
-
-		}
 
 		TEST_METHOD(changeTaskName_test)
 		{
