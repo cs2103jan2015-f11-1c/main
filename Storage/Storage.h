@@ -17,6 +17,7 @@
 #include <functional>
 #include <assert.h>
 #include "..\Common\Task.h"
+#include "..\TaskSotong_Log\Log.h"
 
 using namespace std;
 
@@ -73,6 +74,8 @@ private:
 	bool isSortedByStatus();
 	bool isSortedByPriority();
 	void performSort(queue<string>&, string);
+
+	Log _Storage_LogFile;
 
 public:
 

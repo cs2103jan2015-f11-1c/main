@@ -86,7 +86,6 @@ public:
 	void setRawDT(string&, string&);
 	bool monthDayIndicator(int&); //true for 31 days, false for 30 days 
 	void addDayCalc(int, int);
-	void addMonthCalc(int&, int&);
 	void printProcessed();
 	void printNow();
 	void covertTime(char&, int&);
