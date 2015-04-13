@@ -927,3 +927,28 @@ Task Added Successfully! :>
 =======
 >>>>>>> 653261a86bdef472ba9920b8a6ec179f392f74e9
 >>>>>>> 6d47d20e39a311c489a7c938a3c0c8db618de498
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+That Task Has Already Existed~! Please Enter A New Task~

@@ -52,15 +52,15 @@ public:
 
 
 		ostringstream oss;
-		oss << setw(15) << right << taskName
-		<<setw(7)<< left << date1
-			<< setw(5)<< left << time1
-			<< setw(7)<< left << date2
-			<< setw(5)<< left << time2
-			<< setw(7)<< left << date3
-			<< setw(5)<< left << time3
-			<< setw(4)<< left << priority
-			<< setw(5)<<left<<status;
+		oss << right << taskName
+		<< date1
+		<< time1
+		<< date2
+		<< time2
+		<< date3
+		<< time3
+		<< priority
+		<< status;
 
 		return oss.str();		
 	}
