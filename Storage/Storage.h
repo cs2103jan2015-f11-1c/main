@@ -32,7 +32,6 @@ private:
 	vector<string> taskListStringVector;
 	vector<Task> completedTaskList;
 	vector<Task> incompleteTaskList;
-	vector<string> textFileCopy;
 	stack<string> commandStack;
 	stack<pair<Task, unsigned int>> deleteTaskStack;
 	stack<pair<Task, unsigned int>> updateTaskStack;
@@ -40,10 +39,6 @@ private:
 	stack<int> unmarkTaskIndexStack;
 	stack<vector<Task>> clearAllTasksStack;
 	stack<vector<Task>> sortByNameStack;
-	stack<vector<string>> sortByStatusBeforeStack;
-	stack<vector<string>> sortByStatusAfterStack;
-	stack<vector<string>> sortByPriorityBeforeStack;
-	stack<vector<string>> sortByPriorityAfterStack;
 
 	static string ERROR_EMPTY_LIST;
 	static string ERROR_INVALID_NUMBER;
@@ -66,14 +61,9 @@ private:
 
 	string feedbackMessage;
 
-	bool isEmptyTaskList();
-	bool isInvalidIndex(unsigned int);
 	vector<Task> performSearchForViewingTasks(string);
 	bool isOnlyOneTask();
 	bool isSortedByName(vector<Task>);
-	bool isSortedByStatus();
-	bool isSortedByPriority();
-	void performSort(queue<string>&, string);
 
 	Log _Storage_LogFile;
 
@@ -94,8 +84,6 @@ public:
 	void updateTextFile(string);
 
 	void initialiseTextFile(string);
-
-	vector<string> returnTextFileCopy();
 
 	void addTask(Task);
 
@@ -122,10 +110,6 @@ public:
 	vector<string> searchTask(string, const string&);
 
 	vector<Task> sortTaskByName(string);
-
-	vector<string> sortTaskByStatus(string);
-
-	vector<string> sortTaskByPriority(string);
 
 };
 
