@@ -2,10 +2,10 @@
 #include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
+//Testing StartDT, EndDT, Priority Tests
 namespace Parser_Testing
 {		
-	TEST_CLASS(ParserTest)
+	TEST_CLASS(newParserTest)
 	{
 	public:
 		
