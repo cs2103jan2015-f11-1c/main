@@ -316,7 +316,26 @@ bool parserProcess::monthDayIndicator(int& month)
 }
 
 dateStore parserProcess::dateNumCalculator(int& dateNum, int& nowDateNum)
-{
+{  
+
+	string error;
+
+	try
+	{
+		if (dateNum > 31)
+		{
+			throw error = "Out of bounds day-dateNumCalculator";
+		}
+		
+	}
+	catch (string)
+	{
+
+		cout << "Exceptation Case:" << error;
+	}
+	
+	
+	
 	if (monthDayIndicator(nowDT.month) == true) //31st 
 	{
 
@@ -337,7 +356,8 @@ dateStore parserProcess::dateNumCalculator(int& dateNum, int& nowDateNum)
 
 //process the date for months that have 31 days
 void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& storage)
-{
+{   
+	string error;
 	int diff;
 
 	if (nowDay > givenDay)
@@ -347,7 +367,26 @@ void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& 
 	}
 	else if (nowDay < givenDay)
 	{
-		diff = (givenDay - nowDay);
+		
+		//Exception testing for out of bounds difference.
+		try
+		{ 
+		  diff = (givenDay - nowDay);
+		
+		  if (diff>8)
+		  {
+			  throw error="Out of Bounds Diff in Paraprocess";
+		  }
+
+		}
+		catch (string)
+		{
+			cout << "Error occured:" <<error;
+
+
+		}
+		
+		
 		addDayCalc(31, diff);
 
 	}
@@ -369,7 +408,7 @@ void parserProcess::processMonthMoreDays(int& givenDay, int& nowDay, dateStore& 
 //process the date for months that have 30 days
 void parserProcess::processMonthLessDays(int& givenDay, int& nowDay, dateStore& storage)
 {
-
+	string error;
 	int diff;
 
 	if (nowDay > givenDay)
@@ -381,6 +420,33 @@ void parserProcess::processMonthLessDays(int& givenDay, int& nowDay, dateStore& 
 	else if (nowDay < givenDay)
 	{
 		diff = (givenDay - nowDay);
+		
+		
+		try
+		{
+			diff = (givenDay - nowDay);
+
+			if (diff>8)
+			{
+				throw error = "Out of Bounds Diff in Paraprocess";
+			}
+
+		}
+		catch (string)
+		{
+			cout << "Error occured:" << error;
+
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		addDayCalc(30, diff);
 
 	}

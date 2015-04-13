@@ -996,6 +996,10 @@ add
 That Task Has Already Existed~! Please Enter A New Task~
 =======
 Task Added Successfully! :>
+<<<<<<< HEAD
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+=======
 >>>>>>> f109459231ed6a0e135580082053494e89cd6ff7
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
@@ -1019,6 +1023,7 @@ Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Start Date After End Date :<
+>>>>>>> a78cf7f78d8996997f15b4fd3aa8ff54d5dc03c7
 ******************LOGIC_EXECUTECOMMAND_START*******************
 add
 Task Added Successfully! :>
@@ -1030,7 +1035,10 @@ add
 Task Added Successfully! :>
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
+<<<<<<< HEAD
+=======
 ******************LOGIC_EXECUTECOMMAND_START*******************
+<<<<<<< HEAD
 ***********LOGGING _STORAGE_START***********
 ***********LOGGING _STORAGE_START***********
 ******************LOGIC_EXECUTECOMMAND_START*******************
@@ -1090,3 +1098,6 @@ Incomplete
 ******************LOGIC_EXECUTECOMMAND_START*******************
 All Tasks Cleared!
 ******************LOGIC_EXECUTECOMMAND_START*******************
+=======
+>>>>>>> a78cf7f78d8996997f15b4fd3aa8ff54d5dc03c7
+>>>>>>> fa1c20b598f960a8f813efcbdb7a75f4b69ba637
