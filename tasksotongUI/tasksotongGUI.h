@@ -1,4 +1,4 @@
-﻿// @author A0113555L
+﻿//@author A0113555L
 #pragma once
 
 #include "..\Logic\Logic.h"

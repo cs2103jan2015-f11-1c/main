@@ -1,4 +1,6 @@
-﻿#include "Log.h"
+﻿//@author A0113555L
+
+#include "Log.h"
 
 void Log::writeToLogFile(string stringToBeLogged) {
 
