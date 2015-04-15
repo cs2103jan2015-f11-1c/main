@@ -1,0 +1,31 @@
+//@author: generated
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\GUI\TSGUI.h
+	 */
+
+private: System::Void TSGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void tasksotonglabel_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void pictureBox1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void commandline_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+};
+}
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\GUI\TSGUI.h
+
+
+
+
+

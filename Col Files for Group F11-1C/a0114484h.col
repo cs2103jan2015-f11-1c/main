@@ -158,256 +158,79 @@ void Task::changeTaskStatus(string newTaskStatus){
 
 
 	/**
-	 * origin: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Common\Task.h
 	 */
 
-#include "stdafx.h"
-#include "CppUnitTest.h"
+#ifndef TASK_H
+#define TASK_H
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <iterator>
+#include <vector>
+#include <iomanip>
 
-namespace Task_Testing
-{
-	TEST_CLASS(Task_Testing)
-	{
-	public:
-		TEST_METHOD(getTaskName_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actualName;
-			actualName = test->getTaskName();
+using namespace std;
 
-			string expectedName = "Name";
+struct Timeframe{
+	string date;
+	string time;
+};
 
-			Assert::AreEqual(expectedName, actualName);
+class Task{
 
-		}
+private:
 
-		TEST_METHOD(getTaskStartDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskStartDate();
+	static string MESSAGE_COMPLETE_TASK;
+	static string MESSAGE_INCOMPLETE_TASK;
 
-			string expected = "StartDate";
+	string _taskName;
+	Timeframe _taskStart;
+	Timeframe _taskEnd;
+	Timeframe _taskDeadline;
+	string _taskPriority;
+	string _taskStatus;
 
-			Assert::AreEqual(expected, actual);
+public:
 
-		}
+	Task();
+	Task(string,string,string,string,string,string,string,string,string);
 
-		TEST_METHOD(getTaskStartTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskStartTime();
+	string getTaskName(); 
 
-			string expected = "StartTime";
+	string getTaskStartDate();
+	string getTaskStartTime();
 
-			Assert::AreEqual(expected, actual);
+	string getTaskEndDate();
+	string getTaskEndTime();
 
+	string getTaskDeadlineDate();
+	string getTaskDeadlineTime();
 
-		}
+	string getTaskPriority();
+	string getTaskStatus();
 
-		TEST_METHOD(getTaskEndDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskEndDate();
+	void changeTaskName(string);
 
-			string expected = "EndDate";
+	void changeTaskStartDate(string);
+	void changeTaskStartTime(string);
 
-			Assert::AreEqual(expected, actual);
+	void changeTaskEndDate(string);
+	void changeTaskEndTime(string);
 
-		}
+	void changeTaskDeadlineDate(string);
+	void changeTaskDeadlineTime(string);
 
-		TEST_METHOD(getTaskEndTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskEndTime();
+	void changeTaskPriority(string);
 
-			string expected = "EndTime";
+	void changeTaskStatus(string);
+};
 
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(getTaskDeadlineDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskDeadlineDate();
-
-			string expected = "DeadlineDate";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(getTaskDeadlineTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskDeadlineTime();
-
-			string expected = "DeadlineTime";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(getTaskPriority_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			actual = test->getTaskPriority();
-
-			string expected = "Priority";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(getTaskStatus_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
-			string actual;
-			actual = test->getTaskStatus();
-
-			string expected = "Incomplete";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-
-		TEST_METHOD(changeTaskName_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskName("Name1");
-			actual = test->getTaskName();
-
-			string expected = "Name1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskStartDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskStartDate("StartDate1");
-			actual = test->getTaskStartDate();
-
-			string expected = "StartDate1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskStartTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskStartTime("StartTime1");
-			actual = test->getTaskStartTime();
-
-			string expected = "StartTime1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskEndDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskEndDate("EndDate1");
-			actual = test->getTaskEndDate();
-
-			string expected = "EndDate1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskEndTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskEndTime("EndTime1");
-			actual = test->getTaskEndTime();
-
-			string expected = "EndTime1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskDeadlineDate_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskDeadlineDate("DeadlineDate1");
-			actual = test->getTaskDeadlineDate();
-
-			string expected = "DeadlineDate1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskDeadlineTime_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskDeadlineTime("DeadlineTime1");
-			actual = test->getTaskDeadlineTime();
-
-			string expected = "DeadlineTime1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskPriority_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			string actual;
-			test->changeTaskPriority("Priority1");
-			actual = test->getTaskPriority();
-
-			string expected = "Priority1";
-
-			Assert::AreEqual(expected, actual);
-
-		}
-
-		TEST_METHOD(changeTaskStatus_test)
-		{
-			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
-			string actual;
-			test->changeTaskStatus("mark");
-			actual = test->getTaskStatus();
-
-			string expected = "Completed";
-
-			Assert::AreEqual(expected, actual);
-
-			Task* test2 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
-			test2->changeTaskStatus("abcd");
-			string actual2 = test2->getTaskStatus();
-			string expected2 = "Incomplete";
-
-			Assert::AreEqual(expected2, actual2);
-
-
-		}
-	};
-}
-	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+#endif
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Common\Task.h
 
 
 
@@ -936,6 +759,129 @@ vector<Task> Storage::sortTaskByName(string fileName){
 
 
 	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage\Storage.h
+	 */
+
+//#define NDEBUG
+
+#include <iostream>
+#include <utility>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <fstream>
+#include <iterator>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <cctype>
+#include <functional>
+#include <assert.h>
+#include "..\Common\Task.h"
+#include "..\TaskSotong_Log\Log.h"
+
+using namespace std;
+
+bool caseInsensitiveEqual(char, char);
+bool noCaseLess(const string &a, const string &b);
+
+class Storage{
+
+private:
+
+	vector<Task> taskList;
+	vector<string> taskListStringVector;
+	vector<Task> completedTaskList;
+	vector<Task> incompleteTaskList;
+	stack<string> commandStack;
+	stack<pair<Task, unsigned int>> deleteTaskStack;
+	stack<pair<Task, unsigned int>> updateTaskStack;
+	stack<int> markTaskIndexStack;
+	stack<int> unmarkTaskIndexStack;
+	stack<vector<Task>> clearAllTasksStack;
+	stack<vector<Task>> sortByNameStack;
+
+	static string ERROR_EMPTY_LIST;
+	static string ERROR_INVALID_NUMBER;
+	static string ERROR_NO_COMPLETED_TASKS;
+	static string ERROR_NO_INCOMPLETE_TASKS;
+	static string ERROR_TASK_PREVIOUSLY_COMPLETED;
+	static string ERROR_TASK_PREVIOUSLY_INCOMPLETE;
+	static string ERROR_CANNOT_UNDO;
+	static string ERROR_INVALID_SEARCH_TERM;
+	static string ERROR_ONLY_ONE_TASK;
+	static string ERROR_INVALID_NAME_SORT;
+	static string ERROR_INVALID_STATUS_SORT;
+	static string ERROR_INVALID_PRIORITY_SORT;
+	static string ERROR_INVALID_UPDATE_KEYWORD;
+	static string ERROR_INVALID_UPDATE_PRIORITY_KEYWORD;
+	static string FEEDBACK_MESSAGE_UPDATED_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_UNDO_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_VIEW_COMPLETED_SUCCESSFULLY;
+	static string FEEDBACK_MESSAGE_VIEW_INCOMPLETE_SUCCESSFULLY;
+
+	string feedbackMessage;
+
+	vector<Task> performSearchForViewingTasks(string);
+	bool isOnlyOneTask();
+	bool isSortedByName(vector<Task>);
+
+	Log _Storage_LogFile;
+
+public:
+
+	vector<Task> returnTaskList();
+
+	vector<Task> returnCompletedTaskList();
+
+	vector<Task> returnIncompleteTaskList();
+
+	void toString();
+
+	void toTaskList();
+
+	void updateTaskList(Task);
+
+	void updateTextFile(string);
+
+	void initialiseTextFile(string);
+
+	void addTask(Task);
+
+	void deleteTask(string, unsigned int);
+
+	vector<Task> viewCompletedTasks();
+
+	vector<Task> viewIncompleteTasks();
+
+	void setFeedbackMessage(string);
+
+	string returnLogicFeedbackMessage();
+
+	void updateTask(string, unsigned int, string, string);
+
+	void markTask(string, unsigned int);
+
+	void unmarkTask(string, unsigned int);
+
+	void undoAction();
+
+	void clearAllTasks();
+
+	vector<string> searchTask(string, const string&);
+
+	vector<Task> sortTaskByName(string);
+
+};
+
+#endif
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage\Storage.h
+
+
+
+
+
+	/**
 	 * origin: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
 	 */
 
@@ -1072,6 +1018,41 @@ namespace Storage_Testing
 			Assert::IsTrue(testVector.empty());
 		}
 	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Storage_Testing\Storage_Testing.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.h
+	 */
+
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		int index = 0;
+		String^ temp = Display_richTextBox->Text;
+		Display_richTextBox->Text = "";
+		Display_richTextBox->Text = temp;
+		
+		while (index < Display_richTextBox->Text->LastIndexOf(textBox1->Text, System::StringComparison::InvariantCultureIgnoreCase)){
+			//Searches the text in Display_richTextBox control for a string within a range of text within UserInputBox
+			Display_richTextBox->Find(textBox1->Text, index, Display_richTextBox->TextLength, RichTextBoxFinds::None);
+			//Selection Color. This is added automatically when a match is found.
+			Display_richTextBox->SelectionBackColor = Color::Gold;
+			//After a match is found the index is increased so the search won't stop at the same match
+			index = Display_richTextBox->Text->IndexOf(textBox1->Text, index, System::StringComparison::InvariantCultureIgnoreCase) + 1;
+		}
+	}
+};
+}
+
+
+
+
+
+
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.h
 
 
 

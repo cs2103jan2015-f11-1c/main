@@ -300,6 +300,83 @@ bool paraList::getprocessViewComp()
 
 
 	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser\paraList.h
+	 */
+
+#ifndef PARALIST_H
+#define PARALIST_H
+
+#include <vector>
+#include <iostream>
+#include <string>
+#include "..\Common\Task.h"
+
+using namespace std;
+
+class paraList{
+
+private:
+	string _command;
+	string keyword;
+	string input;
+	string markStatus;
+	string userDir;
+	string searchKeyword;
+	bool viewIncompleted;
+	bool viewCompleted;
+    int deleteNumber;
+	int displayNumber;
+	int updateNumber;
+	int markIndex;
+
+
+public:
+	paraList();
+	//for unit testing purpose.
+
+	Task _task;
+	Task getTask();
+	string getKeyword();
+	string getInput();
+	string getCommand();
+	string getSearchKey();
+	string getuserdir();
+	string getmarkstatus();
+	int getDeleteInteger();
+	int getDisplayInteger();
+	int getUpdateInteger();
+	int getmarkindex();
+	void setparaList(string, int, int, int, string, string, Task);
+	void displayTaskName(string taskName);
+	void processCommand(string inputCommand);
+	void processTask(string inputTask);
+	void processDeleteNumber(int index);
+	void processDisplayNumber(int index);
+	void processUpdateNumber(int index);
+	void processKeyWord(string a);
+	void processInput(string b);
+	void processMarkIndex(int);
+	void processMarkStatus(string);
+	void processUserDir(string);
+	void processSearchWord(string);
+	void processViewInc();
+	void processViewComp();
+	void clearAllNumber();
+	void clearTask();
+	bool getprocessViewInc();
+	bool getprocessViewComp();
+
+};
+
+#endif
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Parser\paraList.h
+
+
+
+
+
+	/**
 	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser\Parser.cpp
 	 */
 
@@ -1207,6 +1284,78 @@ void Parser::assertCommand(string command){
 
 
 	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser\Parser.h
+	 */
+
+#ifndef PARSER_H
+#define PARSER_H
+
+#include "paraList.h"
+#include "parserProcess.h"
+
+#include<iostream>
+#include <string>
+#include <regex>
+
+
+using namespace std;
+
+class Parser{
+
+private:
+
+
+public:
+	enum keywordType { START_END, STARTONLY, ENDONLY, DEADLINE, NONE, BY, AT, AFTER, BEFORE, FROM, TO, ON, FROM_TO, ABST_NIL };
+
+
+	Parser();
+	paraList *parseCommand(string);
+	paraList para;
+	string checkST(string);
+	string checkSD(string);
+	string checkingKeywordX(string &);
+	keywordType determineKeywords(string);
+	void sortCommand(string &);
+	void sortDetails(string &);
+	void processCommand(string &);
+	void processKeywordFrom(string &);
+	void processKeywordTo(string &);
+	void processKeywordBy(string &);
+	void processKeywordAt(string &);
+	void processKeywordBefore(string &);
+	void processKeywordOn(string &);
+	void processKeywordAfter(string &);
+	void processBeforeKeywordf(string &);
+	void processBeforeKeywordt(string &);
+	void processBeforeKeywordb(string &);
+	void processX(string);
+	void processNum(int&, int&, int&, int&);
+	void processDate();
+	void processTime();
+	void processBeforeKeywordFrom(string &);
+	void processUpdateKeywords();
+	void processupdateNone(string&, int&);
+	void processStartKey(string&);
+	void processEndKey(string&);
+	void checkStart(string&, string &, string);
+	void checkEnd(string&, string &, string);
+    void getNoneToken(string, int&, int&, int&);
+	void getLocalTime();
+	void convertKeywordTime(string&, string&);
+	void assertCommand(string);
+	int  findToIndex(string&);
+};
+
+#endif
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Parser\Parser.h
+
+
+
+
+
+	/**
 	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser\parserProcess.cpp
 	 */
 
@@ -1993,6 +2142,124 @@ void parserProcess::clearTimestore()
 
 }
 	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Parser\parserProcess.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Parser\parserProcess.h
+	 */
+
+#ifndef PARSERPROCESS_H
+#define PARSERPROCESS_H
+
+#include <vector>
+#include <iostream>
+#include <string>
+#include <regex>
+#include <ctime>
+#include <atltime.h>
+#include <sstream> 
+#include "..\Common\Task.h"
+#include "..\TaskSotong_Log\Log.h"
+
+
+using namespace std;
+
+
+
+
+struct dateStore{
+
+	string dayName;
+	int dayNameRef;
+	int additionDay;
+    int day;
+	int month;
+	int year;
+};
+
+struct timeStore
+{
+
+	string nilstore;
+	string timeStatus;
+	int min;
+	int hours;
+
+};
+
+
+struct nowDTstore{
+
+	string dayName;
+	bool isLongMonth;
+	int day;
+	int month;
+	int year;
+	int dayNameRef;
+	int min;
+	int hour;
+	
+};
+
+
+
+
+class parserProcess{
+
+private:
+	string rawDateStore;
+	string rawTimeStore;
+	dateStore processedDateStore;
+	timeStore processedtimeStore;
+	nowDTstore nowDT;
+
+public:
+
+	enum dayName { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY };
+	enum Time { JAN, FEB, MAR, APR, JUN, JUL, AUG, SEPT, OCT, NOV, DEC };
+	enum datekeyWord { DAY_NAME, DAY_NUM, DAY_NATURALISED };
+	enum timeKeyWord { SHORT_AM_PM, AM_PM, NIL, OCLOCK };
+	enum natExp{ TODAY, YEST, TMR };
+	bool addition(string);
+	bool subtraction(string);
+	void processDate(string);
+	void processTime(string);
+	void processCommandType();	
+	void processDateName(string&);
+	void processDateNum(string&);
+	void processTimeAmPm(string&);
+	void processTimeNil(string&);
+	void processTimeNatExp(string&);
+	void processTimeShortAmPm(string&);
+	void processMonthMoreDays(int&, int&, dateStore&);
+	void processMonthLessDays(int&, int&, dateStore&);
+	void setNowDT();
+	void setRawDT(string&, string&);
+	bool monthDayIndicator(int&); //true for 31 days, false for 30 days 
+	void addDayCalc(int, int);
+	void printProcessed();
+	void printNow();
+	void covertTime(char&, int&);
+	void clearTimestore();
+	datekeyWord sortDateType(string&);
+	dayName sortDayName(string&);
+	dateStore dateNumCalculator(int&, int&);
+	timeKeyWord sortTimeKeyWord(string&);
+	natExp sortNatExp(string&);
+	string parserReturnDate();
+	string parserReturnTime();
+	string parserReturnNowTime();
+
+	Log _ParserProcess_LogFile;
+	
+};
+
+#endif
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Parser\parserProcess.h
 
 
 

@@ -80,6 +80,262 @@ public:
 
 
 	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+	 */
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace Task_Testing
+{
+	TEST_CLASS(Task_Testing)
+	{
+	public:
+		TEST_METHOD(getTaskName_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actualName;
+			actualName = test->getTaskName();
+
+			string expectedName = "Name";
+
+			Assert::AreEqual(expectedName, actualName);
+
+		}
+
+		TEST_METHOD(getTaskStartDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskStartDate();
+
+			string expected = "StartDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskStartTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskStartTime();
+
+			string expected = "StartTime";
+
+			Assert::AreEqual(expected, actual);
+
+
+		}
+
+		TEST_METHOD(getTaskEndDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskEndDate();
+
+			string expected = "EndDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskEndTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskEndTime();
+
+			string expected = "EndTime";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskDeadlineDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskDeadlineDate();
+
+			string expected = "DeadlineDate";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskDeadlineTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskDeadlineTime();
+
+			string expected = "DeadlineTime";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskPriority_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			actual = test->getTaskPriority();
+
+			string expected = "Priority";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(getTaskStatus_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
+			string actual;
+			actual = test->getTaskStatus();
+
+			string expected = "Incomplete";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		TEST_METHOD(changeTaskName_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskName("Name1");
+			actual = test->getTaskName();
+
+			string expected = "Name1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStartDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskStartDate("StartDate1");
+			actual = test->getTaskStartDate();
+
+			string expected = "StartDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStartTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskStartTime("StartTime1");
+			actual = test->getTaskStartTime();
+
+			string expected = "StartTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskEndDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskEndDate("EndDate1");
+			actual = test->getTaskEndDate();
+
+			string expected = "EndDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskEndTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskEndTime("EndTime1");
+			actual = test->getTaskEndTime();
+
+			string expected = "EndTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskDeadlineDate_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskDeadlineDate("DeadlineDate1");
+			actual = test->getTaskDeadlineDate();
+
+			string expected = "DeadlineDate1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskDeadlineTime_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskDeadlineTime("DeadlineTime1");
+			actual = test->getTaskDeadlineTime();
+
+			string expected = "DeadlineTime1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskPriority_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			string actual;
+			test->changeTaskPriority("Priority1");
+			actual = test->getTaskPriority();
+
+			string expected = "Priority1";
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+		TEST_METHOD(changeTaskStatus_test)
+		{
+			Task* test = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incomplete");
+			string actual;
+			test->changeTaskStatus("mark");
+			actual = test->getTaskStatus();
+
+			string expected = "Completed";
+
+			Assert::AreEqual(expected, actual);
+
+			Task* test2 = new Task("Name", "StartDate", "StartTime", "EndDate", "EndTime", "DeadlineDate", "DeadlineTime", "Priority", "Incompleted");
+			test2->changeTaskStatus("abcd");
+			string actual2 = test2->getTaskStatus();
+			string expected2 = "Incomplete";
+
+			Assert::AreEqual(expected2, actual2);
+
+
+		}
+	};
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Common_Testing\Common_Testing.cpp
+
+
+
+
+
+	/**
 	 * origin: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.cpp
 	 */
 
@@ -907,6 +1163,159 @@ string Logic::executeCommand(paraList Input) {
 
 
 	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.h
+	 */
+
+#ifndef LOGIC_H
+#define LOGIC_H
+
+//#define NDEBUG
+
+#include "..\UI\UI.h"
+#include "..\Parser\Parser.h"
+#include "..\Storage\Storage.h"
+#include "..\Common\Task.h"
+#include "..\TaskSotong_Log\Log.h"
+
+#include <iostream> 
+#include <string> 
+#include <sstream> 
+#include <vector> 
+#include <fstream>
+#include <cctype>
+#include <algorithm>
+#include <assert.h>
+
+using namespace std;
+
+class Logic {
+
+private:
+
+	UI _UserInterface;
+	Parser _ParserComponent;
+	Storage _DataBase;
+
+	vector<string> _fileLocation;
+	vector<Task> _resultVector;
+	vector<Task> _storageTaskListCopy;
+
+	string _userInput;
+	string _filename;
+	string _feedbackMessage;
+
+	static string SAVING_LOCATON_HISTORY;
+	static string ERROR_INVALID_USERINPUT;
+	static string ERROR_EXISTING_TASK;
+	static string ERROR_TASK_UPDATED_UNSUCCESSFULLY;
+	static string ERROR_TASK_DELETED_UNSUCCESSFULLY;
+	static string ERROR_TASK_MARKED_UNSUCCESSFULLY;
+	static string ERROR_TASK_UNMARKED_UNSUCCESSFULLY;
+	static string ERROR_EMPTY_LIST;
+	static string ERROR_TASK_INSUFFICIENT_PARAMETERS;
+	static string ERROR_NO_INDEX;
+	static string ERROR_INDEX_OUT_OF_RANGE;
+	static string ERROR_NO_COMPONENT;
+	static string ERROR_COMPONENT_INVALID;
+	static string ERROR_NO_CONTENT;
+	static string ERROR_INVALID_CONTENT;
+	static string ERROR_INVALID_YEAR;
+	static string ERROR_INVALID_MONTH;
+	static string ERROR_INVALID_DAY;
+	static string ERROR_INVALID_HOUR;
+	static string ERROR_INVALID_MINUTE;
+	static string ERROR_START_TIME_AFTER_END_TIME;
+	static string ERROR_START_DATE_AFTER_END_DATE; 
+
+	static string FEEDBACK_TASK_ADDED_SUCCESSFULLY;
+	static string FEEDBACK_DISPLAY_ALL_TASKS;
+	static string FEEDBACK_TASK_UPDATED_SUCCESSFULLY;
+	static string FEEDBACK_TASK_DELETED_SUCCESSFULLY;
+	static string FEEDBACK_SAVING_FILE_DIRECTORY_CHANGED;
+	static string FEEDBACK_TASK_MARKED_SUCCESSFULLY;
+	static string FEEDBACK_TASK_UNMARKED_SUCCESSFULLY;
+	static string FEEDBACK_CLEAR_ALL_TASKS;
+	static string FEEDBACK_UNDO_PREVIOUS_TASK;
+	static string FEEDBACK_SEARCH_TASK_BY_KEYWORD;
+	static string FEEDBACK_SORT_TASK_BY_KEYWORD;
+	static string FEEDBACK_VIEW_ALL_SUCCESSFULLY;
+
+	Log _Logic_LogFile;
+
+public:
+
+	string checkTimeValidity(string);
+
+	string checkDateValidity(string);
+
+	string checkTaskDatenTimeValidity(Task);
+
+	string convertYearToCorrectForm(string);
+
+	string convertTimeToCorrectForm(string);
+
+	string compareTaskDateandTime(Task);
+
+	void setTaskList();
+
+	vector<Task> getTaskList();
+
+	void setCompletedTaskList();
+
+	vector<Task> getCompletedTaskList();
+
+	void setIncompleteTaskList();
+
+	vector<Task> getIncompleteTaskList();
+
+	void initialiseSetUp();
+
+	void initialiseFileLocationFile();
+
+	void writeFileLocation(vector<string>);
+
+	bool checkIfFileIsAtExeLocation();
+
+	string getLastFileLocation();
+
+	void updatefileLocation(string);
+
+	string getExePath();
+
+	void createNewDirectory(string);
+
+	void changeFileDirectory(string);
+
+	void setFileName(string);
+
+	string getFileName();
+
+	paraList* getParaList(string);
+
+	string getLowerCaseCommand(paraList);
+
+	Task getTask(paraList);
+
+	vector<string> getTextFileCopy();
+
+	void callInitialise(string);
+
+	bool ExistingTask(Task);
+
+	string getFeedbackMsg();
+
+	string executeCommand(paraList);
+
+};
+#endif
+
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.h
+
+
+
+
+
+	/**
 	 * origin: C:\Users\User\Desktop\TaskSotong\main\ParaList_Testing\unittest1.cpp
 	 */
 
@@ -1151,6 +1560,767 @@ int main(array<String^>^ args) {
 }
 
 	// End of segment: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.h
+	 */
+
+#pragma once
+
+#include "..\Logic\Logic.h"
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <cassert>
+#include <msclr\marshal_cppstd.h>
+
+
+namespace tasksotongUI {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Summary for tasksotongGUI
+	/// </summary>
+
+
+
+	//hashtable added
+	// Hash map class template
+	/*template <typename K, typename V, typename F = KeyHash<K>>
+	class HashMap {
+	public:
+	HashMap() {
+	// construct zero initialized hash table of size
+	table = new HashNode<K, V> *[TABLE_SIZE]();
+	}
+
+	~HashMap() {
+	// destroy all buckets one by one
+	for (int i = 0; i < TABLE_SIZE; ++i) {
+	HashNode<K, V> *entry = table[i];
+	while (entry != NULL) {
+	HashNode<K, V> *prev = entry;
+	entry = entry->getNext();
+	delete prev;
+	}
+	table[i] = NULL;
+	}
+	// destroy the hash table
+	delete[] table;
+	}
+
+	bool get(const K &key, V &value) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *entry = table[hashValue];
+
+	while (entry != NULL) {
+	if (entry->getKey() == key) {
+	value = entry->getValue();
+	return true;
+	}
+	entry = entry->getNext();
+	}
+	return false;
+	}
+
+	void put(const K &key, const V &value) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *prev = NULL;
+	HashNode<K, V> *entry = table[hashValue];
+
+	while (entry != NULL && entry->getKey() != key) {
+	prev = entry;
+	entry = entry->getNext();
+	}
+
+	if (entry == NULL) {
+	entry = new HashNode<K, V>(key, value);
+	if (prev == NULL) {
+	// insert as first bucket
+	table[hashValue] = entry;
+	} else {
+	prev->setNext(entry);
+	}
+	} else {
+	// just update the value
+	entry->setValue(value);
+	}
+	}
+
+	void remove(const K &key) {
+	unsigned long hashValue = hashFunc(key);
+	HashNode<K, V> *prev = NULL;
+	HashNode<K, V> *entry = table[hashValue];
+
+	while (entry != NULL && entry->getKey() != key) {
+	prev = entry;
+	entry = entry->getNext();
+	}
+
+	if (entry == NULL) {
+	// key not found
+	return;
+	} else {
+	if (prev == NULL) {
+	// remove first bucket of the list
+	table[hashValue] = entry->getNext();
+	} else {
+	prev->setNext(entry->getNext());
+	}
+	delete entry;
+	}
+	}
+
+	private:
+	// hash table
+	HashNode<K, V> **table;
+	F hashFunc;
+	};
+
+
+
+
+
+	private enum Accelerators {
+	Unspecified = 0, Home, Save, Print, Logout
+	};
+
+	HashMap _accelHash() = new HashMap();
+	public class AcceleratorKey {
+	private Keys key_ = Keys.None;
+	public AcceleratorKey() {
+	}
+
+	public AcceleratorKey(Keys key) {
+	key_ = key;
+	}
+
+	public Keys Key
+	{
+	get{ return key_; }
+	set{ key_ = value; }
+	}
+
+	public override Int32 GetHashCode() {
+	return (Int32)key_;
+	}
+
+	public override bool Equals(Object obj) {
+	// It is unlikely that two hashcodes would
+	// be equal... :)
+	if (obj.GetHashCode() == (Int32)key_) return true;
+
+	return false;
+	}
+	}
+
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.H),
+	Accelerators.Home);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.S),
+	Accelerators.Save);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.P),
+	Accelerators.Print);
+	_accelHash.Add(new AcceleratorKey(Keys.Alt | Keys.X),
+	Accelerators.Logout);
+
+	protected override bool ProcessCmdKey(ref Message msg,
+	Keys keyData) {
+	// Check this key...
+	bool bHandled = false;
+
+	// Look up value
+	Accelerators accel = Accelerators.Unspecified;
+	if (_accelHash.ContainsKey(AcceleratorKey(keyData))) {
+	accel = (Accelerators)_accelHash[key];
+
+	switch (accel) {
+	case Accelerators.Home:
+	DisplayHome();
+	bHandled = true;
+	break;
+
+	case Accelerators.Save:
+	Save();
+	bHandled = true;
+	break;
+
+	case Accelerators.Print:
+	Print();
+	bHandled = true;
+	break;
+
+	case Accelerators.Logout:
+	LogOut();
+	bHandled = true;
+	break;
+
+	case Accelerators.Unspecified:
+	default:
+	break;
+
+	} // switch
+	} // if
+
+	return bHandled;
+	}
+	*/
+
+	//HashTable ended
+
+	public ref class tasksotongGUI : public System::Windows::Forms::Form {
+	public:
+		tasksotongGUI(void) {
+			TSLogic = new Logic;
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~tasksotongGUI() {
+			if (components) {
+				delete components;
+
+			}
+		}
+	private: System::Windows::Forms::TextBox^  UserInputBox;
+	private: System::Windows::Forms::Button^  Enter;
+	protected:
+
+
+
+	private: System::Windows::Forms::TextBox^  WelcomeBox;
+
+
+	private: System::Windows::Forms::Button^  IncompleteButton;
+	private: System::Windows::Forms::Button^  PriorityButton;
+	private: System::Windows::Forms::Button^  DeadlineButton;
+
+
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		Logic* TSLogic;
+
+
+	private: System::Windows::Forms::Button^  CompleteButton;
+
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::RichTextBox^  Display_richTextBox;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::TextBox^  textBox1;
+
+			 /// </summary>
+			 System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+			 /// <summary>
+			 /// Required method for Designer support - do not modify
+			 /// the contents of this method with the code editor.
+			 /// </summary>
+			 void InitializeComponent(void) {
+				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(tasksotongGUI::typeid));
+				 this->UserInputBox = (gcnew System::Windows::Forms::TextBox());
+				 this->WelcomeBox = (gcnew System::Windows::Forms::TextBox());
+				 this->IncompleteButton = (gcnew System::Windows::Forms::Button());
+				 this->PriorityButton = (gcnew System::Windows::Forms::Button());
+				 this->DeadlineButton = (gcnew System::Windows::Forms::Button());
+				 this->Enter = (gcnew System::Windows::Forms::Button());
+				 this->CompleteButton = (gcnew System::Windows::Forms::Button());
+				 this->Display_richTextBox = (gcnew System::Windows::Forms::RichTextBox());
+				 this->button1 = (gcnew System::Windows::Forms::Button());
+				 this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+				 this->SuspendLayout();
+				 // 
+				 // UserInputBox
+				 // 
+				 this->UserInputBox->BackColor = System::Drawing::Color::DimGray;
+				 resources->ApplyResources(this->UserInputBox, L"UserInputBox");
+				 this->UserInputBox->ForeColor = System::Drawing::Color::MintCream;
+				 this->UserInputBox->Name = L"UserInputBox";
+				 this->UserInputBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &tasksotongGUI::UserInputBox_KeyPress);
+				 // 
+				 // WelcomeBox
+				 // 
+				 this->WelcomeBox->BackColor = System::Drawing::Color::MistyRose;
+				 resources->ApplyResources(this->WelcomeBox, L"WelcomeBox");
+				 this->WelcomeBox->ForeColor = System::Drawing::Color::Goldenrod;
+				 this->WelcomeBox->Name = L"WelcomeBox";
+				 this->WelcomeBox->Click += gcnew System::EventHandler(this, &tasksotongGUI::WelcomeBox_TextChanged);
+				 this->WelcomeBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::WelcomeBox_TextChanged);
+				 // 
+				 // IncompleteButton
+				 // 
+				 this->IncompleteButton->BackColor = System::Drawing::Color::LightCoral;
+				 resources->ApplyResources(this->IncompleteButton, L"IncompleteButton");
+				 this->IncompleteButton->ForeColor = System::Drawing::SystemColors::Control;
+				 this->IncompleteButton->Name = L"IncompleteButton";
+				 this->IncompleteButton->UseVisualStyleBackColor = false;
+				 this->IncompleteButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::IncompleteButton_Click);
+				 // 
+				 // PriorityButton
+				 // 
+				 this->PriorityButton->BackColor = System::Drawing::Color::PaleVioletRed;
+				 resources->ApplyResources(this->PriorityButton, L"PriorityButton");
+				 this->PriorityButton->ForeColor = System::Drawing::SystemColors::Control;
+				 this->PriorityButton->Name = L"PriorityButton";
+				 this->PriorityButton->UseVisualStyleBackColor = false;
+				 this->PriorityButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::PriorityButton_Click);
+				 // 
+				 // DeadlineButton
+				 // 
+				 this->DeadlineButton->BackColor = System::Drawing::Color::DarkSlateBlue;
+				 resources->ApplyResources(this->DeadlineButton, L"DeadlineButton");
+				 this->DeadlineButton->ForeColor = System::Drawing::SystemColors::Control;
+				 this->DeadlineButton->Name = L"DeadlineButton";
+				 this->DeadlineButton->UseVisualStyleBackColor = false;
+				 this->DeadlineButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::DeadlineButton_Click);
+				 // 
+				 // Enter
+				 // 
+				 this->Enter->BackColor = System::Drawing::Color::MidnightBlue;
+				 resources->ApplyResources(this->Enter, L"Enter");
+				 this->Enter->ForeColor = System::Drawing::SystemColors::Control;
+				 this->Enter->Name = L"Enter";
+				 this->Enter->UseVisualStyleBackColor = false;
+				 this->Enter->Click += gcnew System::EventHandler(this, &tasksotongGUI::Enter_Click);
+				 // 
+				 // CompleteButton
+				 // 
+				 this->CompleteButton->BackColor = System::Drawing::Color::LightPink;
+				 resources->ApplyResources(this->CompleteButton, L"CompleteButton");
+				 this->CompleteButton->ForeColor = System::Drawing::SystemColors::Control;
+				 this->CompleteButton->Name = L"CompleteButton";
+				 this->CompleteButton->UseVisualStyleBackColor = false;
+				 this->CompleteButton->Click += gcnew System::EventHandler(this, &tasksotongGUI::Complete_click);
+				 // 
+				 // Display_richTextBox
+				 // 
+				 this->Display_richTextBox->BackColor = System::Drawing::Color::RosyBrown;
+				 resources->ApplyResources(this->Display_richTextBox, L"Display_richTextBox");
+				 this->Display_richTextBox->ForeColor = System::Drawing::Color::MintCream;
+				 this->Display_richTextBox->Name = L"Display_richTextBox";
+				 this->Display_richTextBox->ReadOnly = true;
+				 this->Display_richTextBox->TextChanged += gcnew System::EventHandler(this, &tasksotongGUI::Display_richTextBox_TextChanged);
+				 // 
+				 // button1
+				 // 
+				 this->button1->BackColor = System::Drawing::Color::SaddleBrown;
+				 this->button1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+				 resources->ApplyResources(this->button1, L"button1");
+				 this->button1->Name = L"button1";
+				 this->button1->UseVisualStyleBackColor = false;
+				 this->button1->Click += gcnew System::EventHandler(this, &tasksotongGUI::button1_Click);
+				 // 
+				 // textBox1
+				 // 
+				 this->textBox1->BackColor = System::Drawing::SystemColors::ScrollBar;
+				 resources->ApplyResources(this->textBox1, L"textBox1");
+				 this->textBox1->Name = L"textBox1";
+				 // 
+				 // tasksotongGUI
+				 // 
+				 resources->ApplyResources(this, L"$this");
+				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+				 this->BackColor = System::Drawing::Color::BurlyWood;
+				 this->Controls->Add(this->textBox1);
+				 this->Controls->Add(this->button1);
+				 this->Controls->Add(this->Enter);
+				 this->Controls->Add(this->DeadlineButton);
+				 this->Controls->Add(this->PriorityButton);
+				 this->Controls->Add(this->IncompleteButton);
+				 this->Controls->Add(this->CompleteButton);
+				 this->Controls->Add(this->WelcomeBox);
+				 this->Controls->Add(this->UserInputBox);
+				 this->Controls->Add(this->Display_richTextBox);
+				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				 this->MaximizeBox = false;
+				 this->Name = L"tasksotongGUI";
+				 this->Load += gcnew System::EventHandler(this, &tasksotongGUI::tasksotongGUI_Load);
+				 this->ResumeLayout(false);
+				 this->PerformLayout();
+
+			 }
+
+
+#pragma endregion
+
+
+	private: System::Void UserInputBox_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+		//DisplayTaskBox->Text = "debugging1: " + UserInputBox->Text + "testing1";
+		if (e->KeyChar == (char)13) {
+
+			string tempUserInput = msclr::interop::marshal_as<std::string>(UserInputBox->Text);
+
+			int i = tempUserInput.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSUVWXYZ");
+			string userInput = tempUserInput.substr(i);
+
+			//DisplayTaskBox->Text ="debugging2: "+ UserInputBox->Text + "testing2";
+
+			paraList* storageInput = TSLogic->getParaList(userInput);
+
+			std::string feedbackmsg = TSLogic->executeCommand(*storageInput);
+			//DisplayTaskBox->Clear();
+			vector<Task> taskListCopy_fromLogic = TSLogic->getTaskList();
+
+			//String^ stringnewlala = gcnew String(userInput.c_str());
+			//DisplayTaskBox->Text = stringnewlala + "\r\n" + textFileCopy_fromLogic.size().ToString();
+
+			//DisplayTaskBox->Text = textFileCopy_fromLogic.size().ToString();
+
+			Display_richTextBox->Clear();
+
+			for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
+
+				string tempName = "\t" + to_string(i + 1) + ".\t" + taskListCopy_fromLogic[i].getTaskName() + "\r\n";
+				String^ displayName = gcnew String(tempName.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Segoe UI", 15.75, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = displayName;
+
+				string start = "START: \t";
+				String^ startLine = gcnew String(start.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = startLine;
+
+				string tempStartDate;
+				string tempStartTime;
+				if (taskListCopy_fromLogic[i].getTaskStartDate() == "") {
+					tempStartDate = "\t-";
+				} else {
+					tempStartDate = taskListCopy_fromLogic[i].getTaskStartDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskStartTime() == "") {
+					tempStartTime = "-";
+				} else {
+					tempStartTime = taskListCopy_fromLogic[i].getTaskStartTime();
+				}
+				string tempStartDnT = tempStartDate + "\t" + tempStartTime + "\r\n";
+				String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayStartDnT;
+
+				string end = "END: \t\t";
+				String^ endLine = gcnew String(end.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = endLine;
+
+				string tempEndDate;
+				string tempEndTime;
+				if (taskListCopy_fromLogic[i].getTaskEndDate() == "") {
+					tempEndDate = "\t-";
+				} else {
+					tempEndDate = taskListCopy_fromLogic[i].getTaskEndDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskEndTime() == "") {
+					tempEndTime = "-";
+				} else {
+					tempEndTime = taskListCopy_fromLogic[i].getTaskEndTime();
+				}
+				string tempEndDnT = tempEndDate + "\t" + tempEndTime + "\r\n";
+				String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayEndDnT;
+
+				string deadLine = "DEADLINE: \t";
+				String^ deadLineLine = gcnew String(deadLine.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = deadLineLine;
+
+				string tempDeadlineDate;
+				string tempDeadlineTime;
+				if (taskListCopy_fromLogic[i].getTaskDeadlineDate() == "") {
+					tempDeadlineDate = "\t-";
+				} else {
+					tempDeadlineDate = taskListCopy_fromLogic[i].getTaskDeadlineDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskDeadlineTime() == "") {
+					tempDeadlineTime = "-";
+				} else {
+					tempDeadlineTime = taskListCopy_fromLogic[i].getTaskDeadlineTime();
+				}
+				string tempDeadlineDnT = tempDeadlineDate + "\t" + tempDeadlineTime + "\r\n";
+				String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayDeadlineDnT;
+
+
+				string tempP;
+				if (taskListCopy_fromLogic[i].getTaskPriority() == "") {
+					tempP = "-";
+				} else {
+					tempP = taskListCopy_fromLogic[i].getTaskPriority();
+				}
+				string tempPriority = "\t\t" + tempP + "\t";
+				String^ priority = gcnew String(tempPriority.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 12, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkSlateGray;
+				Display_richTextBox->SelectedText = priority;
+
+
+				string tempS;
+				if (taskListCopy_fromLogic[i].getTaskStatus() == "") {
+					tempS = "\t-";
+				} else {
+					tempS = taskListCopy_fromLogic[i].getTaskStatus();
+				}
+				string tempStatus = tempS + "\r\n";
+				String^ status = gcnew String(tempStatus.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 12, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkMagenta;
+				Display_richTextBox->SelectedText = status;
+			}
+
+
+			String^ feedback = gcnew String(feedbackmsg.c_str());
+			WelcomeBox->Text = feedback;
+
+			UserInputBox->Clear();
+		}
+
+	}
+
+	private: System::Void Enter_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	}
+
+
+	private: System::Void Complete_click(System::Object^  sender, System::EventArgs^  e) {
+		MessageBox::Show("hello world!");
+	}
+
+	private: System::Void DisplayTaskBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+
+
+	}
+	private: System::Void IncompleteButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void PriorityButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void DeadlineButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void WelcomeBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void tasksotongGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		TSLogic->initialiseSetUp();
+		TSLogic->setTaskList();	
+		
+		vector<Task> taskListCopy_fromLogic = TSLogic->getTaskList();
+
+		
+		if (taskListCopy_fromLogic.size() == 0) {
+			
+
+		} else {
+			Display_richTextBox->Clear();
+			for (int i = 0; i < taskListCopy_fromLogic.size(); i++) {
+
+				string tempName = "\t" + to_string(i + 1) + ".\t" + taskListCopy_fromLogic[i].getTaskName() + "\r\n";
+				String^ displayName = gcnew String(tempName.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Segoe UI", 15.75, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = displayName;
+
+				string start = "START: \t";
+				String^ startLine = gcnew String(start.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = startLine;
+				
+				string tempStartDate;
+				string tempStartTime;
+				if (taskListCopy_fromLogic[i].getTaskStartDate() == "") {
+					tempStartDate = "\t-";
+				} else {
+					tempStartDate = taskListCopy_fromLogic[i].getTaskStartDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskStartTime() == "") {
+					tempStartTime = "-";
+				} else {
+					tempStartTime = taskListCopy_fromLogic[i].getTaskStartTime();
+				}
+				string tempStartDnT =tempStartDate + "\t" + tempStartTime + "\r\n";
+				String^ displayStartDnT = gcnew String(tempStartDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayStartDnT;
+
+				string end = "END: \t\t";
+				String^ endLine = gcnew String(end.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = endLine;
+
+				string tempEndDate;
+				string tempEndTime;
+				if (taskListCopy_fromLogic[i].getTaskEndDate() == "") {
+					tempEndDate = "\t-";
+				} else {
+					tempEndDate = taskListCopy_fromLogic[i].getTaskEndDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskEndTime() == "") {
+					tempEndTime = "-";
+				} else {
+					tempEndTime = taskListCopy_fromLogic[i].getTaskEndTime();
+				}
+				string tempEndDnT = tempEndDate + "\t" + tempEndTime + "\r\n";
+				String^ displayEndDnT = gcnew String(tempEndDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayEndDnT;
+
+				string deadLine = "DEADLINE: \t";
+				String^ deadLineLine = gcnew String(deadLine.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 8, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::Snow;
+				Display_richTextBox->SelectedText = deadLineLine;
+
+				string tempDeadlineDate;
+				string tempDeadlineTime;
+				if (taskListCopy_fromLogic[i].getTaskDeadlineDate() == "") {
+					tempDeadlineDate = "\t-";
+				} else {
+					tempDeadlineDate = taskListCopy_fromLogic[i].getTaskDeadlineDate();
+				}
+				if (taskListCopy_fromLogic[i].getTaskDeadlineTime() == "") {
+					tempDeadlineTime = "-";
+				} else {
+					tempDeadlineTime = taskListCopy_fromLogic[i].getTaskDeadlineTime();
+				}
+				string tempDeadlineDnT = tempDeadlineDate + "\t" + tempDeadlineTime + "\r\n";
+				String^ displayDeadlineDnT = gcnew String(tempDeadlineDnT.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 10, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkBlue;
+				Display_richTextBox->SelectedText = displayDeadlineDnT;
+
+
+				string tempP;
+				if (taskListCopy_fromLogic[i].getTaskPriority() == "") {
+					tempP = "-";
+				} else {
+					tempP = taskListCopy_fromLogic[i].getTaskPriority();
+				}
+				string tempPriority = "\t\t" + tempP + "\t";
+				String^ priority = gcnew String(tempPriority.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 12, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkSlateGray;
+				Display_richTextBox->SelectedText = priority;
+
+
+				string tempS;
+				if (taskListCopy_fromLogic[i].getTaskStatus() == "") {
+					tempS = "\t-";
+				} else {
+					tempS = taskListCopy_fromLogic[i].getTaskStatus();
+				}
+				string tempStatus = tempS + "\r\n";
+				String^ status = gcnew String(tempStatus.c_str());
+				Display_richTextBox->SelectionFont = gcnew System::Drawing::Font("Seoge UI", 12, FontStyle::Bold);
+				Display_richTextBox->SelectionColor = Color::DarkMagenta;
+				Display_richTextBox->SelectedText = status;
+			}
+		}
+
+
+	}
+
+
+	private: System::Void featuresToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\tasksotongUI\tasksotongGUI.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\TaskSotong_Log\Log.cpp
+	 */
+
+
+#include "Log.h"
+
+void Log::writeToLogFile(string stringToBeLogged) {
+
+	ofstream writeFile("log.txt", ios::app);
+	writeFile << stringToBeLogged<< endl;
+
+	writeFile.close();
+}
+
+void Log::clearLogFile() {
+
+
+	ofstream writeFile("log.txt");
+	writeFile.close();
+}
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\TaskSotong_Log\Log.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\TaskSotong_Log\Log.h
+	 */
+
+
+#ifndef LOG_H
+#define LOG_H
+
+#include<iostream>
+#include<vector>
+#include<string>
+#include<fstream>
+
+using namespace std;
+
+class Log {
+private:
+
+public:
+	void writeToLogFile(string);
+	void clearLogFile();
+};
+#endif
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\TaskSotong_Log\Log.h
 
 
 
