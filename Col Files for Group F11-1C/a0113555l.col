@@ -693,15 +693,16 @@ void Logic::updatefileLocation(string userDirectory) {
 	return;
 }
 
-//this function only gets the directory of the .exe file, not where the .txt file is. 
-string Logic::getExePath() {
+	// End of segment: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.cpp
 
-	char buffer[MAX_PATH];
-	GetModuleFileName(NULL, buffer, MAX_PATH);
-	string::size_type pos = string(buffer).find_last_of("\\/");
 
-	return string(buffer).substr(0, pos);
-}
+
+
+
+	/**
+	 * origin: C:\Users\User\Desktop\TaskSotong\main\Logic\Logic.cpp
+	 */
+
 
 void Logic::createNewDirectory(string userFileDirectory) {
 

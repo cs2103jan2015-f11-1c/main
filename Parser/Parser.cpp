@@ -12,7 +12,7 @@
 #include <regex>
 
 using namespace std;
-
+//@author A0111642W-reused
 const regex X_PATTERN("(!)\\w+\\b", std::tr1::regex_constants::icase);
 const regex DATE_PATTERN("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))", std::tr1::regex_constants::icase);
 const regex TIME_PATTERN("(^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))|((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
@@ -41,7 +41,7 @@ const regex NTRL_AT_PATTERN("((at)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0
 const regex NTRL_AFTER_PATTERN("((after)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((after)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(after)([\\s]+)((!high)|(!low))", std::tr1::regex_constants::icase);
 const regex NTRL_BEFORE_PATTERN("((before)([\\s]+)((^((2[0-4]|1[0-9]|0?[1-9])([:|.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?)|[^/.:\\w]((2[0-4]|1[0-9]|0?[1-9])([:|\.])?([0-5][0-9])(Am|am|PM|pm|Pm|AM|aM|pM)?))|((2[0-4]|1[0-9]|[1-9])(\\s)?(o|O)(')?(clock))|((1[0-2]|[1-9])(\\s)?(Am|am|PM|pm|Pm|AM|aM|pM|noon))))|((before)([\\s]+)((t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b|(y(\\w+|)(e|s)(\\w+|)(t|r|y))|(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2}))))|(before)([\\s]+)((!high)|(!low))");
 const int PROCESS_INITIAL = 1000;
-
+//@author A0111642W
 Parser::Parser()
 {}
 

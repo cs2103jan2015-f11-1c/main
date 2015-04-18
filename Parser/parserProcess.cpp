@@ -8,7 +8,7 @@
 #include <assert.h>
 
 
-
+//@author A0111642W-reused
 const regex DAY_INPUT("(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b", std::tr1::regex_constants::icase);
 const regex DATE_NATURALIZED("(t(o+|)d(a+|)(y))|(t(\\w+|)m(\\w+|)(w|r))|(y(\\w+|)(e|s)(\\w+|)(t|r|y))", std::tr1::regex_constants::icase);
 const regex DATE_NAME("(mondays?)\\b|(tuesdays?)\\b|(wednesdays?)\\b|(thursdays?)\\b|(fridays?)\\b|(saturdays?)\\b|(sundays?)\\b|(mons?\\b)|(tues?)\\b|(weds?)\\b|(thurs?)\\b|(fri)\\b|(sats?)\\b|(sun)\\b", std::tr1::regex_constants::icase);
@@ -40,7 +40,7 @@ const regex AMPM_SHORT_INPUT("(((1[0-2]|[1-9])(\\s)?(am|pm|noon)))", std::tr1::r
 const regex NIL_INPUT("((2[0-3]|1[0-9]|0[1-9]|[1-9])([:|\.])?([0-5][0-9]))", std::tr1::regex_constants::icase);
 const regex OCLOCK_INPUT("((1[0-2]|[1-9])(\\s)?(o|O)(')?(clock))", std::tr1::regex_constants::icase);
 const regex SYM_INPUT("([:|\.])", std::tr1::regex_constants::icase);
-
+//@author A0111642W
 void parserProcess::setRawDT(string& rawDate, string& rawTime)
 {
 	_ParserProcess_LogFile.writeToLogFile(rawDate);
