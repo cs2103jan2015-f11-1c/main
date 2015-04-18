@@ -694,7 +694,7 @@ namespace tasksotongUI {
 	}
 	private: System::Void Display_richTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 	}
-// @author A0114484H
+// @author A0114484H-reused
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		int index = 0;

@@ -353,6 +353,7 @@ void Logic::updatefileLocation(string userDirectory) {
 	return;
 }
 
+//@author A0113555L-reused
 //this function only gets the directory of the .exe file, not where the .txt file is. 
 string Logic::getExePath() {
 
@@ -362,6 +363,8 @@ string Logic::getExePath() {
 
 	return string(buffer).substr(0, pos);
 }
+
+//@author A0113555L
 
 void Logic::createNewDirectory(string userFileDirectory) {
 
