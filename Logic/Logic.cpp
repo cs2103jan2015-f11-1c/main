@@ -222,7 +222,7 @@ string Logic::compareTaskDateandTime(Task taskInput) {
 		} else {
 		}
 	} else if (startDate > endDate) {
-		tempFeedback = ERROR_START_DATE_AFTER_END_DATE;
+		//tempFeedback = ERROR_START_DATE_AFTER_END_DATE;
 	} else {
 	}
 	return tempFeedback;

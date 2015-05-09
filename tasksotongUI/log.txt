@@ -1218,3 +1218,882 @@ add
 add
 Task Added Successfully! :>
 ***********LOGGING _STORAGE_START***********
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+fri
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+name
+Task Updated Successfully!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+Priority must be High, Medium or Low!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+name
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Invalid User Input. Please Enter Again! :<
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-time
+Task Updated Successfully!
+yesterday
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Date After End Date :<
+Start Date After End Date :<
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Completed
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+Incomplete
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+***********LOGGING _STORAGE_START***********
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Completed
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+Incomplete
+Your Incomplete Tasks! :/
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Your Incomplete Tasks! :/
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-time
+Task Updated Successfully!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Time After End Time!
+Start Time After End Time!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Time After End Time!
+Start Time After End Time!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Time After End Time!
+Start Time After End Time!
+12/6/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+Task Updated Successfully!
+Task Updated Successfully!
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+***********LOGGING _STORAGE_START***********
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+Start Date After End Date :<
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Date After End Date :<
+Start Date After End Date :<
+11/5/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Date After End Date :<
+Start Date After End Date :<
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+yesterday
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+end-date
+Start Date After End Date :<
+Start Date After End Date :<
+17/9/2017
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Year Entered Is Invalid!
+Year Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+deadline-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+deadline-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+deadline-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+Priority must be High, Medium or Low!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+Priority must be High, Medium or Low!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+Task Updated Successfully!
+Task Updated Successfully!
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+start-date
+Start Date After End Date :<
+Start Date After End Date :<
+ytd
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Month Entered Is Invalid!
+Month Entered Is Invalid!
+9/5/2105
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+start-date
+Start Date After End Date :<
+Start Date After End Date :<
+9/5/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+start-date
+Start Date After End Date :<
+Start Date After End Date :<
+***********LOGGING _STORAGE_START***********
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Invalid User Input. Please Enter Again! :<
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-time
+Task Updated Successfully!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Completed
+Your Completed Tasks! :D
+******************LOGIC_EXECUTECOMMAND_START*******************
+Viewing All Tasks!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+***********LOGGING _STORAGE_START***********
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+Year Entered Is Invalid!
+Year Entered Is Invalid!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+deadline-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+deadline-time
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+tomorrow
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+start-date
+Start Time After End Time!
+Start Time After End Time!
+11/5/2015
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+end-date
+Task Updated Successfully!
+Task Updated Successfully!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+start-date
+Task Updated Successfully!
+Task Updated Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+***********LOGGING _STORAGE_START***********
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+delete
+Task Deleted Successfully!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task List Is Empty!
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+tomorrow
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+today
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+tomorrow
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+Unmarked The Task!
+******************LOGIC_EXECUTECOMMAND_START*******************
+Task Marked Completed! 
+******************LOGIC_EXECUTECOMMAND_START*******************
+delete
+Task Deleted Successfully!
+today
+tmr
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+today
+tomorrow
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+******************LOGIC_EXECUTECOMMAND_START*******************
+update
+priority
+
+******************LOGIC_EXECUTECOMMAND_START*******************
+All Tasks Cleared!
+******************LOGIC_EXECUTECOMMAND_START*******************
+add
+add
+Task Added Successfully! :>
+***********LOGGING _STORAGE_START***********
